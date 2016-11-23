@@ -7,15 +7,13 @@
 	<link rel="stylesheet" href="node_modules/codemirror/lib/codemirror.css">
 	<script src="node_modules/codemirror/mode/stex/stex.js"></script>
 
-	Введите TeX-код для проверки в поле ниже:
+	Введите TeX-код для проверки в поле ниже или загрузите TeX-файл:
+	<input type="file" id="file-load"/><button onclick="codeLoad();">Загрузить</button>
 	<div id="code-mirror-holder" style="border:2px black solid; padding:5px;height:600px;">
 	</div>
 	Отсутствие ошибок является необходимым условием подачи тезисов.
 	Достаточное условие проверяется вручную!
-	<script>
-		var myCodeMirror = CodeMirror(document.getElementById('code-mirror-holder'));
+	<script src="playground.js">
 	</script>
-
-
 </body>
 </html>
