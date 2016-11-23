@@ -1,4 +1,6 @@
 
+var fileName='saved.tex'
+
 function codeLoad(){
 
 	var readers=[];
@@ -9,6 +11,7 @@ function codeLoad(){
 		return function(e) {
 			try{
 				myCodeMirror.setValue(e.target.result);
+				fileName = theFile.name;
 			}catch(e){
 				alert('Не удалось прочитать '+theFile.name)
 			}
@@ -17,19 +20,21 @@ function codeLoad(){
 	reader.readAsText(f);
 }
 
-function baseSave(){
-	var blob = new Blob([JSON.stringify(base).replace(/},{/g,"},\r\n{")], {
+function codeSave(){
+	var blob = new Blob([myCodeMirror.getValue().replace(/[\n\r]+/g,"},\r\n{")], {
 		type: "text/plain;charset=utf-8"
 	});
 	var a = document.createElement('a');
-	a.download = "save.json";
+	a.download = fileName+".edited.tex";
 	a.href = URL.createObjectURL(blob);
-	a.innerHTML = "<button>Сохранить</button>";
+	a.innerHTML = "<button>Сохранить TeX-файл</button>";
 	document.getElementById('span-save').innerHTML='';
 	document.getElementById('span-save').appendChild(a);
+	console.log('codeSave()');
 }
 
 
 
 var myCodeMirror = CodeMirror(document.getElementById('code-mirror-holder'));
 
+myCodeMirror.on("change",codeSave);
