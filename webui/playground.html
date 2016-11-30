@@ -6,11 +6,16 @@
 	<script src="node_modules/codemirror/lib/codemirror.js"></script>
 	<link rel="stylesheet" href="node_modules/codemirror/lib/codemirror.css">
 	<script src="node_modules/codemirror/mode/stex/stex.js"></script>
+	<script src="node_modules/codemirror/addon/runmode/runmode.js"></script>
+
 
 	Введите TeX-код для проверки в поле ниже или загрузите TeX-файл:
 	<input type="file" id="file-load"/><button onclick="codeLoad();">Загрузить</button>
-	<div id="code-mirror-holder" style="border:2px black solid; padding:5px;height:600px;">
+	<div id="code-mirror-holder" style="border:2px black solid; padding:5px;height:300px;">
 	</div>
+	<button onclick="runcheck();">
+		Проверить текст
+	</button>
 	Отсутствие ошибок является необходимым условием подачи тезисов.
 	Достаточное условие проверяется вручную!
 	<span id="span-save"></span>

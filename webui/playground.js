@@ -38,3 +38,34 @@ function codeSave(){
 var myCodeMirror = CodeMirror(document.getElementById('code-mirror-holder'));
 
 myCodeMirror.on("change",codeSave);
+
+
+function getNodesAsIs(){
+	var nodes = [];
+	CodeMirror.runMode(
+		myCodeMirror.getValue(),
+		{name:'stex'},
+		function(node,style){
+			nodes.push({text:node,type:style});
+		}
+	);
+	return nodes;
+};
+
+function getNodesQuantity(nodes,nodetype,nodetext){
+	var quantity = 0;
+	for(var i=0; i<nodes.length; i++){
+		if(nodes[i].type == nodetype && nodes[i].text == nodetext){
+			quantity++;
+		}
+	}
+	return quantity;
+}
+
+function runcheck(){
+	var nodes = getNodesAsIs();
+	console.log(nodes);
+	console.log(getNodesQuantity(nodes,"tag","\\input"));
+}
+
+
