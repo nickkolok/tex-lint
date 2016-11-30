@@ -65,7 +65,9 @@ function getNodesQuantity(nodes,nodetype,nodetext){
 function runcheck(){
 	var nodes = getNodesAsIs();
 	console.log(nodes);
-	console.log(getNodesQuantity(nodes,"tag","\\input"));
+	if(getNodesQuantity(nodes,"tag","\\newcommand")+getNodesQuantity(nodes,"tag","\\renewcommand")){
+		alert('Команды переопределять нельзя!');
+	};
 }
 
 
