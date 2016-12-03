@@ -1,4 +1,3 @@
-
 var fileName='saved.tex'
 
 function codeLoad(){
@@ -39,27 +38,35 @@ var myCodeMirror = CodeMirror(document.getElementById('code-mirror-holder'));
 
 myCodeMirror.on("change",codeSave);
 
+function getNodesAsIs(){
 
-function parseToNodes(text){
-	var nodes = [];
+	return new Nodes(myCodeMirror.getValue());
+};
+
+// конструктор
+function Nodes(text) {
+  this.nodes = [];
+  if(text){
+	  this.fromText(text);
+  }
+}
+
+Nodes.prototype.fromText = function(text) {
+	this.nodes = [];
+	var self = this;
 	CodeMirror.runMode(
 		text,
 		{name:'stex'},
 		function(node,style){
-			nodes.push({text:node,type:style});
+			self.nodes.push({text:node,type:style});
 		}
 	);
-	return nodes;
 }
 
-function getNodesAsIs(){
-	return parseToNodes(myCodeMirror.getValue());
-};
-
-function getNodesQuantity(nodes,nodetype,nodetext){
+Nodes.prototype.getNodesQuantity = function(nodetype,nodetext){
 	var quantity = 0;
-	for(var i=0; i<nodes.length; i++){
-		if(nodes[i].type == nodetype && nodes[i].text == nodetext){
+	for(var i=0; i<this.nodes.length; i++){
+		if(this.nodes[i].type == nodetype && this.nodes[i].text == nodetext){
 			quantity++;
 		}
 	}
@@ -107,10 +114,10 @@ function prepareNodes(nodes){
 }
 
 function runcheck(){
-	var nodes = getNodesAsIs();
-	prepareNodes(nodes);
-	console.log(nodes);
-	if(getNodesQuantity(nodes,"tag","\\newcommand")+getNodesQuantity(nodes,"tag","\\renewcommand")){
+	var nodesObject = getNodesAsIs();
+	prepareNodes(nodesObject.nodes);
+	console.log(nodesObject.nodes);
+	if(nodesObject.getNodesQuantity("tag","\\newcommand")+nodesObject.getNodesQuantity("tag","\\renewcommand")){
 		alert('Команды переопределять нельзя!');
 	};
 }
