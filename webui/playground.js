@@ -68,8 +68,19 @@ function runcheck() {
 	console.log(nodesObject.nodes);
 
 
-	checkRules("vzmsh2017", nodesObject);
+	checkRules(hashOptions.ruleset, nodesObject);
 }
 
 document.getElementById("codeload").onclick = codeLoad;
 document.getElementById("runcheck").onclick = runcheck;
+
+var hashOptions = {};
+try {
+	hashOptions = JSON.parse(document.location.hash.substr(1));
+} catch (e) {
+	console.log('Не удалось выделить настройки из адреса страницы');
+}
+hashOptions.ruleset = hashOptions.ruleset || "default";
+
+document.getElementById('ruleset-info').href = rulesets[hashOptions.ruleset].url;
+document.getElementById('ruleset-info').innerHTML = rulesets[hashOptions.ruleset].title;
