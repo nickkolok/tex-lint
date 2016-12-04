@@ -48,4 +48,38 @@ new Rule(
 	}
 );
 
+new Rule(
+	"Bibitem_exist",
+	"В статье должна присутствовать библиография, оформленная в соответствии с требованиями",
+	function(nodes) {
+		return {
+			quantity:
+				+!(nodes.getNodesQuantity("tag","\\RBibitem") +
+				nodes.getNodesQuantity("tag","\\Bibitem"))
+		};
+	}
+);
+
+new Rule(
+	"udk_exist",
+	"Необходимо указать УДК статьи с помощью команды \\udk",
+	function(nodes) {
+		return {
+			quantity:
+				+!(nodes.getNodesQuantity("tag","\\udk"))
+		};
+	}
+);
+
+new Rule(
+	"udk_onlyone",
+	"Необходимо указать УДК статьи с помощью одной команды \\udk. Если УДК несколько, используйте +, например, \\udk{111+222}",
+	function(nodes) {
+		return {
+			quantity:
+				+(nodes.getNodesQuantity("tag","\\udk") > 1)
+		};
+	}
+);
+
 module.exports.rules = rules;
