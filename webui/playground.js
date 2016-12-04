@@ -2,6 +2,8 @@
 
 var Nodes = require('../common/Nodes.js').Nodes;
 var rules = require('../common/Rule.js').rules;
+var rulesets = require('../common/rulesets.js');
+
 
 var fileName = 'saved.tex';
 
@@ -47,10 +49,11 @@ function getNodesAsIs() {
 	return new Nodes(myCodeMirror.getValue());
 };
 
-function checkRules(rulesArray,nodesObject) {
+function checkRules(rulesetName,nodesObject) {
 	var checkLog = [];
-	for (var i = 0; i < rulesArray.length; i++) {
-		var theRule = rules[rulesArray[i]];
+	for (var i = 0; i < rulesets[rulesetName].rules.length; i++) {
+		var theRule = rules[rulesets[rulesetName].rules[i][0]];
+		console.log(theRule);
 		var result = theRule.findErrors(nodesObject);
 		if (result.quantity) {
 			checkLog.push(theRule.message + " : " + "ошибок: " + result.quantity);
@@ -65,11 +68,7 @@ function runcheck() {
 	console.log(nodesObject.nodes);
 
 
-	checkRules([
-		"nonewcommand",
-		"noautonumformulas",
-		"noautonumbiblio",
-	], nodesObject);
+	checkRules("vzmsh2017", nodesObject);
 }
 
 document.getElementById("codeload").onclick = codeLoad;
