@@ -10,18 +10,16 @@
 
 
 	Введите TeX-код для проверки в поле ниже или загрузите TeX-файл:
-	<input type="file" id="file-load"/><button onclick="codeLoad();">Загрузить</button>
+	<input type="file" id="file-load"/><button id="codeload">Загрузить</button>
 	<div id="code-mirror-holder" style="border:2px black solid; padding:5px;height:300px;">
 	</div>
-	<button onclick="runcheck();">
+	<button id="runcheck">
 		Проверить текст
 	</button>
 	Отсутствие ошибок является необходимым условием подачи тезисов.
 	Достаточное условие проверяется вручную!
 	<span id="span-save"></span>
-	<script src="../common/Nodes.js"></script>
-	<script src="../common/Rule.js"></script>
-	<script src="playground.js"></script>
+	<script src="../dist/webui/playground.js"></script>
 	<div id="result-container"></div>
 </body>
 </html>

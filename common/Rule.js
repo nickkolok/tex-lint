@@ -46,3 +46,5 @@ new Rule(
 		};
 	}
 );
+
+module.exports.rules = rules;

@@ -1,4 +1,7 @@
-var fileName='saved.tex'
+var Nodes = require('../common/Nodes.js').Nodes;
+var rules = require('../common/Rule.js' ).rules;
+
+var fileName='saved.tex';
 
 function codeLoad(){
 
@@ -12,12 +15,12 @@ function codeLoad(){
 				myCodeMirror.setValue(e.target.result);
 				fileName = theFile.name;
 			}catch(e){
-				alert('Не удалось прочитать '+theFile.name)
+				alert('Не удалось прочитать '+theFile.name);
 			}
 		};
 	})(f);
 	reader.readAsText(f);
-}
+};
 
 function codeSave(){
 	var blob = new Blob([myCodeMirror.getValue().replace(/[\r]*[\n][\r]*/g,"},\r\n{")], {
@@ -67,3 +70,6 @@ function runcheck(){
 		"noautonumbiblio",
 	],nodesObject);
 }
+
+document.getElementById("codeload").onclick = codeLoad;
+document.getElementById("runcheck").onclick = runcheck;

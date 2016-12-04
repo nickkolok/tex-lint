@@ -69,3 +69,5 @@ Nodes.prototype.prepareNodes = function(){
 function isCyryllicText(text){
 	return /^[А-ЯЁ]+$/i.test(text);
 }
+
+module.exports.Nodes = Nodes;
