@@ -176,7 +176,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('process-webui-js', [
 		'newer:eslint',
-		'newer:browserify:main',
+		'browserify:main',
 	]);
 
 	grunt.registerTask('default', [
