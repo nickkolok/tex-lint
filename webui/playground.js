@@ -10,7 +10,7 @@ function codeLoad() {
 	var readers = [];
 	// Closure to capture the file information.
 	var f = document.getElementById('file-load').files[0];
-	reader = new FileReader();
+	var reader = new FileReader();
 	reader.onload = (function(theFile) {
 		return function(e) {
 			try {
