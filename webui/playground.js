@@ -43,14 +43,27 @@ function getNodesAsIs(){
 	return new Nodes(myCodeMirror.getValue());
 };
 
+function checkRules(rulesArray,nodesObject){
+	var checkLog = [];
+	for(var i = 0; i < rulesArray.length; i++){
+		var theRule = rules[rulesArray[i]];
+		var result = theRule.findErrors(nodesObject);
+		if(result.quantity){
+			checkLog.push(theRule.message+" : "+"ошибок: "+result.quantity);
+		}
+	}
+	document.getElementById("result-container").innerHTML=checkLog.join('<br/>')
+}
+
 function runcheck(){
 	var nodesObject = getNodesAsIs();
 	nodesObject.prepareNodes();
 	console.log(nodesObject.nodes);
 
 
-	var result = rules["nonewcommand"].findErrors(nodesObject);
-	if(result.quantity){
-		document.getElementById("result-container").innerHTML=rules["nonewcommand"].message+" : "+"ошибок: "+result.quantity;
-	}
+	checkRules([
+		"nonewcommand",
+		"noautonumformulas",
+		"noautonumbiblio",
+	],nodesObject);
 }
