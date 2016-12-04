@@ -48,6 +48,6 @@ function runcheck(){
 	nodesObject.prepareNodes();
 	console.log(nodesObject.nodes);
 	if(nodesObject.getNodesQuantity("tag","\\newcommand")+nodesObject.getNodesQuantity("tag","\\renewcommand")){
-		alert('Команды переопределять нельзя!');
+		document.getElementById("result-container").innerHTML='Команды переопределять нельзя!';
 	};
 }
