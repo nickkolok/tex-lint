@@ -47,7 +47,10 @@ function runcheck(){
 	var nodesObject = getNodesAsIs();
 	nodesObject.prepareNodes();
 	console.log(nodesObject.nodes);
-	if(nodesObject.getNodesQuantity("tag","\\newcommand")+nodesObject.getNodesQuantity("tag","\\renewcommand")){
-		document.getElementById("result-container").innerHTML='Команды переопределять нельзя!';
-	};
+
+
+	var result = rules["nonewcommand"].findErrors(nodesObject);
+	if(result.quantity){
+		document.getElementById("result-container").innerHTML=rules["nonewcommand"].message+" : "+"ошибок: "+result.quantity;
+	}
 }
