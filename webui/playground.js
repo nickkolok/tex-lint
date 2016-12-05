@@ -69,6 +69,7 @@ function runcheck() {
 	var nodesObject = getNodesAsIs();
 	nodesObject.prepareNodes();
 	console.log(nodesObject.nodes);
+	console.log(nodesObject.getAllSingleDelimited('keyword','$'));
 
 
 	checkRules(hashOptions.ruleset, nodesObject);

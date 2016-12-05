@@ -66,6 +66,44 @@ Nodes.prototype.prepareNodes = function() {
 	this.joinCyrillicNodes();
 };
 
+Nodes.prototype.getNodesNumbers = function(nodetype, nodetext) {
+	var numbers = [];
+	for (var i = 0; i < this.nodes.length; i++) {
+		if (this.nodes[i].type == nodetype && this.nodes[i].text == nodetext) {
+			numbers.push[i];
+		}
+	}
+	return numbers;
+};
+
+Nodes.prototype.getSubnodes = function(start, end) {
+	var newNodes = new Nodes();
+	newNodes.nodes = this.nodes.slice(start,end);
+	return newNodes;
+};
+
+Nodes.prototype.getAllSingleDelimited = function(nodetype, nodetext) {
+	var result = [];
+	var fl = false;
+	var start;
+	for (var i = 0; i < this.nodes.length; i++) {
+		if (this.nodes[i].type == nodetype && this.nodes[i].text == nodetext) {
+			if (!fl) {
+				// Левый конец
+				start = i + 1;
+				fl = true;
+			} else {
+				// Правый конец
+				fl = false;
+				result.push(this.getSubnodes(start, i));
+			}
+		}
+	}
+	return result;
+};
+
+// TODO: наследовать от массива
+
 // Вспомогательные - вынести!
 
 function isCyryllicText(text) {
