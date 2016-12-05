@@ -9,6 +9,7 @@ var rulesets = {
 			["noautonumformulas",1],
 			["noautonumbiblio",1],
 		],
+		comment: "Отсутствие ошибок является необходимым условием подачи тезисов. Достаточное условие проверяется вручную!",
 	},
 	mz: {
 		title: "Математические заметки",
@@ -18,6 +19,7 @@ var rulesets = {
 			["udk_exist",1],
 			["udk_onlyone",1],
 		],
+		comment: "",
 		examples: [
 			{
 				title: "С библиографией",

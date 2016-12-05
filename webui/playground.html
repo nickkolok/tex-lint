@@ -11,16 +11,25 @@
 
 	Введите TeX-код для проверки в поле ниже или загрузите TeX-файл:
 	<input type="file" id="file-load"/><button id="codeload">Загрузить</button>
+	<span id="tex-examples">
+		Готовые примеры:
+		<select id="tex-examples-list">
+		</select>
+		<button id="paste-example">
+			Вставить
+		</button>
+	</span>
 	<div id="code-mirror-holder" style="border:2px black solid; padding:5px;height:300px;">
 	</div>
 	Набор правил: <a id="ruleset-info"></a>
+	<hr/>
 	<button id="runcheck">
 		Проверить текст
 	</button>
-	Отсутствие ошибок является необходимым условием подачи тезисов.
-	Достаточное условие проверяется вручную!
+	<span id="ruleset-comment"></span>
 	<span id="span-save"></span>
 	<script src="playground.js"></script>
+	<hr/>
 	<div id="result-container"></div>
 </body>
 </html>

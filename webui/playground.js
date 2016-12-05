@@ -3,7 +3,7 @@
 var Nodes = require('../common/Nodes.js').Nodes;
 var rules = require('../common/Rule.js').rules;
 var rulesets = require('../common/rulesets.js');
-
+var texEmaples = require('../build/webui/tex-examples.js');
 
 var fileName = 'saved.tex';
 
@@ -60,6 +60,9 @@ function checkRules(rulesetName,nodesObject) {
 		}
 	}
 	document.getElementById("result-container").innerHTML = checkLog.join('<br/>');
+	if (!checkLog.length) {
+		document.getElementById("result-container").innerHTML = 'Ошибок не найдено';
+	}
 }
 
 function runcheck() {
@@ -80,7 +83,26 @@ try {
 } catch (e) {
 	console.log('Не удалось выделить настройки из адреса страницы');
 }
-hashOptions.ruleset = hashOptions.ruleset || "default";
+hashOptions.ruleset = hashOptions.ruleset || "defaultSet";
 
 document.getElementById('ruleset-info').href = rulesets[hashOptions.ruleset].url;
 document.getElementById('ruleset-info').innerHTML = rulesets[hashOptions.ruleset].title;
+document.getElementById('ruleset-comment').innerHTML = rulesets[hashOptions.ruleset].comment;
+
+if (rulesets[hashOptions.ruleset].examples && rulesets[hashOptions.ruleset].examples.length) {
+	var optionsString = "";
+	var examples = rulesets[hashOptions.ruleset].examples;
+	for (var i = 0; i < examples.length; i++) {
+		optionsString += '<option value="' + i + '">' + examples[i].title + '</option>';
+	}
+	document.getElementById("tex-examples-list").innerHTML = optionsString;
+} else {
+	document.getElementById("tex-examples").style.display = "none";
+}
+
+document.getElementById("paste-example").onclick = pasteExample;
+
+function pasteExample() {
+	var exampleNumber = document.getElementById("tex-examples-list").value;
+	myCodeMirror.setValue(texEmaples[rulesets[hashOptions.ruleset].examples[exampleNumber].source]);
+}
