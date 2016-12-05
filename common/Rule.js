@@ -82,4 +82,19 @@ new Rule(
 	}
 );
 
+new Rule(
+	"noinlinefrac",
+	"Дроби, находящиеся в строке, желательно оформлять как a/b, а не вертикально",
+	function(nodes) {
+		var quantity = 0;
+		var formulas = nodes.getAllSingleDelimited('keyword','$');
+		for (var i = 0; i < formulas.length; i++) {
+			quantity += formulas[i].getNodesQuantity('tag','\\frac');
+		}
+		return {
+			quantity: quantity,
+		};
+	}
+);
+
 module.exports.rules = rules;

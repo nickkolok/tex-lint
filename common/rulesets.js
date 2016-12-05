@@ -18,6 +18,7 @@ var rulesets = {
 			["Bibitem_exist",1],
 			["udk_exist",1],
 			["udk_onlyone",1],
+			["noinlinefrac",0.5],
 		],
 		comment: "",
 		examples: [
