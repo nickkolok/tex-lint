@@ -174,6 +174,27 @@ Nodes.prototype.getGroupOrSingle = function(index) {
 	return this.getSubnodes(index, index + 1);
 };
 
+Nodes.prototype.skipTypes = function(index, types) {
+	// TODO: reverse
+	var nodes = this.nodes;
+	while (nodes[index] && types.indexOf(nodes[index].type) > -1) {
+		index++;
+	}
+	return index;
+};
+
+Nodes.prototype.getArguments = function(index, count) {
+	var nodes = this.nodes;
+	var args = [];
+	for (var i = 0; i < count; i++) {
+		index = this.skipTypes(index,['space','linebreak']);
+		var arg = this.getGroupOrSingle(index);
+		index += arg.nodes.length;
+		args.push(arg);
+	}
+	return args;
+};
+
 
 // TODO: наследовать от массива и this.nodes = this
 
