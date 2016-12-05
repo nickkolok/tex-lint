@@ -40,6 +40,7 @@ Nodes.prototype.fromText = function(text) {
 			self.nodes.push({ text:node, type:style });
 		}
 	);
+	this.prepareNodes();
 };
 
 Nodes.prototype.getNodesQuantity = function(nodetype, nodetext) {
