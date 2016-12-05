@@ -179,7 +179,7 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerTask('packExamples', 'Упаковываем примеры кода в js-обёртки', function() {
-		packExamples('webui/tex-examples/','build/webui/tex-examples.js');
+		packExamples('webui/tex-examples/', 'build/webui/tex-examples.js');
 	});
 
 	grunt.registerTask('process-html', [
@@ -194,7 +194,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', [
 		//'concurrent:process-all', // На деле - медленнее
 		'process-html',
-		'process-webui-js',
 		'packExamples',
+		'process-webui-js',
 	]);
 };
