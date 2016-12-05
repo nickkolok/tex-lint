@@ -148,6 +148,32 @@ Nodes.prototype.getBraceGroup = function(start, left, right) {
 	return this.getSubnodes(start, end);
  };
 
+Nodes.prototype.getGroupOrSingle = function(index) {
+	var nodes = this.nodes;
+	while (nodes[index] && (nodes[index].type === 'space' || nodes[index].type === 'linebreak')) {
+		index++;
+	}
+
+	if (areNodesEqual(nodes[index], Nodes.RIGHT_CURLY) || areNodesEqual(nodes[index], Nodes.RIGHT_SQUARE)) {
+		// Внезапно встретили закрывающую скобку
+		return new Nodes();
+	}
+
+	if (areNodesEqual(nodes[index], Nodes.LEFT_CURLY)) {
+		// Фигурная скобка
+		return this.getBraceGroup(index, Nodes.LEFT_CURLY, Nodes.RIGHT_CURLY);
+	}
+
+	if (areNodesEqual(nodes[index], Nodes.LEFT_SQUARE)) {
+		// Квадратная скобка
+		return this.getBraceGroup(index, Nodes.LEFT_SQUARE, Nodes.RIGHT_SQUARE);
+	}
+
+	// Не скобка вообще
+	return this.getSubnodes(index, index + 1);
+};
+
+
 // TODO: наследовать от массива и this.nodes = this
 
 // Вспомогательные - вынести!
