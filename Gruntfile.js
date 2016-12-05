@@ -3,7 +3,7 @@
 var fs = require('fs');
 var ls = require('ls');
 //var regexp = require('node-regexp');
-//var mkdirp = require('mkdirp');
+var mkdirp = require('mkdirp');
 
 var exec = require('child_process').exec;
 
@@ -15,8 +15,19 @@ module.exports = function(grunt) {
 
 	var cwd = process.cwd();
 
-	var packExamples = function(sourceDir, targetDir) {
+	var packExamples = function(sourceDir, targetFile) {
 		var examples = ls(sourceDir + '*.tex');
+
+		var examplesDictionary = {};
+		for (var i = 0; i < examples.length; i++) {
+			examplesDictionary[examples[i].name] = fs.readFileSync(examples[i].full, 'utf8');
+		}
+		fs.writeFileSync(targetFile,
+			'"use strict";\nmodule.exports=' + JSON.stringify(examplesDictionary)
+		);
+
+
+/*
 		for (var i = 0; i < examples.length; i++) {
 			//Используем синхронное чтение/запись. Ибо вдруг дескрипторов не хватит?
 			fs.writeFileSync(targetDir + examples[i].path + '/' + examples[i].name + '.js',
@@ -28,6 +39,7 @@ module.exports = function(grunt) {
 				'\');\n'
 			);
 		}
+*/
 	};
 
 	grunt.initConfig({
@@ -167,7 +179,7 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerTask('packExamples', 'Упаковываем примеры кода в js-обёртки', function() {
-		packCppTasks('common/tex-examples/');
+		packExamples('webui/tex-examples/','build/webui/tex-examples.js');
 	});
 
 	grunt.registerTask('process-html', [
@@ -183,5 +195,6 @@ module.exports = function(grunt) {
 		//'concurrent:process-all', // На деле - медленнее
 		'process-html',
 		'process-webui-js',
+		'packExamples',
 	]);
 };
