@@ -119,7 +119,31 @@ Nodes.prototype.getAllSingleDelimited = function(nodetype, nodetext) {
 	return result;
 };
 
-// TODO: наследовать от массива
+function areNodesEqual(node1, node2) {
+	// TODO: регулярки
+	return node1.type === node2.type && node1.text === node2.text;
+}
+
+Nodes.prototype.getBraceGroup = function(start, left, right) {
+	// Считаем, что нода с номером start - открывающая (левая) скобка
+	var depth = 1;
+	var end;
+	for (end = start + 1; end < this.nodes.length; end++) {
+		if (areNodesEqual(this.nodes[end], left)) {
+			depth++;
+		} else if (areNodesEqual(this.nodes[end], right)) {
+			depth--;
+			if (!depth) {
+				end++;
+				break;
+			}
+		}
+	}
+	console.log(start, end);
+	return this.getSubnodes(start, end);
+ };
+
+// TODO: наследовать от массива и this.nodes = this
 
 // Вспомогательные - вынести!
 
