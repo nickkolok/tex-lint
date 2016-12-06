@@ -75,3 +75,7 @@ var Nodes12 = new Nodes('abc$\\frac{1+\\alpha}{2 - \\beta}$def\nmno $\\frac{\\ga
 Nodes12.groupInlineFormulas();
 console.log(Nodes12.toString());
 console.log(Nodes12);
+
+var Nodes12 = new Nodes('abc$\\frac{1+\\alpha}{2 - \\beta}$def\nmno $\\frac{\\gamma} 4  \\varepsilon$ xyz');
+Nodes12.inlinizeAllFracs();
+console.log(Nodes12.toString());

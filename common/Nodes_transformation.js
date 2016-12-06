@@ -20,9 +20,9 @@ Nodes.prototype.wrapInBracesIfAdditive = function() {
 	}
 };
 
-Nodes.prototype.groupString = function(start, end) {
+Nodes.prototype.groupString = function(start, end, type) {
 	var nodes = this.nodes;
-	nodes[start].type = 'groupstring';
+	nodes[start].type = type || 'groupstring';
 	for (var i = start + 1; i <= end; i++) {
 		nodes[start].text += nodes[i].text;
 	}
@@ -32,13 +32,54 @@ Nodes.prototype.groupString = function(start, end) {
 Nodes.prototype.groupInlineFormulas = function() {
 	var $indexes = this.getNodesNumbers('keyword','$');
 	if ($indexes.length) {
-		this.groupString($indexes[0],$indexes[1]);
+		this.groupString($indexes[0], $indexes[1], 'inlineformula');
 		this.groupInlineFormulas();
 	}
 };
 
+function inlinizeFracsInSingleFormula(text) {
+	var formula = new Nodes(text);
+	var fracnumbers = formula.getNodesNumbers('tag', '\\frac');
+	if (!fracnumbers.length) {
+		return text;
+	}
+
+	var fracnumber = fracnumbers[0];
+	var fracargs = formula.getArguments(fracnumber + 1, 2);
+	console.log('fracargs', fracargs);
+	var newfracargs = [];
+	for (var k = 0; k < 2; k++) {
+		newfracargs[k] = fracargs[k].slice();
+		newfracargs[k].wrapInBracesIfAdditive();
+	}
+
+	var fractext = formula.getWithArguments(fracnumber,2).toString();
+	console.log('fractext', fractext);
+	var newfractext = ' ' + newfracargs[0].toString() + '/' + newfracargs[1].toString() + ' ';
+	console.log('newfractext', newfractext);
+	return inlinizeFracsInSingleFormula(text.replace(fractext, newfractext));
+}
+
 Nodes.prototype.inlinizeAllFracs = function() {
-	var nodes = this;
+	// Загоняем все формулы в макроноды
+	// Знаю, что костыль. Полшестого утра, хрен с ним
+
+	this.groupInlineFormulas();
+
+	var nodes = this.nodes;
+
+	// Ищем ноду, которая формула
+
+	for (var i = 0; i < nodes.length; i++) {
+		if (nodes[i].type == 'inlineformula') {
+			nodes[i].text = inlinizeFracsInSingleFormula(nodes[i].text);
+		}
+	}
+
+	// Затратно, но сердито
+	this.reparse();
+/*
+
 	var numbers = nodes.getNodesNumbers('keyword','$');
 	console.log('numbers', numbers);
 	var i = 0;
@@ -79,6 +120,8 @@ Nodes.prototype.inlinizeAllFracs = function() {
 	}
 	console.log(nodes);
 	console.log(nodes.toString());
+	* */
 };
+
 
 };
