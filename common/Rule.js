@@ -99,51 +99,7 @@ new Rule(
 		};
 	},
 	function(nodes) {
-		var numbers = nodes.getNodesNumbers('keyword','$');
-		console.log('numbers', numbers);
-		for (var i = 0; i < numbers.length; i += 2) {
-			// При предыдущих правках номера нод "$", скорее всего, изменились
-			numbers = nodes.getNodesNumbers('keyword', '$');
-			console.log('numbers', numbers);
-
-			var formula = nodes.getSubnodes(numbers[i], numbers[i + 1] + 1);
-
-			var fracnumbers = formula.getNodesNumbers('keyword','$');
-
-			for (var j = 0; j < fracnumbers.length; j++) {
-				// При предыдущих правках номера нод "\\frac", скорее всего, изменились
-				fracnumbers = formula.getNodesNumbers('tag', '\\frac');
-
-				console.log('fracnumbers', fracnumbers);
-
-				var fracargs = formula.getArguments(fracnumbers[j], 2);
-
-				console.log('fracargs', fracargs);
-				// TODO: вынести этот кусок в функцию, при необходимости оборачивающую в скобки
-				var newfracargs = [];
-				for (var k = 0; k < 2; k++) {
-					// TODO: как-то поточнее, что ли
-					if (fracargs[k].toString().match(/[+-]/)) {
-						newfracargs[k] = new Nodes('(' + fracargs[k].toString() + ')');
-					} else {
-						newfracargs[k] = fracargs[k].slice();
-					}
-				}
-				// Тут начинается дичайший костыль
-				// TODO: переписать
-				var formulatext = formula.toString();
-				console.log('formulatext', formulatext);
-				var fractext = formula.getWithArguments(fracnumbers[i]).toString();
-				var newfractext = ' ' + newfracargs[0].toString() + '/' + newfracargs[1].toString() + ' ';
-				console.log(newfractext, newfracargs);
-				var newformulatext = formulatext.replace(fractext, newfractext);
-				nodes.nodes.splice(numbers[i], numbers[i + 1] + 1 - numbers[i], { text: newformulatext });
-				nodes.reparse();
-			}
-		}
-		console.log(nodes);
-		console.log(nodes.toString());
-		return nodes;
+		nodes.inlinizeAllFracs();
 	}
 );
 

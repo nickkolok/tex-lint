@@ -48,7 +48,7 @@ console.log(Nodes7);
 Nodes7.reparse();
 console.log(Nodes7);
 
-var Nodes8 = new Nodes('\\frac{1+\\alpha}{2 - \\beta}')
+var Nodes8 = new Nodes('\\frac{1+\\alpha}{2 - \\beta}');
 Nodes8.nodes.splice(8,3);
 console.log(Nodes8.toString());
 
@@ -60,3 +60,8 @@ Nodes9.insertSubnodes(2, Nodes10);
 console.log(Nodes9);
 
 console.log(Nodes9.slice());
+
+
+var Nodes11 = new Nodes('abc$\\frac{1+\\alpha}{2 - \\beta}$def');
+Nodes11.inlinizeAllFracs();
+console.log(Nodes11.toString());
