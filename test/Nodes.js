@@ -42,4 +42,9 @@ var Nodes6 = new Nodes('Some text with frac $\\frac{a}{b}+\\frac{1+\\alpha}{2-\\
 console.log(Nodes6);
 console.log(Nodes6.getNodesNumbers('keyword', '$'));
 
+var Nodes7 = new Nodes('\\frac   \n 1 2');
+Nodes7.nodes[2].text = '\\alpha';
+console.log(Nodes7);
+Nodes7.reparse();
+console.log(Nodes7);
 
