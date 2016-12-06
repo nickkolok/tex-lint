@@ -51,3 +51,12 @@ console.log(Nodes7);
 var Nodes8 = new Nodes('\\frac{1+\\alpha}{2 - \\beta}')
 Nodes8.nodes.splice(8,3);
 console.log(Nodes8.toString());
+
+
+var Nodes9 = new Nodes('\\alpha 2 \\beta');
+console.log(Nodes9);
+var Nodes10 = new Nodes('\\gamma 4 \\varepsilon');
+Nodes9.insertSubnodes(2, Nodes10);
+console.log(Nodes9);
+
+console.log(Nodes9.slice());

@@ -145,5 +145,10 @@ Nodes.prototype.toString = function() {
 	return str;
 };
 
+Nodes.prototype.slice = function() {
+	var copy = new Nodes();
+	copy.nodes = this.nodes.slice();
+	return copy;
+};
 
 };

@@ -126,7 +126,7 @@ new Rule(
 					if (fracargs[k].toString().match(/[+-]/)) {
 						newfracargs[k] = new Nodes('(' + fracargs[k].toString() + ')');
 					} else {
-						newfracargs[k] = fracargs[k];
+						newfracargs[k] = fracargs[k].slice();
 					}
 				}
 				// Тут начинается дичайший костыль
@@ -138,7 +138,7 @@ new Rule(
 				console.log(newfractext, newfracargs);
 				var newformulatext = formulatext.replace(fractext, newfractext);
 				nodes.nodes.splice(numbers[i], numbers[i + 1] + 1 - numbers[i], { text: newformulatext });
-				nodes = new Nodes(nodes.toString());
+				nodes.reparse();
 			}
 		}
 		console.log(nodes);
