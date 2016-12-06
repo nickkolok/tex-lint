@@ -65,3 +65,13 @@ console.log(Nodes9.slice());
 var Nodes11 = new Nodes('abc$\\frac{1+\\alpha}{2 - \\beta}$def');
 Nodes11.inlinizeAllFracs();
 console.log(Nodes11.toString());
+
+var Nodes11a = new Nodes('$a$ mno $\\frac{\\gamma} 4  \\varepsilon$ xyz');
+Nodes11a.inlinizeAllFracs();
+console.log(Nodes11a.toString());
+
+
+var Nodes12 = new Nodes('abc$\\frac{1+\\alpha}{2 - \\beta}$def\nmno $\\frac{\\gamma} 4  \\varepsilon$ xyz');
+Nodes12.groupInlineFormulas();
+console.log(Nodes12.toString());
+console.log(Nodes12);

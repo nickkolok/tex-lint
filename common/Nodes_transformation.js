@@ -20,10 +20,28 @@ Nodes.prototype.wrapInBracesIfAdditive = function() {
 	}
 };
 
+Nodes.prototype.groupString = function(start, end) {
+	var nodes = this.nodes;
+	nodes[start].type = 'groupstring';
+	for (var i = start + 1; i <= end; i++) {
+		nodes[start].text += nodes[i].text;
+	}
+	nodes.splice(start + 1, end - start);
+};
+
+Nodes.prototype.groupInlineFormulas = function() {
+	var $indexes = this.getNodesNumbers('keyword','$');
+	if ($indexes.length) {
+		this.groupString($indexes[0],$indexes[1]);
+		this.groupInlineFormulas();
+	}
+};
+
 Nodes.prototype.inlinizeAllFracs = function() {
 	var nodes = this;
 	var numbers = nodes.getNodesNumbers('keyword','$');
 	console.log('numbers', numbers);
+	var i = 0;
 	for (var i = 0; i < numbers.length; i += 2) {
 		// При предыдущих правках номера нод "$", скорее всего, изменились
 		numbers = nodes.getNodesNumbers('keyword', '$');
@@ -31,7 +49,8 @@ Nodes.prototype.inlinizeAllFracs = function() {
 		var formula = nodes.getSubnodes(numbers[i], numbers[i + 1] + 1);
 		var fracnumbers = formula.getNodesNumbers('keyword','$');
 
-		for (var j = 0; j < fracnumbers.length; j++) {
+		var j = 0;
+		//for (var j = 0; j < fracnumbers.length; j++) {
 			// При предыдущих правках номера нод "\\frac", скорее всего, изменились
 			fracnumbers = formula.getNodesNumbers('tag', '\\frac');
 
@@ -56,7 +75,7 @@ Nodes.prototype.inlinizeAllFracs = function() {
 			var newformulatext = formulatext.replace(fractext, newfractext);
 			nodes.nodes.splice(numbers[i], numbers[i + 1] + 1 - numbers[i], { text: newformulatext });
 			nodes.reparse();
-		}
+		//}
 	}
 	console.log(nodes);
 	console.log(nodes.toString());
