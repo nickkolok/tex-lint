@@ -100,6 +100,7 @@ new Rule(
 	},
 	function(nodes) {
 		nodes.inlinizeAllFracs();
+		return nodes;
 	}
 );
 
