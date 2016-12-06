@@ -93,7 +93,7 @@ Nodes.prototype.getNodesNumbers = function(nodetype, nodetext) {
 	var numbers = [];
 	for (var i = 0; i < this.nodes.length; i++) {
 		if (this.nodes[i].type == nodetype && this.nodes[i].text == nodetext) {
-			numbers.push[i];
+			numbers.push(i);
 		}
 	}
 	return numbers;
@@ -126,6 +126,9 @@ Nodes.prototype.getAllSingleDelimited = function(nodetype, nodetext) {
 };
 
 function areNodesEqual(node1, node2) {
+	if (!node1 || !node2) {
+		return false;
+	}
 	// TODO: регулярки
 	return node1.type === node2.type && node1.text === node2.text;
 }
@@ -187,7 +190,7 @@ Nodes.prototype.getArguments = function(index, count) {
 	var nodes = this.nodes;
 	var args = [];
 	for (var i = 0; i < count; i++) {
-		index = this.skipTypes(index,['space','linebreak']);
+		index = this.skipTypes(index, ['space', 'linebreak']);
 		var arg = this.getGroupOrSingle(index);
 		index += arg.nodes.length;
 		args.push(arg);
@@ -195,6 +198,26 @@ Nodes.prototype.getArguments = function(index, count) {
 	return args;
 };
 
+Nodes.prototype.getWithArguments = function(index, count) {
+	var nodes = this.nodes;
+	var start = index;
+	// Берём то, аргументы чего ищем
+	index++;
+	for (var i = 0; i < count; i++) {
+		index = this.skipTypes(index, ['space', 'linebreak']);
+		var arg = this.getGroupOrSingle(index);
+		index += arg.nodes.length;
+	}
+	return this.getSubnodes(start, index);
+};
+
+Nodes.prototype.toString = function() {
+	var str = '';
+	for (var i = 0; i < this.nodes.length; i++) {
+		str += this.nodes[i].text;
+	}
+	return str;
+};
 
 // TODO: наследовать от массива и this.nodes = this
 

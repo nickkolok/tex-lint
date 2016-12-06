@@ -53,21 +53,36 @@ function checkRules(rulesetName,nodesObject) {
 	var checkLog = [];
 	for (var i = 0; i < rulesets[rulesetName].rules.length; i++) {
 		var theRule = rules[rulesets[rulesetName].rules[i][0]];
-		console.log(theRule);
 		var result = theRule.findErrors(nodesObject);
 		if (result.quantity) {
-			checkLog.push(theRule.message + " : " + "ошибок: " + result.quantity);
+			var message = theRule.message + " : " + "ошибок: " + result.quantity;
+			if (theRule.fixErrors) {
+				message += ' <button id="fixErrors-' + theRule.name + '">Исправить</button>';
+			}
+			checkLog.push(message);
 		}
 	}
 	document.getElementById("result-container").innerHTML = checkLog.join('<br/>');
 	if (!checkLog.length) {
 		document.getElementById("result-container").innerHTML = 'Ошибок не найдено';
 	}
+
+	// TODO: отрефакторить через какой-нибудь documentFragment
+	for (var i = 0; i < rulesets[rulesetName].rules.length; i++) {
+		var theRule = rules[rulesets[rulesetName].rules[i][0]];
+		if (theRule.fixErrors && document.getElementById('fixErrors-' + theRule.name)) {
+			document.getElementById('fixErrors-' + theRule.name).onclick = function() {
+				console.log('Trying to fix ' + theRule.name);
+				var nodes = theRule.fixErrors(getNodesAsIs());
+				myCodeMirror.setValue(nodes.toString());
+				runcheck();
+			};
+		}
+	}
 }
 
 function runcheck() {
 	var nodesObject = getNodesAsIs();
-	nodesObject.prepareNodes();
 	console.log(nodesObject.nodes);
 	console.log(nodesObject.getAllSingleDelimited('keyword','$'));
 

@@ -30,3 +30,16 @@ console.log(Nodes1.getArguments(1, 1));
 console.log(Nodes1.getArguments(1, 2));
 console.log(Nodes1.getArguments(1, 3));
 console.log(JSON.stringify(Nodes1.getArguments(1, 4)));
+console.log(Nodes1.getArguments(1, 3)[2].toString());
+
+var Nodes5 = new Nodes('\\frac{1+\\alpha}{2 - \\beta}')
+console.log(Nodes5);
+
+console.log(Nodes1.getWithArguments(0, 3));
+console.log(Nodes3.getWithArguments(0, 2));
+
+var Nodes6 = new Nodes('Some text with frac $\\frac{a}{b}+\\frac{1+\\alpha}{2-\\beta}+\\frac{1+C_0}{2}$ in it.');
+console.log(Nodes6);
+console.log(Nodes6.getNodesNumbers('keyword', '$'));
+
+
