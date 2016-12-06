@@ -32,6 +32,23 @@ var rulesets = {
 			},
 		],
 	},
+	smzh: {
+		title: "Сибматжурнал",
+		url: "http://a-server.math.nsc.ru/publishing/smz/for_authors.php",
+		rules: [
+			["nonewcommand",1],
+			["noautonumformulas",1],
+			["noautonumbiblio",1],
+			["notoest",1],
+		],
+		comment: "",
+		examples: [
+			{
+				title: "Простой пример",
+				source: "smzh-1",
+			},
+		],
+	},
 };
 
 rulesets.defaultSet = rulesets.vzmsh2017;

@@ -104,4 +104,19 @@ new Rule(
 	}
 );
 
+new Rule(
+	"notoest",
+	'Вместо "то есть" необходимо использовать сокращение "т. е."',
+	function(nodes) {
+		var text = nodes.toString();
+		var quantity = text.match(/\sто\s+есть\s/g);
+		return {
+			quantity: quantity,
+		};
+	},
+	function(nodes) {
+		return (new Nodes(nodes.toString().replace(/\sто\sесть\s/g," т.~е. ")));
+	}
+);
+
 module.exports.rules = rules;
