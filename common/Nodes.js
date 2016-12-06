@@ -1,22 +1,5 @@
 'use strict';
 
-
-// Костыль =(
-// С browserify такого быть не должно
-
-try {
-	if (typeof (navigator) === 'undefined') {
-		var CodeMirror = require("../node_modules/codemirror/addon/runmode/runmode.node.js");
-		require("../node_modules/codemirror/mode/meta.js");
-		require("../node_modules/codemirror/mode/stex/stex.js");
-
-	} else {
-		var CodeMirror = window.CodeMirror;
-	}
-} catch (e) {
-	console.log(e);
-}
-
 // Конструктор
 function Nodes(text) {
   this.nodes = [];
@@ -25,23 +8,29 @@ function Nodes(text) {
   }
 };
 
+// Костыль =(
+// С browserify такого быть не должно
+
+try {
+	if (typeof (navigator) === 'undefined') {
+		Nodes.CodeMirror = require("../node_modules/codemirror/addon/runmode/runmode.node.js");
+		require("../node_modules/codemirror/mode/meta.js");
+		require("../node_modules/codemirror/mode/stex/stex.js");
+
+	} else {
+		Nodes.CodeMirror = window.CodeMirror;
+	}
+} catch (e) {
+	console.log(e);
+}
+
+require('./Nodes_construction.js')(Nodes);
+
 Nodes. LEFT_CURLY  = { type:'bracket', text:'{' };
 Nodes.RIGHT_CURLY  = { type:'bracket', text:'}' };
 Nodes. LEFT_SQUARE = { type:'bracket', text:'[' };
 Nodes.RIGHT_SQUARE = { type:'bracket', text:']' };
 
-Nodes.prototype.fromText = function(text) {
-	this.nodes = [];
-	var self = this;
-	CodeMirror.runMode(
-		text,
-		{ name:'stex' },
-		function(node, style) {
-			self.nodes.push({ text:node, type:style });
-		}
-	);
-	this.prepareNodes();
-};
 
 Nodes.prototype.getNodesQuantity = function(nodetype, nodetext) {
 	var quantity = 0;
