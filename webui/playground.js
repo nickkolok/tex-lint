@@ -71,12 +71,16 @@ function checkRules(rulesetName,nodesObject) {
 	for (var i = 0; i < rulesets[rulesetName].rules.length; i++) {
 		var theRule = rules[rulesets[rulesetName].rules[i][0]];
 		if (theRule.fixErrors && document.getElementById('fixErrors-' + theRule.name)) {
-			document.getElementById('fixErrors-' + theRule.name).onclick = function() {
-				console.log('Trying to fix ' + theRule.name);
-				var nodes = theRule.fixErrors(getNodesAsIs());
-				myCodeMirror.setValue(nodes.toString());
-				runcheck();
-			};
+			document.getElementById('fixErrors-' + theRule.name).onclick = (function(rule) { return function() {
+				try { // TODO: выляпаться из замыкания!!!
+					console.log('Trying to fix ' + rule.name);
+					var nodes = rule.fixErrors(getNodesAsIs());
+					myCodeMirror.setValue(nodes.toString());
+					runcheck();
+				} catch (e) {
+					console.log(e);
+				}
+			};})(theRule);
 		}
 	}
 }
