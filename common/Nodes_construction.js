@@ -37,6 +37,14 @@ Nodes.prototype.markSpaceNodes = function() {
 	}
 };
 
+Nodes.prototype.remarkNumberNodes = function() {
+	for (var i = 0; i < this.nodes.length; i++) {
+		if (/^\d+$/.test(this.nodes[i].text)) {
+			this.nodes[i].type = 'number';
+		}
+	}
+};
+
 Nodes.prototype.joinCyrillicNodes = function() {
 	for (var i = 0; i < this.nodes.length; i++) {
 		// TODO: объединять не по одной, а по несколько. А то тормозит. Переделать!
@@ -52,6 +60,7 @@ Nodes.prototype.prepareNodes = function() {
 	this.markSpaceNodes();
 	this.markCyrillicNodes();
 	this.joinCyrillicNodes();
+	this.remarkNumberNodes();
 };
 
 
