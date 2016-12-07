@@ -1,3 +1,5 @@
+const util = require('util');
+
 const Nodes = require('../common/Nodes.js').Nodes;
 
 var Nodes1 = new Nodes('\\frac{1}{2}3[5]');
@@ -5,13 +7,11 @@ var Nodes1 = new Nodes('\\frac{1}{2}3[5]');
 
 var Nodes3 = new Nodes('\\frac   \n 1 2');
 
-/*
-console.log(Nodes1.getArguments(1, 1));
-console.log(Nodes1.getArguments(1, 2));
-console.log(Nodes1.getArguments(1, 3));
-console.log(JSON.stringify(Nodes1.getArguments(1, 4)));
-console.log(Nodes1.getArguments(1, 3)[2].toString());
+console.inspect = function(obj, opts) {
+	console.log(util.inspect(obj, opts || {showHidden: false, depth: null}));
+};
 
+/*
 var Nodes5 = new Nodes('\\frac{1+\\alpha}{2 - \\beta}')
 console.log(Nodes5);
 
