@@ -2,8 +2,6 @@ const Nodes = require('../common/Nodes.js').Nodes;
 
 var Nodes1 = new Nodes('\\frac{1}{2}3[5]');
 
-console.log(new Nodes(' 12 ').nodes);
-
 /*
 var Nodes3 = new Nodes('\\frac   \n 1 2');
 console.log(Nodes3.nodes);
