@@ -74,7 +74,6 @@ Nodes.prototype.getBraceGroup = function(start, left, right) {
 			}
 		}
 	}
-	console.log(start, end);
 	return this.getSubnodes(start, end);
  };
 

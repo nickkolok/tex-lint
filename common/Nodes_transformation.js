@@ -50,7 +50,6 @@ function inlinizeFracsInSingleFormula(text) {
 
 	var fracnumber = fracnumbers[0];
 	var fracargs = formula.getArguments(fracnumber + 1, 2);
-	//console.log('fracargs', fracargs);
 	var newfracargs = [];
 	for (var k = 0; k < 2; k++) {
 		newfracargs[k] = fracargs[k].slice();
@@ -58,9 +57,7 @@ function inlinizeFracsInSingleFormula(text) {
 	}
 
 	var fractext = formula.getWithArguments(fracnumber,2).toString();
-	//console.log('fractext', fractext);
 	var newfractext = ' ' + newfracargs[0].toString() + '/' + newfracargs[1].toString() + ' ';
-	//console.log('newfractext', newfractext);
 	return inlinizeFracsInSingleFormula(text.replace(fractext, newfractext));
 }
 
