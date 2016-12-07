@@ -90,3 +90,31 @@ test("getGroupOrSingle", function () {
 		""
 	);
 });
+
+test("skipTypes", function () {
+	var N = new Nodes('\\frac{1}{2}3[5]');
+	assert.deepEqual(
+		N.skipTypes(1,['space']),
+		1,
+		""
+	);
+
+	assert.deepEqual(
+		N.skipTypes(1,['space','linebreak']),
+		1,
+		""
+	);
+
+	N = new Nodes('\\frac   \n 1 2');
+	assert.deepEqual(
+		N.skipTypes(1,['space']),
+		2,
+		""
+	);
+
+	assert.deepEqual(
+		N.skipTypes(1,['space','linebreak']),
+		4,
+		""
+	);
+});
