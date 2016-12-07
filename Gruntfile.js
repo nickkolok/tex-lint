@@ -172,7 +172,7 @@ module.exports = function(grunt) {
 		'node-qunit': {
 			Nodes: {
 				code: './common/Nodes.js',
-				tests: './test/Nodes.js',
+				tests: './test/Nodes_get.js',
 				done: function(err, res){
 					!err && publishResults("node", res, this.async());
 				},

@@ -4,6 +4,7 @@ module.exports = function(Nodes) {
 
 // Здесь сложены функции, вызываемые из конструктора
 // Они изменяют объект
+// Тесты пишутся не на отдельную функцию, а на результат конструктора
 
 Nodes.prototype.fromText = function(text) {
 	this.nodes = [];
