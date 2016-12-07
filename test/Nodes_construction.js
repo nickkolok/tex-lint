@@ -60,7 +60,6 @@ test("frac, numbers, spaces and linebreak", function () {
 			{ text: '\\frac', type: 'tag' },
 			{ text: '   ', type: 'space' },
 			{ text: '\n', type: 'linebreak' },
-			{ text: '\n', type: 'linebreak' },
 			{ text: ' ', type: 'space' },
 			{ text: '1', type: 'number' },
 			{ text: ' ', type: 'space' },
@@ -78,7 +77,6 @@ test("cyrillic text", function () {
 		[
 			{ text: 'Текст', type: 'cyrtext' },
 			{ text: '   ', type: 'space' },
-			{ text: '\n', type: 'linebreak' },
 			{ text: '\n', type: 'linebreak' },
 			{ text: ' ', type: 'space' },
 			{ text: 'на', type: 'cyrtext' },

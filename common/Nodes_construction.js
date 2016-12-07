@@ -61,7 +61,7 @@ Nodes.prototype.joinCyrillicNodes = function() {
 Nodes.prototype.separateSpaces = function() {
 	// Мы предполагаем, что разрывы строки-то уж кодемирроровский парсер осилил
 	for (var i = 0; i < this.nodes.length; i++) {
-		if (this.nodes[i].type === 'space') {
+		if (this.nodes[i].type === 'space' || this.nodes[i].type === 'linebreak') {
 			continue;
 		}
 		var begin = this.nodes[i].text.match(/^\s+/);
