@@ -12,6 +12,10 @@ Nodes.prototype.insertSubnodes = function(index, subnodes) {
 	}
 };
 
+Nodes.prototype.insertNode = function(index, node) {
+	this.nodes.splice(index,0,node);
+};
+
 Nodes.prototype.wrapInBracesIfAdditive = function() {
 	// TODO: переделать на инъекцию нод в начало и конец
 	if (this.toString().match(/[+-]/)) {

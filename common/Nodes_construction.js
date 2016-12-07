@@ -57,7 +57,26 @@ Nodes.prototype.joinCyrillicNodes = function() {
 	}
 };
 
+Nodes.prototype.separateSpaces = function() {
+	// Мы предполагаем, что разрывы строки-то уж кодемирроровский парсер осилил
+	for (var i = 0; i < this.nodes.length; i++) {
+		var begin = this.nodes[i].text.match(/^\s+/);
+		var end = this.nodes[i].text.match(/\s$/);
+		if (begin) {
+			this.insertNode(i, { text: begin[0], type: 'space' });
+			i++;
+			this.nodes[i].text = this.nodes[i].text.replace(/^\s+/,"");
+		}
+		if (end) {
+			this.insertNode(i + 1, { text: end[0], type: 'space' });
+			this.nodes[i].text = this.nodes[i].text.replace(/\s+$/,"");
+			i++;
+		}
+	}
+};
+
 Nodes.prototype.prepareNodes = function() {
+	this.separateSpaces();
 	this.markSpaceNodes();
 	this.markCyrillicNodes();
 	this.joinCyrillicNodes();
