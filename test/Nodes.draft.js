@@ -18,10 +18,6 @@ console.log(Nodes5);
 console.log(Nodes1.getWithArguments(0, 3));
 console.log(Nodes3.getWithArguments(0, 2));
 
-var Nodes6 = new Nodes('Some text with frac $\\frac{a}{b}+\\frac{1+\\alpha}{2-\\beta}+\\frac{1+C_0}{2}$ in it.');
-console.log(Nodes6);
-console.log(Nodes6.getNodesNumbers('keyword', '$'));
-
 var Nodes7 = new Nodes('\\frac   \n 1 2');
 Nodes7.nodes[2].text = '\\alpha 2 \\beta';
 console.log(Nodes7);

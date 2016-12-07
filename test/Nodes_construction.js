@@ -145,3 +145,61 @@ test("single linebreak", function () {
 	);
 });
 
+test("text with fracs", function () {
+	var N = new Nodes('Some text with frac $\\frac{a}{b}+\\frac{1+\\alpha}{2-\\beta}+\\frac{1+C_0}{2}$ in it.');
+
+	assert.deepEqual(
+		N.nodes,
+		[
+			{ text: 'Some', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'text', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'with', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'frac', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: '\\frac', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'a', type: 'variable-2' },
+			{ text: '}', type: 'bracket' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'b', type: 'variable-2' },
+			{ text: '}', type: 'bracket' },
+			{ text: '+', type: null },
+			{ text: '\\frac', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: '1', type: 'number' },
+			{ text: '+', type: null },
+			{ text: '\\alpha', type: 'tag' },
+			{ text: '}', type: 'bracket' },
+			{ text: '{', type: 'bracket' },
+			{ text: '2', type: 'number' },
+			{ text: '-', type: null },
+			{ text: '\\beta', type: 'tag' },
+			{ text: '}', type: 'bracket' },
+			{ text: '+', type: null },
+			{ text: '\\frac', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: '1', type: 'number' },
+			{ text: '+', type: null },
+			{ text: 'C', type: 'variable-2' },
+			{ text: '_', type: 'tag' },
+			{ text: '0', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '{', type: 'bracket' },
+			{ text: '2', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '$', type: 'keyword' },
+			{ text: ' ', type: 'space' },
+			{ text: 'in', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'it', type: null },
+			{ text: '.', type: null },
+		],
+		""
+	);
+});
+
+

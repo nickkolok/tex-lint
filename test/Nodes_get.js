@@ -160,3 +160,28 @@ test("getArguments", function () {
 		""
 	);
 });
+
+test("getNodesNumbers", function () {
+	var N = new Nodes('Some text with frac $\\frac{a}{b}+\\frac{1+\\alpha}{2-\\beta}+\\frac{1+C_0}{2}$ in it.');
+	assert.deepEqual(
+		N.getNodesNumbers('keyword', '$'),
+		[ 8, 40, ],
+		""
+	);
+
+});
+
+
+/*
+
+test('', function () {
+	var N = new Nodes('');
+	assert.deepEqual(
+		N.,
+		1,
+		""
+	);
+
+});
+
+*/
