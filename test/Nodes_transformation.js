@@ -80,6 +80,16 @@ test('insertSubnodes', function () {
 
 });
 
+test('nodes-splice', function () {
+	var N = new Nodes('\\frac{1+\\alpha}{2 - \\beta}');
+	N.nodes.splice(8,3);
+	assert.deepEqual(
+		N.toString(),
+		'\\frac{1+\\alpha}{2\\beta}',
+		""
+	);
+
+});
 
 
 /*
