@@ -47,6 +47,7 @@ Nodes.prototype.remarkNumberNodes = function() {
 };
 
 Nodes.prototype.joinCyrillicNodes = function() {
+	// TODO: влить в joinNodeOfType()
 	for (var i = 0; i < this.nodes.length; i++) {
 		// TODO: объединять не по одной, а по несколько. А то тормозит. Переделать!
 		if (this.nodes[i].type == "cyrtext" && this.nodes[i + 1].type == "cyrtext") {
@@ -60,8 +61,11 @@ Nodes.prototype.joinCyrillicNodes = function() {
 Nodes.prototype.separateSpaces = function() {
 	// Мы предполагаем, что разрывы строки-то уж кодемирроровский парсер осилил
 	for (var i = 0; i < this.nodes.length; i++) {
+		if (this.nodes[i].type === 'space') {
+			continue;
+		}
 		var begin = this.nodes[i].text.match(/^\s+/);
-		var end = this.nodes[i].text.match(/\s$/);
+		var end = this.nodes[i].text.match(/\s+$/);
 		if (begin) {
 			this.insertNode(i, { text: begin[0], type: 'space' });
 			i++;
@@ -75,9 +79,32 @@ Nodes.prototype.separateSpaces = function() {
 	}
 };
 
+Nodes.prototype.deleteEmptyNodes = function() {
+	for (var i = 0; i < this.nodes.length; i++) {
+		if (!this.nodes[i].text) {
+			this.nodes.splice(i,1);
+			i--;
+		}
+	}
+};
+
+Nodes.prototype.joinNodesOfType = function(type) {
+	for (var i = 0; i < this.nodes.length - 1; i++) {
+		// TODO: объединять не по одной, а по несколько. А то тормозит. Переделать!
+		if (this.nodes[i].type == type && this.nodes[i + 1].type == type) {
+			this.nodes[i].text += this.nodes[i + 1].text;
+			this.nodes.splice(i + 1, 1);
+			i--;
+		}
+	}
+};
+
 Nodes.prototype.prepareNodes = function() {
-	this.separateSpaces();
 	this.markSpaceNodes();
+	this.separateSpaces();
+	this.deleteEmptyNodes();
+	this.markSpaceNodes();
+	this.joinNodesOfType('space');
 	this.markCyrillicNodes();
 	this.joinCyrillicNodes();
 	this.remarkNumberNodes();

@@ -13,7 +13,7 @@ Nodes.prototype.insertSubnodes = function(index, subnodes) {
 };
 
 Nodes.prototype.insertNode = function(index, node) {
-	this.nodes.splice(index,0,node);
+	this.nodes.splice(index, 0, node);
 };
 
 Nodes.prototype.wrapInBracesIfAdditive = function() {
