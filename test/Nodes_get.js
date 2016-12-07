@@ -171,6 +171,40 @@ test("getNodesNumbers", function () {
 
 });
 
+test('getWithArguments', function () {
+	var N = new Nodes('\\frac{1}{2}3[5]');
+
+	assert.deepEqual(
+		N.getWithArguments(0, 3).nodes,
+		[
+			{ text: '\\frac', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: '1', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '{', type: 'bracket' },
+			{ text: '2', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '3', type: 'number' },
+		],
+		""
+	);
+
+	N = new Nodes('\\frac   \n 1 2');
+	assert.deepEqual(
+		N.getWithArguments(0, 2).nodes,
+		[
+			{ text: '\\frac', type: 'tag' },
+			{ text: '   ', type: 'space' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: ' ', type: 'space' },
+			{ text: '1', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '2', type: 'number' },
+		],
+		""
+	);
+});
+
 
 /*
 

@@ -2,19 +2,11 @@ const util = require('util');
 
 const Nodes = require('../common/Nodes.js').Nodes;
 
-var Nodes1 = new Nodes('\\frac{1}{2}3[5]');
-
-
-var Nodes3 = new Nodes('\\frac   \n 1 2');
-
 console.inspect = function(obj, opts) {
 	console.log(util.inspect(obj, opts || {showHidden: false, depth: null}));
 };
 
 /*
-console.log(Nodes1.getWithArguments(0, 3));
-console.log(Nodes3.getWithArguments(0, 2));
-
 var Nodes7 = new Nodes('\\frac   \n 1 2');
 Nodes7.nodes[2].text = '\\alpha 2 \\beta';
 console.log(Nodes7);
