@@ -90,3 +90,58 @@ test("cyrillic text", function () {
 	);
 });
 
+test("single comment", function () {
+	var N = new Nodes('%\n');
+
+	assert.deepEqual(
+		N.nodes,
+		[
+			{ text: '%', type: 'comment' },
+			{ text: '\n', type: 'linebreak' },
+		],
+		""
+	);
+
+	N = new Nodes('%smth\n');
+
+	assert.deepEqual(
+		N.nodes,
+		[
+			{ text: '%smth', type: 'comment' },
+			{ text: '\n', type: 'linebreak' },
+		],
+		""
+	);
+
+	N = new Nodes('%smth');
+
+	assert.deepEqual(
+		N.nodes,
+		[
+			{ text: '%smth', type: 'comment' },
+		],
+		""
+	);
+	N = new Nodes('%\\smth');
+
+	assert.deepEqual(
+		N.nodes,
+		[
+			{ text: '%\\smth', type: 'comment' },
+		],
+		""
+	);
+});
+
+test("single linebreak", function () {
+	var N = new Nodes('\n');
+
+	assert.deepEqual(
+		N.nodes,
+		[
+			{ text: '\n', type: 'linebreak' },
+		],
+		""
+	);
+});
+
