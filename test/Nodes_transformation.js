@@ -57,6 +57,30 @@ test('groupInlineFormulas', function () {
 	);
 });
 
+test('insertSubnodes', function () {
+	var Nodes9 = new Nodes('\\alpha 2 \\beta');
+	var Nodes10 = new Nodes('\\gamma 4 \\varepsilon');
+	Nodes9.insertSubnodes(2, Nodes10);
+	assert.deepEqual(
+		Nodes9.nodes,
+		[
+			{ text: '\\alpha', type: 'tag' },
+			{ text: ' ', type: 'space' },
+			{ text: '\\gamma', type: 'tag' },
+			{ text: ' ', type: 'space' },
+			{ text: '4', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '\\varepsilon', type: 'tag' },
+			{ text: '2', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '\\beta', type: 'tag' },
+		],
+		""
+	);
+
+});
+
+
 
 /*
 
