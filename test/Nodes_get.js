@@ -205,6 +205,28 @@ test('getWithArguments', function () {
 	);
 });
 
+test('slice', function () {
+	var N = new Nodes('\\frac{1}{2}3[5]');
+	var copy = N.slice();
+	N.nodes.splice(1, 3);
+	assert.deepEqual(
+		copy.nodes,
+		[
+			{ text: '\\frac', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: '1', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '{', type: 'bracket' },
+			{ text: '2', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '3', type: 'number' },
+			{ text: '[', type: 'bracket' },
+			{ text: '5', type: 'number' },
+			{ text: ']', type: 'bracket' },
+		],
+		""
+	);
+});
 
 /*
 
