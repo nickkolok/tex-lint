@@ -27,8 +27,10 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-eslint": "^19.0.0",
     "grunt-newer": "^1.2.0",
+    "grunt-node-qunit": "^2.0.2",
     "load-grunt-tasks": "^3.5.2",
     "ls": "^0.2.1",
+    "qunit": "^0.9.1",
     "time-grunt": "^1.4.0"
   }
 }

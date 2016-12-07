@@ -168,6 +168,17 @@ module.exports = function(grunt) {
 			build: ['build/'],
 			dist: ['dist/']
 		},
+
+		'node-qunit': {
+			Nodes: {
+				code: './common/Nodes.js',
+				tests: './test/Nodes.js',
+				done: function(err, res){
+					!err && publishResults("node", res, this.async());
+				},
+			},
+		},
+
 /*
 		concurrent: {
 			'process-all': [
