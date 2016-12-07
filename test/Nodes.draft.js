@@ -12,9 +12,6 @@ console.inspect = function(obj, opts) {
 };
 
 /*
-var Nodes5 = new Nodes('\\frac{1+\\alpha}{2 - \\beta}')
-console.log(Nodes5);
-
 console.log(Nodes1.getWithArguments(0, 3));
 console.log(Nodes3.getWithArguments(0, 2));
 
@@ -30,11 +27,9 @@ console.log(Nodes8.toString());
 
 
 var Nodes9 = new Nodes('\\alpha 2 \\beta');
-console.log(Nodes9);
 var Nodes10 = new Nodes('\\gamma 4 \\varepsilon');
 Nodes9.insertSubnodes(2, Nodes10);
 console.log(Nodes9);
-
 console.log(Nodes9.slice());
 
 

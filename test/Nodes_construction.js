@@ -202,4 +202,60 @@ test("text with fracs", function () {
 	);
 });
 
+test('sfrac with \\alpha and \\beta', function () {
+	var N = new Nodes('\\frac{1+\\alpha}{2 - \\beta}');
 
+	assert.deepEqual(
+		N.nodes,
+		[
+			{ text: '\\frac', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: '1', type: 'number' },
+			{ text: '+', type: null },
+			{ text: '\\alpha', type: 'tag' },
+			{ text: '}', type: 'bracket' },
+			{ text: '{', type: 'bracket' },
+			{ text: '2', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '-', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '\\beta', type: 'tag' },
+			{ text: '}', type: 'bracket' },
+		],
+		""
+	);
+});
+
+test('\\alpha 2 \\beta', function () {
+	var N = new Nodes('\\alpha 2 \\beta');
+
+	assert.deepEqual(
+		N.nodes,
+		[
+			{ text: '\\alpha', type: 'tag' },
+			{ text: ' ', type: 'space' },
+			{ text: '2', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '\\beta', type: 'tag' },
+		],
+		""
+	);
+});
+
+
+
+/*
+
+test('', function () {
+	var N = new Nodes('');
+
+	assert.deepEqual(
+		N.nodes,
+		[
+			{ text: '\n', type: 'linebreak' },
+		],
+		""
+	);
+});
+
+*/
