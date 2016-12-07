@@ -91,6 +91,45 @@ test('nodes-splice', function () {
 
 });
 
+test('reparse', function () {
+
+	var N = new Nodes('\\frac   \n 1 2');
+	N.nodes[2].text = '\\alpha 2 \\beta';
+
+	assert.deepEqual(
+		N.nodes,
+		[
+			{ text: '\\frac', type: 'tag' },
+			{ text: '   ', type: 'space' },
+			{ text: '\\alpha 2 \\beta', type: 'linebreak' },
+			{ text: ' ', type: 'space' },
+			{ text: '1', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '2', type: 'number' }
+		],
+		""
+	);
+
+	N.reparse();
+
+	assert.deepEqual(
+		N.nodes,
+		[
+			{ text: '\\frac', type: 'tag' },
+			{ text: '   ', type: 'space' },
+			{ text: '\\alpha', type: 'tag' },
+			{ text: ' ', type: 'space' },
+			{ text: '2', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '\\beta', type: 'tag' },
+			{ text: ' ', type: 'space' },
+			{ text: '1', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '2', type: 'number' }],
+		""
+	);
+});
+
 
 /*
 
