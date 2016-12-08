@@ -117,6 +117,19 @@ test("skipTypes", function () {
 		4,
 		""
 	);
+
+	assert.deepEqual(
+		new Nodes('\\frac{1}{2}3[5]%\n').skipTypes(12,['space']),
+		12,
+		""
+	);
+
+	assert.deepEqual(
+		new Nodes('\\frac{1}{2}3[5]%text\n%line\n').skipTypes(14,['space']),
+		14,
+		""
+	);
+
 });
 
 test("getArguments", function () {
