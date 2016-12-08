@@ -200,4 +200,27 @@ Nodes.prototype.getNontrivialCommentsQuantity = function() {
 	return quantity;
 };
 
+Nodes.prototype.isNonseparated$$ = function(index) {
+	var left = this.nodes[this.skipTypesReverse(index - 1,['space'])];
+	var right = this.nodes[this.skipTypes(index + 1,['space'])];
+	var node = this.nodes[index];
+	return node && node.type === 'keyword' && node.text === '$$' &&
+	(
+		left && left.type !== 'linebreak'
+	||
+		right && right.type !== 'linebreak'
+	);
+};
+
+Nodes.prototype.getNonseparated$$Numbers = function() {
+	var nums = this.getNodesNumbers('keyword', '$$');
+	var rez = [];
+	for (var i = 0; i < nums.length; i++) {
+		if (this.isNonseparated$$(nums[i])) {
+			rez.push(nums[i]);
+		}
+	}
+	return rez;
+};
+
 };

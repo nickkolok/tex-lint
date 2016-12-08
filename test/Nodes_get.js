@@ -249,6 +249,66 @@ test('getNontrivialCommentsQuantity', function () {
 
 });
 
+test('getNonseparated$$Numbers', function () {
+	assert.deepEqual(
+		new Nodes('$$').getNonseparated$$Numbers(),
+		[],
+		""
+	);
+
+	assert.deepEqual(
+		new Nodes('\\alpha $$ \\frac{1}{2} \\cdot \\gamma $$ text text text').getNonseparated$$Numbers(),
+		[2,16],
+		""
+	);
+
+	assert.deepEqual(
+		new Nodes('\\alpha \n$$\n \\frac{1}{2} \\cdot \\gamma $$ text text text').getNonseparated$$Numbers(),
+		[18],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n$$ text text text').getNonseparated$$Numbers(),
+		[2,17],
+		""
+	);
+
+	assert.deepEqual(
+		new Nodes('\\alpha $$ \\frac{1}{2} \\cdot \\gamma $$\n text text text').getNonseparated$$Numbers(),
+		[2,16],
+		""
+	);
+
+	assert.deepEqual(
+		new Nodes('\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n$$\n text text text').getNonseparated$$Numbers(),
+		[2],
+		""
+	);
+
+	assert.deepEqual(
+		new Nodes('\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n  $$\n text text text').getNonseparated$$Numbers(),
+		[2],
+		""
+	);
+
+	assert.deepEqual(
+		new Nodes('\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n$$  \n text text text').getNonseparated$$Numbers(),
+		[2],
+		""
+	);
+
+	assert.deepEqual(
+		new Nodes('\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n   $$   \n text text text').getNonseparated$$Numbers(),
+		[2],
+		""
+	);
+
+	assert.deepEqual(
+		new Nodes('\n$$\n').getNonseparated$$Numbers(),
+		[],
+		""
+	);
+});
 
 /*
 
