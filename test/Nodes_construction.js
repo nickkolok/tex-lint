@@ -122,6 +122,18 @@ test("single comment", function () {
 		],
 		""
 	);
+
+	N = new Nodes('%%');
+
+	assert.deepEqual(
+		N.nodes,
+		[
+			{ text: '%%', type: 'comment' },
+		],
+		""
+	);
+
+
 	N = new Nodes('%\\smth');
 
 	assert.deepEqual(
