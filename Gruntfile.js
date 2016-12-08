@@ -177,7 +177,7 @@ module.exports = function(grunt) {
 					'./test/Nodes_construction.js',
 					'./test/Nodes_transformation.js',
 				],
-				done: function(err, res){
+				done: function(err, res) {
 					!err && publishResults("node", res, this.async());
 				},
 			},
