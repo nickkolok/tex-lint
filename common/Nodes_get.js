@@ -118,6 +118,22 @@ Nodes.prototype.skipTypesReverse = function(index, types) {
 	return index;
 };
 
+Nodes.prototype.skipToTypes = function(index, types) {
+	var nodes = this.nodes;
+	while (nodes[index] && types.indexOf(nodes[index].type) == -1) {
+		index++;
+	}
+	return index;
+};
+
+Nodes.prototype.skipToTypesReverse = function(index, types) {
+	var nodes = this.nodes;
+	while (nodes[index] && types.indexOf(nodes[index].type) == -1) {
+		index--;
+	}
+	return index;
+};
+
 Nodes.prototype.getArguments = function(index, count) {
 	var nodes = this.nodes;
 	var args = [];
