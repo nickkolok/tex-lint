@@ -297,6 +297,52 @@ test('with comments', function () {
 });
 
 
+test('$$', function () {
+	var N = new Nodes('$$');
+
+	assert.deepEqual(
+		N.nodes,
+		[
+			{ text: '$$', type: 'keyword' },
+		],
+		""
+	);
+
+	var N = new Nodes('\\alpha $$ \\frac{1}{2} \\cdot \\gamma $$ text text text');
+
+	assert.deepEqual(
+		N.nodes,
+		[
+			{ text: '\\alpha', type: 'tag' },
+			{ text: ' ', type: 'space' },
+			{ text: '$$', type: 'keyword' },
+			{ text: ' ', type: 'space' },
+			{ text: '\\frac', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: '1', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '{', type: 'bracket' },
+			{ text: '2', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: ' ', type: 'space' },
+			{ text: '\\cdot', type: 'tag' },
+			{ text: ' ', type: 'space' },
+			{ text: '\\gamma', type: 'tag' },
+			{ text: ' ', type: 'space' },
+			{ text: '$$', type: 'keyword' },
+			{ text: ' ', type: 'space' },
+			{ text: 'text', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'text', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'text', type: null },
+		],
+		""
+	);
+});
+
+
+
 /*
 
 test('', function () {
