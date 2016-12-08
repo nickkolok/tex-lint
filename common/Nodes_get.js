@@ -103,10 +103,17 @@ Nodes.prototype.getGroupOrSingle = function(index) {
 };
 
 Nodes.prototype.skipTypes = function(index, types) {
-	// TODO: reverse
 	var nodes = this.nodes;
 	while (nodes[index] && types.indexOf(nodes[index].type) > -1) {
 		index++;
+	}
+	return index;
+};
+
+Nodes.prototype.skipTypesReverse = function(index, types) {
+	var nodes = this.nodes;
+	while (nodes[index] && types.indexOf(nodes[index].type) > -1) {
+		index--;
 	}
 	return index;
 };
