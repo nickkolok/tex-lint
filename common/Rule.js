@@ -111,7 +111,7 @@ new Rule(
 		var text = nodes.toString();
 		var quantity = text.match(/\sто\s+есть\s/g);
 		return {
-			quantity: quantity,
+			quantity: quantity, // TODO: всё-таки число бы, а?
 		};
 	},
 	function(nodes) {
