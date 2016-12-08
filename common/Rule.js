@@ -133,4 +133,19 @@ new Rule(
 	}
 );
 
+new Rule(
+	"separate$$",
+	'Знак выключной формулы $$ должен занимать отдельную строку',
+	function(nodes) {
+		return {
+			quantity: nodes.getNonseparated$$Numbers().length,
+		};
+	},
+	function(nodes) {
+		nodes.separate$$();
+		return nodes;
+	}
+);
+
+
 module.exports.rules = rules;

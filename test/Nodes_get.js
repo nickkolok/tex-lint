@@ -308,6 +308,12 @@ test('getNonseparated$$Numbers', function () {
 		[],
 		""
 	);
+
+	assert.deepEqual(
+		new Nodes('1 $$ 2 $$\n 3').getNonseparated$$Numbers(),
+		[2, 6],
+		""
+	);
 });
 
 /*
