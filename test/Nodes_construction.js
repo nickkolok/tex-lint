@@ -254,6 +254,47 @@ test('\\alpha 2 \\beta', function () {
 	);
 });
 
+test('with comments', function () {
+	assert.deepEqual(
+		new Nodes('\\frac{1}{2}3[5]%\n').nodes,
+		[
+			{ text: '\\frac', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: '1', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '{', type: 'bracket' },
+			{ text: '2', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '3', type: 'number' },
+			{ text: '[', type: 'bracket' },
+			{ text: '5', type: 'number' },
+			{ text: ']', type: 'bracket' },
+			{ text: '%', type: 'comment' },
+			{ text: '\n', type: 'linebreak' },
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\frac{1}{2}3[5]% \n').nodes,
+		[
+			{ text: '\\frac', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: '1', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '{', type: 'bracket' },
+			{ text: '2', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '3', type: 'number' },
+			{ text: '[', type: 'bracket' },
+			{ text: '5', type: 'number' },
+			{ text: ']', type: 'bracket' },
+			{ text: '%', type: 'comment' },
+			{ text: ' ', type: 'space' },
+			{ text: '\n', type: 'linebreak' },
+		],
+		""
+	);
+});
 
 
 /*
