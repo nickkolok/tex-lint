@@ -131,6 +131,105 @@ test('reparse', function () {
 });
 
 
+test('removeNontrivialComments', function () {
+	var N = new Nodes('\\frac{1}{2}3[5]');
+	N.removeNontrivialComments();
+	assert.deepEqual(
+		N.toString(),
+		'\\frac{1}{2}3[5]',
+		""
+	);
+
+	N = new Nodes('\\frac{1}{2}3[5]%\n');
+	N.removeNontrivialComments();
+	assert.deepEqual(
+		N.toString(),
+		'\\frac{1}{2}3[5]%\n',
+		""
+	);
+
+	N = new Nodes('\\frac{1}{2}3[5]% \n');
+	N.removeNontrivialComments();
+	assert.deepEqual(
+		N.toString(),
+		'\\frac{1}{2}3[5]% \n',
+		""
+	);
+
+	N = new Nodes('\\frac{1}{2}3[5]%\n%');
+	N.removeNontrivialComments();
+	assert.deepEqual(
+		N.toString(),
+		'\\frac{1}{2}3[5]%\n',
+		""
+	);
+
+	N = new Nodes('\\frac{1}{2}3[5]%text\n');
+	N.removeNontrivialComments();
+	assert.deepEqual(
+		N.toString(),
+		'\\frac{1}{2}3[5]',
+		""
+	);
+
+	N = new Nodes('\\frac{1}{2}3[5]%text\n%line\n');
+	N.removeNontrivialComments();
+	assert.deepEqual(
+		N.toString(),
+		'\\frac{1}{2}3[5]',
+		""
+	);
+
+	N = new Nodes('\\frac{1}{2}3[5]%text\n%line \n');
+	N.removeNontrivialComments();
+	assert.deepEqual(
+		N.toString(),
+		'\\frac{1}{2}3[5]',
+		""
+	);
+
+	N = new Nodes('\\frac{1}{2}3[5]%text\n%line \n123');
+	N.removeNontrivialComments();
+	assert.deepEqual(
+		N.toString(),
+		'\\frac{1}{2}3[5]123',
+		""
+	);
+
+	N = new Nodes('\\frac{1}{2}3[5]%text\n%line \n123 a b c');
+	N.removeNontrivialComments();
+	assert.deepEqual(
+		N.toString(),
+		'\\frac{1}{2}3[5]123 a b c',
+		""
+	);
+
+	N = new Nodes('%');
+	N.removeNontrivialComments();
+	assert.deepEqual(
+		N.toString(),
+		'',
+		""
+	);
+
+	N = new Nodes('Текст\ntext % another text');
+	N.removeNontrivialComments();
+	assert.deepEqual(
+		N.toString(),
+		'Текст\ntext ',
+		""
+	);
+
+	N = new Nodes('Текст\ntext % another text\n');
+	N.removeNontrivialComments();
+	assert.deepEqual(
+		N.toString(),
+		'Текст\ntext ',
+		""
+	);
+});
+
+
 /*
 
 test('', function () {

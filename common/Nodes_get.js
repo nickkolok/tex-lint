@@ -150,4 +150,31 @@ Nodes.prototype.slice = function() {
 	return copy;
 };
 
+Nodes.prototype.isNontrivialComment = function(index) {
+	return (
+		this.nodes[index].type === 'comment'
+	&&
+		(
+			this.nodes[index].text.length > 1
+		||
+			//Комментарий в конце файле бессмысленнен и потому нетривиален. Л - логика!
+			index === this.nodes.length - 1
+		//||
+			//И в комментарии есть непробельные символы
+			//this.nodes[this.skipTypes(index + 1,['space'])].type !== 'linebreak'
+			// NB: пробелы не влияют на тривиальность
+		)
+	);
+};
+
+Nodes.prototype.getNontrivialCommentsQuantity = function() {
+	var quantity = 0;
+	for (var i = 0; i < this.nodes.length; i++) {
+		if (this.isNontrivialComment(i)) {
+			quantity++;
+		}
+	}
+	return quantity;
+};
+
 };

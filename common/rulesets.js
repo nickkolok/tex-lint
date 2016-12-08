@@ -40,6 +40,7 @@ var rulesets = {
 			["noautonumformulas",1],
 			["noautonumbiblio",1],
 			["notoest",1],
+			["no_nontrivial-comments",1],
 		],
 		comment: "",
 		examples: [
