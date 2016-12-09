@@ -184,4 +184,22 @@ Nodes.prototype.splitRows = function(maxlength) {
 	}
 };
 
+Nodes.prototype.trimLeft = function() {
+	var start = this.skipTypes(0, ['space','linebreak']);
+	this.nodes.splice(0, start);
+
+};
+
+Nodes.prototype.trimRight = function() {
+	var end = this.skipTypesReverse(this.nodes.length - 1, ['space','linebreak']);
+	this.nodes.splice(end + 1, this.nodes.length); // С запасом, лень вычислять
+
+};
+
+Nodes.prototype.trim = function() {
+	this.trimLeft();
+	this.trimRight();
+};
+
+
 };
