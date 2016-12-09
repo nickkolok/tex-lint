@@ -148,6 +148,13 @@ module.exports = function(grunt) {
 				],
 				tasks: ['process-webui-js'],
 			},
+			texExamples: {
+				files: [
+					'webui/tex-examples/*.tex',
+				],
+				tasks: ['packExamples', 'process-webui-js'],
+			},
+
 		},
 
 		eslint: {
