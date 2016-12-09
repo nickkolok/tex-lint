@@ -16,6 +16,8 @@ module.exports = function(grunt) {
 	var cwd = process.cwd();
 
 	var packExamples = function(sourceDir, targetFile) {
+		var targetDir = targetFile.replace(/[^\/\\]+$/,'');
+		mkdirp.sync(targetDir);
 		var examples = ls(sourceDir + '*.tex');
 
 		var examplesDictionary = {};
