@@ -369,6 +369,27 @@ test('$12$ \nb', function () {
 	);
 });
 
+test('$$12 \\eqno (1)$$ \nb', function () {
+	assert.deepEqual(
+		new Nodes('$$12 \\eqno (1)$$ \nb').nodes,
+		[
+			{ text: '$$', type: 'keyword' },
+			{ text: '12', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '\\eqno', type: 'tag' },
+			{ text: ' ', type: 'space' },
+			{ text: '(', type: 'bracket' },
+			{ text: '1', type: 'number' },
+			{ text: ')', type: 'bracket' },
+			{ text: '$$', type: 'keyword' },
+			{ text: ' ', type: 'space' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: 'b', type: null },
+		],
+		""
+	);
+});
+
 /*
 
 test('', function () {
