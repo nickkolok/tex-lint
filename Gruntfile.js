@@ -240,6 +240,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('bundle', [
 		'node-qunit',
 		'newer:copy:codemirror',
+		'newer:copy:license',
 		'default',
 		'newer:copy:wrappers',
 	]);
