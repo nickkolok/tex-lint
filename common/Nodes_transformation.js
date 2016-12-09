@@ -130,4 +130,18 @@ Nodes.prototype.separate$$ = function() {
 	}
 };
 
+Nodes.prototype.separate$ = function() {
+	var len = this.getNodesNumbers('keyword','$').length;
+	for (var j = 0; j < len; j++) {
+		var i = this.getNodesNumbers('keyword','$')[j]; // Номера нод могли поменяться. Хотя могли и нет.
+		if (j % 2 == 0 && !this.isGoodOpening$(i)) {
+			var target = this.skipToTypesReverse(i, ['space']);
+			this.nodes[target] = Nodes.NEW_LINEBREAK();
+		} else if (j % 2 == 1 && !this.isGoodClosing$(i)) {
+			var target = this.skipToTypes(i, ['space']);
+			this.nodes[target] = Nodes.NEW_LINEBREAK();
+		}
+	}
+};
+
 };

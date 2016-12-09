@@ -43,6 +43,7 @@ var rulesets = {
 			["no_nontrivial-comments",1],
 			["no_trivial-comments",1],
 			["separate$$",1],
+			["separate$",1],
 		],
 		comment: "",
 		examples: [

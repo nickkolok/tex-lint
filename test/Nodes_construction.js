@@ -341,15 +341,39 @@ test('$$', function () {
 	);
 });
 
+test('a$12$', function () {
+	assert.deepEqual(
+		new Nodes('a$12$').nodes,
+		[
+			{ text: 'a', type: null },
+			{ text: '$', type: 'keyword' },
+			{ text: '12', type: 'number' },
+			{ text: '$', type: 'keyword' },
+		],
+		""
+	);
+});
 
+test('$12$ \nb', function () {
+	assert.deepEqual(
+		new Nodes('$12$ \nb').nodes,
+		[
+			{ text: '$', type: 'keyword' },
+			{ text: '12', type: 'number' },
+			{ text: '$', type: 'keyword' },
+			{ text: ' ', type: 'space' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: 'b', type: null },
+		],
+		""
+	);
+});
 
 /*
 
 test('', function () {
-	var N = new Nodes('');
-
 	assert.deepEqual(
-		N.nodes,
+		new Nodes('').nodes,
 		[
 			{ text: '\n', type: 'linebreak' },
 		],

@@ -161,5 +161,19 @@ new Rule(
 	}
 );
 
+new Rule(
+	"separate$",
+	'Строчная формула должна занимать отдельную строку',
+	function(nodes) {
+		return {
+			quantity: nodes.count$SeparationErrors(),
+		};
+	},
+	function(nodes) {
+		nodes.separate$();
+		return nodes;
+	}
+);
+
 
 module.exports.rules = rules;

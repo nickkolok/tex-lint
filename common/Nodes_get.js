@@ -246,4 +246,63 @@ Nodes.prototype.getNonseparated$$Numbers = function() {
 	return rez;
 };
 
+Nodes.prototype.isWellSeparated = function(index, rightSepTypes, wrongSepTypes, reverse) {
+	var nodes = this.nodes;
+	for (var i = index; i < nodes.length && i >= 0; i += (reverse ? -1 : 1)) {
+		if (rightSepTypes.indexOf(nodes[i].type) > -1) {
+			// Встретили правильный разделитель
+			return true;
+		} else if (wrongSepTypes.indexOf(nodes[i].type) > -1) {
+			// Встретили неправильный разделитель
+			return false;
+		}
+	}
+	// Если дошли до конца и ничего не встретили - считаем, что правильно
+	return true;
+};
+
+Nodes.prototype.isGoodOpening$ = function(i) {
+	var node = this.nodes[this.skipTypesReverse(i - 1,['space'])];
+	if (node && node.type === 'linebreak') {
+		// Пробелы в начале строки? Возможно, это отступ
+		return true;
+	}
+	return this.isWellSeparated(i, ['linebreak'], ['space'], true);
+};
+
+Nodes.prototype.isGoodClosing$ = function(i) {
+	var node = this.nodes[this.skipTypes(i + 1,['space'])];
+	if (node && node.type === 'linebreak') {
+		// Пробелы в конце строки? Это плохо, но не поймут-с.
+		return true;
+	}
+	return this.isWellSeparated(i, ['linebreak'], ['space'], false);
+};
+
+Nodes.prototype.count$SeparationErrors = function() {
+	var quantity = 0;
+	var nums = this.getNodesNumbers('keyword','$');
+
+	for (var j = 0; j < nums.length; j += 2) {
+		if (!this.isGoodOpening$(nums[j])) {
+			quantity++;
+		}
+	}
+
+	for (var j = 1; j < nums.length; j += 2) {
+		if (!this.isGoodClosing$(nums[j])) {
+			quantity++;
+		}
+	}
+
+/*
+	for (var j = 0; j < nums.length; j++) {
+		if (![this.isGoodOpening$, this.isGoodClosing$][j % 2](nums[j])) {
+			quantity++;
+		}
+	}
+*/
+	return quantity;
+};
+
 };
