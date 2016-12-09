@@ -57,6 +57,17 @@ module.exports = function(grunt) {
 					},
 				]
 			},
+			license: {
+				files: [
+					{
+						expand: true,
+						src: ['LICENSE'],
+						dest: 'dist/',
+						rename: function() { return 'dist/LICENSE.TXT';},
+
+					},
+				]
+			},
 			codemirror: {
 				files: [
 					{ expand: true, src: ['node_modules/codemirror/**'], dest: 'dist/webui/' },
