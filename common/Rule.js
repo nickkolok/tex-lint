@@ -175,5 +175,19 @@ new Rule(
 	}
 );
 
+new Rule(
+	"splitrows80",
+	'Длина строки не должна превышать 80 символов',
+	function(nodes) {
+		return {
+			quantity: nodes.getTooLongRowsNumbers(80).length,
+		};
+	},
+	function(nodes) {
+		nodes.splitRows(80);
+		return nodes;
+	}
+);
+
 
 module.exports.rules = rules;

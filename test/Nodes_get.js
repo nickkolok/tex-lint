@@ -441,6 +441,12 @@ test('getTooLongRowsNumbers', function () {
 		[0, 1, 2],
 		""
 	);
+	assert.deepEqual(
+		new Nodes('1\n12345 6 7').getTooLongRowsNumbers(4),
+		[1],
+		""
+	);
+
 
 });
 

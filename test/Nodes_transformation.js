@@ -607,12 +607,116 @@ test('separate$', function () {
 	);
 });
 
+test('splitRowOnce', function () {
+	var N = new Nodes('1\n12345 6');
+	N.splitRowOnce(1, 5);
+	assert.deepEqual(
+		N.toString(),
+		'1\n12345\n6',
+		""
+	);
+
+	var N = new Nodes('1\n12345 6 7');
+	N.splitRowOnce(1, 5);
+	assert.deepEqual(
+		N.toString(),
+		'1\n12345\n6 7',
+		""
+	);
+
+
+});
+
+test('splitOneRow', function () {
+	var N = new Nodes('');
+	N.splitOneRow(5);
+	assert.deepEqual(
+		N.toString(),
+		'',
+		""
+	);
+
+	var N = new Nodes('1\n12345 6');
+	N.splitOneRow(5);
+	assert.deepEqual(
+		N.toString(),
+		'1\n12345\n6',
+		""
+	);
+
+	var N = new Nodes('1\n12345 6 7');
+	N.splitOneRow(5);
+	assert.deepEqual(
+		N.toString(),
+		'1\n12345\n6 7',
+		""
+	);
+
+	var N = new Nodes('1\n12345 6 7\nabracadabra');
+	N.splitOneRow(5);
+	assert.deepEqual(
+		N.toString(),
+		'1\n12345\n6 7\nabracadabra',
+		""
+	);
+
+	N.splitOneRow(5);
+	assert.deepEqual(
+		N.splitOneRow(5),
+		false,
+		""
+	);
+	assert.deepEqual(
+		N.toString(),
+		'1\n12345\n6 7\nabracadabra',
+		""
+	);
+
+
+	'1\n12345 6 7\nabracadabra'
+});
+
+test('splitRows', function () {
+	var N = new Nodes('');
+	N.splitRows(5);
+	assert.deepEqual(
+		N.toString(),
+		'',
+		""
+	);
+
+	var N = new Nodes('1\n12345 6');
+	N.splitRows(5);
+	assert.deepEqual(
+		N.toString(),
+		'1\n12345\n6',
+		""
+	);
+
+	var N = new Nodes('1\n12345 6 7');
+	N.splitRows(5);
+	assert.deepEqual(
+		N.toString(),
+		'1\n12345\n6 7',
+		""
+	);
+
+	var N = new Nodes('1\n12345 6 7\nabracadabra');
+	N.splitRows(5);
+	assert.deepEqual(
+		N.toString(),
+		'1\n12345\n6 7\nabracadabra',
+		""
+	);
+});
+
 /*
 
 test('', function () {
 	var N = new Nodes('');
+	N.();
 	assert.deepEqual(
-		N.,
+		N.toString(),
 		1,
 		""
 	);

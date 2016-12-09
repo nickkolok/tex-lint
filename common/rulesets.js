@@ -44,6 +44,7 @@ var rulesets = {
 			["no_trivial-comments",1],
 			["separate$$",1],
 			["separate$",1],
+			["splitrows80",1],
 		],
 		comment: "",
 		examples: [
