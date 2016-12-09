@@ -305,4 +305,34 @@ Nodes.prototype.count$SeparationErrors = function() {
 	return quantity;
 };
 
+Nodes.prototype.getTooLongRowsNumbers = function(maxlength) {
+	var nums = [];
+	var rows = this.toString().split('\n');
+	for (var i = 0; i < rows.length; i++) {
+		if (rows[i].length > maxlength) {
+			nums.push(i);
+		}
+	}
+
+	return nums;
+
+/*
+	// Вернёт номера не нод, а строк
+	var nums = [];
+	var linebreaks = this.getNodesNumbers('linebreak','\n');
+
+	//Начало и конец текста считаются разрывами строки
+	linebreaks.unshift(-1);
+	linebreaks.push(this.nodes.length);
+
+	for (var j = 0; j < linebreaks.length; j++) {
+		var i = linebreaks[j];
+		if (this.getSubnodes().toString().length > ) {
+			nums.push(j);
+		}
+	}
+	return nums;
+*/
+};
+
 };

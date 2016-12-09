@@ -400,13 +400,56 @@ test('count$SeparationErrors', function () {
 	);
 });
 
+test('getTooLongRowsNumbers', function () {
+	assert.deepEqual(
+		new Nodes('').getTooLongRowsNumbers(4),
+		[],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('123').getTooLongRowsNumbers(4),
+		[],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('1234').getTooLongRowsNumbers(4),
+		[],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('123\n456').getTooLongRowsNumbers(4),
+		[],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('12345').getTooLongRowsNumbers(4),
+		[0],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('12345\n67890').getTooLongRowsNumbers(4),
+		[0, 1],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('12345\nabc\n67890').getTooLongRowsNumbers(4),
+		[0, 2],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('12345\n abc \n67890').getTooLongRowsNumbers(4),
+		[0, 1, 2],
+		""
+	);
+
+});
+
 
 /*
 
 test('', function () {
-	var N = new Nodes('');
 	assert.deepEqual(
-		N.,
+		new Nodes('').,
 		1,
 		""
 	);
