@@ -52,6 +52,11 @@ module.exports = function(grunt) {
 					{ expand: true, src: ['webui/*.html', 'c2/*.js'], dest: 'dist/' },
 				]
 			},
+			codemirror: {
+				files: [
+					{ expand: true, src: ['node_modules/codemirror/**'], dest: 'dist/webui/' },
+				]
+			},
 		},
 		uglify: {
 			options: {
@@ -214,6 +219,12 @@ module.exports = function(grunt) {
 	grunt.registerTask('process-webui-js', [
 		'newer:eslint',
 		'browserify:main',
+	]);
+
+	grunt.registerTask('bundle', [
+		'node-qunit',
+		'newer:copy:codemirror',
+		'default',
 	]);
 
 	grunt.registerTask('default', [
