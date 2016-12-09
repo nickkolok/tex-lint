@@ -47,9 +47,14 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		copy: {
-			html: {
+			wrappers: {
 				files: [
-					{ expand: true, src: ['webui/*.html', 'c2/*.js'], dest: 'dist/' },
+					{
+						expand: true,
+						cwd: 'webui/wrappers',
+						src: ['*.html'],
+						dest: 'dist/'
+					},
 				]
 			},
 			codemirror: {
@@ -225,6 +230,7 @@ module.exports = function(grunt) {
 		'node-qunit',
 		'newer:copy:codemirror',
 		'default',
+		'newer:copy:wrappers',
 	]);
 
 	grunt.registerTask('default', [
