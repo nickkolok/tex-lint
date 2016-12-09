@@ -134,6 +134,20 @@ new Rule(
 );
 
 new Rule(
+	"no_trivial-comments",
+	'Не разрешается комментировать пустое окончание строки',
+	function(nodes) {
+		return {
+			quantity: nodes.getTrivialCommentsNumbers().length,
+		};
+	},
+	function(nodes) {
+		nodes.removeTrivialComments();
+		return nodes;
+	}
+);
+
+new Rule(
 	"separate$$",
 	'Знак выключной формулы $$ должен занимать отдельную строку',
 	function(nodes) {

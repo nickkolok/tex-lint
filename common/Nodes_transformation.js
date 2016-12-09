@@ -101,6 +101,17 @@ Nodes.prototype.removeNontrivialComments = function() {
 	}
 };
 
+Nodes.prototype.removeTrivialComments = function() {
+	for (var i = 0; i < this.nodes.length; i++) {
+		if (this.isTrivialComment(i)) {
+			// Прервать комментарий может только конец строки или пробел перед ним
+			var itsLinebreakIndex = this.skipTypes(i + 1, ['space']) + 1;
+			this.nodes.splice(i, itsLinebreakIndex - i);
+			i--;
+		}
+	}
+};
+
 Nodes.prototype.separate$$ = function() {
 	var len = this.getNonseparated$$Numbers().length;
 	for (var j = 0; j < len; j++) {

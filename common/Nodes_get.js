@@ -179,9 +179,9 @@ Nodes.prototype.isNontrivialComment = function(index) {
 	&&
 		(
 			this.nodes[index].text.length > 1
-		||
+		//||
 			//Комментарий в конце файле бессмысленнен и потому нетривиален. Л - логика!
-			index === this.nodes.length - 1
+			//index === this.nodes.length - 1
 		//||
 			//И в комментарии есть непробельные символы
 			//this.nodes[this.skipTypes(index + 1,['space'])].type !== 'linebreak'
@@ -190,14 +190,37 @@ Nodes.prototype.isNontrivialComment = function(index) {
 	);
 };
 
-Nodes.prototype.getNontrivialCommentsQuantity = function() {
-	var quantity = 0;
+Nodes.prototype.getNontrivialCommentsNumbers = function() {
+	var nums = [];
 	for (var i = 0; i < this.nodes.length; i++) {
 		if (this.isNontrivialComment(i)) {
-			quantity++;
+			nums.push(i);
 		}
 	}
-	return quantity;
+	return nums;
+};
+
+Nodes.prototype.getNontrivialCommentsQuantity = function() {
+	return this.getNontrivialCommentsNumbers().length;
+};
+
+
+Nodes.prototype.isTrivialComment = function(index) {
+	return (
+		this.nodes[index].type === 'comment'
+	&&
+		this.nodes[index].text === '%'
+	);
+};
+
+Nodes.prototype.getTrivialCommentsNumbers = function() {
+	var nums = [];
+	for (var i = 0; i < this.nodes.length; i++) {
+		if (this.isTrivialComment(i)) {
+			nums.push(i);
+		}
+	}
+	return nums;
 };
 
 Nodes.prototype.isNonseparated$$ = function(index) {

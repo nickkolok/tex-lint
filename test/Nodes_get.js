@@ -218,7 +218,7 @@ test('getNontrivialCommentsQuantity', function () {
 	);
 	assert.deepEqual(
 		new Nodes('\\frac{1}{2}3[5]%\n%').getNontrivialCommentsQuantity(),
-		1,
+		0,
 		""
 	);
 	assert.deepEqual(
@@ -233,7 +233,7 @@ test('getNontrivialCommentsQuantity', function () {
 	);
 	assert.deepEqual(
 		new Nodes('%').getNontrivialCommentsQuantity(),
-		1,
+		0,
 		""
 	);
 	assert.deepEqual(

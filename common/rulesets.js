@@ -41,6 +41,7 @@ var rulesets = {
 			["noautonumbiblio",1],
 			["notoest",1],
 			["no_nontrivial-comments",1],
+			["no_trivial-comments",1],
 			["separate$$",1],
 		],
 		comment: "",
