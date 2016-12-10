@@ -169,56 +169,6 @@ Nodes.prototype.slice = function() {
 	return copy;
 };
 
-Nodes.prototype.isNontrivialComment = function(index) {
-	return (
-		this.nodes[index].type === 'comment'
-	&&
-		(
-			this.nodes[index].text.length > 1
-		//||
-			//Комментарий в конце файле бессмысленнен и потому нетривиален. Л - логика!
-			//index === this.nodes.length - 1
-		//||
-			//И в комментарии есть непробельные символы
-			//this.nodes[this.skipTypes(index + 1,['space'])].type !== 'linebreak'
-			// NB: пробелы не влияют на тривиальность
-		)
-	);
-};
-
-Nodes.prototype.getNontrivialCommentsNumbers = function() {
-	var nums = [];
-	for (var i = 0; i < this.nodes.length; i++) {
-		if (this.isNontrivialComment(i)) {
-			nums.push(i);
-		}
-	}
-	return nums;
-};
-
-Nodes.prototype.getNontrivialCommentsQuantity = function() {
-	return this.getNontrivialCommentsNumbers().length;
-};
-
-
-Nodes.prototype.isTrivialComment = function(index) {
-	return (
-		this.nodes[index].type === 'comment'
-	&&
-		this.nodes[index].text === '%'
-	);
-};
-
-Nodes.prototype.getTrivialCommentsNumbers = function() {
-	var nums = [];
-	for (var i = 0; i < this.nodes.length; i++) {
-		if (this.isTrivialComment(i)) {
-			nums.push(i);
-		}
-	}
-	return nums;
-};
-
 Nodes.prototype.isWellSeparated = function(index, rightSepTypes, wrongSepTypes, reverse) {
 	var nodes = this.nodes;
 	for (var i = index; i < nodes.length && i >= 0; i += (reverse ? -1 : 1)) {

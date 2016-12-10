@@ -17,6 +17,7 @@ require('./Nodes_constants.js')(Nodes);
 require('./Nodes_get.js')(Nodes);
 require('./Nodes_get_environments.js')(Nodes);
 require('./Nodes_get_rowsplit.js')(Nodes);
+require('./Nodes_get_comments.js')(Nodes);
 
 require('./Nodes_edit.js')(Nodes);
 
