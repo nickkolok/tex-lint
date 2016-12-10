@@ -6,13 +6,7 @@ module.exports = function(Nodes) {
 // Они НЕ изменяют объект, а возвращают нечто новое
 
 Nodes.prototype.getNodesQuantity = function(nodetype, nodetext) {
-	var quantity = 0;
-	for (var i = 0; i < this.nodes.length; i++) {
-		if (this.nodes[i].type == nodetype && this.nodes[i].text == nodetext) {
-			quantity++;
-		}
-	}
-	return quantity;
+	return this.getNodesNumbers(nodetype, nodetext).length;
 };
 
 Nodes.prototype.getNodesNumbers = function(nodetype, nodetext) {
