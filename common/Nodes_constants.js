@@ -17,5 +17,7 @@ Nodes. LEFT_SQUARE = { type:'bracket', text:'[' };
 Nodes.RIGHT_SQUARE = { type:'bracket', text:']' };
 
 Nodes.NEW_LINEBREAK = gen({ type:'linebreak', text:'\n' });
+Nodes.NEW_$  = gen({ type:'keyword', text:'$'  });
+Nodes.NEW_$$ = gen({ type:'keyword', text:'$$' });
 
 };
