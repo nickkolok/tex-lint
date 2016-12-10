@@ -33,8 +33,10 @@ function codeLoad() {
 };
 
 function codeSave() {
-	var blob = new Blob([myCodeMirror.getValue().replace(/[\r]*[\n][\r]*/g,"},\r\n{")], {
-		type: "text/plain;charset=utf-8"
+	var encoding = document.getElementById("file-save-encoding").value;
+	var text = myCodeMirror.getValue().replace(/[\r]*[\n][\r]*/g,"},\r\n{");
+	var blob = new Blob([iconv.encode(text,encoding)], {
+//		type: "text/plain;charset=",
 	});
 	var a = document.createElement('a');
 	a.download = fileName + ".edited.tex";
@@ -49,6 +51,7 @@ function codeSave() {
 var myCodeMirror = CodeMirror(document.getElementById('code-mirror-holder'));
 
 myCodeMirror.on("change", codeSave);
+document.getElementById("file-save-encoding").onchange = codeSave;
 
 function getNodesAsIs() {
 
