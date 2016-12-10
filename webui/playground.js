@@ -108,7 +108,7 @@ document.getElementById("runcheck").onclick = runcheck;
 
 var hashOptions = {};
 try {
-	hashOptions = JSON.parse(document.location.hash.substr(1).replace(/&quot;/g,'"').replace(/%7b/gi,"{").replace(/%7d/gi,"}"));
+	hashOptions = JSON.parse(document.location.hash.substr(1).replace(/&quot;/g,'"').replace(/%7b/gi,"{").replace(/%7d/gi,"}").replace(/%22/gi,'"'));
 } catch (e) {
 	console.log('Не удалось выделить настройки из адреса страницы');
 }
