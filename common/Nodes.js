@@ -14,6 +14,6 @@ require('./Nodes_construction.js')(Nodes);
 require('./Nodes_get.js')(Nodes);
 require('./Nodes_codemirror.js')(Nodes);
 require('./Nodes_constants.js')(Nodes);
-require('./Nodes_transformation.js')(Nodes);
+require('./Nodes_edit.js')(Nodes);
 
 module.exports.Nodes = Nodes;
