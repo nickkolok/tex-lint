@@ -8,6 +8,7 @@ var rulesets = require('../common/rulesets.js');
 var texEmaples = require('../build/webui/tex-examples.js');
 
 var fileName = 'saved.tex';
+var fileEnc  = 'utf8';
 
 function codeLoad() {
 
@@ -18,14 +19,17 @@ function codeLoad() {
 	reader.onload = (function(theFile) {
 		return function(e) {
 			try {
-				myCodeMirror.setValue(e.target.result);
+				var encoding = document.getElementById("file-encoding").value;
+				var text = iconv.decode(new Buffer(e.target.result), encoding);
+				myCodeMirror.setValue(text);
 				fileName = theFile.name;
+				fileEnc  = encoding;
 			} catch (err) {
 				alert('Не удалось прочитать ' + theFile.name);
 			}
 		};
 	})(f);
-	reader.readAsText(f);
+	reader.readAsArrayBuffer(f);
 };
 
 function codeSave() {
