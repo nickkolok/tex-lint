@@ -58,6 +58,8 @@ function areNodesEqual(node1, node2) {
 	// TODO: регулярки
 	return node1.type === node2.type && node1.text === node2.text;
 }
+Nodes.areNodesEqual =  areNodesEqual;
+
 
 Nodes.prototype.getBraceGroup = function(start, left, right) {
 	// Считаем, что нода с номером start - открывающая (левая) скобка

@@ -390,6 +390,36 @@ test('$$12 \\eqno (1)$$ \nb', function () {
 	);
 });
 
+test('unwrap', function () {
+	assert.deepEqual(
+		new Nodes('{\n{\n123 456\n789\n}}').nodes,
+		[
+			{ text: '{', type: 'bracket' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: '{', type: 'bracket' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: '123', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '456', type: 'number' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: '789', type: 'number' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: '}', type: 'bracket' },
+			{ text: '}', type: 'bracket' },
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('{}').nodes,
+		[
+			{ text: '{', type: 'bracket' },
+			{ text: '}', type: 'bracket' },
+		],
+		""
+	);
+});
+
+
 /*
 
 test('', function () {

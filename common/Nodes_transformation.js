@@ -201,5 +201,29 @@ Nodes.prototype.trim = function() {
 	this.trimRight();
 };
 
+Nodes.prototype.unwrap = function() {
+	this.trim();
+	//console.log('___________________');
+	//console.log(this.toString());
+	if (
+		!Nodes.areNodesEqual(this.nodes[0],                     Nodes. LEFT_CURLY)
+	||
+		!Nodes.areNodesEqual(this.nodes[this.nodes.length - 1], Nodes.RIGHT_CURLY)
+	) {
+		//console.log('not group');
+		return;
+	}
+	// Итак, слева и справа - скобки.
+	// Охватывают ли они весь массив?
+	if (this.getArguments(0, 1)[0].nodes.length != this.nodes.length) {
+		//console.log('not single arg', this.getArguments(0, 1)[0].nodes.length, this.nodes.length);
+		return;
+	}
+	this.nodes.pop();
+	this.nodes.shift();
+
+	// И уходим на рекурсию, мало ли чего там понапихано
+	this.unwrap();
+};
 
 };
