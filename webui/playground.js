@@ -1,5 +1,7 @@
 'use strict';
 
+var iconv = require('iconv-lite');
+
 var Nodes = require('../common/Nodes.js').Nodes;
 var rules = require('../common/Rule.js').rules;
 var rulesets = require('../common/rulesets.js');

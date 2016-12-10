@@ -29,6 +29,7 @@
     "grunt-eslint": "^19.0.0",
     "grunt-newer": "^1.2.0",
     "grunt-node-qunit": "^2.0.2",
+    "iconv-lite": "^0.4.15",
     "load-grunt-tasks": "^3.5.2",
     "ls": "^0.2.1",
     "mkdirp": "^0.5.1",
