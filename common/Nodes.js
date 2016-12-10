@@ -21,5 +21,6 @@ require('./Nodes_get_comments.js')(Nodes);
 
 require('./Nodes_edit.js')(Nodes);
 require('./Nodes_edit_wrap.js')(Nodes);
+require('./Nodes_edit_rowsplit.js')(Nodes);
 
 module.exports.Nodes = Nodes;
