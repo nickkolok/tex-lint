@@ -205,6 +205,7 @@ module.exports = function(grunt) {
 				tests: [
 					'./test/Nodes_get.js',
 					'./test/Nodes_get_skip.js',
+					'./test/Nodes_get_environments.js',
 					'./test/Nodes_construction.js',
 					'./test/Nodes_edit.js',
 				],
