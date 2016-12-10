@@ -189,5 +189,24 @@ new Rule(
 	}
 );
 
+new Rule(
+	'no_env_equation',
+	'Не разрешается использование окружений \\begin{equation} ... \\end{equation}',
+	function(nodes) {
+		return {
+			quantity: nodes.getEnvironmentsList(['equation']).length,
+		};
+	}
+);
+
+new Rule(
+	'no_env_equation*',
+	'Не разрешается использование окружений \\begin{equation*} ... \\end{equation*}',
+	function(nodes) {
+		return {
+			quantity: nodes.getEnvironmentsList(['equation*']).length,
+		};
+	}
+);
 
 module.exports.rules = rules;

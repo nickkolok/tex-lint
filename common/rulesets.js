@@ -45,6 +45,8 @@ var rulesets = {
 			["separate$$",1],
 			["separate$",1],
 			["splitrows80",1],
+			['no_env_equation',1],
+			['no_env_equation*',1],
 		],
 		comment: "",
 		examples: [
