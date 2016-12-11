@@ -172,6 +172,24 @@ test('replaceArguments', function () {
 
 });
 
+test('renewEnvironment', function () {
+	var N = new Nodes('Look at\\begin {equation}\\frac{\\alpha}{\\beta}+1\\end {equation}qq');
+	N.renewEnvironment(3, new Nodes('$$%begin\n'), new Nodes('$$%end\n'));
+	assert.deepEqual(
+		N.toString(),
+		'Look at$$%begin\n\\frac{\\alpha}{\\beta}+1$$%end\nqq',
+		""
+	);
+	var N = new Nodes('Look at\\begin {equation}\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} \\end {equation}qq');
+	N.renewEnvironment(3, new Nodes('$$%begin\n'), new Nodes('$$%end\n'));
+	assert.deepEqual(
+		N.toString(),
+		'Look at$$%begin\n\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} $$%end\nqq',
+		""
+	);
+
+});
+
 /*
 
 test('', function () {

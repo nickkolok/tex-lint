@@ -88,4 +88,9 @@ Nodes.prototype.replaceArguments = function(index, argsQuantity, subnodes) {
 	this.insertSubnodes(index, subnodes);
 };
 
+Nodes.prototype.renewEnvironment = function(index, beginNodes, endNodes) {
+	this.replaceArguments(this.getEnvironmentEnd(index), 2, endNodes);
+	this.replaceArguments(index, 2, beginNodes);
+};
+
 };
