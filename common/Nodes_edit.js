@@ -93,4 +93,17 @@ Nodes.prototype.renewEnvironment = function(index, beginNodes, endNodes) {
 	this.replaceArguments(index, 2, beginNodes);
 };
 
+Nodes.prototype.renewFirstEnvironment = function(names, beginNodes, endNodes) {
+	var envIndexes = this.getEnvironmentsList(names);
+	this.renewEnvironment(envIndexes[0].begin, beginNodes, endNodes);
+};
+
+
+Nodes.prototype.renewAllEnvironments = function(names, beginNodes, endNodes) {
+	var quantity = this.getEnvironmentsList(names).length;
+	for (var i = 0; i < quantity; i++) {
+		this.renewFirstEnvironment(names, beginNodes, endNodes);
+	}
+};
+
 };

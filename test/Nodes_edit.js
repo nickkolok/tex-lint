@@ -190,6 +190,61 @@ test('renewEnvironment', function () {
 
 });
 
+test('renewAllEnvironments', function () {
+	var N = new Nodes('Look at\\begin {equation}\\frac{\\alpha}{\\beta}+1\\end {equation}qq');
+	N.renewAllEnvironments(['equation'], new Nodes('$$%begin\n'), new Nodes('$$%end\n'));
+	assert.deepEqual(
+		N.toString(),
+		'Look at$$%begin\n\\frac{\\alpha}{\\beta}+1$$%end\nqq',
+		""
+	);
+	var N = new Nodes('Look at\\begin {equation}\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} \\end {equation}qq');
+	N.renewAllEnvironments(['equation'], new Nodes('$$%begin\n'), new Nodes('$$%end\n'));
+	assert.deepEqual(
+		N.toString(),
+		'Look at$$%begin\n\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} $$%end\nqq',
+		""
+	);
+	var N = new Nodes(
+		'Look at\\begin {equation}\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} \\end {equation}qq' +
+		'Look at\\begin {equation}\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} \\end {equation}qq'
+	);
+	N.renewAllEnvironments(['equation'], new Nodes('$$%begin\n'), new Nodes('$$%end\n'));
+	assert.deepEqual(
+		N.toString(),
+		'Look at$$%begin\n\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} $$%end\nqq' +
+		'Look at$$%begin\n\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} $$%end\nqq',
+		""
+	);
+	var N = new Nodes(
+		'Look at\\begin {equation}\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} \\end {equation}qq' +
+		'Look at\\begin {equation}\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} \\end {equation}qq' +
+		'Look at\\begin {equation}\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} \\end {equation}qq'
+	);
+	N.renewAllEnvironments(['equation'], new Nodes('$$%begin\n'), new Nodes('$$%end\n'));
+	assert.deepEqual(
+		N.toString(),
+		'Look at$$%begin\n\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} $$%end\nqq' +
+		'Look at$$%begin\n\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} $$%end\nqq' +
+		'Look at$$%begin\n\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} $$%end\nqq',
+		""
+	);
+	var N = new Nodes(
+		'Look at\\begin {equation}\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} \\end {equation}qq' +
+		'Look at\\begin {equation}\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} \\end {equation}qq' +
+		'Look at\\begin {equation}\\begin{array}{c|c}\\alpha & \\beta \\+1 & 0 \\end{array} \\end {equation}qq'
+	);
+	N.renewAllEnvironments(['equation','array'], new Nodes('$$%begin\n'), new Nodes('$$%end\n'));
+	assert.deepEqual(
+		N.toString(),
+		'Look at$$%begin\n$$%begin\n{c|c}\\alpha & \\beta \\+1 & 0 $$%end\n $$%end\nqq' +
+		'Look at$$%begin\n$$%begin\n{c|c}\\alpha & \\beta \\+1 & 0 $$%end\n $$%end\nqq' +
+		'Look at$$%begin\n$$%begin\n{c|c}\\alpha & \\beta \\+1 & 0 $$%end\n $$%end\nqq',
+		""
+	);
+
+});
+
 /*
 
 test('', function () {
