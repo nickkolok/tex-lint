@@ -249,11 +249,11 @@ new Rule(
 			quantity: indexes.length,
 		};
 	}
-	/*,
+	,
 	function(nodes) {
-		nodes.renewAllEnvironments(['equation*'], new Nodes('$$'), new Nodes('$$'));
+		nodes.inlinizeAllSubSupFracs();
 		return nodes;
-	}*/
+	}
 );
 
 
