@@ -19,6 +19,13 @@ Nodes.prototype.fromText = function(text) {
 	this.prepareNodes();
 };
 
+Nodes.prototype.markSubSup = function() {
+	for (var i = 0; i < this.nodes.length; i++) {
+		if (["_","^"].indexOf(this.nodes[i].text) !== -1) {
+			this.nodes[i].type = "tag";
+		}
+	}
+};
 
 Nodes.prototype.markCyrillicNodes = function() {
 	for (var i = 0; i < this.nodes.length; i++) {
@@ -141,6 +148,7 @@ Nodes.prototype.prepareNodes = function() {
 	this.joinNodesOfType('space');
 	this.markCyrillicNodes();
 	this.joinCyrillicNodes();
+	this.markSubSup();
 	this.remarkNumberNodes();
 };
 

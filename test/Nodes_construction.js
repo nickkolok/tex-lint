@@ -496,6 +496,15 @@ test('$a$\\alpha$g$', function () {
 	);
 });
 
+test('_', function () {
+	assert.deepEqual(
+		new Nodes('_').nodes,
+		[
+			{ text: '_', type: 'tag' },
+		],
+		""
+	);
+});
 
 /*
 
