@@ -209,4 +209,21 @@ Nodes.prototype.isInsideSymmDelimiters = function(index, delimeterType, delimite
 	return false;
 };
 
+Nodes.prototype.getSymmDelimitedTagNumbers = function(delimiter, tags) {
+	var fracs = [];
+	for (var i = 0; i < tags.length; i++) {
+		fracs = fracs.concat(this.getNodesNumbers('tag', tags[i]));
+	}
+	var targetfracs = [];
+
+	// TODO: переписать через .filter()
+	for (var i = 0; i < fracs.length; i++) {
+		if (this.isInsideSymmDelimiters(fracs[i], delimiter.type, delimiter.text)) {
+			targetfracs.push(fracs[i]);
+		}
+	}
+	targetfracs.sort(function(a,b) {return a - b;});
+	return targetfracs;
+};
+
 };

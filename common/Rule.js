@@ -89,13 +89,10 @@ new Rule(
 	"noinlinefrac",
 	"Дроби, находящиеся в строке, желательно оформлять как a/b, а не вертикально",
 	function(nodes) {
-		var quantity = 0;
-		var formulas = nodes.getAllSingleDelimited('keyword','$');
-		for (var i = 0; i < formulas.length; i++) {
-			quantity += formulas[i].getNodesQuantity('tag','\\frac');
-		}
+		var indexes = nodes.getSymmDelimitedTagNumbers(Nodes.NEW_$,['\\frac']);
 		return {
-			quantity: quantity,
+			quantity: indexes.length,
+			indexes: indexes,
 		};
 	},
 	function(nodes) {

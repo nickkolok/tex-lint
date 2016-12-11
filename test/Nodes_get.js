@@ -246,6 +246,44 @@ test('isInsideSymmDelimiters', function () {
 
 });
 
+test('getSymmDelimitedTagNumbers', function () {
+	assert.deepEqual(
+		new Nodes('$\\mu$').getSymmDelimitedTagNumbers(Nodes.NEW_$(), ['\\mu']),
+		[1, ],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$\\mu\\mu$').getSymmDelimitedTagNumbers(Nodes.NEW_$(), ['\\mu']),
+		[1, 2, ],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$\\nu\\mu$').getSymmDelimitedTagNumbers(Nodes.NEW_$(), ['\\mu']),
+		[2, ],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$\\mu\\mu$').getSymmDelimitedTagNumbers(Nodes.NEW_$(), ['\\mu','\\nu']),
+		[1, 2, ],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$\\mu\\nu$').getSymmDelimitedTagNumbers(Nodes.NEW_$(), ['\\mu','\\nu']),
+		[1, 2, ],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$\\mu\\mu$\\mu$\\nu^2\\mu$').getSymmDelimitedTagNumbers(Nodes.NEW_$(), ['\\mu','\\nu']),
+		[1, 2, 6, 9, ],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$\\mu\\mu$$\\mu$\\nu^2\\mu$').getSymmDelimitedTagNumbers(Nodes.NEW_$(), ['\\mu','\\nu']),
+		[6, 9, ],
+		""
+	);
+});
+
 /*
 
 test('', function () {
