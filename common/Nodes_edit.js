@@ -73,4 +73,19 @@ Nodes.prototype.inlinizeAllFracs = function() {
 	this.reparse();
 };
 
+Nodes.join = function(arr) {
+	var rez = new Nodes('');
+	for (var i = 0; i < arr.length; i++) {
+		rez.nodes = rez.nodes.concat(arr[i].nodes);
+	}
+	return rez;
+};
+
+Nodes.prototype.replaceArguments = function(index, argsQuantity, subnodes) {
+	//var argsNodesQuantity = Nodes.join(this.getArguments(index, argsQuantity)).nodes.length;
+	var firstNodeToRemain = this.getArgumentsEnd(index, argsQuantity);
+	this.nodes.splice(index, firstNodeToRemain - index);
+	this.insertSubnodes(index, subnodes);
+};
+
 };

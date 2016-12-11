@@ -130,6 +130,47 @@ test('reparse', function () {
 	);
 });
 
+test('replaceArguments', function () {
+	var N = new Nodes('2\\frac{\\alpha}{\\beta}+1');
+	N.replaceArguments(1, 3, new Nodes('\\alpha/\\beta'));
+	assert.deepEqual(
+		N.toString(),
+		'2\\alpha/\\beta+1',
+		""
+	);
+	var N = new Nodes('2\\frac{\\alpha}\n{\\beta}+1');
+	N.replaceArguments(1, 3, new Nodes('\\alpha/\\beta'));
+	assert.deepEqual(
+		N.toString(),
+		'2\\alpha/\\beta+1',
+		""
+	);
+	var N = new Nodes('2\\frac\n\n{ \\alpha} \n {\\beta}+1');
+	N.replaceArguments(1, 3, new Nodes('\\alpha/\\beta'));
+	assert.deepEqual(
+		N.toString(),
+		'2\\alpha/\\beta+1',
+		""
+	);
+	var N = new Nodes('Look at\\begin{equation}\\frac{\\alpha}{\\beta}+1\\end{equation}');
+	N.replaceArguments(15, 2, new Nodes('$$'));
+	N.replaceArguments(3, 2, new Nodes('$$'));
+	assert.deepEqual(
+		N.toString(),
+		'Look at$$\\frac{\\alpha}{\\beta}+1$$',
+		""
+	);
+	var N = new Nodes('Look at\\begin {equation}\\frac{\\alpha}{\\beta}+1\\end {equation}');
+	N.replaceArguments(16, 2, new Nodes('$$'));
+	N.replaceArguments(3, 2, new Nodes('$$'));
+	assert.deepEqual(
+		N.toString(),
+		'Look at$$\\frac{\\alpha}{\\beta}+1$$',
+		""
+	);
+
+
+});
 
 /*
 

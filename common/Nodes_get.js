@@ -142,6 +142,16 @@ Nodes.prototype.getArguments = function(index, count) {
 	return args;
 };
 
+Nodes.prototype.getArgumentsEnd = function(index, count) {
+	var nodes = this.nodes;
+	for (var i = 0; i < count; i++) {
+		index = this.skipTypes(index, ['space', 'linebreak']);
+		var arg = this.getGroupOrSingle(index);
+		index += arg.nodes.length;
+	}
+	return index;
+};
+
 Nodes.prototype.getWithArguments = function(index, count) {
 	var nodes = this.nodes;
 	var start = index;
