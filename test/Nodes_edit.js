@@ -245,6 +245,44 @@ test('renewAllEnvironments', function () {
 
 });
 
+test('inlinizeFrac', function () {
+	var N = new Nodes('\\frac{a}{b}');
+	N.inlinizeFrac(0);
+	assert.deepEqual(
+		N.toString(),
+		'{a}/{b}',
+		""
+	);
+	var N = new Nodes('\\frac{a+1}{b}');
+	N.inlinizeFrac(0);
+	assert.deepEqual(
+		N.toString(),
+		'({a+1})/{b}',
+		""
+	);
+	var N = new Nodes('\\frac{a}{bc}');
+	N.inlinizeFrac(0);
+	assert.deepEqual(
+		N.toString(),
+		'{a}/{bc}',
+		""
+	);
+	var N = new Nodes('\\frac{a}{b+1}');
+	N.inlinizeFrac(0);
+	assert.deepEqual(
+		N.toString(),
+		'{a}/({b+1})',
+		""
+	);
+	var N = new Nodes('\\frac{a}{b+1} + \\frac{a+1}{b}');
+	N.inlinizeFrac(12);
+	assert.deepEqual(
+		N.toString(),
+		'\\frac{a}{b+1} + ({a+1})/{b}',
+		""
+	);
+});
+
 /*
 
 test('', function () {

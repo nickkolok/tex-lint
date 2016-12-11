@@ -106,4 +106,19 @@ Nodes.prototype.renewAllEnvironments = function(names, beginNodes, endNodes) {
 	}
 };
 
+Nodes.prototype.inlinizeFrac = function(index) {
+	// 3 аргумента - потому что тэг и два его аргумента
+	//console.log(this.nodes[index]);
+	var firstNodeToRemain = this.getArgumentsEnd(index, 3);
+	var args = this.getArguments(index + 1, 2);
+	for (var i = 0; i < 2; i++) {
+		args[i].wrapInBracesIfAdditive();
+	}
+	this.nodes.splice(index, firstNodeToRemain - index);
+	// Вставляем ноды - в обратном порядке
+	this.insertSubnodes(index, args[1]);
+	this.insertSubnodes(index, new Nodes('/'));
+	this.insertSubnodes(index, args[0]);
+};
+
 };
