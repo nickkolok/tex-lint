@@ -206,6 +206,10 @@ new Rule(
 		return {
 			quantity: nodes.getEnvironmentsList(['equation*']).length,
 		};
+	},
+	function(nodes) {
+		nodes.renewAllEnvironments(['equation*'], new Nodes('$$'), new Nodes('$$'));
+		return nodes;
 	}
 );
 
