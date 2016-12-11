@@ -121,6 +121,22 @@ Nodes.prototype.inlinizeFrac = function(index) {
 	this.insertSubnodes(index, args[0]);
 };
 
+Nodes.prototype.inlinizeFirstSubSupFrac = function() {
+	var indexes = this.getChildrenInTagsArguments(['_', '^'], ['\\frac'], 1);
+	if (!indexes.length) {
+		return false;
+	}
+	indexes.sort(function(a, b) {return a - b;});
+	this.inlinizeFrac(indexes[0]);
+	return true;
+};
+
+Nodes.prototype.inlinizeAllSubSupFracs = function() {
+	while (this.inlinizeFirstSubSupFrac()) {
+	}
+};
+
+
 Nodes.prototype.pushFormulaOut = function(index) {
 	if (!this.isInsideSymmDelimiters(index, 'keyword', '$')) {
 		return false;

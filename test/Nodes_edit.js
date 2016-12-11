@@ -368,6 +368,25 @@ test('pushAllUglyFormulasOut', function () {
 	);
 });
 
+test('inlinizeFirstSubSupFrac', function () {
+	var N = new Nodes('\\sum_{\\frac{1}{a+b}}^{\\frac{c+d}{a-b}}');
+	N.inlinizeFirstSubSupFrac();
+	assert.deepEqual(
+		N.toString(),
+		'\\sum_{{1}/({a+b})}^{\\frac{c+d}{a-b}}',
+		""
+	);
+});
+
+test('inlinizeAllSubSupFracs', function () {
+	var N = new Nodes('\\sum_{\\frac{1}{a+b}}^{\\frac{c+d}{a-b}}');
+	N.inlinizeAllSubSupFracs();
+	assert.deepEqual(
+		N.toString(),
+		'\\sum_{{1}/({a+b})}^{({c+d})/({a-b})}',
+		""
+	);
+});
 
 /*
 
