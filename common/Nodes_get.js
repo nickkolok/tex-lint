@@ -210,10 +210,7 @@ Nodes.prototype.isInsideSymmDelimiters = function(index, delimeterType, delimite
 };
 
 Nodes.prototype.getSymmDelimitedTagNumbers = function(delimiter, tags) {
-	var fracs = [];
-	for (var i = 0; i < tags.length; i++) {
-		fracs = fracs.concat(this.getNodesNumbers('tag', tags[i]));
-	}
+	var fracs = this.getTagsArrayNumbers(tags);
 	var targetfracs = [];
 
 	// TODO: переписать через .filter()
@@ -224,6 +221,29 @@ Nodes.prototype.getSymmDelimitedTagNumbers = function(delimiter, tags) {
 	}
 	targetfracs.sort(function(a,b) {return a - b;});
 	return targetfracs;
+};
+
+Nodes.prototype.getTagsArrayNumbers = function(tags) {
+	var found = [];
+	for (var i = 0; i < tags.length; i++) {
+		found = found.concat(this.getNodesNumbers('tag', tags[i]));
+	}
+	return found;
+};
+
+Nodes.prototype.getChildrenInTagsArguments = function(parents, children, args) {
+	var parentIndexes = this.getTagsArrayNumbers(parents);
+	var found = [];
+	for (var i = 0; i < parentIndexes.length; i++) {
+		var index = parentIndexes[i];
+		var end = this.getArgumentsEnd(index + 1, args);
+		for (var j = index + 1; j < end; j++) {
+			if (this.nodes[j].type === 'tag' && children.indexOf(this.nodes[j].text) !== -1) {
+				found.push(j);
+			}
+		}
+	}
+	return found;
 };
 
 };

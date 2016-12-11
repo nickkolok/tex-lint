@@ -146,6 +146,12 @@ test("getNodesNumbers", function () {
 		[ 0, 2, 4, 6, ],
 		""
 	);
+	var N = new Nodes('_');
+	assert.deepEqual(
+		N.getNodesNumbers('tag', '_'),
+		[ 0, ],
+		""
+	);
 
 
 });
@@ -284,11 +290,54 @@ test('getSymmDelimitedTagNumbers', function () {
 	);
 });
 
+test('getChildrenInTagsArguments', function () {
+	assert.deepEqual(
+		new Nodes('').getChildrenInTagsArguments(['_'], ['\\frac'], 1),
+		[],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('_').getChildrenInTagsArguments(['_'], ['\\frac'], 1),
+		[],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('_\\frac').getChildrenInTagsArguments(['_'], ['\\frac'], 1),
+		[1],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('_\\beta\\frac{1}{2}').getChildrenInTagsArguments(['_'], ['\\frac'], 1),
+		[],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('_\\beta\\frac{1}{2} \\sum_{a = \\frac{1}{2}}^{\\frac{3}{4}}').getChildrenInTagsArguments(['_', '^'], ['\\frac'], 1),
+		[17, 27],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\sum_{\\frac{1}{2}}^{\\frac{3}{4}}').getChildrenInTagsArguments(['_'], ['\\frac'], 1),
+		[3],
+		""
+	);
+
+
+});
+test('getTagsArrayNumbers', function () {
+	assert.deepEqual(
+		new Nodes('_').getTagsArrayNumbers(['_']),
+		[0],
+		""
+	);
+
+});
+
 /*
 
 test('', function () {
 	assert.deepEqual(
-		new Nodes('').,
+		new Nodes('').(),
 		1,
 		""
 	);
