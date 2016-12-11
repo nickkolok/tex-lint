@@ -194,4 +194,19 @@ Nodes.prototype.isWellSeparated = function(index, rightSepTypes, wrongSepTypes, 
 	return true;
 };
 
+Nodes.prototype.isInsideSymmDelimiters = function(index, delimeterType, delimiterText, includeDelimiters) {
+	var delimiters = this.getNodesNumbers(delimeterType, delimiterText);
+	if (includeDelimiters && delimiters.indexOf(index) !== -1) {
+		return true;
+	}
+	for (var i = 0; i < delimiters.length; i += 2) {
+		if (index < delimiters[i + 1] && delimiters[i] < index) { // В таком порядке проверка д.б. быстрее
+			return true;
+		} else if (delimiters[i] > index) {
+			return false;
+		}
+	}
+	return false;
+};
+
 };

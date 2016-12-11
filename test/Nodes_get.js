@@ -140,6 +140,13 @@ test("getNodesNumbers", function () {
 		[ 8, 40, ],
 		""
 	);
+	var N = new Nodes('$a$\\alpha$g$');
+	assert.deepEqual(
+		N.getNodesNumbers('keyword', '$'),
+		[ 0, 2, 4, 6, ],
+		""
+	);
+
 
 });
 
@@ -200,6 +207,44 @@ test('slice', function () {
 	);
 });
 
+test('isInsideSymmDelimiters', function () {
+	assert.deepEqual(
+		new Nodes('$a$').isInsideSymmDelimiters(1, 'keyword', '$'),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b').isInsideSymmDelimiters(3, 'keyword', '$'),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b').isInsideSymmDelimiters(2, 'keyword', '$'),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b').isInsideSymmDelimiters(3, 'keyword', '$', true),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b$').isInsideSymmDelimiters(3, 'keyword', '$', true),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$\\alpha$g$').isInsideSymmDelimiters(5, 'keyword', '$', true),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$\\alpha$$g$$123$g$').isInsideSymmDelimiters(9, 'keyword', '$', true),
+		true,
+		""
+	);
+
+});
 
 /*
 

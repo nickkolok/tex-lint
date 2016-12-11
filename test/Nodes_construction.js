@@ -480,6 +480,22 @@ test('space', function () {
 	);
 });
 
+test('$a$\\alpha$g$', function () {
+	assert.deepEqual(
+		new Nodes('$a$\\alpha$g$').nodes,
+		[
+			{ text: '$', type: 'keyword' },
+			{ text: 'a', type: 'variable-2' },
+			{ text: '$', type: 'keyword' },
+			{ text: '\\alpha', type: 'tag' },
+			{ text: '$', type: 'keyword' },
+			{ text: 'g', type: 'variable-2' },
+			{ text: '$', type: 'keyword' },
+		],
+		""
+	);
+});
+
 
 /*
 
