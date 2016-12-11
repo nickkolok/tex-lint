@@ -302,6 +302,72 @@ test('pushFormulaOut', function () {
 	);
 });
 
+test('pushFirstUglyFormulaOut', function () {
+	var N = new Nodes('$a$ mno $\\frac{\\gamma} 4  \\varepsilon$ xyz');
+	N.pushFirstUglyFormulaOut(['\\frac']);
+	assert.deepEqual(
+		N.toString(),
+		'$a$ mno $$\\frac{\\gamma} 4  \\varepsilon$$ xyz',
+		""
+	);
+	var N = new Nodes('$a$ mno $\\frac{\\gamma} 4  \\varepsilon$ xyz $5$');
+	N.pushFirstUglyFormulaOut(['\\frac','\\gamma']);
+	assert.deepEqual(
+		N.toString(),
+		'$a$ mno $$\\frac{\\gamma} 4  \\varepsilon$$ xyz $5$',
+		""
+	);
+
+	var N = new Nodes('$a$ mno $\\frac{\\gamma} 4  \\varepsilon$ xyz $5$');
+	N.pushFirstUglyFormulaOut(['\\beta']);
+	assert.deepEqual(
+		N.toString(),
+		'$a$ mno $\\frac{\\gamma} 4  \\varepsilon$ xyz $5$',
+		""
+	);
+
+	var N = new Nodes('$a$ mno $\\frac{\\gamma} 4  \\varepsilon$ xyz $\\gamma$');
+	N.pushFirstUglyFormulaOut(['\\frac','\\gamma']);
+	assert.deepEqual(
+		N.toString(),
+		'$a$ mno $$\\frac{\\gamma} 4  \\varepsilon$$ xyz $\\gamma$',
+		""
+	);
+});
+
+test('pushAllUglyFormulasOut', function () {
+	var N = new Nodes('$a$ mno $\\frac{\\gamma} 4  \\varepsilon$ xyz');
+	N.pushAllUglyFormulasOut(['\\frac']);
+	assert.deepEqual(
+		N.toString(),
+		'$a$ mno $$\\frac{\\gamma} 4  \\varepsilon$$ xyz',
+		""
+	);
+	var N = new Nodes('$a$ mno $\\frac{\\gamma} 4  \\varepsilon$ xyz $5$');
+	N.pushAllUglyFormulasOut(['\\frac','\\gamma']);
+	assert.deepEqual(
+		N.toString(),
+		'$a$ mno $$\\frac{\\gamma} 4  \\varepsilon$$ xyz $5$',
+		""
+	);
+
+	var N = new Nodes('$a$ mno $\\frac{\\gamma} 4  \\varepsilon$ xyz $5$');
+	N.pushAllUglyFormulasOut(['\\beta']);
+	assert.deepEqual(
+		N.toString(),
+		'$a$ mno $\\frac{\\gamma} 4  \\varepsilon$ xyz $5$',
+		""
+	);
+
+	var N = new Nodes('$a$ mno $\\frac{\\gamma} 4  \\varepsilon$ xyz $\\gamma$');
+	N.pushAllUglyFormulasOut(['\\frac','\\gamma']);
+	assert.deepEqual(
+		N.toString(),
+		'$a$ mno $$\\frac{\\gamma} 4  \\varepsilon$$ xyz $$\\gamma$$',
+		""
+	);
+});
+
 
 /*
 

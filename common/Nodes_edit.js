@@ -134,4 +134,19 @@ Nodes.prototype.pushFormulaOut = function(index) {
 	this.nodes[$s[beginIndex    ]] = Nodes.NEW_$$();
 };
 
+Nodes.prototype.pushFirstUglyFormulaOut = function(tags) {
+	var indexes = this.getSymmDelimitedTagNumbers(Nodes.NEW_$(), tags);
+	if (!indexes.length) {
+		return false;
+	}
+	this.pushFormulaOut(indexes[0]);
+	return true;
+};
+
+Nodes.prototype.pushAllUglyFormulasOut = function(tags) {
+	while (this.pushFirstUglyFormulaOut(tags)) {
+	}
+};
+
+
 };
