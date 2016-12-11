@@ -27,7 +27,7 @@ test("getAllEnvironmentsList", function () {
 	assert.deepEqual(
 		N.getAllEnvironmentsList(),
 		[
-			{ begin: 4, end: 13, name: 'equation' },
+			{ begin: 4, end: 14, name: 'equation' },
 		],
 		""
 	);
@@ -37,7 +37,7 @@ test("getAllEnvironmentsList", function () {
 	assert.deepEqual(
 		N.getAllEnvironmentsList(),
 		[
-			{ begin: 4, end: 15, name: 'equation' },
+			{ begin: 4, end: 16, name: 'equation' },
 		],
 		""
 	);
@@ -45,7 +45,7 @@ test("getAllEnvironmentsList", function () {
 	assert.deepEqual(
 		N.getAllEnvironmentsList(),
 		[
-			{ begin: 4, end: 16, name: 'equation*' },
+			{ begin: 4, end: 17, name: 'equation*' },
 		],
 		""
 	);
@@ -54,8 +54,8 @@ test("getAllEnvironmentsList", function () {
 	assert.deepEqual(
 		N.getAllEnvironmentsList(),
 		[
-			{ begin: 4, end: 29, name: 'equation' },
-			{ begin: 9, end: 21, name: 'array' },
+			{ begin: 4, end: 33, name: 'equation' },
+			{ begin: 9, end: 24, name: 'array' },
 		],
 		""
 	);
@@ -66,7 +66,7 @@ test("getEnvironmentsList", function () {
 	assert.deepEqual(
 		N.getEnvironmentsList(['equation']),
 		[
-			{ begin: 4, end: 29, name: 'equation' },
+			{ begin: 4, end: 33, name: 'equation' },
 		],
 		""
 	);
@@ -74,9 +74,9 @@ test("getEnvironmentsList", function () {
 	assert.deepEqual(
 		N.getEnvironmentsList(['equation']),
 		[
-			{ begin:  4, end: 37, name: 'equation' },
-			{ begin: 19, end: 23, name: 'equation' },
-			{ begin: 47, end: 54, name: 'equation' },
+			{ begin:  4, end: 41, name: 'equation' },
+			{ begin: 20, end: 24, name: 'equation' },
+			{ begin: 51, end: 58, name: 'equation' },
 		],
 		""
 	);
@@ -84,10 +84,10 @@ test("getEnvironmentsList", function () {
 	assert.deepEqual(
 		N.getEnvironmentsList(['equation','array']),
 		[
-			{ begin:  4, end: 37, name: 'equation' },
-			{ begin:  9, end: 29, name: 'array' },
-			{ begin: 19, end: 23, name: 'equation' },
-			{ begin: 47, end: 54, name: 'equation' },
+			{ begin:  4, end: 41, name: 'equation' },
+			{ begin:  9, end: 32, name: 'array' },
+			{ begin: 20, end: 24, name: 'equation' },
+			{ begin: 51, end: 58, name: 'equation' },
 		],
 		""
 	);

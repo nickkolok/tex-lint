@@ -153,7 +153,7 @@ test('replaceArguments', function () {
 		""
 	);
 	var N = new Nodes('Look at\\begin{equation}\\frac{\\alpha}{\\beta}+1\\end{equation}');
-	N.replaceArguments(15, 2, new Nodes('$$'));
+	N.replaceArguments(16, 2, new Nodes('$$'));
 	N.replaceArguments(3, 2, new Nodes('$$'));
 	assert.deepEqual(
 		N.toString(),
@@ -161,7 +161,7 @@ test('replaceArguments', function () {
 		""
 	);
 	var N = new Nodes('Look at\\begin {equation}\\frac{\\alpha}{\\beta}+1\\end {equation}');
-	N.replaceArguments(16, 2, new Nodes('$$'));
+	N.replaceArguments(17, 2, new Nodes('$$'));
 	N.replaceArguments(3, 2, new Nodes('$$'));
 	assert.deepEqual(
 		N.toString(),
