@@ -210,4 +210,22 @@ new Rule(
 	}
 );
 
+new Rule(
+	'no_frac_in_sub_sup',
+	'Не разрешается использование вертикальных дробей в степенях, верхних и нижних индексах',
+	function(nodes) {
+		var indexes = nodes.getChildrenInTagsArguments(['_', '^'], ['\\frac'], 1);
+		return {
+			indexes: indexes,
+			quantity: indexes.length,
+		};
+	}
+	/*,
+	function(nodes) {
+		nodes.renewAllEnvironments(['equation*'], new Nodes('$$'), new Nodes('$$'));
+		return nodes;
+	}*/
+);
+
+
 module.exports.rules = rules;

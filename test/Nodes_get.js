@@ -288,6 +288,12 @@ test('getSymmDelimitedTagNumbers', function () {
 		[6, 9, ],
 		""
 	);
+	assert.deepEqual(
+		new Nodes('Some text with frac $\\frac{a}{b}+\\frac{1+\\alpha}{2-\\beta}+\\frac{1+C_0}{2}$ in it.').
+			getSymmDelimitedTagNumbers(Nodes.NEW_$(), ['\\frac']),
+		[ 9, 17, 29, ],
+		""
+	);
 });
 
 test('getChildrenInTagsArguments', function () {
