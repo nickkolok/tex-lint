@@ -58,6 +58,37 @@ Nodes.prototype.joinCyrillicNodes = function() {
 	}
 };
 
+Nodes.prototype.separateNumbers = function() {
+	//TODO: сейчас оно режет только крайние. В принципе, пока этого хватает.
+	// Но в перспетиве - резать по-человечески и обобщить с separateSpaces
+
+	// Мы предполагаем, что разрывы строки-то уж кодемирроровский парсер осилил
+	for (var i = 0; i < this.nodes.length; i++) {
+		if (
+			[
+				'space',
+				'linebreak',
+				'comment',
+				'number',
+			].indexOf(this.nodes[i].type) !== -1
+		) {
+			continue;
+		}
+		var begin = this.nodes[i].text.match(/^\d+/);
+		var end = this.nodes[i].text.match(/\d+$/);
+		if (begin) {
+			this.insertNode(i, { text: begin[0], type: 'number' });
+			i++;
+			this.nodes[i].text = this.nodes[i].text.replace(/^\d+/,"");
+		}
+		if (end) {
+			this.insertNode(i + 1, { text: end[0], type: 'number' });
+			this.nodes[i].text = this.nodes[i].text.replace(/\d+$/,"");
+			i++;
+		}
+	}
+};
+
 Nodes.prototype.separateSpaces = function() {
 	// Мы предполагаем, что разрывы строки-то уж кодемирроровский парсер осилил
 	for (var i = 0; i < this.nodes.length; i++) {
@@ -102,6 +133,9 @@ Nodes.prototype.joinNodesOfType = function(type) {
 Nodes.prototype.prepareNodes = function() {
 	this.markSpaceNodes();
 	this.separateSpaces();
+	this.remarkNumberNodes();
+	this.separateNumbers();
+	this.remarkNumberNodes();
 	this.deleteEmptyNodes();
 	this.markSpaceNodes();
 	this.joinNodesOfType('space');

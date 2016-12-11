@@ -419,6 +419,67 @@ test('unwrap', function () {
 	);
 });
 
+test('\\frac{a}{b+1} + \\frac{a+1}{b}', function () {
+	assert.deepEqual(
+		new Nodes('\\frac{a}{b+1} + \\frac{a+1}{b}').nodes,
+		[
+			{ text: '\\frac', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'a', type: null },
+			{ text: '}', type: 'bracket' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'b', type: null },
+			{ text: '+', type: null },
+			{ text: '1', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: ' ', type: 'space' },
+			{ text: '+', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '\\frac', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'a', type: null },
+			{ text: '+', type: null },
+			{ text: '1', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'b', type: null },
+			{ text: '}', type: 'bracket' },
+		],
+		""
+	);
+});
+test('-1', function () {
+	assert.deepEqual(
+		new Nodes('-1').nodes,
+		[
+			{ text: '-', type: null },
+			{ text: '1', type: 'number' },
+		],
+		""
+	);
+});
+test('$-1$', function () {
+	assert.deepEqual(
+		new Nodes('$-1$').nodes,
+		[
+			{ text: '$', type: 'keyword' },
+			{ text: '-', type: null },
+			{ text: '1', type: 'number' },
+			{ text: '$', type: 'keyword' },
+		],
+		""
+	);
+});
+test('space', function () {
+	assert.deepEqual(
+		new Nodes(' ').nodes,
+		[
+			{ text: ' ', type: 'space' },
+		],
+		""
+	);
+});
+
 
 /*
 
