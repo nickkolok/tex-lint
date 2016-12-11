@@ -283,6 +283,26 @@ test('inlinizeFrac', function () {
 	);
 });
 
+test('pushFormulaOut', function () {
+	var N = new Nodes('$a$ mno $\\frac{\\gamma} 4  \\varepsilon$ xyz');
+	N.pushFormulaOut(1);
+
+	assert.deepEqual(
+		N.toString(),
+		'$$a$$ mno $\\frac{\\gamma} 4  \\varepsilon$ xyz',
+		""
+	);
+	N = new Nodes('abc$\\frac{1+\\alpha}{2 - \\beta}$def\nmno $\\frac{\\gamma} 4  \\varepsilon$ xyz');
+	N.pushFormulaOut(23);
+
+	assert.deepEqual(
+		N.toString(),
+		'abc$\\frac{1+\\alpha}{2 - \\beta}$def\nmno $$\\frac{\\gamma} 4  \\varepsilon$$ xyz',
+		""
+	);
+});
+
+
 /*
 
 test('', function () {

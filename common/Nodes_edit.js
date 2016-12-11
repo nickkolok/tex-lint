@@ -121,4 +121,17 @@ Nodes.prototype.inlinizeFrac = function(index) {
 	this.insertSubnodes(index, args[0]);
 };
 
+Nodes.prototype.pushFormulaOut = function(index) {
+	if (!this.isInsideSymmDelimiters(index, 'keyword', '$')) {
+		return false;
+	}
+	var $s = this.getNodesNumbers('keyword', '$');
+	var beginIndex = 0;
+	while ($s[beginIndex] < index) {
+		beginIndex++;
+	}
+	this.nodes[$s[beginIndex - 1]] = Nodes.NEW_$$();
+	this.nodes[$s[beginIndex    ]] = Nodes.NEW_$$();
+};
+
 };
