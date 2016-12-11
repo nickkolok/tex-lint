@@ -20,6 +20,7 @@ var rulesets = {
 			["udk_onlyone",1],
 			["noinlinefrac",0.5],
 			['no_frac_in_sub_sup',0.5],
+			['noinlinesumprod', 0.5],
 		],
 		comment: "",
 		examples: [

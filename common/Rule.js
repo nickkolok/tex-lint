@@ -102,6 +102,29 @@ new Rule(
 );
 
 new Rule(
+	'noinlinesumprod',
+	'Формулы, содержащие знаки суммирования, произведения, максимума и т. д., желательно выносить в отдельную строку',
+	function(nodes) {
+		var indexes = nodes.getSymmDelimitedTagNumbers(Nodes.NEW_$(),[
+			'\\sum',
+			'\\prod',
+			'\\coprod',
+			'\\max',
+			'\\min',
+		]);
+		return {
+			quantity: indexes.length,
+			indexes: indexes,
+		};
+	}
+	/*,
+	function(nodes) {
+		nodes.inlinizeAllFracs();
+		return nodes;
+	}*/
+);
+
+new Rule(
 	"notoest",
 	'Вместо "то есть" необходимо использовать сокращение "т. е."',
 	function(nodes) {
