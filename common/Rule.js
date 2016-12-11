@@ -117,11 +117,17 @@ new Rule(
 			indexes: indexes,
 		};
 	}
-	/*,
+	,
 	function(nodes) {
-		nodes.inlinizeAllFracs();
+		nodes.pushAllUglyFormulasOut([
+			'\\sum',
+			'\\prod',
+			'\\coprod',
+			'\\max',
+			'\\min',
+		]);
 		return nodes;
-	}*/
+	}
 );
 
 new Rule(
