@@ -212,6 +212,7 @@ module.exports = function(grunt) {
 					'./test/Nodes_edit.js',
 					'./test/Nodes_edit_wrap.js',
 					'./test/Nodes_edit_rowsplit.js',
+					'./test/Nodes_edit_comments.js',
 				],
 				done: function(err, res) {
 					!err && publishResults("node", res, this.async());
