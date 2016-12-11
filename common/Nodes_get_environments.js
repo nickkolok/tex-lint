@@ -8,11 +8,14 @@ Nodes.prototype.getAllEnvironmentsList = function() {
 	var pairs = [];
 	var begins = this.getNodesNumbers('tag','\\begin');
 	for (var j = 0; j < begins.length; j++) {
+		/*
 		var end = this.getBraceGroup(
 			begins[j],
 			{ type: 'tag', text: '\\begin' },
 			{ type: 'tag', text: '\\end' }
 		).nodes.length - 1 + begins[j];
+		*/
+		var end = this.getEnvironmentEnd(begins[j]);
 		var envname = this.getArguments(begins[j] + 1, 1)[0];
 		envname.unwrap();
 		pairs.push({
@@ -34,5 +37,14 @@ Nodes.prototype.getEnvironmentsList = function(names) {
 	}
 	return list;
 };
+
+Nodes.prototype.getEnvironmentEnd = function(begin) {
+	return this.getBraceGroup(
+		begin,
+		{ type: 'tag', text: '\\begin' },
+		{ type: 'tag', text: '\\end' }
+	).nodes.length - 1 + begin;
+};
+
 
 };
