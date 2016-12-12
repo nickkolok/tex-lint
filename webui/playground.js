@@ -48,7 +48,9 @@ function codeSave() {
 }
 
 
-var myCodeMirror = CodeMirror(document.getElementById('code-mirror-holder'));
+var myCodeMirror = CodeMirror(document.getElementById('code-mirror-holder'),{
+	lineNumbers: true,
+});
 
 myCodeMirror.on("change", codeSave);
 document.getElementById("file-save-encoding").onchange = codeSave;
