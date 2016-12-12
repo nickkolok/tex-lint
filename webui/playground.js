@@ -6,6 +6,7 @@ var Nodes = require('../common/Nodes.js').Nodes;
 var rules = require('../common/Rule.js').rules;
 var rulesets = require('../common/rulesets.js');
 var texEmaples = require('../build/webui/tex-examples.js');
+var HTMLreport = require('./htmlreport.js');
 
 var fileName = 'saved.tex';
 var fileEnc  = 'utf8';
@@ -59,59 +60,15 @@ function getNodesAsIs() {
 	return new Nodes(myCodeMirror.getValue());
 };
 
-function createHTMLreport(rulesetName, nodesObject, targetElement) {
-	var reportErrors = document.createDocumentFragment();
-	var reportGood = document.createDocumentFragment();
-	var totalRules = rulesets[rulesetName].rules.length;
-	var brokenRules = 0;
-
-	for (var i = 0; i < totalRules; i++) {
-		var theRule = rules[rulesets[rulesetName].rules[i][0]];
-		var result = theRule.findErrors(nodesObject);
-
-		if (!result.quantity) {
-			var goodspan = document.createElement('span');
-			goodspan.innerHTML = theRule.message;
-			reportGood.appendChild(goodspan);
-			reportGood.appendChild(document.createElement('br'));
-			continue;
-		}
-
-		// А вот если правило не выполнено...
-
-		brokenRules++;
-		var message = document.createElement('span');
-		message.innerHTML = theRule.message + " : " + "ошибок: " + result.quantity;
-		reportErrors.appendChild(message);
-		if (theRule.fixErrors) {
-			var fixbutton = document.createElement('button');
-			fixbutton.id = 'fixErrors-' + theRule.name;
-			fixbutton.innerHTML = 'Исправить';
-			fixbutton.onclick = (function(rule) { return function() {
-				try { // TODO: выляпаться из замыкания!!!
-					console.log('Trying to fix ' + rule.name);
-					var nodes = rule.fixErrors(getNodesAsIs());
-					myCodeMirror.setValue(nodes.toString());
-					runcheck();
-				} catch (e) {
-					console.log(e);
-				}
-			};})(theRule);
-			reportErrors.appendChild(fixbutton);
-		}
-		reportErrors.appendChild(document.createElement('hr'));
-	}
-	targetElement.innerHTML = '';
-	if (brokenRules) {
-		targetElement.appendChild(reportErrors);
-	} else {
-		targetElement.innerHTML = 'Ошибок не найдено';
-	}
-
-}
-
 function checkRules(rulesetName,nodesObject) {
-	createHTMLreport(rulesetName, nodesObject, document.getElementById("result-container"));
+	HTMLreport.createHTMLreport({
+		rulesetName: rulesetName,
+		nodesObject: nodesObject,
+		targetElement: document.getElementById("result-container"),
+		editor: myCodeMirror,
+		getNodes: getNodesAsIs,
+		recheck: runcheck,
+	});
 }
 
 function runcheck() {
