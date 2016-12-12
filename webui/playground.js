@@ -56,44 +56,53 @@ myCodeMirror.on("change", codeSave);
 document.getElementById("file-save-encoding").onchange = codeSave;
 
 function getNodesAsIs() {
-
 	return new Nodes(myCodeMirror.getValue());
 };
 
-function checkRules(rulesetName,nodesObject) {
-	var checkLog = [];
-	for (var i = 0; i < rulesets[rulesetName].rules.length; i++) {
+function createHTMLreport(rulesetName, nodesObject, targetElement) {
+	var brokenRulesCount = 0;
+	var reportErrors = document.createDocumentFragment();
+	var reportGood = document.createDocumentFragment();
+		for (var i = 0; i < rulesets[rulesetName].rules.length; i++) {
 		var theRule = rules[rulesets[rulesetName].rules[i][0]];
 		var result = theRule.findErrors(nodesObject);
 		if (result.quantity) {
-			var message = theRule.message + " : " + "ошибок: " + result.quantity;
+			brokenRulesCount++;
+			var message = document.createElement('span');
+			message.innerHTML = theRule.message + " : " + "ошибок: " + result.quantity;
+			reportErrors.appendChild(message);
 			if (theRule.fixErrors) {
-				message += ' <button id="fixErrors-' + theRule.name + '">Исправить</button>';
+				var fixbutton = document.createElement('button');
+				fixbutton.id = 'fixErrors-' + theRule.name;
+				fixbutton.innerHTML = 'Исправить';
+				//message += ' <button id="fixErrors-' + theRule.name + '">Исправить</button>';
+				fixbutton.onclick = (function(rule) { return function() {
+					try { // TODO: выляпаться из замыкания!!!
+						console.log('Trying to fix ' + rule.name);
+						var nodes = rule.fixErrors(getNodesAsIs());
+						myCodeMirror.setValue(nodes.toString());
+						runcheck();
+					} catch (e) {
+						console.log(e);
+					}
+
+				};})(theRule);
+				reportErrors.appendChild(fixbutton);
 			}
-			checkLog.push(message);
+			reportErrors.appendChild(document.createElement('hr'));
 		}
 	}
-	document.getElementById("result-container").innerHTML = checkLog.join('<br/>');
-	if (!checkLog.length) {
-		document.getElementById("result-container").innerHTML = 'Ошибок не найдено';
+	targetElement.innerHTML = '';
+	if (brokenRulesCount) {
+		targetElement.appendChild(reportErrors);
+	} else {
+		targetElement.innerHTML = 'Ошибок не найдено';
 	}
 
-	// TODO: отрефакторить через какой-нибудь documentFragment
-	for (var i = 0; i < rulesets[rulesetName].rules.length; i++) {
-		var theRule = rules[rulesets[rulesetName].rules[i][0]];
-		if (theRule.fixErrors && document.getElementById('fixErrors-' + theRule.name)) {
-			document.getElementById('fixErrors-' + theRule.name).onclick = (function(rule) { return function() {
-				try { // TODO: выляпаться из замыкания!!!
-					console.log('Trying to fix ' + rule.name);
-					var nodes = rule.fixErrors(getNodesAsIs());
-					myCodeMirror.setValue(nodes.toString());
-					runcheck();
-				} catch (e) {
-					console.log(e);
-				}
-			};})(theRule);
-		}
-	}
+}
+
+function checkRules(rulesetName,nodesObject) {
+	createHTMLreport(rulesetName, nodesObject, document.getElementById("result-container"));
 }
 
 function runcheck() {
