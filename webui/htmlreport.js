@@ -1,5 +1,6 @@
 var rulesets = require('../common/rulesets.js');
 var rules = require('../common/Rule.js').rules;
+var $ = require('jquery-browserify');
 
 module.exports.createHTMLreport = function(o) {
 	var reportErrors = document.createDocumentFragment();
@@ -32,7 +33,7 @@ module.exports.createHTMLreport = function(o) {
 			fixbutton.onclick = (function(rule) { return function() {
 				try { // TODO: выляпаться из замыкания!!!
 					console.log('Trying to fix ' + rule.name);
-					var nodes = rule.fixErrors(getNodes());
+					var nodes = rule.fixErrors(o.getNodes());
 					o.editor.setValue(nodes.toString());
 					o.recheck();
 				} catch (e) {
@@ -47,7 +48,7 @@ module.exports.createHTMLreport = function(o) {
 	if (brokenRules) {
 		o.targetElement.appendChild(reportErrors);
 	} else {
-		o.targetElement.innerHTML = 'Ошибок не найдено';
+		$(o.targetElement).html('Ошибок не найдено');
 	}
 
 };
