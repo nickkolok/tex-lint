@@ -506,6 +506,18 @@ test('_', function () {
 	);
 });
 
+test('double linebreak', function () {
+	assert.deepEqual(
+		new Nodes('\n\n\\alpha').nodes,
+		[
+			{ text: '\n', type: 'linebreak' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: '\\alpha', type: 'tag' },
+		],
+		""
+	);
+});
+
 /*
 
 test('', function () {
