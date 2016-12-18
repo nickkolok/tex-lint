@@ -39,12 +39,13 @@ function codeSave() {
 	var blob = new Blob([iconv.encode(text,encoding)], {
 //		type: "text/plain;charset=",
 	});
-	var a = document.createElement('a');
-	a.download = fileName + ".edited.tex";
-	a.href = URL.createObjectURL(blob);
-	a.innerHTML = "<button>Сохранить TeX-файл</button>";
+	var a = $('<a>', {
+		download : fileName + ".edited.tex",
+		href : URL.createObjectURL(blob),
+		html : "<button>Сохранить TeX-файл</button>",
+	});
 	document.getElementById('span-save').innerHTML = '';
-	document.getElementById('span-save').appendChild(a);
+	document.getElementById('span-save').appendChild(a[0]);
 	console.log('codeSave()');
 }
 

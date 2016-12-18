@@ -13,23 +13,26 @@ module.exports.createHTMLreport = function(o) {
 		var result = theRule.findErrors(o.nodesObject);
 
 		if (!result.quantity) {
-			var goodspan = document.createElement('span');
-			goodspan.innerHTML = theRule.message;
-			reportGood.appendChild(goodspan);
-			reportGood.appendChild(document.createElement('br'));
+			var goodspan = $('<span>', {
+				html : theRule.message,
+			});
+			reportGood.appendChild(goodspan[0]);
+			reportGood.appendChild($('<br>')[0]);
 			continue;
 		}
 
 		// А вот если правило не выполнено...
 
 		brokenRules++;
-		var message = document.createElement('span');
-		message.innerHTML = theRule.message + " : " + "ошибок: " + result.quantity;
+		var message = $('<span>',{
+			html: theRule.message + " : " + "ошибок: " + result.quantity,
+		})[0];
 		reportErrors.appendChild(message);
 		if (theRule.fixErrors) {
-			var fixbutton = document.createElement('button');
-			fixbutton.id = 'fixErrors-' + theRule.name;
-			fixbutton.innerHTML = 'Исправить';
+			var fixbutton = $('<button>',{
+				id: 'fixErrors-' + theRule.name,
+				html: 'Исправить',
+			})[0];
 			fixbutton.onclick = (function(rule) { return function() {
 				try { // TODO: выляпаться из замыкания!!!
 					console.log('Trying to fix ' + rule.name);
