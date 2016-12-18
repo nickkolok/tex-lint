@@ -35,7 +35,7 @@ function codeLoad() {
 
 function codeSave() {
 	var encoding = document.getElementById("file-save-encoding").value;
-	var text = myCodeMirror.getValue().replace(/[\r]*[\n][\r]*/g,"},\r\n{");
+	var text = myCodeMirror.getValue().replace(/[\r]*[\n][\r]*/g,"\r\n");
 	var blob = new Blob([iconv.encode(text,encoding)], {
 //		type: "text/plain;charset=",
 	});
