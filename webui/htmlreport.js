@@ -45,7 +45,16 @@ module.exports.createHTMLreport = function(o) {
 			};})(theRule);
 			reportErrors.appendChild(fixbutton);
 		}
-		reportErrors.appendChild(document.createElement('hr'));
+		if (result.indexes) {
+			reportErrors.appendChild($('<br/>')[0]);
+			for (var j = 0; j < result.indexes.length; j++) {
+				var rowcol = $('<span>');
+				var coord = o.nodesObject.getRowCol(result.indexes[j]);
+				rowcol.html('Строка ' + coord.row + ', символ ' + coord.col + '; ');
+				reportErrors.appendChild(rowcol[0]);
+			}
+		}
+		reportErrors.appendChild($('<hr/>')[0]);
 	}
 	o.targetElement.innerHTML = '';
 	if (brokenRules) {
