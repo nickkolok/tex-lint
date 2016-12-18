@@ -246,4 +246,17 @@ Nodes.prototype.getChildrenInTagsArguments = function(parents, children, args) {
 	return found;
 };
 
+Nodes.prototype.getRowCol = function(index) {
+	var coord = { col:0, row:0 };
+	for (var i = index - 1; i >= 0 && this.nodes[i].type !== 'linebreak'; i--) {
+		coord.col += this.nodes[i].text.length;
+	}
+	for (var i = index - 1; i >= 0; i--) {
+		coord.row += (this.nodes[i].type === 'linebreak');
+	}
+	coord.row++;
+	coord.col++;
+	return coord;
+};
+
 };

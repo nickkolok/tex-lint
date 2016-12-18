@@ -339,6 +339,30 @@ test('getTagsArrayNumbers', function () {
 
 });
 
+test('getRowCol', function () {
+	assert.deepEqual(
+		new Nodes('\\sum_{\\frac{1}{2}}^{\\frac{3}{4}}\n\\sum_{\\frac{1}{2}}^{\\frac{3}{4}}').getRowCol(22),
+		{col:1,row:2,},
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\sum_{\\frac{1}{2}}^{\\frac{3}{4}}\n\\sum_{\\frac{1}{2}}^{\\frac{3}{4}}').getRowCol(24),
+		{col:6,row:2,},
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\sum_{\\frac{1}{2}}^{\\frac{3}{4}}\n\\sum_{\\frac{1}{2}}^{\\frac{3}{4}}\n\n\\alpha').getRowCol(45),
+		{col:1,row:4,},
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\n\n\\alpha').getRowCol(2),
+		{col:1,row:3,},
+		""
+	);
+});
+
+
 /*
 
 test('', function () {
