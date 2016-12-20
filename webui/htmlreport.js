@@ -31,7 +31,7 @@ module.exports.createHTMLreport = function(o) {
 		if (theRule.fixErrors) {
 			var fixbutton = $('<button>',{
 				id: 'fixErrors-' + theRule.name,
-				html: 'Исправить',
+				html: 'Исправить все',
 			})[0];
 			fixbutton.onclick = (function(rule) { return function() {
 				try { // TODO: выляпаться из замыкания!!!
