@@ -52,6 +52,14 @@ module.exports.createHTMLreport = function(o) {
 				var coord = o.nodesObject.getRowCol(result.indexes[j]);
 				rowcol.html('Строка ' + coord.row + ', символ ' + coord.col + '; ');
 				reportErrors.appendChild(rowcol[0]);
+				rowcol[0].onclick = (function(pos) { return function() {
+					o.editor.focus();
+					o.editor.setCursor({
+						line: pos.row - 1,
+						ch  : pos.col - 1,
+					});
+					o.editor.focus();
+				};})(coord);
 			}
 		}
 		reportErrors.appendChild($('<hr/>')[0]);
