@@ -60,6 +60,19 @@ module.exports.createHTMLreport = function(o) {
 					});
 					o.editor.focus();
 				};})(coord);
+				if (result.commonCorrector) {
+					var singleButton = $('<button>',{
+						html: 'Исправить',
+					})[0];
+					singleButton.onclick = (function(index, corrector) { return function() {
+						var nodes = corrector(o.getNodes(), index);
+						o.editor.setValue(nodes.toString());
+						o.recheck();
+					};})(result.indexes[j], result.commonCorrector);
+
+					reportErrors.appendChild(singleButton);
+					reportErrors.appendChild($('<br/>')[0]);
+				}
 			}
 		}
 		reportErrors.appendChild($('<hr/>')[0]);

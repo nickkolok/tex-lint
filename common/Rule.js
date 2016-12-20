@@ -247,6 +247,10 @@ new Rule(
 		return {
 			indexes: indexes,
 			quantity: indexes.length,
+			commonCorrector: function(n, index) {
+				n.inlinizeFrac(index);
+				return n;
+			},
 		};
 	}
 	,
