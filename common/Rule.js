@@ -93,6 +93,10 @@ new Rule(
 		return {
 			quantity: indexes.length,
 			indexes: indexes,
+			commonCorrector: function(n, index) {
+				n.inlinizeFrac(index);
+				return n;
+			},
 		};
 	},
 	function(nodes) {
@@ -115,6 +119,10 @@ new Rule(
 		return {
 			quantity: indexes.length,
 			indexes: indexes,
+			commonCorrector: function(n, index) {
+				n.pushFormulaOut(index);
+				return n;
+			},
 		};
 	}
 	,
@@ -219,8 +227,10 @@ new Rule(
 	'no_env_equation',
 	'Не разрешается использование окружений \\begin{equation} ... \\end{equation}',
 	function(nodes) {
+		var indexes = nodes.getEnvironmentsList(['equation']);
 		return {
-			quantity: nodes.getEnvironmentsList(['equation']).length,
+			quantity: indexes.length,
+			indexes: indexes,
 		};
 	}
 );
@@ -229,8 +239,14 @@ new Rule(
 	'no_env_equation*',
 	'Не разрешается использование окружений \\begin{equation*} ... \\end{equation*}',
 	function(nodes) {
+		var indexes = nodes.getEnvironmentsList(['equation*']);
 		return {
-			quantity: nodes.getEnvironmentsList(['equation*']).length,
+			quantity: indexes.length,
+			indexes: indexes,
+			commonCorrector: function(n, index) {
+				n.renewEnvironment(index, new Nodes('$$'), new Nodes('$$'));
+				return n;
+			},
 		};
 	},
 	function(nodes) {
