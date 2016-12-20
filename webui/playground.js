@@ -8,6 +8,8 @@ var rulesets = require('../common/rulesets.js');
 var texEmaples = require('../build/webui/tex-examples.js');
 var HTMLreport = require('./htmlreport.js');
 var JSONfromHash = require('./json-from-hash.js');
+var autoenc = require('./autodetect-utf8-cp1251-cp866.js');
+
 
 var fileName = 'saved.tex';
 var fileEnc  = 'utf8';
@@ -22,12 +24,17 @@ function codeLoad() {
 		return function(e) {
 			try {
 				var encoding = document.getElementById("file-encoding").value;
+				if (encoding === 'auto') {
+					encoding = autoenc.detectEncoding(e.target.result).encoding;
+					document.getElementById("file-encoding").value = encoding;
+				}
 				var text = iconv.decode(new Buffer(e.target.result), encoding);
 				myCodeMirror.setValue(text);
 				fileName = theFile.name;
 				fileEnc  = encoding;
 			} catch (err) {
 				alert('Не удалось прочитать ' + theFile.name);
+				console.log(err);
 			}
 		};
 	})(f);
