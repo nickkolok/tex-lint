@@ -61,7 +61,10 @@ function getHashAsObject(o) {
 }
 
 module.exports = {
+	getHashAsObject : getHashAsObject,
 	decodeHash : decodeHash,
 	encodeHash : encodeHash,
-	getHashAsObject : getHashAsObject,
+	importNonExisting : importNonExisting,
+	encodeURIComponentEx : encodeURIComponentEx,
+	decodeURIComponentEx : decodeURIComponentEx,
 };
