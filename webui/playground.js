@@ -8,7 +8,7 @@ var rulesets = require('../common/rulesets.js');
 var texEmaples = require('../build/webui/tex-examples.js');
 var HTMLreport = require('./htmlreport.js');
 var JSONfromHash = require('./json-from-hash.js');
-var autoenc = require('./autodetect-utf8-cp1251-cp866.js');
+var autoenc = require('node-autodetect-utf8-cp1251-cp866');
 
 
 var fileName = 'saved.tex';
