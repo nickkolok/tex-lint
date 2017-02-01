@@ -152,7 +152,42 @@ module.exports = function(grunt) {
 				ext: '.html'
 			}
 		},
-
+		compress: {
+			mz: {
+				options: {
+					archive: 'dist/tex-lint-dist-mz.zip'
+				},
+				files: [
+					{
+						expand: true,
+						cwd: 'dist/',
+						src: [
+							'webui/**',
+							'LICENSE.TXT',
+							'for-mz-site.html',
+						],
+						dest: 'tex-lint-mz/'
+					}, // makes all src relative to cwd
+				],
+			},
+			smzh: {
+				options: {
+					archive: 'dist/tex-lint-dist-smzh.zip'
+				},
+				files: [
+					{
+						expand: true,
+						cwd: 'dist/',
+						src: [
+							'webui/**',
+							'LICENSE.TXT',
+							'for-smzh-site.html',
+						],
+						dest: 'tex-lint-smzh/'
+					}, // makes all src relative to cwd
+				],
+			},
+		},
 
 		watch: {
 			options: {
@@ -249,6 +284,7 @@ module.exports = function(grunt) {
 		'newer:copy:license',
 		'default',
 		'newer:copy:wrappers',
+		'compress',
 	]);
 
 	grunt.registerTask('default', [
