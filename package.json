@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/nickkolok/tex-lint#readme",
   "devDependencies": {
-    "node-autodetect-utf8-cp1251-cp866": "^0.1.0",
     "browserify": "^13.1.1",
     "codemirror": "^5.21.0",
     "grunt": "^1.0.1",
@@ -36,6 +35,7 @@
     "load-grunt-tasks": "^3.5.2",
     "ls": "^0.2.1",
     "mkdirp": "^0.5.1",
+    "node-autodetect-utf8-cp1251-cp866": "^0.1.0",
     "qunit": "^0.9.1",
     "time-grunt": "^1.4.0"
   }
