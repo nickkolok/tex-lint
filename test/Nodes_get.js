@@ -362,6 +362,43 @@ test('getRowCol', function () {
 	);
 });
 
+test('getInputencs', function () {
+	assert.deepEqual(
+		new Nodes('\\usepackage[cp1251]{inputenc}').getInputencs(),
+		[[0,'cp1251']],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\begin{document}\\usepackage[cp1251]{inputenc}').getInputencs(),
+		[[4,'cp1251']],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\begin{document}\\usepackage[utf8]{inputenc}').getInputencs(),
+		[[4,'utf8']],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\begin{document}\\usepackage [ utf8 ] {inputenc}').getInputencs(),
+		[[4,'utf8']],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\begin{document}\n\\usepackage{amsmath}\n\\usepackage[cp1251]{inputenc}\\usepackage{amsmath}').getInputencs(),
+		[[10,'cp1251']],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\begin{document}\n\\usepackage{amsmath}\n\\usepackage[cp1251]{inputenc}\\usepackage{amsthm}\n\\usepackage[cp866]{inputenc}').getInputencs(),
+		[
+			[10,'cp1251'],
+			[23,'cp866'],
+		],
+		""
+	);
+
+});
+
 
 /*
 

@@ -259,4 +259,29 @@ Nodes.prototype.getRowCol = function(index) {
 	return coord;
 };
 
+Nodes.prototype.getInputencs = function() {
+	var inputencs = [];
+	//TODO: нормальная функция получения всех пакетов с необязательными аргументами
+	//TODO: а для этого - вероятно, функция получения аргументов с указанием обязательности/необязательности
+	var usepacks = this.getNodesNumbers('tag','\\usepackage');
+	for (var i = 0; i < usepacks.length; i++) {
+		var currentUsepack = this.getArguments(usepacks[i],3);
+		currentUsepack[2].unwrap();
+		if (currentUsepack[2].toString() != 'inputenc') {
+			continue;
+		}
+		var encArg = currentUsepack[1];
+		if (encArg.nodes[0].text === '[') {
+			encArg.nodes.shift();
+		}
+		if (encArg.nodes[encArg.nodes.length - 1].text === ']') {
+			encArg.nodes.pop();
+		}
+		encArg.trim();
+		inputencs.push([usepacks[i], encArg.toString()]); // TODO: а если пробел?
+	}
+	return inputencs;
 };
+
+
+};//modules.export
