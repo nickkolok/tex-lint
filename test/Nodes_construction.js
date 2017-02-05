@@ -519,6 +519,19 @@ test('double linebreak', function () {
 });
 
 /*
+//TODO: запятая не отделяется от слова. Решить, что с ней делать.
+test('', function () {
+	assert.deepEqual(
+		new Nodes('\\begin{document}\n\\usepackage{amsmath,amsthm}').nodes,
+		[
+			{ text: '\n', type: 'linebreak' },
+		],
+		""
+	);
+});
+*/
+
+/*
 
 test('', function () {
 	assert.deepEqual(
