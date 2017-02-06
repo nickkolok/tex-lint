@@ -133,6 +133,61 @@ test("getArguments", function () {
 	);
 });
 
+test("getArgumentsEnd", function () {
+	var N = new Nodes('\\frac{1}{2}3[5]\\sqrt {2} \\alpha');
+
+	assert.deepEqual(
+		N.getArgumentsEnd(0, 1),
+		1,
+		""
+	);
+
+	assert.deepEqual(
+		N.getArgumentsEnd(0, 2),
+		4,
+		""
+	);
+
+	assert.deepEqual(
+		N.getArgumentsEnd(1, 1),
+		4,
+		""
+	);
+
+	assert.deepEqual(
+		N.getArgumentsEnd(1, 2),
+		7,
+		""
+	);
+
+	assert.deepEqual(
+		N.getArgumentsEnd(1, 3),
+		8,
+		""
+	);
+
+	assert.deepEqual(
+		N.getArgumentsEnd(1, 4),
+		11,
+		""
+	);
+	assert.deepEqual(
+		N.getArgumentsEnd(11, 2),
+		16,
+		""
+	);
+	assert.deepEqual(
+		N.getArgumentsEnd(11, 3),
+		18,
+		""
+	);
+	assert.deepEqual(
+		N.getArgumentsEnd(12, 3),
+		18,
+		""
+	);
+});
+
 test("getNodesNumbers", function () {
 	var N = new Nodes('Some text with frac $\\frac{a}{b}+\\frac{1+\\alpha}{2-\\beta}+\\frac{1+C_0}{2}$ in it.');
 	assert.deepEqual(
