@@ -243,6 +243,74 @@ test('getWithArguments', function () {
 		],
 		""
 	);
+
+	N = new Nodes('   \\sqrt  \\frac   \n 1 2');
+	assert.deepEqual(
+		N.getWithArguments(3, 2).nodes,
+		[
+			{ text: '\\frac', type: 'tag' },
+			{ text: '   ', type: 'space' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: ' ', type: 'space' },
+			{ text: '1', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '2', type: 'number' },
+		],
+		""
+	);
+
+	N = new Nodes('   \\sqrt  \\frac   \n 1 2');
+	assert.deepEqual(
+		N.getWithArguments(1, 2).nodes,
+		[
+			{ text: '\\sqrt', type: 'tag' },
+			{ text: '  ', type: 'space' },
+			{ text: '\\frac', type: 'tag' },
+			{ text: '   ', type: 'space' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: ' ', type: 'space' },
+			{ text: '1', type: 'number' },
+		],
+		""
+	);
+
+	N = new Nodes('   \\sqrt  \\frac   \n 1 2');
+	assert.deepEqual(
+		N.getWithArguments(1, 2).nodes,
+		[
+			{ text: '\\sqrt', type: 'tag' },
+			{ text: '  ', type: 'space' },
+			{ text: '\\frac', type: 'tag' },
+			{ text: '   ', type: 'space' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: ' ', type: 'space' },
+			{ text: '1', type: 'number' },
+		],
+		""
+	);
+
+	N = new Nodes('');
+	assert.deepEqual(
+		N.getWithArguments(1, 2).nodes,
+		[
+		],
+		""
+	);
+
+	N = new Nodes('\\alpha 1 2 3 \\frac {1} ');
+	assert.deepEqual(
+		N.getWithArguments(8, 2).nodes,
+		[
+			{ text: '\\frac', type: 'tag' },
+			{ text: ' ', type: 'space' },
+			{ text: '{', type: 'bracket' },
+			{ text: '1', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: ' ', type: 'space' },
+		],
+		""
+	);
+
 });
 
 test('slice', function () {
