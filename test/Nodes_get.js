@@ -131,6 +131,106 @@ test("getArguments", function () {
 		],
 		""
 	);
+
+	N = new Nodes('\\begin{document}\\usepackage [ utf8 ] {inputenc}');
+
+	// Полукостыли, но без них парсится неправильно.
+	// То есть правильно, но нам так не надо.
+	var _utf8_ = new Nodes('[ utf8 ]');
+	_utf8_.nodes[2].type = 'atom';
+
+	var utf8_ = new Nodes('[utf8 ]');
+	utf8_.nodes[1].type = 'atom';
+
+	var utf8 = new Nodes('[utf8]');
+	utf8.nodes[1].type = 'atom';
+
+	assert.deepEqual(
+		N.getArguments(4, 2),
+		[
+			new Nodes('\\usepackage'),
+			_utf8_,
+		],
+		""
+	);
+
+	N = new Nodes('\\begin{document}\\usepackage [ utf8 ] {inputenc} ');
+	assert.deepEqual(
+		N.getArguments(4, 2),
+		[
+			new Nodes('\\usepackage'),
+			_utf8_,
+		],
+		""
+	);
+
+	N = new Nodes('\\usepackage [ utf8 ] {inputenc}');
+	assert.deepEqual(
+		N.getArguments(0, 2),
+		[
+			new Nodes('\\usepackage'),
+			_utf8_,
+		],
+		""
+	);
+
+	N = new Nodes('\\usepackage [ utf8 ] {inputenc}');
+	assert.deepEqual(
+		N.getArguments(0, 1),
+		[
+			new Nodes('\\usepackage'),
+		],
+		""
+	);
+	N = new Nodes('[ utf8 ] {inputenc}');
+	assert.deepEqual(
+		N.getArguments(0, 2),
+		[
+			new Nodes('[ utf8 ]'), // Да, а вот здесь так, ибо не аргумент
+			new Nodes('{inputenc}'),
+		],
+		""
+	);
+
+	N = new Nodes('\\usepackage [ utf8 ]');
+	assert.deepEqual(
+		N.getArguments(0, 2),
+		[
+			new Nodes('\\usepackage'),
+			_utf8_,
+		],
+		""
+	);
+
+	N = new Nodes('\\usepackage [utf8 ]');
+	assert.deepEqual(
+		N.getArguments(0, 2),
+		[
+			new Nodes('\\usepackage'),
+			utf8_,
+		],
+		""
+	);
+
+	N = new Nodes('\\usepackage [utf8]');
+	assert.deepEqual(
+		N.getArguments(0, 2),
+		[
+			new Nodes('\\usepackage'),
+			utf8,
+		],
+		""
+	);
+
+	N = new Nodes('\\usepackage[utf8]');
+	assert.deepEqual(
+		N.getArguments(0, 2),
+		[
+			new Nodes('\\usepackage'),
+			utf8,
+		],
+		""
+	);
 });
 
 test("getArgumentsMap", function () {
