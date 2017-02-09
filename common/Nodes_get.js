@@ -149,15 +149,9 @@ Nodes.prototype.getArgumentsMap = function(index, count) {
 
 
 Nodes.prototype.getArguments = function(index, count) {
-	var nodes = this.nodes;
-	var args = [];
-	for (var i = 0; i < count; i++) {
-		index = this.skipTypes(index, ['space', 'linebreak']);
-		var arg = this.getGroupOrSingle(index);
-		index += arg.nodes.length;
-		args.push(arg);
-	}
-	return args;
+	return this.getArgumentsMap(index, count).map(function(arg) {
+		return this.getSubnodes(arg[0], arg[1] + 1);
+	}, this);
 };
 
 Nodes.prototype.getArgumentsEnd = function(index, count) {
