@@ -165,16 +165,7 @@ Nodes.prototype.getArgumentsEnd = function(index, count) {
 };
 
 Nodes.prototype.getWithArguments = function(index, count) {
-	var nodes = this.nodes;
-	var start = index;
-	// Берём то, аргументы чего ищем
-	index++;
-	for (var i = 0; i < count; i++) {
-		index = this.skipTypes(index, ['space', 'linebreak']);
-		var arg = this.getGroupOrSingle(index);
-		index += arg.nodes.length;
-	}
-	return this.getSubnodes(start, index);
+	return this.getSubnodes(index, this.getArgumentsEnd(index, count + 1));
 };
 
 Nodes.prototype.toString = function() {
