@@ -155,13 +155,11 @@ Nodes.prototype.getArguments = function(index, count) {
 };
 
 Nodes.prototype.getArgumentsEnd = function(index, count) {
-	var nodes = this.nodes;
-	for (var i = 0; i < count; i++) {
-		index = this.skipTypes(index, ['space', 'linebreak']);
-		var arg = this.getGroupOrSingle(index);
-		index += arg.nodes.length;
+	var argsmap = this.getArgumentsMap(index, count);
+	if (!argsmap.length) {
+		return 0;
 	}
-	return index;
+	return (argsmap[argsmap.length - 1][1] + 1 || 0);
 };
 
 Nodes.prototype.getWithArguments = function(index, count) {

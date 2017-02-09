@@ -433,6 +433,14 @@ test("getArgumentsEnd", function () {
 		18,
 		""
 	);
+
+	N = new Nodes('');
+	assert.deepEqual(
+		N.getArgumentsEnd(1, 2),
+		0,
+		""
+	);
+
 });
 
 test("getNodesNumbers", function () {
