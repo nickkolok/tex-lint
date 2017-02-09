@@ -16,7 +16,7 @@ module.exports = function(grunt) {
 	var cwd = process.cwd();
 
 	var packExamples = function(sourceDir, targetFile) {
-		var targetDir = targetFile.replace(/[^\/\\]+$/,'');
+		var targetDir = targetFile.replace(/[^\/\\]+$/, '');
 		mkdirp.sync(targetDir);
 		var examples = ls(sourceDir + '*.tex');
 
@@ -250,7 +250,7 @@ module.exports = function(grunt) {
 					'./test/Nodes_edit_comments.js',
 				],
 				done: function(err, res) {
-					!err && publishResults("node", res, this.async());
+					!err && publishResults('node', res, this.async());
 				},
 			},
 		},

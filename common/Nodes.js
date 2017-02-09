@@ -6,7 +6,7 @@ function Nodes(text) {
   if (text) {
 	  this.fromText(text);
   }
-};
+}
 // TODO: наследовать от массива и this.nodes = this
 
 
