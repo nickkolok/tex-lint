@@ -131,6 +131,23 @@ Nodes.prototype.skipToTypesReverse = function(index, types) {
 	return index;
 };
 
+Nodes.prototype.getArgumentsMap = function(index, count) {
+	var nodes = this.nodes;
+	var argsmap = [];
+	for (var i = 0; i < count; i++) {
+		if (index >= nodes.length) {
+			break;
+		}
+		index = this.skipTypes(index, ['space', 'linebreak']);
+		var arg = this.getGroupOrSingle(index);
+		var end = index + arg.nodes.length;
+		argsmap.push([index, end - 1]);
+		index = end;
+	}
+	return argsmap;
+};
+
+
 Nodes.prototype.getArguments = function(index, count) {
 	var nodes = this.nodes;
 	var args = [];

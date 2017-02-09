@@ -133,6 +133,124 @@ test("getArguments", function () {
 	);
 });
 
+test("getArgumentsMap", function () {
+	var N = new Nodes('\\frac{1}{2}3[5]');
+
+	assert.deepEqual(
+		N.getArgumentsMap(1, 1),
+		[
+			[1, 3],
+		],
+		""
+	);
+
+	assert.deepEqual(
+		N.getArgumentsMap(1, 2),
+		[
+			[1, 3],
+			[4, 6],
+		],
+		""
+	);
+
+	assert.deepEqual(
+		N.getArgumentsMap(1, 3),
+		[
+			[1, 3],
+			[4, 6],
+			[7, 7],
+		],
+		""
+	);
+
+	assert.deepEqual(
+		N.getArgumentsMap(1, 4),
+		[
+			[1, 3],
+			[4, 6],
+			[7, 7],
+			[8, 10],
+		],
+		""
+	);
+
+	N = new Nodes('\\frac{1}{2}3[5]\\sqrt {2} \\alpha');
+
+	assert.deepEqual(
+		N.getArgumentsMap(0, 1),
+		[
+			[0, 0],
+		],
+		""
+	);
+
+	assert.deepEqual(
+		N.getArgumentsMap(0, 2),
+		[
+			[0, 0],
+			[1, 3],
+		],
+		""
+	);
+	assert.deepEqual(
+		N.getArgumentsMap(11, 2),
+		[
+			[11, 11],
+			[13, 15],
+		],
+		""
+	);
+	assert.deepEqual(
+		N.getArgumentsMap(11, 3),
+		[
+			[11, 11],
+			[13, 15],
+			[17, 17],
+		],
+		""
+	);
+	assert.deepEqual(
+		N.getArgumentsMap(12, 3),
+		[
+			[13, 15],
+			[17, 17],
+		],
+		""
+	);
+
+	N = new Nodes('\\frac');
+
+	assert.deepEqual(
+		N.getArgumentsMap(0, 3),
+		[
+			[0, 0],
+		],
+		""
+	);
+
+	N = new Nodes('');
+	assert.deepEqual(
+		N.getArgumentsMap(0, 3),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		N.getArgumentsMap(0, 1),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		N.getArgumentsMap(1, 25),
+		[
+		],
+		""
+	);
+
+
+});
+
 test("getArgumentsEnd", function () {
 	var N = new Nodes('\\frac{1}{2}3[5]\\sqrt {2} \\alpha');
 
