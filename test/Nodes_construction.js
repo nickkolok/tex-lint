@@ -518,6 +518,78 @@ test('double linebreak', function () {
 	);
 });
 
+test('\\begin{document}\\usepackage [ utf8 ] {inputenc}', function () {
+	assert.deepEqual(
+		new Nodes('\\begin{document}\\usepackage [ utf8 ] {inputenc}').nodes,
+		[
+			{ text: '\\begin', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'document', type: 'atom' },
+			{ text: '}', type: 'bracket' },
+			{ text: '\\usepackage', type: 'tag' },
+			{ text: ' ', type: 'space' },
+			{ text: '[', type: 'bracket' },
+			{ text: ' ', type: 'space' },
+			{ text: 'utf', type: 'atom' },
+			{ text: '8', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: ']', type: 'bracket' },
+			{ text: ' ', type: 'space' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'inputenc', type: null }, // TODO: ?!
+			{ text: '}', type: 'bracket' },
+		],
+		""
+	);
+});
+
+test('\\begin{document}\n\\usepackage{amsmath}\n\\usepackage[cp1251]{inputenc}\\usepackage{amsmath}', function () {
+	assert.deepEqual(
+		new Nodes('\\begin{document}\n\\usepackage{amsmath}\n\\usepackage[cp1251]{inputenc}\\usepackage{amsmath}').nodes,
+		[
+			{ text: '\\begin', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'document', type: 'atom' },
+			{ text: '}', type: 'bracket' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: '\\usepackage', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'amsmath', type: 'atom' },
+			{ text: '}', type: 'bracket' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: '\\usepackage', type: 'tag' },
+			{ text: '[', type: 'bracket' },
+			{ text: 'cp', type: 'atom' },
+			{ text: '1251', type: 'number' },
+			{ text: ']', type: 'bracket' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'inputenc', type: null },
+			{ text: '}', type: 'bracket' },
+			{ text: '\\usepackage', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'amsmath', type: 'atom' },
+			{ text: '}', type: 'bracket' },
+		],
+		""
+	);
+});
+
+test('[utf8]', function () {
+	assert.deepEqual(
+		new Nodes('[utf8]').nodes,
+		[
+			{ text: '[', type: 'bracket' },
+			{ text: 'utf', type: null },
+			{ text: '8', type: 'number' },
+			{ text: ']', type: 'bracket' },
+		],
+		""
+	);
+});
+
+
+
+
 /*
 //TODO: запятая не отделяется от слова. Решить, что с ней делать.
 test('', function () {
