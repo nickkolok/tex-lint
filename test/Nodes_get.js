@@ -625,6 +625,11 @@ test('getInputencs', function () {
 		""
 	);
 	assert.deepEqual(
+		new Nodes('\\usepackage{amsmath}').getInputencs(),
+		[],
+		""
+	);
+	assert.deepEqual(
 		new Nodes('\\begin{document}\n\\usepackage{amsmath}\n\\usepackage[cp1251]{inputenc}\\usepackage{amsmath}').getInputencs(),
 		[[10,'cp1251']],
 		""
