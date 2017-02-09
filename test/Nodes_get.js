@@ -348,6 +348,35 @@ test("getArgumentsMap", function () {
 		""
 	);
 
+	N = new Nodes('\\begin{document}\\usepackage [ utf8 ] {inputenc}');
+	assert.deepEqual(
+		N.getArgumentsMap(4, 2),
+		[
+			[4, 4],
+			[6, 11],
+		],
+		""
+	);
+
+	N = new Nodes('\\begin{document}\\usepackage [ utf8 ] {inputenc} ');
+	assert.deepEqual(
+		N.getArgumentsMap(4, 2),
+		[
+			[4, 4],
+			[6, 11],
+		],
+		""
+	);
+
+	N = new Nodes('\\usepackage [ utf8 ] {inputenc}');
+	assert.deepEqual(
+		N.getArgumentsMap(0, 2),
+		[
+			[0, 0],
+			[2, 7],
+		],
+		""
+	);
 
 });
 
