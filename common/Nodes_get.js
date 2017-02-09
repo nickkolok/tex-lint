@@ -284,6 +284,10 @@ Nodes.prototype.getInputencs = function() {
 	var usepacks = this.getNodesNumbers('tag','\\usepackage');
 	for (var i = 0; i < usepacks.length; i++) {
 		var currentUsepack = this.getArguments(usepacks[i],3);
+		if (currentUsepack.length < 3) {
+			// Это бред какой-то, \usepackage в конце документа, но иначе может упасть
+			continue;
+		}
 		currentUsepack[2].unwrap();
 		if (currentUsepack[2].toString() != 'inputenc') {
 			continue;
