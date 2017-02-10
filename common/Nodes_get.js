@@ -75,10 +75,7 @@ Nodes.prototype.getBraceGroup = function(start, left, right) {
 
 Nodes.prototype.getGroupOrSingle = function(index) {
 	var nodes = this.nodes;
-	// TODO: отрефакторить с использованием skipTypes
-	while (nodes[index] && (nodes[index].type === 'space' || nodes[index].type === 'linebreak')) {
-		index++;
-	}
+	index = this.skipTypes(index, ['space', 'linebreak']);
 
 	if (areNodesEqual(nodes[index], Nodes.RIGHT_CURLY) || areNodesEqual(nodes[index], Nodes.RIGHT_SQUARE)) {
 		// Внезапно встретили закрывающую скобку
