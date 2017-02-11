@@ -164,5 +164,12 @@ Nodes.prototype.pushAllUglyFormulasOut = function(tags) {
 	}
 };
 
+Nodes.prototype.forceInputencs = function(inputenc) {
+	var iencs = this.getInputencs();
+	for (var i = iencs.length - 1; i >= 0; i--) {
+		this.replaceArguments(iencs[i][0], 2, new Nodes('\\usepackage[' + inputenc + ']'));
+	}
+};
+
 
 };

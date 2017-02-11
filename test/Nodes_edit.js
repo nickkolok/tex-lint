@@ -388,6 +388,74 @@ test('inlinizeAllSubSupFracs', function () {
 	);
 });
 
+test('forceInputencs', function () {
+	var N = new Nodes('');
+	N.forceInputencs('cp1251');
+	assert.deepEqual(
+		N.toString(),
+		'',
+		""
+	);
+
+	var N = new Nodes('\\alpha\\frac{\\pi}{2}');
+	N.forceInputencs();
+	assert.deepEqual(
+		N.toString(),
+		'\\alpha\\frac{\\pi}{2}',
+		""
+	);
+
+	var N = new Nodes('\\usepackage[cp1251]{inputenc}');
+	N.forceInputencs('cp1251');
+	assert.deepEqual(
+		N.toString(),
+		'\\usepackage[cp1251]{inputenc}',
+		""
+	);
+
+	var N = new Nodes('\\usepackage [ cp1251 ] {inputenc}');
+	N.forceInputencs('cp1251');
+	assert.deepEqual(
+		N.toString(),
+		'\\usepackage[cp1251] {inputenc}',
+		""
+	);
+
+	var N = new Nodes('\\usepackage[cp1251]{inputenc}');
+	N.forceInputencs('cp866');
+	assert.deepEqual(
+		N.toString(),
+		'\\usepackage[cp866]{inputenc}',
+		""
+	);
+
+	var N = new Nodes('\\begin{document}\\usepackage[cp1251]{inputenc}');
+	N.forceInputencs('utf8');
+	assert.deepEqual(
+		N.toString(),
+		'\\begin{document}\\usepackage[utf8]{inputenc}',
+		""
+	);
+
+
+
+	var N = new Nodes('\\begin{document}\n\\usepackage{amsmath}\n\\usepackage[cp1251]{inputenc}\\usepackage{amsthm}\n\\usepackage[cp866]{inputenc}');
+	N.forceInputencs('utf8');
+	assert.deepEqual(
+		N.toString(),
+		'\\begin{document}\n\\usepackage{amsmath}\n\\usepackage[utf8]{inputenc}\\usepackage{amsthm}\n\\usepackage[utf8]{inputenc}',
+		""
+	);
+
+	var N = new Nodes('\\begin{document}\n\\usepackage{amsmath}\n\\usepackage[cp1251]{inputenc}\\usepackage{amsthm}\n\\usepackage[cp866]{inputenc}');
+	N.forceInputencs('cp1251');
+	assert.deepEqual(
+		N.toString(),
+		'\\begin{document}\n\\usepackage{amsmath}\n\\usepackage[cp1251]{inputenc}\\usepackage{amsthm}\n\\usepackage[cp1251]{inputenc}',
+		""
+	);
+});
+
 /*
 
 test('', function () {
