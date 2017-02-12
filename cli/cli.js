@@ -1,0 +1,41 @@
+'use strict';
+var fs = require('fs');
+var Nodes = require('../common/Nodes.js').Nodes;
+var rules = require('../common/Rule.js').rules;
+
+// TODO: подключить это дело к eslint
+
+function applyRuleToString (str, rulename) {
+	var rule = rules[rulename];
+	var nodes = new Nodes(str);
+	var findResult = rule.findErrors(nodes);
+
+	var rez = {
+		text: str,
+		indexes: findResult.indexes,
+		quantity: findResult.quantity,
+	};
+	if (rule.fixErrors) {
+		// Не для всех правил определена функция исправления
+		rule.fixErrors(nodes);
+		rez.fixed = nodes.toString();
+	}
+	return rez;
+	// TODO: возможность применять точечные исправления с известными номерами.
+	// Не забыть, что при изменении номера нод ползут.
+	// Возможно, стОит начинать с последнего.
+}
+
+function applyRuleToFile (filename, rulename, callback) {
+	var text = fs.readFile(filename, 'utf8', function (err, contents) {
+		callback(applyRuleToString(contents, rulename));
+	});
+}
+
+// DRAFT
+
+var f = function (p) {
+	console.log(p);
+}
+
+applyRuleToFile ('../webui/tex-examples/mz-01.tex', 'separate$', f);
