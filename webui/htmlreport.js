@@ -45,8 +45,19 @@ module.exports.createHTMLreport = function(o) {
 			};})(theRule);
 			reportErrors.appendChild(fixbutton);
 		}
+
+		// Если известны точные места...
 		if (result.indexes) {
-			var divGroupErrors = $('<div>')[0];
+			var randomClass = ('class' + Math.random()).replace('.', '');
+			reportErrors.appendChild($('<button>', {
+				html : 'Свернуть/развернуть',
+				'data-target' : '.' + randomClass,
+				'data-toggle' : 'collapse',
+			})[0]);
+
+			var divGroupErrors = $('<div>', {
+				'class' : 'collapse in ' + randomClass,
+			})[0];
 
 			for (var j = 0; j < result.indexes.length; j++) {
 				var rowcol = $('<span>');
