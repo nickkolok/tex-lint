@@ -5,7 +5,7 @@ var rules = require('../common/Rule.js').rules;
 
 // TODO: подключить это дело к eslint
 
-function applyRuleToString (str, rulename) {
+function applyRuleToString(str, rulename) {
 	var rule = rules[rulename];
 	var nodes = new Nodes(str);
 	var findResult = rule.findErrors(nodes);
@@ -26,16 +26,16 @@ function applyRuleToString (str, rulename) {
 	// Возможно, стОит начинать с последнего.
 }
 
-function applyRuleToFile (filename, rulename, callback) {
-	var text = fs.readFile(filename, 'utf8', function (err, contents) {
+function applyRuleToFile(filename, rulename, callback) {
+	var text = fs.readFile(filename, 'utf8', function(err, contents) {
 		callback(applyRuleToString(contents, rulename));
 	});
 }
 
 // DRAFT
 
-var f = function (p) {
+var f = function(p) {
 	console.log(p);
-}
+};
 
-applyRuleToFile ('../webui/tex-examples/mz-01.tex', 'separate$', f);
+applyRuleToFile('../webui/tex-examples/mz-01.tex', 'separate$', f);
