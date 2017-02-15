@@ -1,6 +1,6 @@
 var rulesets = require('../common/rulesets.js');
 var rules = require('../common/Rule.js').rules;
-var $ = require('jquery-browserify');
+var $ = require('./jquery-with-bootstrap-for-browserify.js');
 
 module.exports.createHTMLreport = function(o) {
 	var reportErrors = document.createDocumentFragment();
