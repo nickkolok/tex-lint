@@ -46,12 +46,13 @@ module.exports.createHTMLreport = function(o) {
 			reportErrors.appendChild(fixbutton);
 		}
 		if (result.indexes) {
-			reportErrors.appendChild($('<br/>')[0]);
+			var divGroupErrors = $('<div>')[0];
+
 			for (var j = 0; j < result.indexes.length; j++) {
 				var rowcol = $('<span>');
 				var coord = o.nodesObject.getRowCol(result.indexes[j]);
 				rowcol.html('Строка ' + coord.row + ', символ ' + coord.col + '; ');
-				reportErrors.appendChild(rowcol[0]);
+				divGroupErrors.appendChild(rowcol[0]);
 				rowcol[0].onclick = (function(pos) { return function() {
 					o.editor.focus();
 					o.editor.setCursor({
@@ -70,11 +71,13 @@ module.exports.createHTMLreport = function(o) {
 						o.recheck();
 					};})(result.indexes[j], result.commonCorrector);
 
-					reportErrors.appendChild(singleButton);
-					reportErrors.appendChild($('<br/>')[0]);
+					divGroupErrors.appendChild(singleButton);
+					divGroupErrors.appendChild($('<br/>')[0]);
 				}
 			}
+			reportErrors.appendChild(divGroupErrors);
 		}
+
 		reportErrors.appendChild($('<hr/>')[0]);
 	}
 	o.targetElement.innerHTML = '';
