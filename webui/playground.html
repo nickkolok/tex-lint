@@ -13,8 +13,11 @@
 
 
 	Введите TeX-код для проверки в поле ниже или загрузите TeX-файл:
-	<input type="file" id="file-load"/><button id="codeload">Загрузить</button>
-	<select id="file-encoding">
+	<label class="btn btn-default btn-file">
+		Открыть файл...
+		<input type="file" id="file-load" style="display:none;">
+	</label>
+	<select id="file-encoding" class="btn btn-default">
 		<option value="auto"  >Автоопределение   </option>
 		<option value="utf8"  >Юникод UTF-8      </option>
 		<option value="cp1251">CP-1251 (WIN-1251)</option>
@@ -22,9 +25,9 @@
 	</select>
 	<span id="tex-examples">
 		Готовые примеры:
-		<select id="tex-examples-list">
+		<select id="tex-examples-list" class="btn btn-default">
 		</select>
-		<button id="paste-example">
+		<button id="paste-example" class="btn btn-default">
 			Вставить
 		</button>
 	</span>
@@ -32,12 +35,12 @@
 	</div>
 	Набор правил: <a id="ruleset-info"></a>
 	<hr/>
-	<button id="runcheck">
+	<button id="runcheck" class="btn btn-default">
 		Проверить текст
 	</button>
 	<span id="ruleset-comment"></span>
 	<span id="span-save"></span>
-	<select id="file-save-encoding">
+	<select id="file-save-encoding" class="btn btn-default">
 		<!--<option value="">Авто</option>-->
 		<option value="utf8"  >Юникод UTF-8      </option>
 		<option value="cp1251">CP-1251 (WIN-1251)</option>

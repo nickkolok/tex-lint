@@ -50,7 +50,7 @@ function codeSave() {
 	var a = $('<a>', {
 		download : fileName + ".edited.tex",
 		href : URL.createObjectURL(blob),
-		html : "<button>Сохранить TeX-файл</button>",
+		html : '<button class="btn btn-default">Сохранить TeX-файл</button>',
 	});
 	document.getElementById('span-save').innerHTML = '';
 	document.getElementById('span-save').appendChild(a[0]);
@@ -85,7 +85,7 @@ function runcheck() {
 	checkRules(hashOptions.ruleset, nodesObject);
 }
 
-document.getElementById("codeload").onclick = codeLoad;
+document.getElementById("file-load").onchange = codeLoad;
 document.getElementById("runcheck").onclick = runcheck;
 
 var hashOptions = JSONfromHash.getHashAsObject({

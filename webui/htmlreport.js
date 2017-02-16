@@ -32,6 +32,7 @@ module.exports.createHTMLreport = function(o) {
 			var fixbutton = $('<button>',{
 				id: 'fixErrors-' + theRule.name,
 				html: 'Исправить все',
+				'class': 'btn btn-default',
 			})[0];
 			fixbutton.onclick = (function(rule) { return function() {
 				try { // TODO: выляпаться из замыкания!!!
@@ -53,6 +54,7 @@ module.exports.createHTMLreport = function(o) {
 				html : 'Свернуть/развернуть',
 				'data-target' : '.' + randomClass,
 				'data-toggle' : 'collapse',
+				'class': 'btn btn-default',
 			})[0]);
 
 			var divGroupErrors = $('<div>', {
@@ -75,6 +77,7 @@ module.exports.createHTMLreport = function(o) {
 				if (result.commonCorrector) {
 					var singleButton = $('<button>',{
 						html: 'Исправить',
+						'class': 'btn btn-default',
 					})[0];
 					singleButton.onclick = (function(index, corrector) { return function() {
 						var nodes = corrector(o.getNodes(), index);
