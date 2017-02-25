@@ -9,9 +9,6 @@ var texEmaples = require('../build/webui/tex-examples.js');
 var HTMLreport = require('./htmlreport.js');
 var JSONfromHash = require('./json-from-hash.js');
 var autoenc = require('node-autodetect-utf8-cp1251-cp866');
-var katex = require('katex');
-//katex.render("c = \\pm\\sqrt{a^2 + b^2}", $('#katex-try')[0]);
-
 
 var fileName = 'saved.tex';
 var fileEnc  = 'utf8';

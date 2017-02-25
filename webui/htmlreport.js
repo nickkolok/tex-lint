@@ -1,6 +1,11 @@
 var rulesets = require('../common/rulesets.js');
 var rules = require('../common/Rule.js').rules;
 var $ = require('./jquery-with-bootstrap-for-browserify.js');
+var katex = require('katex');
+
+function genRandomClass() {
+	return ('randomclass' + Math.random()).replace('.', '');
+}
 
 module.exports.createHTMLreport = function(o) {
 	var reportErrors = document.createDocumentFragment();
@@ -49,7 +54,7 @@ module.exports.createHTMLreport = function(o) {
 
 		// Если известны точные места...
 		if (result.indexes) {
-			var randomClass = ('class' + Math.random()).replace('.', '');
+			var randomClass = genRandomClass();
 			reportErrors.appendChild($('<button>', {
 				html : 'Свернуть/развернуть',
 				'data-target' : '.' + randomClass,
@@ -86,6 +91,41 @@ module.exports.createHTMLreport = function(o) {
 					};})(result.indexes[j], result.commonCorrector);
 
 					divGroupErrors.appendChild(singleButton);
+
+					// А если это ещё и внутри формулы...
+					if (
+						o.nodesObject.isInsideSymmDelimiters(result.indexes[j], 'keyword', '$', true)
+					||
+						o.nodesObject.isInsideSymmDelimiters(result.indexes[j], 'keyword', '$', true)
+					) {
+						var randomClass = genRandomClass();
+						var previewButton = $('<button>', {
+							html : 'Предпросмотр',
+							'data-target' : '.' + randomClass,
+							'data-toggle' : 'collapse',
+							'class': 'btn btn-default',
+						})[0];
+
+						var previewDiv = $('<div>', {
+							'class' : 'collapse ' + randomClass,
+						})[0];
+
+						var previewDivBefore = $('<div>', {
+						})[0];
+						var previewDivComment = $('<span>', {
+							'html' : 'будет преобразовано в'
+						})[0];
+						var previewDivAfter = $('<div>', {
+						})[0];
+						previewDiv.appendChild(previewDivBefore);
+						previewDiv.appendChild(previewDivComment);
+						previewDiv.appendChild(previewDivAfter);
+						katex.render("c = \\pm\\sqrt{a^2 + b^2}", previewDivBefore);
+						katex.render("d = \\pm\\sqrt{a^2 + b^2}", previewDivAfter);
+						divGroupErrors.appendChild(previewButton);
+						divGroupErrors.appendChild(previewDiv);
+					}
+
 					divGroupErrors.appendChild($('<br/>')[0]);
 				}
 			}
