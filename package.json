@@ -33,6 +33,7 @@
     "grunt-node-qunit": "^2.0.2",
     "iconv-lite": "^0.4.15",
     "jquery-browserify": "^1.8.1",
+    "katex": "^0.7.1",
     "load-grunt-tasks": "^3.5.2",
     "ls": "^0.2.1",
     "mkdirp": "^0.5.1",

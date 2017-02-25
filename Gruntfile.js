@@ -78,6 +78,11 @@ module.exports = function(grunt) {
 					{ expand: true, src: ['node_modules/bootstrap/**'], dest: 'dist/webui/' },
 				]
 			},
+			katex: {
+				files: [
+					{ expand: true, src: ['node_modules/katex/dist/**'], dest: 'dist/webui/' },
+				]
+			},
 		},
 		uglify: {
 			options: {
