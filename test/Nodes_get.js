@@ -782,6 +782,17 @@ test('getInputencs', function () {
 
 });
 
+test('clone', function () {
+	var oldNodes = new Nodes('\\frac{1}{2}');
+	var newNodes = oldNodes.clone();
+	newNodes.nodes[2].text = '3';
+	assert.deepEqual(
+		oldNodes.toString(),
+		'\\frac{1}{2}',
+		''
+	);
+});
+
 
 /*
 

@@ -177,6 +177,17 @@ Nodes.prototype.slice = function() {
 	return copy;
 };
 
+Nodes.prototype.clone = function() {
+	var copy = new Nodes();
+	copy.nodes = this.nodes.map(function(n) {
+		return {
+			type : n.type,
+			text : n.text,
+		};
+	});
+	return copy;
+};
+
 Nodes.prototype.isWellSeparated = function(index, rightSepTypes, wrongSepTypes, reverse) {
 	var nodes = this.nodes;
 	for (var i = index; i < nodes.length && i >= 0; i += (reverse ? -1 : 1)) {
