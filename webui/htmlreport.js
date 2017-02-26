@@ -93,11 +93,10 @@ module.exports.createHTMLreport = function(o) {
 					divGroupErrors.appendChild(singleButton);
 
 					// А если это ещё и внутри формулы...
-					if (
-						o.nodesObject.isInsideSymmDelimiters(result.indexes[j], 'keyword', '$', true)
-					||
-						o.nodesObject.isInsideSymmDelimiters(result.indexes[j], 'keyword', '$', true)
-					) {
+					var isInside$   = o.nodesObject.isInside$(result.indexes[j], true);
+					var isInside$$  = o.nodesObject.isInside$$(result.indexes[j], true);
+					if (isInside$ || isInside$$) {
+						//TODO: isInsideFormula - ?
 						var randomClass = genRandomClass();
 						var previewButton = $('<button>', {
 							html : 'Предпросмотр',
@@ -106,24 +105,27 @@ module.exports.createHTMLreport = function(o) {
 							'class': 'btn btn-default',
 						})[0];
 
-						var previewDiv = $('<div>', {
+						var previewBody = $('<div>', {
 							'class' : 'collapse ' + randomClass,
 						})[0];
 
-						var previewDivBefore = $('<div>', {
+						var previewBefore = $('<span>', {
 						})[0];
-						var previewDivComment = $('<span>', {
-							'html' : 'будет преобразовано в'
+						var previewComment = $('<span>', {
+							'html' : ' будет преобразовано в '
 						})[0];
-						var previewDivAfter = $('<div>', {
+						var previewAfter = $('<span>', {
 						})[0];
-						previewDiv.appendChild(previewDivBefore);
-						previewDiv.appendChild(previewDivComment);
-						previewDiv.appendChild(previewDivAfter);
-						katex.render("c = \\pm\\sqrt{a^2 + b^2}", previewDivBefore);
-						katex.render("d = \\pm\\sqrt{a^2 + b^2}", previewDivAfter);
+						previewBody.appendChild(previewBefore);
+						previewBody.appendChild(previewComment);
+						previewBody.appendChild(previewAfter);
+						katex.render("c = \\pm\\sqrt{a^2 + b^2}", previewBefore, {
+							displayMode: isInside$$,
+						});
+						var nodesAfterFix = o.nodesObject.clone();
+						katex.render("d = \\pm\\sqrt{a^2 + b^2}", previewAfter);
 						divGroupErrors.appendChild(previewButton);
-						divGroupErrors.appendChild(previewDiv);
+						divGroupErrors.appendChild(previewBody);
 					}
 
 					divGroupErrors.appendChild($('<br/>')[0]);
