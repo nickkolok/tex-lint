@@ -62,6 +62,28 @@ function createFullPreviewBlockIfNeeded(nodes, index, corrector, target) {
 	target.appendChild(previewBody);
 }
 
+function createFixButtonIfPossible(theRule, reportErrors, target) {
+	if (!theRule.fixErrors) {
+		return;
+	}
+	var fixbutton = $('<button>',{
+		id: 'fixErrors-' + theRule.name,
+		html: 'Исправить все',
+		'class': 'btn btn-default',
+	})[0];
+	fixbutton.onclick = (function(rule) { return function() {
+		try { // TODO: выляпаться из замыкания!!!
+			console.log('Trying to fix ' + rule.name);
+			var nodes = rule.fixErrors(o.getNodes());
+			o.editor.setValue(nodes.toString());
+			o.recheck();
+		} catch (e) {
+			console.log(e);
+		}
+	};})(theRule);
+	target.appendChild(fixbutton);
+}
+
 module.exports.createHTMLreport = function(o) {
 	var reportErrors = document.createDocumentFragment();
 	var reportGood = document.createDocumentFragment();
@@ -88,24 +110,11 @@ module.exports.createHTMLreport = function(o) {
 			html: theRule.message + " : " + "ошибок: " + result.quantity,
 		})[0];
 		reportErrors.appendChild(message);
-		if (theRule.fixErrors) {
-			var fixbutton = $('<button>',{
-				id: 'fixErrors-' + theRule.name,
-				html: 'Исправить все',
-				'class': 'btn btn-default',
-			})[0];
-			fixbutton.onclick = (function(rule) { return function() {
-				try { // TODO: выляпаться из замыкания!!!
-					console.log('Trying to fix ' + rule.name);
-					var nodes = rule.fixErrors(o.getNodes());
-					o.editor.setValue(nodes.toString());
-					o.recheck();
-				} catch (e) {
-					console.log(e);
-				}
-			};})(theRule);
-			reportErrors.appendChild(fixbutton);
-		}
+		createFixButtonIfPossible(
+			theRule,
+			result.commonCorrector,
+			reportErrors
+		);
 
 		// Если известны точные места...
 		if (result.indexes) {
