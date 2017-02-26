@@ -218,6 +218,14 @@ Nodes.prototype.isInsideSymmDelimiters = function(index, delimeterType, delimite
 	return false;
 };
 
+Nodes.prototype.isInside$ = function(index, includeDelimiters) {
+	return this.isInsideSymmDelimiters(index, 'keyword', '$', includeDelimiters);
+};
+
+Nodes.prototype.isInside$$ = function(index, includeDelimiters) {
+	return this.isInsideSymmDelimiters(index, 'keyword', '$$', includeDelimiters);
+};
+
 Nodes.prototype.getSymmDelimitedTagNumbers = function(delimiter, tags) {
 	var fracs = this.getTagsArrayNumbers(tags);
 	var targetfracs = [];

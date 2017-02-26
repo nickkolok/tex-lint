@@ -630,6 +630,99 @@ test('isInsideSymmDelimiters', function () {
 
 });
 
+test('isInside$$', function () {
+	assert.deepEqual(
+		new Nodes('$$a$$').isInside$$(1),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$b').isInside$$(3),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$b').isInside$$(2),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$b').isInside$$(3, true),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$b$$').isInside$$(3, true),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$\\alpha$$g$$').isInside$$(5, true),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$\\alpha$g$123$$g$$').isInside$$(9, true),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$\\alpha$g$123$$g$$').isInside$$(5, true),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$\\alpha$g$123$$g$$').isInside$$(5),
+		false,
+		""
+	);
+
+});
+
+test('isInside$', function () {
+	assert.deepEqual(
+		new Nodes('$a$').isInside$(1),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b').isInside$(3),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b').isInside$(2),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b').isInside$(3, true),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b$').isInside$(3, true),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$\\alpha$g$').isInside$(5, true),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$\\alpha$$g$$').isInside$(5, true),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$\\alpha$$g$$123$g$').isInside$(9, true),
+		true,
+		""
+	);
+
+});
+
 test('getSymmDelimitedTagNumbers', function () {
 	assert.deepEqual(
 		new Nodes('$\\mu$').getSymmDelimitedTagNumbers(Nodes.NEW_$(), ['\\mu']),
