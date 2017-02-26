@@ -138,7 +138,7 @@ Nodes.prototype.inlinizeAllSubSupFracs = function() {
 
 
 Nodes.prototype.pushFormulaOut = function(index) {
-	if (!this.isInsideSymmDelimiters(index, 'keyword', '$')) {
+	if (!this.isInside$(index)) {
 		return false;
 	}
 	var $s = this.getNodesNumbers('keyword', '$');
