@@ -767,6 +767,79 @@ test('getSymmDelimitedTagNumbers', function () {
 	);
 });
 
+test('getFormulaByIndex', function () {
+	assert.deepEqual(
+		new Nodes('$a$').getFormulaByIndex(1),
+		{
+			start : 0,
+			end   : 2,
+			type  : '$',
+		},
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b').getFormulaByIndex(3),
+		null,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b').getFormulaByIndex(2),
+		null,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b').getFormulaByIndex(3),
+		null,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b$').getFormulaByIndex(3),
+		null,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$\\alpha$g$').getFormulaByIndex(5),
+		{
+			start : 4,
+			end   : 6,
+			type  : '$',
+		},
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$\\alpha$$g$$').getFormulaByIndex(5),
+		{
+			start : 4,
+			end   : 6,
+			type  : '$$',
+		},
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$\\alpha$g\\beta_2$').getFormulaByIndex(5),
+		{
+			start : 4,
+			end   : 9,
+			type  : '$',
+		},
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$\\alpha$$g$$').getFormulaByIndex(6),
+		null,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$\\alpha$$g$$123$g$').getFormulaByIndex(9),
+		{
+			start : 8,
+			end   : 10,
+			type  : '$',
+		},
+		""
+	);
+});
+
 test('getChildrenInTagsArguments', function () {
 	assert.deepEqual(
 		new Nodes('').getChildrenInTagsArguments(['_'], ['\\frac'], 1),

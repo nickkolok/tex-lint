@@ -226,6 +226,28 @@ Nodes.prototype.isInside$$ = function(index, includeDelimiters) {
 	return this.isInsideSymmDelimiters(index, 'keyword', '$$', includeDelimiters);
 };
 
+Nodes.prototype.getFormulaByIndex = function(index) {
+	// TODO: обобщить
+	var beginIndex = 0;
+	if (this.isInside$(index)) {
+		var type = '$';
+	} else if (this.isInside$$(index)) {
+		var type = '$$';
+	} else {
+		return null; // TODO: а может, всё-таки объект, пусть и пустой?
+	}
+	var $s = this.getNodesNumbers('keyword', type);
+	while ($s[beginIndex] < index) {
+		beginIndex++;
+	}
+
+	return {
+		start : $s[beginIndex - 1],
+		end   : $s[beginIndex    ],
+		type  : type,
+	};
+};
+
 Nodes.prototype.getSymmDelimitedTagNumbers = function(delimiter, tags) {
 	var fracs = this.getTagsArrayNumbers(tags);
 	var targetfracs = [];
