@@ -23,6 +23,45 @@ function createKaTeXspan(nodes, index) {
 	return preview;
 }
 
+function createFullPreviewBlockIfNeeded(nodes, index, corrector, target) {
+	//TODO: isInsideFormula
+	if (!nodes.isInside$(index) && !nodes.isInside$$(index)) {
+		return;
+	}
+	var randomClass = genRandomClass();
+	var previewButton = $('<button>', {
+		html : 'Предпросмотр',
+		'data-target' : '.' + randomClass,
+		'data-toggle' : 'collapse',
+		'class': 'btn btn-default',
+	})[0];
+
+	var previewBody = $('<div>', {
+		'class' : 'collapse ' + randomClass,
+	})[0];
+
+	previewBody.appendChild(
+		createKaTeXspan(nodes, index)
+	);
+	previewBody.appendChild(
+		$('<span>', {
+			'html' : ' будет преобразовано в '
+		})[0]
+	);
+
+	var nodesAfterFix = corrector(nodes.clone(), index);
+	// Убеждаемся, что индекс по-прежнему показывает внутрь формулы
+	if (!nodesAfterFix.isInside$(index) && !nodesAfterFix.isInside$$(index)) {
+		return;
+	}
+	previewBody.appendChild(
+		createKaTeXspan(nodesAfterFix, index)
+	);
+
+	target.appendChild(previewButton);
+	target.appendChild(previewBody);
+}
+
 module.exports.createHTMLreport = function(o) {
 	var reportErrors = document.createDocumentFragment();
 	var reportGood = document.createDocumentFragment();
@@ -107,42 +146,12 @@ module.exports.createHTMLreport = function(o) {
 					};})(result.indexes[j], result.commonCorrector);
 
 					divGroupErrors.appendChild(singleButton);
-
-					// А если это ещё и внутри формулы...
-					var isInside$   = o.nodesObject.isInside$(result.indexes[j], true);
-					var isInside$$  = o.nodesObject.isInside$$(result.indexes[j], true);
-					if (isInside$ || isInside$$) {
-						//TODO: isInsideFormula - ?
-						var randomClass = genRandomClass();
-						var previewButton = $('<button>', {
-							html : 'Предпросмотр',
-							'data-target' : '.' + randomClass,
-							'data-toggle' : 'collapse',
-							'class': 'btn btn-default',
-						})[0];
-
-						var previewBody = $('<div>', {
-							'class' : 'collapse ' + randomClass,
-						})[0];
-
-						var previewAfter = $('<span>', {
-						})[0];
-						previewBody.appendChild(
-							createKaTeXspan(o.nodesObject, result.indexes[j])
-						);
-						previewBody.appendChild(
-							$('<span>', {
-								'html' : ' будет преобразовано в '
-							})[0]
-						);
-						previewBody.appendChild(previewAfter);
-
-						var nodesAfterFix = o.nodesObject.clone();
-						katex.render("d = \\pm\\sqrt{a^2 + b^2}", previewAfter);
-						divGroupErrors.appendChild(previewButton);
-						divGroupErrors.appendChild(previewBody);
-					}
-
+					createFullPreviewBlockIfNeeded(
+						o.nodesObject,
+						result.indexes[j],
+						result.commonCorrector,
+						divGroupErrors
+					);
 					divGroupErrors.appendChild($('<br/>')[0]);
 				}
 			}
