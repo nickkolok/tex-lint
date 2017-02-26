@@ -7,6 +7,22 @@ function genRandomClass() {
 	return ('randomclass' + Math.random()).replace('.', '');
 }
 
+function createKaTeXspan(nodes, index) {
+	var formula = nodes.getFormulaByIndex(index);
+	var formulaText = nodes.getSubnodes(
+		formula.start + 1,
+		formula.end
+	).toString();
+
+	var preview = $('<span>', {
+	})[0];
+	katex.render(formulaText, preview, {
+		displayMode: nodes.isInside$$(index),
+	});
+
+	return preview;
+}
+
 module.exports.createHTMLreport = function(o) {
 	var reportErrors = document.createDocumentFragment();
 	var reportGood = document.createDocumentFragment();
@@ -109,19 +125,18 @@ module.exports.createHTMLreport = function(o) {
 							'class' : 'collapse ' + randomClass,
 						})[0];
 
-						var previewBefore = $('<span>', {
-						})[0];
-						var previewComment = $('<span>', {
-							'html' : ' будет преобразовано в '
-						})[0];
 						var previewAfter = $('<span>', {
 						})[0];
-						previewBody.appendChild(previewBefore);
-						previewBody.appendChild(previewComment);
+						previewBody.appendChild(
+							createKaTeXspan(o.nodesObject, result.indexes[j])
+						);
+						previewBody.appendChild(
+							$('<span>', {
+								'html' : ' будет преобразовано в '
+							})[0]
+						);
 						previewBody.appendChild(previewAfter);
-						katex.render("c = \\pm\\sqrt{a^2 + b^2}", previewBefore, {
-							displayMode: isInside$$,
-						});
+
 						var nodesAfterFix = o.nodesObject.clone();
 						katex.render("d = \\pm\\sqrt{a^2 + b^2}", previewAfter);
 						divGroupErrors.appendChild(previewButton);
