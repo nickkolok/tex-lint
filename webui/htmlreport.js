@@ -84,6 +84,27 @@ function createFixButtonIfPossible(theRule, reportErrors, target) {
 	target.appendChild(fixbutton);
 }
 
+function createPartialCorrectButton(o, index, corrector, target) {
+	var singleButton = $('<button>',{
+	html: 'Исправить',
+		'class': 'btn btn-default',
+	})[0];
+	singleButton.onclick = (function(_index, _corrector) { return function() {
+		var nodes = _corrector(o.getNodes(), _index);
+		o.editor.setValue(nodes.toString());
+		o.recheck();
+	};})(index, corrector);
+
+	target.appendChild(singleButton);
+	createFullPreviewBlockIfNeeded(
+		o.nodesObject,
+		index,
+		corrector,
+		target
+	);
+	target.appendChild($('<br/>')[0]);
+}
+
 module.exports.createHTMLreport = function(o) {
 	var reportErrors = document.createDocumentFragment();
 	var reportGood = document.createDocumentFragment();
@@ -144,24 +165,7 @@ module.exports.createHTMLreport = function(o) {
 					o.editor.focus();
 				};})(coord);
 				if (result.commonCorrector) {
-					var singleButton = $('<button>',{
-						html: 'Исправить',
-						'class': 'btn btn-default',
-					})[0];
-					singleButton.onclick = (function(index, corrector) { return function() {
-						var nodes = corrector(o.getNodes(), index);
-						o.editor.setValue(nodes.toString());
-						o.recheck();
-					};})(result.indexes[j], result.commonCorrector);
-
-					divGroupErrors.appendChild(singleButton);
-					createFullPreviewBlockIfNeeded(
-						o.nodesObject,
-						result.indexes[j],
-						result.commonCorrector,
-						divGroupErrors
-					);
-					divGroupErrors.appendChild($('<br/>')[0]);
+					createPartialCorrectButton(o, result.indexes[j], result.commonCorrector, divGroupErrors);
 				}
 			}
 			reportErrors.appendChild(divGroupErrors);
