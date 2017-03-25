@@ -462,6 +462,44 @@ test('forceInputencs', function () {
 	);
 });
 
+test('correctSubunicodeArtifact', function () {
+
+	var N = new Nodes('в плоскости $\\mbox{^^d0^^121}^{2}  $  с преградой');
+	N.correctSubunicodeArtifact(5);
+	assert.deepEqual(
+		N.toString(),
+		'в плоскости $\\mathbb{R}^{2}  $  с преградой',
+		""
+	);
+
+	var N = new Nodes('в плоскости $\\mbox{^^d0^^121}^{2}  $  с преградой $$x\\in \\mbox{^^d0^^121}^{2} \\l,\\, \\, t>0;\\eqno(1) $$');
+	N.correctSubunicodeArtifact(5);
+	assert.deepEqual(
+		N.toString(),
+		'в плоскости $\\mathbb{R}^{2}  $  с преградой $$x\\in \\mbox{^^d0^^121}^{2} \\l,\\, \\, t>0;\\eqno(1) $$',
+		""
+	);
+
+	var N = new Nodes('в плоскости $\\mbox{^^d0^^121}^{2}  $  с преградой $$x\\in \\mbox{^^d0^^121}^{2} \\l,\\, \\, t>0;\\eqno(1) $$');
+	N.correctSubunicodeArtifact(30);
+	assert.deepEqual(
+		N.toString(),
+		'в плоскости $\\mbox{^^d0^^121}^{2}  $  с преградой $$x\\in \\mathbb{R}^{2} \\l,\\, \\, t>0;\\eqno(1) $$',
+		""
+	);
+
+	var N = new Nodes('$$\\mbox{^^d0^^120}q_{1}^{1} (x_{1} ,t)\\in C_{x_{1} ,t}^{2,1} ((-1,1),\\lbrack 0;\\infty )), $$');
+	N.correctSubunicodeArtifact(1);
+	assert.deepEqual(
+		N.toString(),
+		'$$q_{1}^{1} (x_{1} ,t)\\in C_{x_{1} ,t}^{2,1} ((-1,1),\\lbrack 0;\\infty )), $$',
+		""
+	);
+
+
+});
+
+
 /*
 
 test('', function () {

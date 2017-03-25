@@ -172,4 +172,22 @@ Nodes.prototype.forceInputencs = function(inputenc) {
 };
 
 
+Nodes.prototype.correctSubunicodeArtifact = function(index) {
+	var artifact = this.getArguments(index,2)[1];
+	artifact.unwrap();
+	artifact = artifact.toString();
+	switch (artifact) {
+		case '^^d0^^121':
+			var replacement = '\\mathbb{R}';
+		break;
+		case '^^d0^^120':
+			var replacement = '';
+		break;
+		default:
+			console.log('Неизвестный артефакт: ' + artifact);
+			return;
+	}
+	this.replaceArguments(index, 2, new Nodes(replacement));
+};
+
 };

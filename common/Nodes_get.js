@@ -363,4 +363,18 @@ Nodes.prototype.getTagsEmpty = function(tags) {
 	return empty;
 };
 
+Nodes.prototype.getSubunicodeArtifacts = function() {
+	var foundTags = this.getTagsArrayNumbers(['\\mbox']);
+	var found = [];
+	for (var i = 0; i < foundTags.length; i++) {
+		//TODO: функция для выяснения, пуст ли аргумент
+		var unwrapped = this.getArguments(foundTags[i],2)[1];
+		unwrapped.unwrap();
+		if (/(\^\^[0-9a-f]+)+/i.test(unwrapped.toString().trim())) {
+			found.push(foundTags[i]);
+		}
+	}
+	return found;
+};
+
 };//modules.export

@@ -1103,7 +1103,69 @@ test('getTagsEmpty', function () {
 	);
 });
 
-
+test('getSubunicodeArtifacts', function () {
+	assert.deepEqual(
+		new Nodes('').getSubunicodeArtifacts(),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\alpha').getSubunicodeArtifacts(),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('^^').getSubunicodeArtifacts(),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('в плоскости $mbox{^^d0^^121}^{2}  $  с преградой').getSubunicodeArtifacts(),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('в плоскости $\\mbox{^^d0^^121}^{2}  $  с преградой').getSubunicodeArtifacts(),
+		[
+			5,
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('в плоскости $\\mbox{^^d0^^121}^{2}  $  с преградой $$x\\in \\mbox{^^d0^^121}^{2} \\l,\\, \\, t>0;\\eqno(1) $$').getSubunicodeArtifacts(),
+		[
+			5,
+			30,
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$x\\in \\mbox{^^d0^^121}^{2} \\l,\\, \\, t>0;\\eqno(1) $$').getSubunicodeArtifacts(),
+		[
+			4,
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$\\mbox{^^d0^^120}q_{1}^{1} (x_{1} ,t)\\in C_{x_{1} ,t}^{2,1} ((-1,1),\\lbrack 0;\\infty )), $$').getSubunicodeArtifacts(),
+		[
+			1,
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('в плоскости $\\mbox{^^d0^^121}^{2}  $  с преградой $$\\mbox{^^d0^^120}q_{1}^{1} (x_{1} ,t)\\in C_{x_{1} ,t}^{2,1} ((-1,1),\\lbrack 0;\\infty )), $$').getSubunicodeArtifacts(),
+		[
+			5,
+			27,
+		],
+		""
+	);
+});
 
 /*
 
