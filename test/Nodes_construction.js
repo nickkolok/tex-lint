@@ -587,6 +587,17 @@ test('[utf8]', function () {
 	);
 });
 
+test('baselineskip=18pt', function () {
+	assert.deepEqual(
+		new Nodes('\\baselineskip=18pt').nodes,
+		[
+			{ text: '\\baselineskip', type: 'tag' },
+			{ text: '=18pt', type: null },
+		],
+		""
+	);
+});
+
 
 
 

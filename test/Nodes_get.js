@@ -880,7 +880,13 @@ test('getTagsArrayNumbers', function () {
 		[0],
 		""
 	);
-
+	assert.deepEqual(
+		new Nodes('\\begin{center}\n\\baselineskip=18pt').getTagsArrayNumbers(['\\baselineskip']),
+		[
+			5,
+		],
+		""
+	);
 });
 
 test('getRowCol', function () {
@@ -989,6 +995,64 @@ test('getSuspiciousLongmaps', function () {
 		""
 	);
 });
+
+test('getTagsAssignments', function () {
+	assert.deepEqual(
+		new Nodes('').getTagsAssignments(['\\baselineskip']),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\begin{center}\n\\baselineskip=18pt').getTagsAssignments(['\\baselineskip']),
+		[
+			5,
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\begin{center}\n\\baselineskip').getTagsAssignments(['\\baselineskip']),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\begin{center}\n\\baselineskip 0').getTagsAssignments(['\\baselineskip']),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\baselineskip=18pt').getTagsAssignments(['\\baselineskip']),
+		[
+			0,
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\begin{center}\n\\baselineskip=18pt\\parindent=19pt').getTagsAssignments(['\\baselineskip', '\\parindent']),
+		[
+			5,
+			7,
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\begin{center}\n\\baselineskip=18pt\\parindent=19pt').getTagsAssignments(['\\parindent']),
+		[
+			7,
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\begin{center}\n\\baselineskip=18pt\\parindent=19pt').getTagsAssignments(['\\baselineskip']),
+		[
+			5,
+		],
+		""
+	);
+});
+
 
 
 /*

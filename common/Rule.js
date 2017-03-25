@@ -292,4 +292,24 @@ new Rule(
 	}
 );
 
+new Rule(
+	"manual_paragraph_format",
+	"Не допускается ручное форматирование текста",
+	function(nodes) {
+		var indexes = nodes.getTagsAssignments([
+			'\\baselineskip',
+			'\\leftskip',
+			'\\parindent',
+		]);
+		return {
+			indexes: indexes,
+			quantity: indexes.length,
+			commonCorrector: function(n, index) {
+				n.replaceArguments(index, 2);
+				return n;
+			},
+		};
+	}
+);
+
 module.exports.rules = rules;
