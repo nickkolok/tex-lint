@@ -327,4 +327,16 @@ Nodes.prototype.getInputencs = function() {
 };
 
 
+Nodes.prototype.getSuspiciousLongmaps = function() {
+	var longmaps = this.getNodesNumbers('tag', '\\longmapsto');
+	var susplongmaps = [];
+	for (var i = 0; i < longmaps.length; i++) {
+		if (this.nodes[longmaps[i] - 1].text === '=' && this.nodes[longmaps[i] - 2].text === '4') {
+			susplongmaps.push(longmaps[i] - 2);
+		}
+	}
+	return susplongmaps;
+};
+
+
 };//modules.export

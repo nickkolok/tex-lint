@@ -49,6 +49,7 @@ var rulesets = {
 			["splitrows80",1],
 			['no_env_equation',1],
 			['no_env_equation*',1],
+			['longmapsto_instead_of_delta',1],
 		],
 		comment: "",
 		examples: [

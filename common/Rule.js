@@ -276,5 +276,20 @@ new Rule(
 	}
 );
 
+new Rule(
+	"longmapsto_instead_of_delta",
+	"Возможно, сочетание 4=\\longmapsto должно обозначать оператор Лапласа \\Delta",
+	function(nodes) {
+		var indexes = nodes.getSuspiciousLongmaps();
+		return {
+			indexes: indexes,
+			quantity: indexes.length,
+			commonCorrector: function(n, index) {
+				n.replaceArguments(index, 3, new Nodes('\\Delta'));
+				return n;
+			},
+		};
+	}
+);
 
 module.exports.rules = rules;
