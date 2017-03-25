@@ -64,6 +64,7 @@ var rulesets = {
 		rules: [
 			['longmapsto_instead_of_delta',1],
 			['manual_paragraph_format',1],
+			['empty_text_options',1],
 		],
 		comment: "",
 	},
