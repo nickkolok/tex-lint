@@ -168,8 +168,14 @@ test('replaceArguments', function () {
 		'Look at$$\\frac{\\alpha}{\\beta}+1$$',
 		""
 	);
-
-
+	var N = new Nodes('Look at\\begin {equation}\\frac{\\alpha}{\\beta}+1\\end {equation}');
+	N.replaceArguments(17, 2);
+	N.replaceArguments(3, 2);
+	assert.deepEqual(
+		N.toString(),
+		'Look at\\frac{\\alpha}{\\beta}+1',
+		""
+	);
 });
 
 test('renewEnvironment', function () {
