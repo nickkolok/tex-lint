@@ -15,12 +15,17 @@ function createKaTeXspan(nodes, index) {
 	).toString();
 
 	var preview = $('<span>', {
-	})[0];
-	katex.render(formulaText, preview, {
-		displayMode: nodes.isInside$$(index),
 	});
+	try {
+		katex.render(formulaText, preview[0], {
+			displayMode: nodes.isInside$$(index),
+		});
+	} catch (e) {
+		console.log(e);
+		preview.html('(не удалось изобразить формулу)');
+	}
 
-	return preview;
+	return preview[0];
 }
 
 function createFullPreviewBlockIfNeeded(nodes, index, corrector, target) {
