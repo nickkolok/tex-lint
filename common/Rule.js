@@ -331,4 +331,19 @@ new Rule(
 	}
 );
 
+new Rule(
+	"rtf2latex_subunicode_artifacts",
+	"Вероятно, ошибка преобразования rtf2latex2e",
+	function(nodes) {
+		var indexes = nodes.getSubunicodeArtifacts();
+		return {
+			indexes: indexes,
+			quantity: indexes.length,
+			commonCorrector: function(n, index) {
+				n.correctSubunicodeArtifact(index);
+				return n;
+			},
+		};
+	}
+);
 module.exports.rules = rules;
