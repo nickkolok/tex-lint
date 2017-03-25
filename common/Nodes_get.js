@@ -349,5 +349,18 @@ Nodes.prototype.getTagsAssignments = function(tags) {
 	return assignments;
 };
 
+Nodes.prototype.getTagsEmpty = function(tags) {
+	var foundTags = this.getTagsArrayNumbers(tags);
+	var empty = [];
+	for (var i = 0; i < foundTags.length; i++) {
+		//TODO: функция для выяснения, пуст ли аргумент
+		var unwrapped = this.getArguments(foundTags[i],2)[1];
+		unwrapped.unwrap();
+		if (unwrapped.toString().trim() === '') {
+			empty.push(foundTags[i]);
+		}
+	}
+	return empty;
+};
 
 };//modules.export

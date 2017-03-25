@@ -1053,6 +1053,56 @@ test('getTagsAssignments', function () {
 	);
 });
 
+test('getTagsEmpty', function () {
+	assert.deepEqual(
+		new Nodes('').getTagsEmpty(['\\large']),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\large{}').getTagsEmpty(['\\large']),
+		[
+			0,
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\large{ }').getTagsEmpty(['\\large']),
+		[
+			0,
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\large{ }').getTagsEmpty(['\\text']),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\large{ 2}').getTagsEmpty(['\\large']),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('abc\\large{ }xyz\\text{}\\alpha').getTagsEmpty(['\\large','\\text']),
+		[
+			1,
+			6,
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('abc\\large{ }xyz\\text{2}\\alpha').getTagsEmpty(['\\large','\\text']),
+		[
+			1,
+		],
+		""
+	);
+});
+
 
 
 /*

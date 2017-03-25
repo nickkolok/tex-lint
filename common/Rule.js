@@ -312,4 +312,23 @@ new Rule(
 	}
 );
 
+new Rule(
+	"empty_text_options",
+	"Не допускаются пустые текстовые команды",
+	function(nodes) {
+		var indexes = nodes.getTagsEmpty([
+			'\\large',
+			'\\text',
+		]);
+		return {
+			indexes: indexes,
+			quantity: indexes.length,
+			commonCorrector: function(n, index) {
+				n.replaceArguments(index, 2);
+				return n;
+			},
+		};
+	}
+);
+
 module.exports.rules = rules;
