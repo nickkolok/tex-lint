@@ -291,6 +291,8 @@ module.exports = function(grunt) {
 	grunt.registerTask('bundle', [
 		'node-qunit',
 		'newer:copy:codemirror',
+		'newer:copy:bootstrap',
+		'newer:copy:katex',
 		'newer:copy:license',
 		'default',
 		'newer:copy:wrappers',
