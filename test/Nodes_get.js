@@ -959,6 +959,37 @@ test('clone', function () {
 	);
 });
 
+test('getSuspiciousLongmaps', function () {
+	assert.deepEqual(
+		new Nodes('4=\\longmapsto').getSuspiciousLongmaps(),
+		[
+			0,
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\mu4=\\longmapsto').getSuspiciousLongmaps(),
+		[
+			1,
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\mu=\\longmapsto').getSuspiciousLongmaps(),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('4=\\longmapsto\\alpha 4=\\longmapsto').getSuspiciousLongmaps(),
+		[
+			0,
+			5,
+		],
+		""
+	);
+});
+
 
 /*
 
