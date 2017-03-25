@@ -19,11 +19,11 @@ function decodeURIComponentEx(str) {
 	return decodeURIComponent(str).replace(/&quot;/g, '"');
 }
 function decodeHash() {
-	window.location.hash = decodeURIComponentEx(window.location.hash);
+	return window.location.hash = decodeURIComponentEx(window.location.hash.slice(1));
 }
 
 function encodeHash() {
-	window.location.hash = '#' + encodeURIComponentEx(window.location.hash.slice(1));
+	return window.location.hash = '#' + encodeURIComponentEx(window.location.hash.slice(1));
 }
 
 var defaultOptions = {
@@ -33,11 +33,10 @@ var defaultOptions = {
 function getHashAsObject(o) {
 	importNonExisting(defaultOptions, o);
 
-	if (o.decodeBefore) {
-		decodeHash();
-	}
-
 	var hash = window.location.hash.slice(1);
+	if (o.decodeBefore) {
+		hash = decodeHash(); // Firefox does not allow otherwise =(
+	}
 
 	if (o.decodeAfter) {
 		decodeHash();
@@ -52,6 +51,7 @@ function getHashAsObject(o) {
 	} catch (e) {
 		console.log('Не удалось выделить JSON из хэша страницы. Unable to get JSON from location hash');
 		console.log(hash);
+		console.log(decodeURIComponent(hash));
 	}
 	if ('defaults' in o) {
 		importNonExisting(o.defaults, result);
