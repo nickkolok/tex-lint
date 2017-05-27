@@ -49,7 +49,6 @@ var rulesets = {
 			["splitrows80",1],
 			['no_env_equation',1],
 			['no_env_equation*',1],
-			['longmapsto_instead_of_delta',1],
 		],
 		comment: "",
 		examples: [
@@ -59,6 +58,15 @@ var rulesets = {
 			},
 		],
 	},
+	rtf2latex: {
+		title: "После конвертера rtf2latex",
+		url: "https://github.com/nickkolok/rtf2latex2e",
+		rules: [
+			['longmapsto_instead_of_delta',1],
+		],
+		comment: "",
+	},
+
 };
 
 rulesets.defaultSet = rulesets.vzmsh2017;
