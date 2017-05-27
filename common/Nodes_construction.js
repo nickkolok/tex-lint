@@ -21,8 +21,8 @@ Nodes.prototype.fromText = function(text) {
 
 Nodes.prototype.markSubSup = function() {
 	for (var i = 0; i < this.nodes.length; i++) {
-		if (["_","^"].indexOf(this.nodes[i].text) !== -1) {
-			this.nodes[i].type = "tag";
+		if (['_', '^'].indexOf(this.nodes[i].text) !== -1) {
+			this.nodes[i].type = 'tag';
 		}
 	}
 };
@@ -30,17 +30,17 @@ Nodes.prototype.markSubSup = function() {
 Nodes.prototype.markCyrillicNodes = function() {
 	for (var i = 0; i < this.nodes.length; i++) {
 		if (isCyryllicText(this.nodes[i].text)) {
-			this.nodes[i].type = "cyrtext";
+			this.nodes[i].type = 'cyrtext';
 		}
 	}
 };
 
 Nodes.prototype.markSpaceNodes = function() {
 	for (var i = 0; i < this.nodes.length; i++) {
-		if (this.nodes[i].text == "\n") {
-			this.nodes[i].type = "linebreak";
+		if (this.nodes[i].text == '\n') {
+			this.nodes[i].type = 'linebreak';
 		} else if (/^\s+$/.test(this.nodes[i].text)) {
-			this.nodes[i].type = "space";
+			this.nodes[i].type = 'space';
 		}
 	}
 };
@@ -57,7 +57,7 @@ Nodes.prototype.joinCyrillicNodes = function() {
 	// TODO: влить в joinNodeOfType()
 	for (var i = 0; i < this.nodes.length - 1; i++) {
 		// TODO: объединять не по одной, а по несколько. А то тормозит. Переделать!
-		if (this.nodes[i].type == "cyrtext" && this.nodes[i + 1].type == "cyrtext") {
+		if (this.nodes[i].type == 'cyrtext' && this.nodes[i + 1].type == 'cyrtext') {
 			this.nodes[i].text += this.nodes[i + 1].text;
 			this.nodes.splice(i + 1, 1);
 			i--;
@@ -86,11 +86,11 @@ Nodes.prototype.separateNumbers = function() {
 		if (begin) {
 			this.insertNode(i, { text: begin[0], type: 'number' });
 			i++;
-			this.nodes[i].text = this.nodes[i].text.replace(/^\d+/,"");
+			this.nodes[i].text = this.nodes[i].text.replace(/^\d+/, '');
 		}
 		if (end) {
 			this.insertNode(i + 1, { text: end[0], type: 'number' });
-			this.nodes[i].text = this.nodes[i].text.replace(/\d+$/,"");
+			this.nodes[i].text = this.nodes[i].text.replace(/\d+$/, '');
 			i++;
 		}
 	}
@@ -107,11 +107,11 @@ Nodes.prototype.separateSpaces = function() {
 		if (begin) {
 			this.insertNode(i, { text: begin[0], type: 'space' });
 			i++;
-			this.nodes[i].text = this.nodes[i].text.replace(/^\s+/,"");
+			this.nodes[i].text = this.nodes[i].text.replace(/^\s+/, '');
 		}
 		if (end) {
 			this.insertNode(i + 1, { text: end[0], type: 'space' });
-			this.nodes[i].text = this.nodes[i].text.replace(/\s+$/,"");
+			this.nodes[i].text = this.nodes[i].text.replace(/\s+$/, '');
 			i++;
 		}
 	}
@@ -120,7 +120,7 @@ Nodes.prototype.separateSpaces = function() {
 Nodes.prototype.deleteEmptyNodes = function() {
 	for (var i = 0; i < this.nodes.length; i++) {
 		if (!this.nodes[i].text) {
-			this.nodes.splice(i,1);
+			this.nodes.splice(i, 1);
 			i--;
 		}
 	}
@@ -156,7 +156,7 @@ Nodes.prototype.prepareNodes = function() {
 // Вспомогательные - вынести!
 
 function isCyryllicText(text) {
-	return /^[А-ЯЁ]+$/i.test(text);
+	return (/^[А-ЯЁ]+$/i).test(text);
 }
 
 };
