@@ -289,7 +289,6 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('bundle', [
-		'node-qunit',
 		'newer:copy:codemirror',
 		'newer:copy:bootstrap',
 		'newer:copy:katex',
@@ -301,6 +300,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', [
 		//'concurrent:process-all', // На деле - медленнее
+		'node-qunit',
 		'process-html',
 		'packExamples',
 		'process-webui-js',
