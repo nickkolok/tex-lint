@@ -182,6 +182,22 @@ TSWLatexianTemp*
 # gedit
 *~
 
+# other temp
+*.kate-swp
+*.~lock.*
+*.orig
+*.local
+*.LOCAL.*
+*.BACKUP.*
+*.BASE.*
+*.REMOTE.*
+*_LOCAL_*
+*_BACKUP_*
+*_BASE_*
+*_REMOTE_*
+*.cache
+*.bak
+
 #######################################################
 # Node.JS                                             #
 #######################################################
