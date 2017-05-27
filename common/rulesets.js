@@ -63,6 +63,7 @@ var rulesets = {
 		url: "https://github.com/nickkolok/rtf2latex2e",
 		rules: [
 			['longmapsto_instead_of_delta',1],
+			['manual_paragraph_format',1],
 		],
 		comment: "",
 	},

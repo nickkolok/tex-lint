@@ -326,7 +326,6 @@ Nodes.prototype.getInputencs = function() {
 	return inputencs;
 };
 
-
 Nodes.prototype.getSuspiciousLongmaps = function() {
 	var longmaps = this.getNodesNumbers('tag', '\\longmapsto');
 	var susplongmaps = [];
@@ -336,6 +335,18 @@ Nodes.prototype.getSuspiciousLongmaps = function() {
 		}
 	}
 	return susplongmaps;
+};
+
+
+Nodes.prototype.getTagsAssignments = function(tags) {
+	var foundTags = this.getTagsArrayNumbers(tags);
+	var assignments = [];
+	for (var i = 0; i < foundTags.length; i++) {
+		if (this.nodes[foundTags[i] + 1] && /^=\d+[A-Z]+$/i.test(this.nodes[foundTags[i] + 1].text)) {
+			assignments.push(foundTags[i]);
+		}
+	}
+	return assignments;
 };
 
 
