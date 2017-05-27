@@ -598,6 +598,59 @@ test('baselineskip=18pt', function () {
 	);
 });
 
+test('в плоскости $mbox{^^d0^^121}^{2}  $  с преградой', function () {
+	assert.deepEqual(
+		new Nodes('в плоскости $mbox{^^d0^^121}^{2}  $  с преградой').nodes,
+		[
+			{ text: 'в', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'плоскости', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: 'mbox', type: 'variable-2' },
+			{ text: '{', type: 'bracket' },
+			{ text: '^', type: 'tag' },
+			{ text: '^', type: 'tag' },
+			{ text: 'd', type: 'variable-2' },
+			{ text: '0', type: 'number' },
+			{ text: '^', type: 'tag' },
+			{ text: '^', type: 'tag' },
+			{ text: '121', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '^', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: '2', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '  ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: '  ', type: 'space' },
+			{ text: 'с', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'преградой', type: 'cyrtext' },
+		],
+		""
+	);
+});
+
+test('а', function () {
+	assert.deepEqual(
+		new Nodes('а').nodes,
+		[
+			{ text: 'а', type: 'cyrtext' },
+		],
+		""
+	);
+});
+
+test('абв', function () {
+	assert.deepEqual(
+		new Nodes('абв').nodes,
+		[
+			{ text: 'абв', type: 'cyrtext' },
+		],
+		""
+	);
+});
 
 
 
