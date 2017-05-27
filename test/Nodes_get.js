@@ -880,7 +880,13 @@ test('getTagsArrayNumbers', function () {
 		[0],
 		""
 	);
-
+	assert.deepEqual(
+		new Nodes('\\begin{center}\n\\baselineskip=18pt').getTagsArrayNumbers(['\\baselineskip']),
+		[
+			5,
+		],
+		""
+	);
 });
 
 test('getRowCol', function () {
