@@ -22,10 +22,10 @@ function codeLoad() {
 	reader.onload = (function(theFile) {
 		return function(e) {
 			try {
-				var encoding = document.getElementById("file-encoding").value;
+				var encoding = document.getElementById('file-encoding').value;
 				if (encoding === 'auto') {
 					encoding = autoenc.detectEncoding(e.target.result).encoding;
-					document.getElementById("file-encoding").value = encoding;
+					document.getElementById('file-encoding').value = encoding;
 				}
 				var text = iconv.decode(new Buffer(e.target.result), encoding);
 				myCodeMirror.setValue(text);
@@ -38,16 +38,16 @@ function codeLoad() {
 		};
 	})(f);
 	reader.readAsArrayBuffer(f);
-};
+}
 
 function codeSave() {
-	var encoding = document.getElementById("file-save-encoding").value;
-	var text = myCodeMirror.getValue().replace(/[\r]*[\n][\r]*/g,"\r\n");
-	var blob = new Blob([iconv.encode(text,encoding)], {
+	var encoding = document.getElementById('file-save-encoding').value;
+	var text = myCodeMirror.getValue().replace(/[\r]*[\n][\r]*/g, '\r\n');
+	var blob = new Blob([iconv.encode(text, encoding)], {
 //		type: "text/plain;charset=",
 	});
 	var a = $('<a>', {
-		download : fileName + ".edited.tex",
+		download : fileName + '.edited.tex',
 		href : URL.createObjectURL(blob),
 		html : '<button class="btn btn-default">Сохранить TeX-файл</button>',
 	});
@@ -57,22 +57,22 @@ function codeSave() {
 }
 
 
-var myCodeMirror = CodeMirror(document.getElementById('code-mirror-holder'),{
+var myCodeMirror = CodeMirror(document.getElementById('code-mirror-holder'), {
 	lineNumbers: true,
 });
 
-myCodeMirror.on("change", codeSave);
-document.getElementById("file-save-encoding").onchange = codeSave;
+myCodeMirror.on('change', codeSave);
+document.getElementById('file-save-encoding').onchange = codeSave;
 
 function getNodesAsIs() {
 	return new Nodes(myCodeMirror.getValue());
-};
+}
 
-function checkRules(rulesetName,nodesObject) {
+function checkRules(rulesetName, nodesObject) {
 	HTMLreport.createHTMLreport({
 		rulesetName: rulesetName,
 		nodesObject: nodesObject,
-		targetElement: document.getElementById("result-container"),
+		targetElement: document.getElementById('result-container'),
 		editor: myCodeMirror,
 		getNodes: getNodesAsIs,
 		recheck: runcheck,
@@ -84,12 +84,12 @@ function runcheck() {
 	checkRules(hashOptions.ruleset, nodesObject);
 }
 
-document.getElementById("file-load").onchange = codeLoad;
-document.getElementById("runcheck").onclick = runcheck;
+document.getElementById('file-load').onchange = codeLoad;
+document.getElementById('runcheck').onclick = runcheck;
 
 var hashOptions = JSONfromHash.getHashAsObject({
 	defaults: {
-		ruleset: "defaultSet",
+		ruleset: 'defaultSet',
 	},
 });
 
@@ -98,19 +98,19 @@ document.getElementById('ruleset-info').innerHTML = rulesets[hashOptions.ruleset
 document.getElementById('ruleset-comment').innerHTML = rulesets[hashOptions.ruleset].comment;
 
 if (rulesets[hashOptions.ruleset].examples && rulesets[hashOptions.ruleset].examples.length) {
-	var optionsString = "";
+	var optionsString = '';
 	var examples = rulesets[hashOptions.ruleset].examples;
 	for (var i = 0; i < examples.length; i++) {
 		optionsString += '<option value="' + i + '">' + examples[i].title + '</option>';
 	}
-	document.getElementById("tex-examples-list").innerHTML = optionsString;
+	document.getElementById('tex-examples-list').innerHTML = optionsString;
 } else {
-	document.getElementById("tex-examples").style.display = "none";
+	document.getElementById('tex-examples').style.display = 'none';
 }
 
-document.getElementById("paste-example").onclick = pasteExample;
+document.getElementById('paste-example').onclick = pasteExample;
 
 function pasteExample() {
-	var exampleNumber = document.getElementById("tex-examples-list").value;
+	var exampleNumber = document.getElementById('tex-examples-list').value;
 	myCodeMirror.setValue(texEmaples[rulesets[hashOptions.ruleset].examples[exampleNumber].source]);
 }
