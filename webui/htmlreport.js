@@ -1,6 +1,6 @@
 var rulesets = require('../common/rulesets.js');
 var rules = require('../common/Rule.js').rules;
-var $ = require('./jquery-with-bootstrap-for-browserify.js');
+var $ = require('jquery-with-bootstrap-for-browserify');
 var katex = require('katex');
 
 function genRandomClass() {
