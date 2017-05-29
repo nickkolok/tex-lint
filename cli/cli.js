@@ -32,10 +32,5 @@ function applyRuleToFile(filename, rulename, callback) {
 	});
 }
 
-// DRAFT
-
-var f = function(p) {
-	console.log(p);
-};
-
-applyRuleToFile('../webui/tex-examples/mz-01.tex', 'separate$', f);
+module.exports.applyRuleToFile = applyRuleToFile;
+module.exports.applyRuleToString = applyRuleToString;
