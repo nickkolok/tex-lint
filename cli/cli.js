@@ -3,8 +3,6 @@ var fs = require('fs');
 var Nodes = require('../common/Nodes.js').Nodes;
 var rules = require('../common/Rule.js').rules;
 
-// TODO: подключить это дело к eslint
-
 function applyRuleToString(str, rulename) {
 	var rule = rules[rulename];
 	var nodes = new Nodes(str);
@@ -12,6 +10,7 @@ function applyRuleToString(str, rulename) {
 
 	var rez = {
 		text: str,
+		rulename: rulename,
 		indexes: findResult.indexes,
 		quantity: findResult.quantity,
 	};
@@ -34,3 +33,6 @@ function applyRuleToFile(filename, rulename, callback) {
 
 module.exports.applyRuleToFile = applyRuleToFile;
 module.exports.applyRuleToString = applyRuleToString;
+
+module.exports.ls = require('ls'); // TODO: Dirty hack for QUnit. Refactor!!!
+module.exports.fs = require('fs'); // TODO: Dirty hack for QUnit. Refactor!!!

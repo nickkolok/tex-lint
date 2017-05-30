@@ -263,6 +263,16 @@ module.exports = function(grunt) {
 					!err && publishResults('node', res, this.async());
 				},
 			},
+			Rules: {
+				//deps: 'ls',
+				code: './cli/cli.js',
+				tests: [
+					'./test/Rules.js',
+				],
+				done: function(err, res) {
+					!err && publishResults('node', res, this.async());
+				},
+			},
 		},
 
 /*
