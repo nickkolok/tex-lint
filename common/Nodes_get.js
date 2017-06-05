@@ -317,7 +317,7 @@ Nodes.prototype.getInputencs = function() {
 		if (encArg.nodes[0].text === '[') {
 			encArg.nodes.shift();
 		}
-		if (encArg.nodes[encArg.nodes.length - 1].text === ']') {
+		if (encArg.nodes[encArg.length - 1].text === ']') {
 			encArg.nodes.pop();
 		}
 		encArg.trim();

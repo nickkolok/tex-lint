@@ -7,7 +7,7 @@ Nodes.prototype.reparse = function() {
 };
 
 Nodes.prototype.insertSubnodes = function(index, subnodes) {
-	for (var i = subnodes.nodes.length - 1; i >= 0; i--) {
+	for (var i = subnodes.length - 1; i >= 0; i--) {
 		this.nodes.splice(index,0,subnodes.nodes[i]);
 	}
 };
@@ -82,7 +82,7 @@ Nodes.join = function(arr) {
 };
 
 Nodes.prototype.replaceArguments = function(index, argsQuantity, subnodes) {
-	//var argsNodesQuantity = Nodes.join(this.getArguments(index, argsQuantity)).nodes.length;
+	//var argsNodesQuantity = Nodes.join(this.getArguments(index, argsQuantity)).length;
 	var firstNodeToRemain = this.getArgumentsEnd(index, argsQuantity);
 	this.nodes.splice(index, firstNodeToRemain - index);
 	this.insertSubnodes(index, subnodes || new Nodes(''));

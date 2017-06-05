@@ -13,7 +13,7 @@ Nodes.prototype.getAllEnvironmentsList = function() {
 			begins[j],
 			{ type: 'tag', text: '\\begin' },
 			{ type: 'tag', text: '\\end' }
-		).nodes.length - 1 + begins[j];
+		).length - 1 + begins[j];
 		*/
 		var end = this.getEnvironmentEnd(begins[j]);
 		var envname = this.getArguments(begins[j] + 1, 1)[0];
@@ -43,7 +43,7 @@ Nodes.prototype.getEnvironmentEnd = function(begin) {
 		begin,
 		{ type: 'tag', text: '\\begin' },
 		{ type: 'tag', text: '\\end' }
-	).nodes.length - 1 + begin;
+	).length - 1 + begin;
 };
 
 
