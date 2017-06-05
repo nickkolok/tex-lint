@@ -20,7 +20,7 @@ Nodes.prototype.fromText = function(text) {
 };
 
 Nodes.prototype.markSubSup = function() {
-	for (var i = 0; i < this.nodes.length; i++) {
+	for (var i = 0; i < this.length; i++) {
 		if (['_', '^'].indexOf(this.nodes[i].text) !== -1) {
 			this.nodes[i].type = 'tag';
 		}
@@ -46,7 +46,7 @@ Nodes.prototype.markSpaceNodes = function() {
 };
 
 Nodes.prototype.remarkNumberNodes = function() {
-	for (var i = 0; i < this.nodes.length; i++) {
+	for (var i = 0; i < this.length; i++) {
 		if (/^\d+$/.test(this.nodes[i].text)) {
 			this.nodes[i].type = 'number';
 		}
@@ -55,7 +55,7 @@ Nodes.prototype.remarkNumberNodes = function() {
 
 Nodes.prototype.joinCyrillicNodes = function() {
 	// TODO: влить в joinNodeOfType()
-	for (var i = 0; i < this.nodes.length - 1; i++) {
+	for (var i = 0; i < this.length - 1; i++) {
 		// TODO: объединять не по одной, а по несколько. А то тормозит. Переделать!
 		if (this.nodes[i].type == 'cyrtext' && this.nodes[i + 1].type == 'cyrtext') {
 			this.nodes[i].text += this.nodes[i + 1].text;
@@ -70,7 +70,7 @@ Nodes.prototype.separateNumbers = function() {
 	// Но в перспетиве - резать по-человечески и обобщить с separateSpaces
 
 	// Мы предполагаем, что разрывы строки-то уж кодемирроровский парсер осилил
-	for (var i = 0; i < this.nodes.length; i++) {
+	for (var i = 0; i < this.length; i++) {
 		if (
 			[
 				'space',
@@ -98,7 +98,7 @@ Nodes.prototype.separateNumbers = function() {
 
 Nodes.prototype.separateSpaces = function() {
 	// Мы предполагаем, что разрывы строки-то уж кодемирроровский парсер осилил
-	for (var i = 0; i < this.nodes.length; i++) {
+	for (var i = 0; i < this.length; i++) {
 		if (this.nodes[i].type === 'space' || this.nodes[i].type === 'linebreak') {
 			continue;
 		}

@@ -3,6 +3,16 @@
 // Конструктор
 function Nodes(text) {
   this.nodes = [];
+  Object.defineProperty(this, 'length', {
+    get: function() {
+      return this.nodes.length;
+    },
+    set: function(value) {
+      this.nodes.length = value;
+    },
+    enumerable: false,
+    configurable: false,
+  });
   if (text) {
 	  this.fromText(text);
   }
