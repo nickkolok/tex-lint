@@ -28,7 +28,7 @@ Nodes.prototype.markSubSup = function() {
 };
 
 Nodes.prototype.markCyrillicNodes = function() {
-	for (var i = 0; i < this.nodes.length; i++) {
+	for (var i = 0; i < this.length; i++) {
 		if (isCyryllicText(this.nodes[i].text)) {
 			this.nodes[i].type = 'cyrtext';
 		}
@@ -36,7 +36,7 @@ Nodes.prototype.markCyrillicNodes = function() {
 };
 
 Nodes.prototype.markSpaceNodes = function() {
-	for (var i = 0; i < this.nodes.length; i++) {
+	for (var i = 0; i < this.length; i++) {
 		if (this.nodes[i].text == '\n') {
 			this.nodes[i].type = 'linebreak';
 		} else if (/^\s+$/.test(this.nodes[i].text)) {
@@ -118,7 +118,7 @@ Nodes.prototype.separateSpaces = function() {
 };
 
 Nodes.prototype.deleteEmptyNodes = function() {
-	for (var i = 0; i < this.nodes.length; i++) {
+	for (var i = 0; i < this.length; i++) {
 		if (!this.nodes[i].text) {
 			this.nodes.splice(i, 1);
 			i--;
@@ -127,7 +127,7 @@ Nodes.prototype.deleteEmptyNodes = function() {
 };
 
 Nodes.prototype.joinNodesOfType = function(type) {
-	for (var i = 0; i < this.nodes.length - 1; i++) {
+	for (var i = 0; i < this.length - 1; i++) {
 		// TODO: объединять не по одной, а по несколько. А то тормозит. Переделать!
 		if (this.nodes[i].type == type && this.nodes[i + 1].type == type) {
 			this.nodes[i].text += this.nodes[i + 1].text;

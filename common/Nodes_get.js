@@ -11,7 +11,7 @@ Nodes.prototype.getNodesQuantity = function(nodetype, nodetext) {
 
 Nodes.prototype.getNodesNumbers = function(nodetype, nodetext) {
 	var numbers = [];
-	for (var i = 0; i < this.nodes.length; i++) {
+	for (var i = 0; i < this.length; i++) {
 		if (this.nodes[i].type == nodetype && this.nodes[i].text == nodetext) {
 			numbers.push(i);
 		}
@@ -29,7 +29,7 @@ Nodes.prototype.getAllSingleDelimited = function(nodetype, nodetext) {
 	var result = [];
 	var fl = false;
 	var start;
-	for (var i = 0; i < this.nodes.length; i++) {
+	for (var i = 0; i < this.length; i++) {
 		if (this.nodes[i].type == nodetype && this.nodes[i].text == nodetext) {
 			if (!fl) {
 				// Левый конец
@@ -59,7 +59,7 @@ Nodes.prototype.getBraceGroup = function(start, left, right) {
 	// Считаем, что нода с номером start - открывающая (левая) скобка
 	var depth = 1;
 	var end;
-	for (end = start + 1; end < this.nodes.length; end++) {
+	for (end = start + 1; end < this.length; end++) {
 		if (areNodesEqual(this.nodes[end], left)) {
 			depth++;
 		} else if (areNodesEqual(this.nodes[end], right)) {
@@ -137,7 +137,7 @@ Nodes.prototype.getArgumentsMap = function(index, count) {
 		}
 		index = this.skipTypes(index, ['space', 'linebreak']);
 		var arg = this.getGroupOrSingle(index);
-		var end = index + arg.nodes.length;
+		var end = index + arg.length;
 		argsmap.push([index, end - 1]);
 		index = end;
 	}
@@ -165,7 +165,7 @@ Nodes.prototype.getWithArguments = function(index, count) {
 
 Nodes.prototype.toString = function() {
 	var str = '';
-	for (var i = 0; i < this.nodes.length; i++) {
+	for (var i = 0; i < this.length; i++) {
 		str += this.nodes[i].text;
 	}
 	return str;

@@ -4,7 +4,7 @@ module.exports = function(Nodes) {
 
 
 Nodes.prototype.removeNontrivialComments = function() {
-	for (var i = 0; i < this.nodes.length; i++) {
+	for (var i = 0; i < this.length; i++) {
 		if (this.isNontrivialComment(i)) {
 			// Прервать комментарий может только конец строки или пробел перед ним
 			var itsLinebreakIndex = this.skipTypes(i + 1, ['space']) + 1;
@@ -24,7 +24,7 @@ Nodes.prototype.removeNontrivialComments = function() {
 };
 
 Nodes.prototype.removeTrivialComments = function() {
-	for (var i = 0; i < this.nodes.length; i++) {
+	for (var i = 0; i < this.length; i++) {
 		if (this.isTrivialComment(i)) {
 			// Прервать комментарий может только конец строки или пробел перед ним
 			var itsLinebreakIndex = this.skipTypes(i + 1, ['space']) + 1;

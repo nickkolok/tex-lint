@@ -90,7 +90,7 @@ Nodes.prototype.getTooLongRowsNumbers = function(maxlength) {
 
 	//Начало и конец текста считаются разрывами строки
 	linebreaks.unshift(-1);
-	linebreaks.push(this.nodes.length);
+	linebreaks.push(this.length);
 
 	for (var j = 0; j < linebreaks.length; j++) {
 		var i = linebreaks[j];

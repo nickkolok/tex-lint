@@ -39,7 +39,7 @@ Nodes.prototype.splitRowOnce = function(rownumber, maxlength) {
 	var linebreaks = this.getNodesNumbers('linebreak','\n');
 	//Начало и конец текста считаются разрывами строки
 	linebreaks.unshift(-1);
-	linebreaks.push(this.nodes.length);
+	linebreaks.push(this.length);
 	//console.log('linebreaks',linebreaks);
 
 	var start  = linebreaks[rownumber];

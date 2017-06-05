@@ -13,7 +13,7 @@ Nodes.prototype.isNontrivialComment = function(index) {
 			this.nodes[index].text.length > 1
 		//||
 			//Комментарий в конце файле бессмысленнен и потому нетривиален. Л - логика!
-			//index === this.nodes.length - 1
+			//index === this.length - 1
 		//||
 			//И в комментарии есть непробельные символы
 			//this.nodes[this.skipTypes(index + 1,['space'])].type !== 'linebreak'
@@ -24,7 +24,7 @@ Nodes.prototype.isNontrivialComment = function(index) {
 
 Nodes.prototype.getNontrivialCommentsNumbers = function() {
 	var nums = [];
-	for (var i = 0; i < this.nodes.length; i++) {
+	for (var i = 0; i < this.length; i++) {
 		if (this.isNontrivialComment(i)) {
 			nums.push(i);
 		}
@@ -47,7 +47,7 @@ Nodes.prototype.isTrivialComment = function(index) {
 
 Nodes.prototype.getTrivialCommentsNumbers = function() {
 	var nums = [];
-	for (var i = 0; i < this.nodes.length; i++) {
+	for (var i = 0; i < this.length; i++) {
 		if (this.isTrivialComment(i)) {
 			nums.push(i);
 		}
