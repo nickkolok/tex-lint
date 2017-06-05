@@ -2,6 +2,8 @@
 
 var Nodes = require('./Nodes.js').Nodes;
 
+/* eslint no-new: 0 */  // --> OFF
+
 var rules = {};
 
 function Rule(name, message, findErrors, fixErrors) {
