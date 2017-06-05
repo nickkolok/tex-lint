@@ -652,6 +652,101 @@ test('абв', function () {
 	);
 });
 
+test('comma btw words', function () {
+	assert.deepEqual(
+		new Nodes('Найти проекции скорости точки $M$ на оси цилиндрической системы координат,уравнения движения точки $M_{1 } $,\n\tописывающей годограф скорости, и проекции скорости точки $M_{1 } $.\n').nodes,
+		[
+			{ text: 'Найти', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'проекции', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'скорости', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'точки', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: 'M', type: 'variable-2' },
+			{ text: '$', type: 'keyword' },
+			{ text: ' ', type: 'space' },
+			{ text: 'на', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'оси', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'цилиндрической', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'системы', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'координат', type: 'cyrtext' },
+			{ text: ',', type: null },
+			{ text: 'уравнения', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'движения', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'точки', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: 'M', type: 'variable-2' },
+			{ text: '_', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: '1', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '}', type: 'bracket' },
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: ',', type: null },
+			{ text: '\n', type: 'linebreak' },
+			{ text: '\t', type: 'space' },
+			{ text: 'описывающей', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'годограф', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'скорости', type: 'cyrtext' },
+			{ text: ',', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'и', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'проекции', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'скорости', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'точки', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: 'M', type: 'variable-2' },
+			{ text: '_', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: '1', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '}', type: 'bracket' },
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: '.', type: null },
+			{ text: '\n', type: 'linebreak' },
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('координат,уравнения').nodes,
+		[
+			{ text: 'координат', type: 'cyrtext' },
+			{ text: ',', type: null },
+			{ text: 'уравнения', type: 'cyrtext' },
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a,b$').nodes,
+		[
+			{ text: '$', type: 'keyword' },
+			{ text: 'a', type: 'variable-2' },
+			{ text: ',', type: null },
+			{ text: 'b', type: 'variable-2' },
+			{ text: '$', type: 'keyword' },
+		],
+		""
+	);
+});
+
 
 
 /*
@@ -659,6 +754,13 @@ test('абв', function () {
 test('', function () {
 	assert.deepEqual(
 		new Nodes('\\begin{document}\n\\usepackage{amsmath,amsthm}').nodes,
+		[
+			{ text: '\n', type: 'linebreak' },
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('a,b').nodes,
 		[
 			{ text: '\n', type: 'linebreak' },
 		],
