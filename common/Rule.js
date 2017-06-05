@@ -229,7 +229,11 @@ new Rule(
 	'no_env_equation',
 	'Не разрешается использование окружений \\begin{equation} ... \\end{equation}',
 	function(nodes) {
-		var indexes = nodes.getEnvironmentsList(['equation']);
+		var indexes = nodes.getEnvironmentsList(['equation']).map(
+			function(env) {
+				return env.begin;
+			}
+		);
 		return {
 			quantity: indexes.length,
 			indexes: indexes,
@@ -241,7 +245,11 @@ new Rule(
 	'no_env_equation*',
 	'Не разрешается использование окружений \\begin{equation*} ... \\end{equation*}',
 	function(nodes) {
-		var indexes = nodes.getEnvironmentsList(['equation*']);
+		var indexes = nodes.getEnvironmentsList(['equation*']).map(
+			function(env) {
+				return env.begin;
+			}
+		);
 		return {
 			quantity: indexes.length,
 			indexes: indexes,
