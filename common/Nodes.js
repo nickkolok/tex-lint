@@ -7,7 +7,8 @@ function Nodes(text) {
 	  this.fromText(text);
   }
 }
-// TODO: наследовать от массива и this.nodes = this
+// Наследовать от массива пока нельзя.
+// Гуглить 'javascript subclass Array', если очень хочется
 
 
 require('./Nodes_construction.js')(Nodes);
