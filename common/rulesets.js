@@ -69,7 +69,16 @@ var rulesets = {
 		],
 		comment: "",
 	},
-
+	openMeschersky: {
+		title: "Проект OpenMeschersky",
+		url: "https://github.com/nickkolok/OpenMeschersky",
+		rules: [
+			['splitrows80',1],
+			['manual_paragraph_format',1],
+			['empty_text_options',1],
+		],
+		comment: "",
+	},
 };
 
 rulesets.defaultSet = rulesets.vzmsh2017;
