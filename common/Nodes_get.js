@@ -383,4 +383,14 @@ Nodes.prototype.getSubunicodeArtifacts = function() {
 	return found;
 };
 
+Nodes.prototype.findSingleByRegExp = function(typereg, textreg) {
+	var found = [];
+	this.nodes.forEach(function(node, index) {
+		if (textreg.test(node.text) && typereg.test(node.type)) {
+			found.push(index);
+		}
+	});
+	return found;
+};
+
 };//modules.export

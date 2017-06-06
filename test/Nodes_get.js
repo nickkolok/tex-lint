@@ -1167,6 +1167,78 @@ test('getSubunicodeArtifacts', function () {
 	);
 });
 
+test('findSingleByRegExp', function () {
+	var N = new Nodes('\\frac{1}{2}3[5]');
+	assert.deepEqual(
+		N.findSingleByRegExp(/bracket/, /^/),
+		[
+			1,
+			3,
+			4,
+			6,
+			8,
+			10,
+		],
+		""
+	);
+	assert.deepEqual(
+		N.findSingleByRegExp(/^/, /{|}/),
+		[
+			1,
+			3,
+			4,
+			6,
+		],
+		""
+	);
+	assert.deepEqual(
+		N.findSingleByRegExp(/bracket/, /{|}/),
+		[
+			1,
+			3,
+			4,
+			6,
+		],
+		""
+	);
+	assert.deepEqual(
+		N.findSingleByRegExp(/bracket|number/, /{|1/),
+		[
+			1,
+			2,
+			4,
+		],
+		""
+	);
+	N = new Nodes('a $a+b=c$ b');
+	assert.deepEqual(
+		N.findSingleByRegExp(/null|variable-2/, /a|b/),
+		[
+			0,
+			3,
+			5,
+			10,
+		],
+		""
+	);
+	assert.deepEqual(
+		N.findSingleByRegExp(/null/, /a|b/),
+		[
+			0,
+			10,
+		],
+		""
+	);
+	assert.deepEqual(
+		N.findSingleByRegExp(/null|variable-2/, /a/),
+		[
+			0,
+			3,
+		],
+		""
+	);
+});
+
 /*
 
 test('', function () {
