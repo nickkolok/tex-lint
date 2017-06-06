@@ -356,4 +356,74 @@ new Rule(
 		};
 	}
 );
+
+// TODO: мини-либа mathopnames
+
+var mathOpNamesInt = [
+	'sin',
+	'cos',
+	'tan',
+	'cot',
+	'sec',
+	'csc',
+	'sinh',
+	'cosh',
+	'tanh',
+	'coth',
+/*
+	TODO: определиться, что из этого есть в LaTeX и как с ними работать
+	'log',
+	'ln',
+	'lg',
+*/
+];
+
+var mathOpNamesRus = [
+	'tg',
+	'ctg',
+	'cosec',
+	'sh',
+	'ch',
+	'th',
+	'cth',
+];
+
+function makeArc(value, index, array) {
+	array.push('arc' + value);
+	array.push('Arc' + value);
+}
+
+mathOpNamesInt.forEach(makeArc);
+mathOpNamesRus.forEach(makeArc);
+
+var mathOpNamesAll = mathOpNamesInt.concat(mathOpNamesRus);
+
+var mathOpRegExpAll = new RegExp('(' + mathOpNamesAll.join('|') + ')', 'g');
+var mathOpRegExpInt = new RegExp('(' + mathOpNamesInt.join('|') + ')', 'g');
+var mathOpRegExpRus = new RegExp('(' + mathOpNamesRus.join('|') + ')', 'g');
+
+new Rule(
+	'sin_must_be_command',
+	'Названия математических операторов, такие как sin, в формулах должны быть прямым шрифтом',
+	function(nodes) {
+		var indexes = nodes.findSingleByRegExp(
+			/variable-2/,
+			mathOpRegExpAll
+		);
+		return {
+			indexes: indexes,
+			quantity: indexes.length,
+			commonCorrector: function(n, index) {
+				n.nodes[index].text = n.nodes[index].text.
+					replace(mathOpRegExpInt, '\\$1').
+					replace(mathOpRegExpRus, '\\operatorname{$1}')
+				;
+				n.reparse();
+				return n;
+			},
+		};
+	}
+);
+
+
 module.exports.rules = rules;
