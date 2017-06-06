@@ -20,5 +20,5 @@ function createRuleTest(filename, rulename) {
     cliruler.applyRuleToFile('../webui/tex-examples/' + filename, rulename, writeToFile);
 }
 
-createRuleTest('smzh-1.tex', 'separate$');
-createRuleTest('smzh-1.tex', 'separate$$');
+createRuleTest('sin-example.tex', 'sin_must_be_command');
+//createRuleTest('smzh-1.tex', 'separate$$');
