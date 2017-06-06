@@ -747,6 +747,26 @@ test('comma btw words', function () {
 	);
 });
 
+test('a $a+ b=c$ b', function () {
+	assert.deepEqual(
+		new Nodes('a $a+ b=c$ b').nodes,
+		[
+			{ text: 'a', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: 'a', type: 'variable-2' },
+			{ text: '+', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'b', type: 'variable-2' },
+			{ text: '=', type: null },
+			{ text: 'c', type: 'variable-2' },
+			{ text: '$', type: 'keyword' },
+			{ text: ' ', type: 'space' },
+			{ text: 'b', type: null },
+		],
+		""
+	);
+});
 
 
 /*
