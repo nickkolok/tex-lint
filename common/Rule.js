@@ -10,7 +10,22 @@ function Rule(name, message, findErrors, fixErrors) {
 	this.name = name;
 	this.message = message;
 	this.findErrors = findErrors;
-	this.fixErrors = fixErrors;
+	if (fixErrors) {
+		this.fixErrors = fixErrors;
+	} else {
+		this.fixErrors = (function(f){
+			return function(nodes){
+				for (var i = 0; i < 100; i++) { //Мало ли что, хоть не повиснет
+					// TODO: реагировать-таки на неизменность нод
+					var found = f(nodes);
+					if (!found.quantity || !found.commonCorrector || !found.indexes) {
+						break;
+					}
+					nodes = found.commonCorrector(nodes,found.indexes[0]);
+				};
+			}
+		})(this.findErrors);
+	}
 
 	rules[name] = this;
 }
