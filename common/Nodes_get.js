@@ -179,7 +179,7 @@ Nodes.prototype.slice = function() {
 
 Nodes.prototype.clone = function() {
 	var copy = new Nodes();
-	copy.nodes = this.nodes.map(function(n) {
+	copy.nodes = this.map(function(n) {
 		return {
 			type : n.type,
 			text : n.text,
@@ -361,6 +361,12 @@ Nodes.prototype.getTagsEmpty = function(tags) {
 		}
 	}
 	return empty;
+};
+
+// TODO: возможно, врапперы на функции Array стОит сложить в отдельный файл
+// Не вполне понятно, писать ли к ним тесты.
+Nodes.prototype.map = function(callback, thisArg) {
+	return this.nodes.map(callback, thisArg);
 };
 
 Nodes.prototype.getSubunicodeArtifacts = function() {
