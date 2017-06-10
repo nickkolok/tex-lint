@@ -136,9 +136,10 @@ module.exports.createHTMLreport = function(o) {
 			html: theRule.message + " : " + "ошибок: " + result.quantity,
 		})[0];
 		reportErrors.appendChild(message);
+		var corrector = (result.commonCorrector || theRule.commonCorrector);
 		createFixButtonIfPossible(
 			theRule,
-			result.commonCorrector,
+			corrector,
 			reportErrors
 		);
 
@@ -169,8 +170,8 @@ module.exports.createHTMLreport = function(o) {
 					});
 					o.editor.focus();
 				};})(coord);
-				if (result.commonCorrector) {
-					createPartialCorrectButton(o, result.indexes[j], result.commonCorrector, divGroupErrors);
+				if (corrector) {
+					createPartialCorrectButton(o, result.indexes[j], corrector, divGroupErrors);
 				}
 			}
 			reportErrors.appendChild(divGroupErrors);
