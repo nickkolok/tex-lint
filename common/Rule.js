@@ -6,17 +6,25 @@ var Nodes = require('./Nodes.js').Nodes;
 
 var rules = {};
 
-function Rule(name, message, findErrors, fixErrors) {
-	this.name = name;
-	this.message = message;
-	this.findErrors = findErrors;
-	if (fixErrors) {
-		this.fixErrors = fixErrors;
+function Rule(o, message, findErrors, fixErrors) {
+	if (o instanceof Object) {
+		for (var prop in o) {
+			this[prop] = o[prop];
+		}
 	} else {
+		this.name = o;
+		this.message = message;
+		this.findErrors = findErrors;
+		this.fixErrors = fixErrors;
+	}
+	if (!this.fixErrors) {
 		// Жуткий, феерический костыль
 		// TODO: переписать
-		var emptyCheck = this.findErrors(new Nodes(''));
-		if (emptyCheck.commonCorrector) {
+		var commonCorrector = (
+			this.commonCorrector ||
+			this.findErrors(new Nodes('')).commonCorrector // Вот это - костыль
+		);
+		if (commonCorrector) {
 			this.fixErrors = (function(corrector, f) {
 				return function(nodes) {
 					for (var i = 0; i < 10000; i++) { //Мало ли что, хоть не повиснет
@@ -26,13 +34,13 @@ function Rule(name, message, findErrors, fixErrors) {
 							break;
 						}
 						nodes = corrector(nodes, found.indexes[0]);
-					};
+					}
 				};
-			})(emptyCheck.commonCorrector, this.findErrors);
+			})(commonCorrector, this.findErrors);
 		}
 	}
 
-	rules[name] = this;
+	rules[this.name] = this;
 }
 
 new Rule(
