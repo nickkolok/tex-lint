@@ -49,11 +49,10 @@ new Rule({
 	message: "Не допускается переопределение команд или окружений или определение новых",
 	findErrors: function(nodes) {
 		return new RuleViolation({
-			quantity:
-				nodes.findSingleByRegExp(
-					/^tag$/,
-					/^\\(re|)new(command|environment)$/
-				).length,
+			indexes: nodes.findSingleByRegExp(
+				/^tag$/,
+				/^\\(re|)new(command|environment)$/
+			),
 		});
 	}
 });
