@@ -43,19 +43,19 @@ function Rule(o, message, findErrors, fixErrors) {
 	rules[this.name] = this;
 }
 
-new Rule(
-	"nonewcommand",
-	"Не допускается переопределение команд или окружений или определение новых",
-	function(nodes) {
+new Rule({
+	name: "nonewcommand",
+	message: "Не допускается переопределение команд или окружений или определение новых",
+	findErrors: function(nodes) {
 		return {
 			quantity:
-				nodes.getNodesQuantity("tag", "\\newcommand") +
-				nodes.getNodesQuantity("tag", "\\renewcommand") +
-				nodes.getNodesQuantity("tag", "\\newenvironment") +
-				nodes.getNodesQuantity("tag", "\\renewenvironment")
+				nodes.findSingleByRegExp(
+					/^tag$/,
+					/^\\(re|)new(command|environment)$/
+				).length,
 		};
 	}
-);
+});
 
 new Rule(
 	"noautonumformulas",
