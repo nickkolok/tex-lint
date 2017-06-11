@@ -2,6 +2,7 @@
 var fs = require('fs');
 var Nodes = require('../common/Nodes.js').Nodes;
 var rules = require('../common/Rule.js').rules;
+var rulesets = require('../common/rulesets.js');
 
 function applyRuleToString(str, rulename) {
 	var rule = rules[rulename];
@@ -31,8 +32,26 @@ function applyRuleToFile(filename, rulename, callback) {
 	});
 }
 
+function applyRuleToFileSync(filename, rulename) {
+	var text = fs.readFileSync(filename, 'utf8');
+	return applyRuleToString(text, rulename);
+}
+//TODO: а оно вообще работает?
+
+function applyRulesetToFileSync(filename, rulesetname) {
+	var text = fs.readFileSync(filename, 'utf8');
+	var _rules = rulesets[rulesetname].rules;
+	var rez = [];
+	_rules.forEach(function(rule) {
+		rez.push(applyRuleToString(text, rule[0]));
+	});
+	return rez;
+}
+//TODO: асинхронная версия
+
 module.exports.applyRuleToFile = applyRuleToFile;
 module.exports.applyRuleToString = applyRuleToString;
+module.exports.applyRulesetToFileSync = applyRulesetToFileSync;
 
 module.exports.ls = require('ls'); // TODO: Dirty hack for QUnit. Refactor!!!
 module.exports.fs = require('fs'); // TODO: Dirty hack for QUnit. Refactor!!!
