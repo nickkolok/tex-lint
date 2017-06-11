@@ -1,6 +1,7 @@
 'use strict';
 
 var Nodes = require('./Nodes.js').Nodes;
+var RuleViolation = require('./RuleViolation.js');
 
 /* eslint no-new: 0 */  // --> OFF
 
@@ -47,13 +48,13 @@ new Rule({
 	name: "nonewcommand",
 	message: "Не допускается переопределение команд или окружений или определение новых",
 	findErrors: function(nodes) {
-		return {
+		return new RuleViolation({
 			quantity:
 				nodes.findSingleByRegExp(
 					/^tag$/,
 					/^\\(re|)new(command|environment)$/
 				).length,
-		};
+		});
 	}
 });
 
