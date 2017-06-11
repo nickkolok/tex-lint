@@ -8,10 +8,9 @@ module.exports = function(Nodes) {
 
 try {
 	if (typeof (navigator) === 'undefined') {
-		Nodes.CodeMirror = require("../node_modules/codemirror/addon/runmode/runmode.node.js");
-		require("../node_modules/codemirror/mode/meta.js");
-		require("../node_modules/codemirror/mode/stex/stex.js");
-
+		Nodes.CodeMirror = require('codemirror/addon/runmode/runmode.node.js');
+		require('codemirror/mode/meta.js');
+		require('codemirror/mode/stex/stex.js');
 	} else {
 		Nodes.CodeMirror = window.CodeMirror;
 	}
