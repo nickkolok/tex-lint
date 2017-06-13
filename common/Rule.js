@@ -454,5 +454,30 @@ new Rule(
 	}
 );
 
+new Rule({
+	name: 'eof_newline',
+	message: 'Файл должен заканчиваться пустой строкой',
+	findErrors: function(nodes) {
+		var last = nodes.nodes[nodes.length - 1];
+		var indexes = [];
+		if (last.type !== 'linebreak') {
+			indexes = [nodes.length - 1];
+		}
+		return {
+			indexes: indexes,
+			commonCorrector: function(n) {
+				n.nodes.push({ text:'\n', type: 'linebreak' });
+				return n;
+			},
+		};
+	},
+	fixErrors: function(n) {
+		var last = n.nodes[n.length - 1];
+		if (last.type !== 'linebreak') {
+			n.nodes.push({ text:'\n', type: 'linebreak' });
+		}
+		return n;
+	},
+});
 
 module.exports.rules = rules;

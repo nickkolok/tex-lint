@@ -76,8 +76,9 @@ var rulesets = {
 			['splitrows80',1],
 			['manual_paragraph_format',1],
 			['empty_text_options',1],
+			['eof_newline',1],
 		],
-		comment: "",
+		comment: '',
 	},
 };
 
