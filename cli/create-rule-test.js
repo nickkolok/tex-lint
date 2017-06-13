@@ -2,12 +2,13 @@
 
 var cliruler = require('./cli.js');
 var fs = require('fs');
+var jsonFormat = require('json-format');
 
 function createRuleTest(filename, rulename, postfix) {
     var writeToFile = function(p) {
         fs.writeFileSync(
             'test/ruletests/' + filename + '-' + rulename + (postfix || '') + '.json',
-            JSON.stringify(p)
+            jsonFormat(p)
         );
 
     };

@@ -36,6 +36,7 @@
     "iconv-lite": "^0.4.15",
     "jquery-browserify": "^1.8.1",
     "jquery-with-bootstrap-for-browserify": "0.0.1-bs3.3.7",
+    "json-format": "^1.0.1",
     "json-from-location-hash": "^0.2.0",
     "katex": "^0.7.1",
     "load-grunt-tasks": "^3.5.2",
