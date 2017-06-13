@@ -393,4 +393,21 @@ Nodes.prototype.findSingleByRegExp = function(typereg, textreg) {
 	return found;
 };
 
+Nodes.prototype.findSequenceByRegExp = function(seq) {
+	var found = [];
+	this.nodes.forEach(function(node, index, n) {
+		if (index > n.length - seq.length) {
+			return;
+		}
+		for (var i = 0; i < seq.length; i++) {
+			var curnode = n[index + i];
+			if (!seq[i].text.test(curnode.text) || !seq[i].type.test(curnode.type)) {
+				return;
+			}
+		}
+		found.push(index);
+	});
+	return found;
+};
+
 };//modules.export

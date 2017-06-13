@@ -1239,6 +1239,50 @@ test('findSingleByRegExp', function () {
 	);
 });
 
+test('findSequenceByRegExp', function () {
+	var N = new Nodes('\\frac{1}{2}3[5]');
+	assert.deepEqual(
+		N.findSequenceByRegExp([{ type:/bracket/, text:/^/ }]),
+		[
+			1,
+			3,
+			4,
+			6,
+			8,
+			10,
+		],
+		""
+	);
+	assert.deepEqual(
+		N.findSequenceByRegExp([{ type:/bracket/, text:/^/ }, { type:/bracket/, text:/^/ }]),
+		[
+			3,
+		],
+		""
+	);
+	N = new Nodes('\\frac{1}{2}{3}[5]');
+	assert.deepEqual(
+		N.findSequenceByRegExp([{ type:/bracket/, text:/^/ }, { type:/bracket/, text:/^/ }]),
+		[
+			3,
+			6,
+			9,
+		],
+		""
+	);
+	N = new Nodes('\\frac{1}{2}{3}[5]');
+	assert.deepEqual(
+		N.findSequenceByRegExp([{ type:/bracket/, text:/^/ }, { type:/number/, text:/^/ }]),
+		[
+			1,
+			4,
+			7,
+			10,
+		],
+		""
+	);
+});
+
 /*
 
 test('', function () {
