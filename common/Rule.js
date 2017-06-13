@@ -480,4 +480,33 @@ new Rule({
 	},
 });
 
+new Rule({
+	name: 'eof_newline_only_one',
+	message: 'Файл должен заканчиваться ровно одной пустой строкой',
+	findErrors: function(nodes) {
+		var last = nodes.nodes[nodes.length - 1];
+		var prelast = nodes.nodes[nodes.length - 2];
+		var indexes = [];
+		if (last.type === 'linebreak' && prelast.type === 'linebreak') {
+			indexes = [nodes.length - 2];
+		}
+		return {
+			indexes: indexes,
+			commonCorrector: function(n) {
+				n.nodes.pop();
+				return n;
+			},
+		};
+	},
+	fixErrors: function(n) {
+		var last = n.nodes[n.length - 1];
+		var prelast = n.nodes[n.length - 2];
+		var indexes = [];
+		if (last.type === 'linebreak' && prelast.type === 'linebreak') {
+			n.nodes.pop();
+		}
+		return n;
+	},
+});
+
 module.exports.rules = rules;

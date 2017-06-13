@@ -77,6 +77,7 @@ var rulesets = {
 			['manual_paragraph_format',1],
 			['empty_text_options',1],
 			['eof_newline',1],
+			['eof_newline_only_one',1],
 		],
 		comment: '',
 	},
