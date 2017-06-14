@@ -528,4 +528,22 @@ new Rule({
 });
 //TODO: batchFixOrder
 
+new Rule({
+	name: 'no_spaces_at_line_ending',
+	// СтОит включать почти всегда, но кому-то может быть неудобно
+	message: 'Строка не должна заканчиваться пробелом',
+	findErrors: function(nodes) {
+		return new RuleViolation({
+			indexes: nodes.findSequenceByRegExp([
+				{ type: /space/, text: /[ ]+/ },
+				{ type: /linebreak/, text: /^/ },
+			]),
+		});
+	},
+	commonCorrector: function(n, index) {
+		n.nodes.splice(index, 1);
+		return n;
+	},
+});
+
 module.exports.rules = rules;
