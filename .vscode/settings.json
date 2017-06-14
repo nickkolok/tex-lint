@@ -8,6 +8,7 @@
         "**/node_modules": true,
         "build": true,
         "dist": true,
+        "**/*~": true,
         "**/.DS_Store": true
     }
     ,
