@@ -768,6 +768,61 @@ test('a $a+ b=c$ b', function () {
 	);
 });
 
+test('Пробелы в начале строк', function () {
+	assert.deepEqual(
+		new Nodes('На криволинейных участках железнодорожного пути возвышают наружный\n рельс\n над внутренним для того,\nчтобы сила давления проходящего поезда на рельсы была направлена\n перпендикулярно').nodes,
+		[
+			{ text: 'На', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'криволинейных', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'участках', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'железнодорожного', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'пути', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'возвышают', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'наружный', type: 'cyrtext' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: ' ', type: 'space' },
+			{ text: 'рельс', type: 'cyrtext' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: ' ', type: 'space' },
+			{ text: 'над', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'внутренним', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'для', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'того', type: 'cyrtext' },
+			{ text: ',', type: null },
+			{ text: '\n', type: 'linebreak' },
+			{ text: 'чтобы', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'сила', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'давления', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'проходящего', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'поезда', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'на', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'рельсы', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'была', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'направлена', type: 'cyrtext' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: ' ', type: 'space' },
+			{ text: 'перпендикулярно', type: 'cyrtext' },
+		],
+		""
+	);
+});
 
 /*
 //TODO: запятая не отделяется от слова. Решить, что с ней делать.
