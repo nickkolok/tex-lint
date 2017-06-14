@@ -31,7 +31,7 @@ function Rule(o, message, findErrors, fixErrors) {
 					for (var i = 0; i < 10000; i++) { //Мало ли что, хоть не повиснет
 						// TODO: реагировать-таки на неизменность нод
 						var found = f(nodes);
-						if (!found.quantity || !found.commonCorrector || !found.indexes) {
+						if (!found.quantity || !found.indexes) {
 							break;
 						}
 						nodes = corrector(nodes, found.indexes[0]);
