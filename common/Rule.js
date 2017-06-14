@@ -460,20 +460,20 @@ new Rule({
 	findErrors: function(nodes) {
 		var last = nodes.nodes[nodes.length - 1];
 		var indexes = [];
-		if (last.type !== 'linebreak') {
+		if (last && last.type !== 'linebreak') {
 			indexes = [nodes.length - 1];
 		}
-		return {
+		return new RuleViolation({
 			indexes: indexes,
 			commonCorrector: function(n) {
 				n.nodes.push({ text:'\n', type: 'linebreak' });
 				return n;
 			},
-		};
+		});
 	},
 	fixErrors: function(n) {
 		var last = n.nodes[n.length - 1];
-		if (last.type !== 'linebreak') {
+		if (last && last.type !== 'linebreak') {
 			n.nodes.push({ text:'\n', type: 'linebreak' });
 		}
 		return n;
@@ -487,22 +487,22 @@ new Rule({
 		var last = nodes.nodes[nodes.length - 1];
 		var prelast = nodes.nodes[nodes.length - 2];
 		var indexes = [];
-		if (last.type === 'linebreak' && prelast.type === 'linebreak') {
+		if (last && prelast && last.type === 'linebreak' && prelast.type === 'linebreak') {
 			indexes = [nodes.length - 2];
 		}
-		return {
+		return new RuleViolation({
 			indexes: indexes,
 			commonCorrector: function(n) {
 				n.nodes.pop();
 				return n;
 			},
-		};
+		});
 	},
 	fixErrors: function(n) {
 		var last = n.nodes[n.length - 1];
 		var prelast = n.nodes[n.length - 2];
 		var indexes = [];
-		if (last.type === 'linebreak' && prelast.type === 'linebreak') {
+		if (last && prelast && last.type === 'linebreak' && prelast.type === 'linebreak') {
 			n.nodes.pop();
 		}
 		return n;
