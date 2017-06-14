@@ -509,4 +509,23 @@ new Rule({
 	},
 });
 
+new Rule({
+	name: 'no_spaces_at_line_beginning',
+	// Мягко говоря, спорное, включать только с твёрдым пониманием последствий
+	message: 'Строка не должна начинаться с пробелов',
+	findErrors: function(nodes) {
+		return {
+			indexes: nodes.findSequenceByRegExp([
+				{ type: /linebreak/, text: /^/ },
+				{ type: /space/, text: /[ ]+/ },
+			]),
+		};
+	},
+	commonCorrector: function(n, index) {
+		n.nodes.splice(index);
+		return n;
+	},
+});
+//TODO: batchFixOrder
+
 module.exports.rules = rules;

@@ -78,6 +78,7 @@ var rulesets = {
 			['empty_text_options',1],
 			['eof_newline',1],
 			['eof_newline_only_one',1],
+			['no_spaces_at_line_beginning',1],
 		],
 		comment: '',
 	},
