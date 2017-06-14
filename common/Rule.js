@@ -585,4 +585,28 @@ new Rule({
 	}
 });
 
+
+new Rule({
+	name: 'space_after_comma',
+	message: 'После запятой следует использовать пробел',
+	findErrors: function(nodes) {
+		var indexes = nodes.findSequenceByRegExp([
+			{ type: /cyrtext/, text: /^/ },
+			{ type: /^/, text: /,/ },
+			{ type: /^(?!space$)/, text: /^/ },
+		]).concat(nodes.findSequenceByRegExp([
+			{ type: /^/, text: /$/ },
+			{ type: /^/, text: /,/ },
+			{ type: /^(?!space$)/, text: /^/ },
+		]));
+		return new RuleViolation({
+			indexes: indexes,
+		});
+	},
+	/*commonCorrector: function(nodes, index) {
+		nodes.nodes[index].text = eyo.restore(nodes.nodes[index].text);
+		return nodes;
+	}*/
+});
+
 module.exports.rules = rules;
