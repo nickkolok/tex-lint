@@ -1281,6 +1281,17 @@ test('findSequenceByRegExp', function () {
 		],
 		""
 	);
+	assert.deepEqual(
+		N.findSequenceByRegExp([{ type: /^(?!bracket$)/, text: /^/ }]),
+		[
+			0,
+			2,
+			5,
+			8,
+			11,
+		],
+		""
+	);
 });
 
 /*
