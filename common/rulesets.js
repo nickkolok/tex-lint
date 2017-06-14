@@ -82,6 +82,7 @@ var rulesets = {
 			['no_spaces_at_line_ending', 1],
 			['dot_ending', 1],
 			['eyo', 1],
+			['space_after_comma', 1],
 		],
 		comment: '',
 	},
