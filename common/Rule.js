@@ -562,4 +562,27 @@ new Rule({
 	},
 });
 
+var eyo = require('eyo-kernel');
+
+new Rule({
+	name: 'eyo',
+	message: 'Букву Ё следует использовать',
+	findErrors: function(nodes) {
+		var indexes = [];
+		nodes.nodes.forEach(function(node, index) {
+			var text = node.text;
+			if (node.type === 'cyrtext' && eyo.restore(text) !== text) {
+				indexes.push(index);
+			}
+		});
+		return new RuleViolation({
+			indexes: indexes,
+		});
+	},
+	commonCorrector: function(nodes, index) {
+		nodes.nodes[index].text = eyo.restore(nodes.nodes[index].text);
+		return nodes;
+	}
+});
+
 module.exports.rules = rules;

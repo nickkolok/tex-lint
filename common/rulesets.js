@@ -81,6 +81,7 @@ var rulesets = {
 			['no_spaces_at_line_beginning',1],
 			['no_spaces_at_line_ending', 1],
 			['dot_ending', 1],
+			['eyo', 1],
 		],
 		comment: '',
 	},
