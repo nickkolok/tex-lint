@@ -514,15 +514,15 @@ new Rule({
 	// Мягко говоря, спорное, включать только с твёрдым пониманием последствий
 	message: 'Строка не должна начинаться с пробелов',
 	findErrors: function(nodes) {
-		return {
+		return new RuleViolation({
 			indexes: nodes.findSequenceByRegExp([
 				{ type: /linebreak/, text: /^/ },
 				{ type: /space/, text: /[ ]+/ },
 			]),
-		};
+		});
 	},
 	commonCorrector: function(n, index) {
-		n.nodes.splice(index);
+		n.nodes.splice(index + 1, 1);
 		return n;
 	},
 });
