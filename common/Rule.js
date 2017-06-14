@@ -546,4 +546,20 @@ new Rule({
 	},
 });
 
+new Rule({
+	name: 'dot_ending',
+	message: 'Файл должен заканчиваться точкой или вопросительным знаком',
+	findErrors: function(nodes) {
+		var lastNotNewline = nodes.skipTypesReverse(nodes.length - 1, ['linebreak']);
+		var prelast = nodes.nodes[lastNotNewline];
+		var indexes = [];
+		if (prelast && !(/[\.\?]/).test(prelast.text)) {
+			indexes = [nodes.length - 2];
+		}
+		return new RuleViolation({
+			indexes: indexes,
+		});
+	},
+});
+
 module.exports.rules = rules;

@@ -80,6 +80,7 @@ var rulesets = {
 			['eof_newline_only_one',1],
 			['no_spaces_at_line_beginning',1],
 			['no_spaces_at_line_ending', 1],
+			['dot_ending', 1],
 		],
 		comment: '',
 	},
