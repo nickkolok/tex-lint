@@ -612,4 +612,40 @@ new Rule({
 	}
 });
 
+new Rule({
+	name: 'numbers_must_be_in_formula',
+	message: 'Числа должны находиться внутри формул',
+	findErrors: function(nodes) {
+		var decimalFracsIndexesAll = nodes.findSequenceByRegExp([
+			{ type: /^number$/, text: /^/ },
+			{ type: /^atom$/, text: /^.$/ },
+			{ type: /^number$/, text: /^/ },
+		]);
+		var decimalFracsIndexesOuter = [];
+		decimalFracsIndexesAll.forEach(function(index) {
+			if (!nodes.isInsideFormula(index)) {
+				decimalFracsIndexesOuter.push(index);
+			}
+		});
+		var integersIndexesAll = nodes.findSequenceByRegExp([
+			{ type: /^number$/, text: /^/ },
+		]);
+		var integersIndexesOuter = [];
+		integersIndexesAll.forEach(function(index) {
+			if (
+				!nodes.isInsideFormula(index)
+			&&
+				decimalFracsIndexesOuter.indexOf(index - 2) === -1
+			) {
+				integersIndexesOuter.push(index);
+			}
+		});
+		return new RuleViolation({
+			indexes: integersIndexesOuter.concat(decimalFracsIndexesOuter),
+		});
+	},
+	// TODO: commonCorrector
+	// TODO: А если \begin{equation}
+});
+
 module.exports.rules = rules;

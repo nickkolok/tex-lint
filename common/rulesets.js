@@ -83,6 +83,7 @@ var rulesets = {
 			['dot_ending', 1],
 			['eyo', 1],
 			['space_after_comma', 1],
+			['numbers_must_be_in_formula', 1],
 		],
 		comment: '',
 	},
