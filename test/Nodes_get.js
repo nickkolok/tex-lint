@@ -1388,6 +1388,67 @@ test('findSequenceByRegExp', function () {
 	);
 });
 
+test('isInsideArgumentsOf', function () {
+	var N = new Nodes('\\alpha \\frac{1}{2} \\dfrac{\\operatorname{tg}t}{\pi}');
+	assert.deepEqual(
+		N.isInsideArgumentsOf(4, [{ type: /tag/, text: /\\frac/ }], 1),
+		true,
+		""
+	);
+	assert.deepEqual(
+		N.isInsideArgumentsOf(4, [{ type: /tag/, text: /\\frac/ }], 2),
+		true,
+		""
+	);
+	assert.deepEqual(
+		N.isInsideArgumentsOf(7, [{ type: /tag/, text: /\\frac/ }], 2),
+		true,
+		""
+	);
+	assert.deepEqual(
+		N.isInsideArgumentsOf(0, [{ type: /tag/, text: /\\frac/ }], 1),
+		false,
+		""
+	);
+	assert.deepEqual(
+		N.isInsideArgumentsOf(13, [{ type: /tag/, text: /\\frac|\\dfrac/ }], 2),
+		true,
+		""
+	);
+	assert.deepEqual(
+		N.isInsideArgumentsOf(13,
+			[
+				{ type: /tag/, text: /\\frac/ },
+				{ type: /tag/, text: /\\dfrac/ },
+			],
+		2),
+		true,
+		""
+	);
+	assert.deepEqual(
+		N.isInsideArgumentsOf(14,
+			[
+				{ type: /tag/, text: /\\frac/ },
+				{ type: /tag/, text: /\\dfrac/ },
+			],
+			2),
+		true,
+		""
+	);
+	N = new Nodes('\\dfrac{\\operatorname{tg}t}{\pi}');
+	assert.deepEqual(
+		N.isInsideArgumentsOf(4,
+			[
+				{ type: /tag/, text: /\\frac/ },
+				{ type: /tag/, text: /\\dfrac/ },
+			],
+			2),
+		true,
+		""
+	);
+});
+
+
 /*
 
 test('', function () {

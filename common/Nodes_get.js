@@ -416,4 +416,24 @@ Nodes.prototype.findSequenceByRegExp = function(seq) {
 	return found;
 };
 
+Nodes.prototype.isInsideArgumentsOf = function(index, tagsArr, argNumber) {
+	// TODO: возможность просмотра только обязательных или необязательных аргументов
+	var self = this;
+	var borders = tagsArr.map(function(tag) {
+		return self.findSingleByRegExp(tag.type, tag.text);
+	}).reduce(function(a, b) {
+		return a.concat(b);
+	}).map(function(i) {
+		return [i, self.getArgumentsEnd(i, argNumber + 1)];
+	});
+	for (var i = 0; i < borders.length; i++) {
+		if (index < borders[i][1] && index > borders[i][0]) {
+			return true;
+		}
+		//TODO: оптимизировать, чтобы при встрече меньшего правого края
+		//останавливалось и возвращало false
+	}
+	return false;
+};
+
 };//modules.export
