@@ -226,6 +226,12 @@ Nodes.prototype.isInside$$ = function(index, includeDelimiters) {
 	return this.isInsideSymmDelimiters(index, 'keyword', '$$', includeDelimiters);
 };
 
+Nodes.prototype.isInsideFormula = function(index, includeDelimiters) {
+	return (
+		this.isInside$(index, includeDelimiters) || this.isInside$$(index, includeDelimiters)
+	);
+};
+
 Nodes.prototype.getFormulaByIndex = function(index) {
 	// TODO: обобщить
 	var beginIndex = 0;

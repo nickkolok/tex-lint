@@ -723,6 +723,100 @@ test('isInside$', function () {
 
 });
 
+test('isInsideFormula', function () {
+	assert.deepEqual(
+		new Nodes('$a$').isInsideFormula(1),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b').isInsideFormula(3),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b').isInsideFormula(2),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b').isInsideFormula(3, true),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b$').isInsideFormula(3, true),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$\\alpha$g$').isInsideFormula(5, true),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$\\alpha$$g$$').isInsideFormula(5, true),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$\\alpha$$g$$123$g$').isInsideFormula(9, true),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$').isInsideFormula(1),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$b').isInsideFormula(3),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$b').isInsideFormula(2),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$b').isInsideFormula(3, true),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$b$$').isInsideFormula(3, true),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$\\alpha$$g$$').isInsideFormula(5, true),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$\\alpha$g$123$$g$$').isInsideFormula(9, true),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$\\alpha$g$123$$g$$').isInsideFormula(5, true),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$\\alpha$g$123$$g$$').isInsideFormula(5),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$$a$$\\alpha$g$123$$g$$').isInsideFormula(3),
+		false,
+		""
+	);
+
+});
+
 test('getSymmDelimitedTagNumbers', function () {
 	assert.deepEqual(
 		new Nodes('$\\mu$').getSymmDelimitedTagNumbers(Nodes.NEW_$(), ['\\mu']),
