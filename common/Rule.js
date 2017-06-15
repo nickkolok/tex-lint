@@ -444,8 +444,7 @@ new Rule(
 			quantity: indexes.length,
 			commonCorrector: function(n, index) {
 				n.nodes[index].text = n.nodes[index].text.
-					replace(mathOpRegExpInt, '\\$1')//.
-					//replace(mathOpRegExpRus, '\\operatorname{$1}')
+					replace(mathOpRegExpInt, '\\$1')
 				;
 				n.reparse();
 				return n;
@@ -453,6 +452,35 @@ new Rule(
 		};
 	}
 );
+
+new Rule({
+	name: 'tg_must_be_command',
+	message: 'Русские названия математических операторов, такие как tg, в формулах должны быть прямым шрифтом; используйте \\operatorname',
+	findErrors: function(nodes) {
+		var indexesSusp = nodes.findSingleByRegExp(
+			/variable-2/,
+			mathOpRegExpRus
+		);
+		var indexes = [];
+		var operatorname = [{ type: /^tag$/, text: /\\operatorname/ }];
+		indexesSusp.forEach(function(index) {
+			if (!nodes.isInsideArgumentsOf(index, operatorname, 2)) {
+				indexes.push(index);
+			}
+		});
+
+		return new RuleViolation({
+			indexes: indexes,
+		});
+	},
+	commonCorrector: function(n, index) {
+		n.nodes[index].text = n.nodes[index].text.
+			replace(mathOpRegExpRus, '\\operatorname{$1}')
+			;
+		n.reparse();
+		return n;
+	},
+});
 
 new Rule({
 	name: 'eof_newline',
@@ -550,7 +578,7 @@ new Rule({
 	name: 'dot_ending',
 	message: 'Файл должен заканчиваться точкой или вопросительным знаком',
 	findErrors: function(nodes) {
-		var lastNotNewline = nodes.skipTypesReverse(nodes.length - 1, ['linebreak']);
+		var lastNotNewline = nodes.skipTypesReverse(nodes.length - 1, ['linebreak', 'comment']);
 		var prelast = nodes.nodes[lastNotNewline];
 		var indexes = [];
 		if (prelast && !(/[\.\?]/).test(prelast.text)) {
