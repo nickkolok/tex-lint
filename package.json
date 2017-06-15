@@ -1,6 +1,6 @@
 {
   "name": "tex-lint",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "TeX/LaTeX scientific paper linting tool",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,8 @@
   "dependencies": {
     "array-unique": "^0.3.2",
     "codemirror": "^5.21.0",
-    "eyo-kernel": "^1.0.6"
+    "eyo-kernel": "^1.0.6",
+    "node-autodetect-utf8-cp1251-cp866": "^0.1.0"
   },
   "devDependencies": {
     "bootstrap": "^3.3.7",
@@ -44,7 +45,6 @@
     "load-grunt-tasks": "^3.5.2",
     "ls": "^0.2.1",
     "mkdirp": "^0.5.1",
-    "node-autodetect-utf8-cp1251-cp866": "^0.1.0",
     "qunit": "^0.9.1",
     "time-grunt": "^1.4.0"
   }
