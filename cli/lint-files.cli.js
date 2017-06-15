@@ -13,7 +13,8 @@ args.shift();
 args.shift();
 var rulesetName = args.shift();
 
-if (!rulesets[rulesetName]) {
+var theRuleset = rulesets[rulesetName];
+if (!theRuleset && !(rulesetName in rules)) {
     console.log('Unknown ruleset: ' + rulesetName);
     process.exit(1);
 }
