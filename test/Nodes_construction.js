@@ -824,6 +824,49 @@ test('Пробелы в начале строк', function () {
 	);
 });
 
+test('1 $2+ 2=4$ 265 $$2a-x2=2y2', function () {
+	assert.deepEqual(
+		new Nodes('1 $2+ 2=4$ 265 $$2a-x2=2y2').nodes,
+		[
+			{ text: '1', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: '2', type: 'number' },
+			{ text: '+', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '2', type: 'number' },
+			{ text: '=', type: null },
+			{ text: '4', type: 'number' },
+			{ text: '$', type: 'keyword' },
+			{ text: ' ', type: 'space' },
+			{ text: '265', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '$$', type: 'keyword' },
+			{ text: '2', type: 'number' },
+			{ text: 'a', type: 'variable-2' },
+			{ text: '-', type: null },
+			{ text: 'x', type: 'variable-2' },
+			{ text: '2', type: 'number' },
+			{ text: '=', type: null },
+			{ text: '2', type: 'number' },
+			{ text: 'y', type: 'variable-2' },
+			{ text: '2', type: 'number' },
+		],
+		""
+	);
+});
+
+test('3.14', function () {
+	assert.deepEqual(
+		new Nodes('3.14').nodes,
+		[
+			{ text: '3', type: 'number' },
+			{ text: '.', type: 'atom' },
+			{ text: '14', type: 'number' },
+		],
+		""
+	);
+});
 /*
 //TODO: запятая не отделяется от слова. Решить, что с ней делать.
 test('', function () {
