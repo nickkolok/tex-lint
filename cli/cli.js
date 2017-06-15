@@ -38,8 +38,11 @@ function applyRuleToFileSync(filename, rulename) {
 }
 //TODO: а оно вообще работает?
 
+var autoenc = require('node-autodetect-utf8-cp1251-cp866');
+
 function applyRulesetToFileSync(filename, rulesetname) {
-	var text = fs.readFileSync(filename, 'utf8');
+	var buf = fs.readFileSync(filename);
+	var text = autoenc.detectEncoding(buf).text;
 	var _rules = rulesets[rulesetname].rules;
 	var rez = [];
 	_rules.forEach(function(rule) {
