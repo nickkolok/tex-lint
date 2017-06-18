@@ -44,6 +44,9 @@ function Rule(o, message, findErrors, fixErrors) {
 	rules[this.name] = this;
 }
 
+module.exports.Rule = Rule;
+
+
 new Rule({
 	name: "nonewcommand",
 	message: "Не допускается переопределение команд или окружений или определение новых",
@@ -613,32 +616,7 @@ new Rule({
 	}
 });
 
-
-new Rule({
-	name: 'space_after_comma',
-	message: 'После запятой следует использовать пробел',
-	findErrors: function(nodes) {
-		var indexes = nodes.findSequenceByRegExp([
-			{ type: /cyrtext/, text: /^/ },
-			{ type: /^/, text: /,/ },
-			{ type: /^(?!(space|linebreak)$)/, text: /^/ },
-		]).concat(nodes.findSequenceByRegExp([
-			{ type: /^/, text: /\$/ },
-			{ type: /^/, text: /,/ },
-			{ type: /^(?!(space|linebreak)$)/, text: /^/ },
-		]));
-		indexes = indexes.map(function(index) {
-			return index + 1;
-		});
-		return new RuleViolation({
-			indexes: indexes,
-		});
-	},
-	commonCorrector: function(nodes, index) {
-		nodes.insertNode(index + 1, { type: 'space', text: ' ' });
-		return nodes;
-	}
-});
+require('./Rules/space_after_comma.js');
 
 new Rule({
 	name: 'numbers_must_be_in_formula',
