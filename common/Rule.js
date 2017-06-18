@@ -46,19 +46,33 @@ function Rule(o, message, findErrors, fixErrors) {
 
 module.exports.Rule = Rule;
 
-
-new Rule({
-	name: "nonewcommand",
-	message: "Не допускается переопределение команд или окружений или определение новых",
-	findErrors: function(nodes) {
+function makeSingleForbiddingRule(typereg, textreg, o) {
+	o.findErrors = (function($typereg, $textreg) { return function(nodes) {
 		return new RuleViolation({
 			indexes: nodes.findSingleByRegExp(
-				/^tag$/,
-				/^\\(re|)new(command|environment)$/
+				$typereg,
+				$textreg
 			),
 		});
+	};})(typereg, textreg);
+	if (o.replacement) {
+		o.commonCorrector = function(nodes, index) {
+			nodes.nodes[index].text = o.replacement;
+			nodes.reparse();
+		};
 	}
-});
+
+	new Rule(o);
+}
+
+makeSingleForbiddingRule(
+	/^tag$/,
+	/^\\(re|)new(command|environment)$/,
+	{
+		name: "nonewcommand",
+		message: "Не допускается переопределение команд или окружений или определение новых",
+	}
+);
 
 new Rule(
 	"noautonumformulas",
