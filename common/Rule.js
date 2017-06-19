@@ -65,6 +65,8 @@ function makeSingleForbiddingRule(typereg, textreg, o) {
 	new Rule(o);
 }
 
+module.exports.makeSingleForbiddingRule = makeSingleForbiddingRule;
+
 makeSingleForbiddingRule(
 	/^tag$/,
 	/^\\(re|)new(command|environment)$/,
@@ -631,6 +633,7 @@ new Rule({
 });
 
 require('./Rules/space_after_comma.js');
+require('./Rules/forbid_upsilon.js');
 
 new Rule({
 	name: 'numbers_must_be_in_formula',

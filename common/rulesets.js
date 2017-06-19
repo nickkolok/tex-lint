@@ -85,6 +85,7 @@ var rulesets = {
 			['space_after_comma', 1],
 			['numbers_must_be_in_formula', 1],
 			['tg_must_be_command', 1],
+			['forbid_upsilon', 1],
 		],
 		comment: '',
 	},
