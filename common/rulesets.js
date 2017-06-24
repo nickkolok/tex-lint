@@ -87,6 +87,7 @@ var rulesets = {
 			['sin_must_be_command', 1],
 			['tg_must_be_command', 1],
 			['forbid_upsilon', 1],
+			['comma_before_gde', 1],
 		],
 		comment: '',
 	},
