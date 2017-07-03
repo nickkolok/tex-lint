@@ -1,0 +1,7 @@
+{
+	"text": "$x=1250ln\\frac{\\left(v_{0}+50\\right)e^0.056t +20-v_{0}}{70}-50t$;\nпри $v_{0}=10$ м/с $x=1250ln\\frac{6e^0.056t +1}{7}-50t$.\n",
+	"rulename": "sin_must_be_command",
+	"indexes": [4,61],
+	"quantity": 2,
+	"fixed": "$x=1250\\ln\\frac{\\left(v_{0}+50\\right)e^0.056t +20-v_{0}}{70}-50t$;\nпри $v_{0}=10$ м/с $x=1250\\ln\\frac{6e^0.056t +1}{7}-50t$.\n"
+}

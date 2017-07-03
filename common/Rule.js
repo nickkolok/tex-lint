@@ -418,12 +418,12 @@ var mathOpNamesInt = [
 	'cosh',
 	'tanh',
 	'coth',
-/*
-	TODO: определиться, что из этого есть в LaTeX и как с ними работать
+
+//	TODO: определиться, что из этого есть в LaTeX и как с ними работать
 	'log', // есть
 	'ln', // есть
 	'lg', // есть
-*/
+
 ];
 
 var mathOpNamesRus = [
