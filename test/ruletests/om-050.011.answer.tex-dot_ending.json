@@ -1,0 +1,6 @@
+{
+	"text": "\\begin{enumerate}\n\\item ~\n\n\t\\vspace{-1em}\n\t%TODO: всё-таки оформить нормально\n\t$\\begin{array}{ll}\n\t\\dot{x}_C - a\\dot{\\theta}\\cos{\\theta}\\sin{\\psi} -\n\ta\\dot{\\psi}\\sin{\\theta}\\cos{\\psi} \\ a\\dot{\\varphi}\\cos{\\psi} = 0,\\\\\n\t\\dot{y}_C - a\\dot{\\theta}\\cos{\\theta}\\cos{\\psi} -\n\ta\\dot{\\psi}\\sin{\\theta}\\sin{\\psi} \\ a\\dot{\\varphi}\\sin{\\psi} = 0,\\\\\n\t\\dot{z}_C + a\\dot{\\theta}\\sin{\\theta} = 0.\\\\\n\t\\end{array}$\n\n\tПоследнее уравнение сводится к конечному соотношению $z_C = a\\cos{\\theta}$.\n\\item $\\dot{x} = a\\dot{\\varphi}\\cos{\\psi}$,\n\t$\\dot{y} = a\\dot{\\varphi}\\sin{\\psi}$.\n\\end{enumerate}\n",
+	"rulename": "dot_ending",
+	"indexes": [],
+	"quantity": 0
+}
