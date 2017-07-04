@@ -1386,6 +1386,58 @@ test('findSequenceByRegExp', function () {
 		],
 		""
 	);
+	N.nodes[2].skip = true;
+	assert.deepEqual(
+		N.findSequenceByRegExp([{ type:/bracket/, text:/^/ }, { type:/bracket/, text:/^/ }]),
+		[
+			1,
+			3,
+			6,
+			9,
+		],
+		""
+	);
+	N.nodes[1].skip = true;
+	assert.deepEqual(
+		N.findSequenceByRegExp([{ type:/bracket/, text:/^/ }, { type:/bracket/, text:/^/ }]),
+		[
+			3,
+			6,
+			9,
+		],
+		""
+	);
+	N.nodes[6].skip = true;
+	assert.deepEqual(
+		N.findSequenceByRegExp([{ type:/bracket/, text:/^/ }, { type:/bracket/, text:/^/ }]),
+		[
+			3,
+			9,
+		],
+		""
+	);
+
+	N = new Nodes('{1}');
+	N.nodes[1].skip = true;
+	assert.deepEqual(
+		N.findSequenceByRegExp([{ type:/bracket/, text:/^/ }, { type:/bracket/, text:/^/ }]),
+		[
+			0,
+		],
+		''
+	);
+	assert.deepEqual(
+		N.findSequenceByRegExp([{ type:/number/, text:/^/ }, { type:/bracket/, text:/^/ }]),
+		[
+		],
+		''
+	);
+	assert.deepEqual(
+		N.findSequenceByRegExp([{ type:/bracket/, text:/^/ }, { type:/number/, text:/^/ }]),
+		[
+		],
+		''
+	);
 });
 
 test('isInsideArgumentsOf', function () {

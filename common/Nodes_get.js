@@ -403,15 +403,28 @@ Nodes.prototype.findSequenceByRegExp = function(seq) {
 	var found = [];
 	this.nodes.forEach(function(node, index, n) {
 		if (index > n.length - seq.length) {
+			// Нужного количества нод попросту нет справа
 			return;
 		}
+		if (node.skip) {
+			// Последовательность не может начинаться с пропускаемой ноды,
+			// иначе некоторые будут попадать по 2 раза
+			return;
+		}
+		var first = index;
 		for (var i = 0; i < seq.length; i++) {
+			while (n[index + i] && n[index + i].skip) {
+				index++;
+			}
 			var curnode = n[index + i];
+			if (!curnode) {
+				return;
+			}
 			if (!seq[i].text.test(curnode.text) || !seq[i].type.test(curnode.type)) {
 				return;
 			}
 		}
-		found.push(index);
+		found.push(first);
 	});
 	return found;
 };
