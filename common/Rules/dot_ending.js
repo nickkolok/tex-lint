@@ -25,7 +25,7 @@ new Rule({
 		// TODO: а вот это в функцию
 		var ends = nodes.findSingleByRegExp(/^tag$/, /^\\end$/);
 		var ranges = ends.map(function(end){
-			return [end, nodes.getArgumentsEnd(ends[ends.length - 1], 2)];
+			return [end, nodes.getArgumentsEnd(end, 2)];
 		});
 		nodes.setPropForRanges(ranges, 'skip', true);
 
