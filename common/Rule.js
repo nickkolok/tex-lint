@@ -424,6 +424,8 @@ var mathOpNamesInt = [
 	'ln', // есть
 	'lg', // есть
 
+	'infty', // Встречалось и такое!
+	'frac',
 ];
 
 var mathOpNamesRus = [
@@ -452,7 +454,7 @@ var mathOpRegExpRus = new RegExp('(' + mathOpNamesRus.reverse().join('|') + ')',
 
 new Rule(
 	'sin_must_be_command',
-	'Названия математических операторов, такие как sin, в формулах должны быть прямым шрифтом',
+	'Названия математических операторов, такие как sin, в формулах должны быть прямым шрифтом. Пропущена дробь \\ перед командой',
 	function(nodes) {
 		var indexes = nodes.findSingleByRegExp(
 			/variable-2/,
