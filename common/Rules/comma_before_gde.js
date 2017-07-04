@@ -9,6 +9,7 @@ new Rule({
 	message: 'В конце выключной формулы перед словом "где" ставится запятая',
 	findErrors: function(nodes) {
 		nodes.setPropByRegExp(/^(space|linebreak|comment)$/, /^/, 'skip', true);
+		nodes.setSkipAllEnds();
 		var indexes = nodes.findSequenceByRegExp([
 			{ type: /^/, text: /^(?!(,)$)/ },
 			{ type: /^/, text: /\$\$/ },
