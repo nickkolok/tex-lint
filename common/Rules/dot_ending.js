@@ -20,14 +20,8 @@ new Rule({
 		var ends;
 		nodes.setPropByRegExp(/^(linebreak|comment)$/, /^/, 'skip', true);
 		nodes.setPropByRegExp(/^/, /^(\$|\$\$)$/, 'skip', true);
+		nodes.setSkipAllEnds();
 		nodes.nodes.push({ type: '_eof', text: '' });
-
-		// TODO: а вот это в функцию
-		var ends = nodes.findSingleByRegExp(/^tag$/, /^\\end$/);
-		var ranges = ends.map(function(end){
-			return [end, nodes.getArgumentsEnd(end, 2)];
-		});
-		nodes.setPropForRanges(ranges, 'skip', true);
 
 		var found = nodes.findSequenceByRegExp([
 			{ type: /^/   , text: /[\.\?]$/},

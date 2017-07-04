@@ -37,4 +37,12 @@ Nodes.prototype.setPropForRanges = function(ranges, propname, propvalue) {
 	}
 };
 
+Nodes.prototype.setSkipAllEnds = function() {
+	var ends = this.findSingleByRegExp(/^tag$/, /^\\end$/);
+	var ranges = ends.map(function(end) {
+		return [end, this.getArgumentsEnd(end, 2)];
+	}, this);
+	this.setPropForRanges(ranges, 'skip', true);
+};
+
 };
