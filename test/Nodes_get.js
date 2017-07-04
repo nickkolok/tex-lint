@@ -1438,6 +1438,15 @@ test('findSequenceByRegExp', function () {
 		],
 		''
 	);
+	N = new Nodes('{1}');
+	N.nodes[1].skip = true;
+	N.nodes[2].skip = true;
+		assert.deepEqual(
+		N.findSequenceByRegExp([{ type:/bracket/, text:/^/ }, { type:/bracket/, text:/^/ }]),
+		[
+		],
+		''
+	);
 });
 
 test('isInsideArgumentsOf', function () {
