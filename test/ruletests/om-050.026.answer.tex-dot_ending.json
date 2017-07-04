@@ -1,0 +1,6 @@
+{
+	"text": "\\begin{enumerate}\n\t\\item $\\omega ^2 > \\omega ^2_{\\mbox{кр}} = \\frac{mgaA}{C(C + ma^2)}$,\n\t\\item $\\Omega ^2 > \\Omega ^2_{\\mbox{кр}} = \\frac{mga}{A + ma^2}$;\n\t\\item $\\Omega ^2\\left( A(1 + 2\\sin^2{\\theta}) +\n\tma^2\\cos^2{\\theta}\\right)+\n\t\\Omega\\omega(3C + ma^2)\\sin{\\theta} +\n\t\\frac{C}{A}(C + ma^2)\\omega ^2 > mga\\cos{\\theta}$.\n\\end{enumerate}\nВходящие в это неравенство величины связаны соотношением\n$$(C + ma^2)\\Omega\\omega - A\\Omega ^2\\sin{\\theta}+\nmga\\sin{\\theta} = 0.$$\n",
+	"rulename": "dot_ending",
+	"indexes": [],
+	"quantity": 0
+}

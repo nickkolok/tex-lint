@@ -9,33 +9,39 @@ new Rule({
 	name: 'dot_ending',
 	message: 'Файл должен заканчиваться точкой или вопросительным знаком',
 	findErrors: function(nodes) {
+		if (!nodes.length) {
+			return new RuleViolation({
+				indexes: [],
+			});
+		}
 		// Планируем испортить всю малину
 		nodes = nodes.clone();
 		var lastNotNewline;
 		var ends;
-		do {
-			lastNotNewline = nodes.skipTypesReverse(nodes.length - 1, ['linebreak', 'comment']);
-			if (lastNotNewline < 0) {
-				break;
-			}
-			nodes.length = lastNotNewline + 1;
+		nodes.setPropByRegExp(/^(linebreak|comment)$/, /^/, 'skip', true);
+		nodes.setPropByRegExp(/^/, /^(\$|\$\$)$/, 'skip', true);
+		nodes.nodes.push({ type: '_eof', text: '' });
 
-			ends = nodes.findSingleByRegExp(/^tag$/, /^\\end$/);
-			if (!ends.length) {
-				break;
-			}
+		// TODO: а вот это в функцию
+		var ends = nodes.findSingleByRegExp(/^tag$/, /^\\end$/);
+		var ranges = ends.map(function(end){
+			return [end, nodes.getArgumentsEnd(ends[ends.length - 1], 2)];
+		});
+		nodes.setPropForRanges(ranges, 'skip', true);
 
-			if (nodes.getArgumentsEnd(ends[ends.length - 1], 2) !== nodes.length) {
-				break;
-			}
-			nodes.replaceArguments(ends[ends.length - 1], 2);
-		} while (1);
+		var found = nodes.findSequenceByRegExp([
+			{ type: /^/   , text: /[\.\?]$/},
+			{ type: /_eof/, text: /^/},
+		]);
 
-		var prelast = nodes.nodes[lastNotNewline];
 		var indexes = [];
-		if (prelast && !(/[\.\?]/).test(prelast.text)) {
-			indexes = [nodes.length - 2];
+		if (!found.length) {
+			indexes = [nodes.findSequenceByRegExp([
+				{ type: /^/, text: /^/ },
+				{ type: /^_eof$/, text: /^/ },
+			]).pop()];
 		}
+		nodes.nodes.pop();
 		return new RuleViolation({
 			indexes: indexes,
 		});
