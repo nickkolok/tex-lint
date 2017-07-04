@@ -8,25 +8,16 @@ new Rule({
 	name: 'comma_before_gde',
 	message: 'В конце выключной формулы перед словом "где" ставится запятая',
 	findErrors: function(nodes) {
+		nodes.setPropByRegExp(/^(space|linebreak|comment)$/, /^/, 'skip', true);
 		var indexes = nodes.findSequenceByRegExp([
 			{ type: /^/, text: /^(?!(,)$)/ },
 			{ type: /^/, text: /\$\$/ },
-			{ type: /^(space|linebreak)$/, text: /^/ },
 			{ type: /cyrtext/, text: /где/ },
-		]).concat(nodes.findSequenceByRegExp([
-			{ type: /^/, text: /^(?!(,))$/ },
-			{ type: /^/, text: /\$\$/ },
-			{ type: /^(space|linebreak)$/, text: /^/ },
-			{ type: /^(space|linebreak)$/, text: /^/ },
-			{ type: /cyrtext/, text: /где/ },
-		])).concat(nodes.findSequenceByRegExp([
-			{ type: /^/, text: /^(?!(,))$/ },
-			{ type: /^/, text: /\$\$/ },
-			{ type: /cyrtext/, text: /где/ },
-		]));
+		]);
 		indexes = indexes.map(function(index) {
 			return index + 1;
 		});
+		nodes.delAllPropsOfAllNodes();
 		return new RuleViolation({
 			indexes: indexes,
 		});
