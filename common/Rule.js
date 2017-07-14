@@ -180,18 +180,7 @@ new Rule(
 	}
 );
 
-makeSingleForbiddingRule(
-	/^comment$/,
-	/^..+$/,
-	{
-		name: 'no_nontrivial-comments',
-		message: 'Не разрешается комментировать фрагменты текста',
-		commonCorrector: function(nodes, i) {
-			nodes.removeComment(i);
-			return nodes;
-		},
-	}
-);
+require('./Rules/no_nontrivial-comments.js');
 
 makeSingleForbiddingRule(
 	/^comment$/,
