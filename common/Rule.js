@@ -251,30 +251,7 @@ new Rule(
 );
 
 require('./Rules/no_env_equation.js');
-
-new Rule(
-	'no_env_equation*',
-	'Не разрешается использование окружений \\begin{equation*} ... \\end{equation*}',
-	function(nodes) {
-		var indexes = nodes.getEnvironmentsList(['equation*']).map(
-			function(env) {
-				return env.begin;
-			}
-		);
-		return {
-			quantity: indexes.length,
-			indexes: indexes,
-			commonCorrector: function(n, index) {
-				n.renewEnvironment(index, new Nodes('$$'), new Nodes('$$'));
-				return n;
-			},
-		};
-	},
-	function(nodes) {
-		nodes.renewAllEnvironments(['equation*'], new Nodes('$$'), new Nodes('$$'));
-		return nodes;
-	}
-);
+require('./Rules/no_env_equation*.js');
 
 new Rule(
 	'no_frac_in_sub_sup',
