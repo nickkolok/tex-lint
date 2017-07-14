@@ -213,9 +213,9 @@ new Rule({
 	name: 'separate$',
 	message: 'Строчная формула должна занимать отдельную строку',
 	findErrors: function(nodes) {
-		return {
-			quantity: nodes.count$SeparationErrors(),
-		};
+		return new RuleViolation({
+			indexes: nodes.get$SeparationErrors(),
+		});
 	},
 	fixErrors: function(nodes) {
 		nodes.separate$();
