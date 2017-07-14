@@ -68,6 +68,27 @@ Nodes.prototype.splitRowOnce = function(rownumber, maxlength) {
 	return false;
 };
 
+Nodes.prototype.splitRowByIndex = function(index, maxlength) {
+	// Передаётся индекс конца строки
+
+	var finish = index;
+	var start  = this.skipToTypesReverse(index - 1, ['linebreak']);
+
+	var currentLength = 0;
+	for (var i = start + 1; i < finish; i++) {
+		currentLength += this.nodes[i].text.length;
+		//console.log('currentLength', currentLength);
+		if (currentLength > maxlength) {
+			var lastSpace = this.skipToTypesReverse(i, ['space']);
+			if (lastSpace > start) {
+				this.nodes[lastSpace] = Nodes.NEW_LINEBREAK();
+				this.splitRowByIndex(index, maxlength);
+				return;
+			}
+		}
+	}
+};
+
 Nodes.prototype.splitOneRow = function(maxlength) {
 	var rows = this.getTooLongRowsNumbers(maxlength);
 	for (var i = 0; i < rows.length; i++) {
