@@ -212,9 +212,9 @@ new Rule(
 	"separate$$",
 	'Знак выключной формулы $$ должен занимать отдельную строку',
 	function(nodes) {
-		return {
-			quantity: nodes.getNonseparated$$Numbers().length,
-		};
+		return new RuleViolation({
+			indexes: nodes.getNonseparated$$Numbers(),
+		});
 	},
 	function(nodes) {
 		nodes.separate$$();
