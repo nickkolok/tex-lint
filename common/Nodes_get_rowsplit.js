@@ -83,8 +83,10 @@ Nodes.prototype.getTooLongRowsNumbers = function(maxlength) {
 	}
 
 	return nums;
+};
 
-/*
+Nodes.prototype.getTooLongRowsIndexes = function(maxlength) {
+	// А вот эта - номера нод
 	var nums = [];
 	var linebreaks = this.getNodesNumbers('linebreak','\n');
 
@@ -92,14 +94,13 @@ Nodes.prototype.getTooLongRowsNumbers = function(maxlength) {
 	linebreaks.unshift(-1);
 	linebreaks.push(this.length);
 
-	for (var j = 0; j < linebreaks.length; j++) {
+	for (var j = 0; j < linebreaks.length - 1; j++) {
 		var i = linebreaks[j];
-		if (this.getSubnodes().toString().length > ) {
-			nums.push(j);
+		if (this.getSubnodes(linebreaks[j] + 1, linebreaks[j + 1]).toString().length > maxlength) {
+			nums.push(linebreaks[j + 1]);
 		}
 	}
 	return nums;
-*/
 };
 
 };
