@@ -59,6 +59,42 @@ test("frac and numbers", function () {
 		],
 		""
 	);
+	N.setPropForRanges([[1,3],[7,19]], 'prop', 'xx');
+	assert.deepEqual(
+		N.nodes,
+		[
+			{ text: '\\frac', type: 'tag' },
+			{ text: '{', type: 'bracket', prop: 'xx' },
+			{ text: '1', type: 'number', prop: 'xx' },
+			{ text: '}', type: 'bracket' },
+			{ text: '{', type: 'bracket' },
+			{ text: '2', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '3', type: 'number', prop: 'xx' },
+			{ text: '[', type: 'bracket', prop: 'xx' },
+			{ text: '5', type: 'number', prop: 'xx' },
+			{ text: ']', type: 'bracket', prop: 'xx' },
+		],
+		""
+	);
+	N.delPropForRanges([[7,19]], 'prop');
+	assert.deepEqual(
+		N.nodes,
+		[
+			{ text: '\\frac', type: 'tag' },
+			{ text: '{', type: 'bracket', prop: 'xx' },
+			{ text: '1', type: 'number', prop: 'xx' },
+			{ text: '}', type: 'bracket' },
+			{ text: '{', type: 'bracket' },
+			{ text: '2', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '3', type: 'number' },
+			{ text: '[', type: 'bracket' },
+			{ text: '5', type: 'number' },
+			{ text: ']', type: 'bracket' },
+		],
+		""
+	);
 });
 
 test('setSkipAllEnds', function () {
