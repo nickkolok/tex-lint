@@ -1,4 +1,4 @@
-var RuleViolation = require('../RuleViolation.js');
+'use strict';
 
 require('../Rule.js').makeSingleForbiddingRule(
 	/^tag$/,
