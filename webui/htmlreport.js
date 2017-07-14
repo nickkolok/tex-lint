@@ -100,7 +100,11 @@ function createPartialCorrectButton(o, index, corrector, target) {
 	})[0];
 	singleButton.onclick = (function(_index, _corrector) { return function() {
 		var nodes = _corrector(o.getNodes(), _index);
+		o.editor.focus();
+		var pos = o.editor.getCursor();
 		o.editor.setValue(nodes.toString());
+		o.editor.focus();
+		o.editor.setCursor(pos);
 		o.recheck();
 	};})(index, corrector);
 
