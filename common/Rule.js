@@ -55,10 +55,11 @@ function makeSingleForbiddingRule(typereg, textreg, o) {
 			),
 		});
 	};})(typereg, textreg);
-	if (o.replacement) {
+	if ('replacement' in o) {//o.replacement не сработает на пустую строку ''
 		o.commonCorrector = function(nodes, index) {
 			nodes.nodes[index].text = o.replacement;
 			nodes.reparse();
+			return nodes;
 		};
 	}
 
