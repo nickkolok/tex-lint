@@ -80,7 +80,11 @@ function createFixButtonIfPossible(theRule, reportErrors, target, o) {
 		try { // TODO: выляпаться из замыкания!!!
 			console.log('Trying to fix ' + rule.name);
 			var nodes = rule.fixErrors(o.getNodes());
+			o.editor.focus();
+			var pos = o.editor.getCursor();
 			o.editor.setValue(nodes.toString());
+			o.editor.focus();
+			o.editor.setCursor(pos);
 			o.recheck();
 		} catch (e) {
 			console.log(e);
