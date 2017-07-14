@@ -188,10 +188,10 @@ new Rule(
 var execall = require('execall');
 
 var toestreg = /([\s\n\r]то[\s\n\r]+есть[\s\n\r])/g;
-new Rule(
-	"notoest",
-	'Вместо "то есть" необходимо использовать сокращение "т. е."',
-	function(nodes) {
+new Rule({
+	name: 'notoest',
+	message: 'Вместо "то есть" необходимо использовать сокращение "т. е."',
+	findErrors: function(nodes) {
 		var text = nodes.toString();
 		var numbers = execall(toestreg, text);
 		var indexes = numbers.map(function(number) {
@@ -201,14 +201,14 @@ new Rule(
 			indexes: indexes,
 		});
 	},
-	function(nodes) {
+	fixErrors: function(nodes) {
 		var newtext = (nodes.toString().replace(toestreg, " т.~е. "));
 		nodes.nodes = [{ text: newtext }];
 		nodes.reparse();
 		return nodes;
 		//return (new Nodes(nodes.toString().replace(toestreg, " т.~е. ")));
-	}
-);
+	},
+});
 
 require('./Rules/no_nontrivial-comments.js');
 require('./Rules/no_trivial-comments.js');
