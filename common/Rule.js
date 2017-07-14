@@ -76,15 +76,12 @@ makeSingleForbiddingRule(
 	}
 );
 
-new Rule(
-	"noautonumformulas",
-	"Не допускается использование автоматической нумерации формул",
-	function(nodes) {
-		return {
-			quantity:
-				nodes.getNodesQuantity("tag", "\\ref") +
-				nodes.getNodesQuantity("tag", "\\label")
-		};
+makeSingleForbiddingRule(
+	/^tag$/,
+	/^\\(label|ref)$/,
+	{
+		name: 'noautonumformulas',
+		message: 'Не допускается использование автоматической нумерации формул',
 	}
 );
 
