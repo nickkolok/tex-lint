@@ -209,25 +209,7 @@ require('./Rules/no_nontrivial-comments.js');
 require('./Rules/no_trivial-comments.js');
 require('./Rules/separate$$.js');
 require('./Rules/separate$.js');
-
-new Rule({
-	name: 'splitrows80',
-	message: 'Длина строки не должна превышать 80 символов',
-	findErrors: function(nodes) {
-		return new RuleViolation({
-			indexes: nodes.getTooLongRowsIndexes(80),
-		});
-	},
-	fixErrors: function(nodes) {
-		nodes.splitRows(80);
-		return nodes;
-	},
-	commonCorrector: function(n, i) {
-		n.splitRowByIndex(i, 80);
-		return n;
-	}
-});
-
+require('./Rules/splitrows80.js');
 require('./Rules/no_env_equation.js');
 require('./Rules/no_env_equation*.js');
 
