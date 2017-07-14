@@ -250,21 +250,7 @@ new Rule(
 	}
 );
 
-new Rule(
-	'no_env_equation',
-	'Не разрешается использование окружений \\begin{equation} ... \\end{equation}',
-	function(nodes) {
-		var indexes = nodes.getEnvironmentsList(['equation']).map(
-			function(env) {
-				return env.begin;
-			}
-		);
-		return {
-			quantity: indexes.length,
-			indexes: indexes,
-		};
-	}
-);
+require('./Rules/no_env_equation.js');
 
 new Rule(
 	'no_env_equation*',
