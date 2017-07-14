@@ -68,6 +68,31 @@ function makeSingleForbiddingRule(typereg, textreg, o) {
 
 module.exports.makeSingleForbiddingRule = makeSingleForbiddingRule;
 
+
+function forbidEnvs(envs, o) {
+	o.findErrors = (function($envs) { return function(nodes) {
+		var indexes = nodes.getEnvironmentsList(envs).map(
+			function(env) {
+				return env.begin;
+			}
+		);
+		return new RuleViolation({
+			indexes: indexes,
+		});
+	};})(envs);
+	if (('newBegin' in o) && ('newEnd' in o)) {//o.newBegin не сработает на пустую строку ''
+		o.commonCorrector = function(n, index) {
+			n.renewEnvironment(index, new Nodes(o.newBegin), new Nodes(o.newEnd));
+			return n;
+		};
+	}
+
+	new Rule(o);
+}
+
+module.exports.forbidEnvs = forbidEnvs;
+
+
 require('./Rules/nonewcommand.js');
 require('./Rules/noautonumformulas.js');
 require('./Rules/noautonumbiblio.js');
