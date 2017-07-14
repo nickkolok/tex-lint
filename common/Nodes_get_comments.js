@@ -23,13 +23,7 @@ Nodes.prototype.isNontrivialComment = function(index) {
 };
 
 Nodes.prototype.getNontrivialCommentsNumbers = function() {
-	var nums = [];
-	for (var i = 0; i < this.length; i++) {
-		if (this.isNontrivialComment(i)) {
-			nums.push(i);
-		}
-	}
-	return nums;
+	return this.findSingleByRegExp(/^comment$/, /..+/);
 };
 
 Nodes.prototype.getNontrivialCommentsQuantity = function() {
