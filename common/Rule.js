@@ -67,14 +67,7 @@ function makeSingleForbiddingRule(typereg, textreg, o) {
 
 module.exports.makeSingleForbiddingRule = makeSingleForbiddingRule;
 
-makeSingleForbiddingRule(
-	/^tag$/,
-	/^\\(re|)new(command|environment)$/,
-	{
-		name: "nonewcommand",
-		message: "Не допускается переопределение команд или окружений или определение новых",
-	}
-);
+require('./Rules/nonewcommand.js');
 
 makeSingleForbiddingRule(
 	/^tag$/,
