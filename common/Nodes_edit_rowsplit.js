@@ -25,17 +25,22 @@ Nodes.prototype.separateOne$$ = function(i) {
 };
 
 Nodes.prototype.separate$ = function() {
-	var len = this.getNodesNumbers('keyword','$').length;
+	var len = this.getNodesNumbers('keyword', '$').length;
 	for (var j = 0; j < len; j++) {
-		var i = this.getNodesNumbers('keyword','$')[j]; // Номера нод могли поменяться. Хотя могли и нет.
-		if (j % 2 == 0 && !this.isGoodOpening$(i)) {
-			var target = this.skipToTypesReverse(i, ['space']);
-			this.nodes[target] = Nodes.NEW_LINEBREAK();
-		} else if (j % 2 == 1 && !this.isGoodClosing$(i)) {
-			var target = this.skipToTypes(i, ['space']);
-			this.nodes[target] = Nodes.NEW_LINEBREAK();
+		var i = this.getNodesNumbers('keyword', '$')[j]; // Номера нод могли поменяться. Хотя могли и нет.
+		if (!this.isWellSeparated$(i)) {
+			this.separateOne$(i);
 		}
 	}
+};
+
+Nodes.prototype.separateOne$ = function(i) {
+	if (this.isInside$(i + 1)) {
+		var target = this.skipToTypesReverse(i, ['space']);
+	} else {
+		var target = this.skipToTypes(i, ['space']);
+	}
+	this.nodes[target] = Nodes.NEW_LINEBREAK();
 };
 
 Nodes.prototype.splitRowOnce = function(rownumber, maxlength) {
