@@ -46,6 +46,15 @@ Nodes.prototype.isGoodClosing$ = function(i) {
 	return this.isWellSeparated(i, ['linebreak'], ['space'], false);
 };
 
+Nodes.prototype.isWellSeparated$ = function(i) {
+	if (this.isInside$(i + 1)) {
+		// Значит, наш $ - левый
+		return this.isGoodOpening$(i);
+	}
+	// А иначе правый
+	return this.isGoodClosing$(i);
+};
+
 Nodes.prototype.count$SeparationErrors = function() {
 	var quantity = 0;
 	var nums = this.getNodesNumbers('keyword','$');
