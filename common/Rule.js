@@ -180,17 +180,16 @@ new Rule(
 	}
 );
 
-new Rule(
-	"no_nontrivial-comments",
-	'Не разрешается комментировать фрагменты текста',
-	function(nodes) {
-		return {
-			quantity: nodes.getNontrivialCommentsQuantity(),
-		};
-	},
-	function(nodes) {
-		nodes.removeNontrivialComments();
-		return nodes;
+makeSingleForbiddingRule(
+	/^comment$/,
+	/^..+$/,
+	{
+		name: 'no_nontrivial-comments',
+		message: 'Не разрешается комментировать фрагменты текста',
+		commonCorrector: function(nodes, i) {
+			nodes.removeComment(i);
+			return nodes;
+		},
 	}
 );
 
