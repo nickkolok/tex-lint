@@ -1510,6 +1510,18 @@ test('isInsideArgumentsOf', function () {
 });
 
 
+test('getIndexBySymbolNumber', function () {
+	var N = new Nodes('\\alpha \\frac{1}{2} \\dfrac{\\operatorname{tg}t}{\pi}');
+	var indexes = [0,0,0,0,0,0,1,2,2,2,2,2,3,4,5,6,7,8,9,10,10,10,10,10,10,11,12,12];
+	for (var i = 0; i < indexes.length; i++) {
+		assert.deepEqual(
+			N.getIndexBySymbolNumber(i),
+			indexes[i],
+			""
+		);
+	}
+});
+
 /*
 
 test('', function () {

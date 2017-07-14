@@ -449,4 +449,14 @@ Nodes.prototype.isInsideArgumentsOf = function(index, tagsArr, argNumber) {
 	return false;
 };
 
+Nodes.prototype.getIndexBySymbolNumber = function(number) {
+	var totalLength = 0;
+	for (var i = 0; i < this.length; i++) {
+		totalLength += this.nodes[i].text.length;
+		if (totalLength > number) {
+			return i;
+		}
+	}
+};
+
 };//modules.export
