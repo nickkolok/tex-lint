@@ -69,19 +69,7 @@ module.exports.makeSingleForbiddingRule = makeSingleForbiddingRule;
 
 require('./Rules/nonewcommand.js');
 require('./Rules/noautonumformulas.js');
-
-
-new Rule(
-	"noautonumbiblio",
-	"Не допускается использование автоматической нумерации библиографии",
-	function(nodes) {
-		return {
-			quantity:
-				nodes.getNodesQuantity("tag","\\cite") +
-				nodes.getNodesQuantity("tag","\\bibitem")
-		};
-	}
-);
+require('./Rules/noautonumbiblio.js');
 
 new Rule(
 	"Bibitem_exist",
