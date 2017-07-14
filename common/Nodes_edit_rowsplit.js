@@ -7,17 +7,20 @@ Nodes.prototype.separate$$ = function() {
 	var len = this.getNonseparated$$Numbers().length;
 	for (var j = 0; j < len; j++) {
 		var i = this.getNonseparated$$Numbers()[0]; // Номера нод-то поменялись! И мы исправили!
-		var left  = this.skipTypesReverse(i - 1, ['space']);
-		var right = this.skipTypes(i + 1, ['space']);
+		//TODO: справа налево. Или вовсе выпилить
+		this.separateOne$$(i);
+	}
+};
 
-		//Справа налево, чтоб индексы не сползли
-		if (this.nodes[right] && this.nodes[right].type !== 'linebreak') {
-			this.insertNode(i + 1, Nodes.NEW_LINEBREAK());
-		}
-
-		if (this.nodes[left] && this.nodes[left].type !== 'linebreak') {
-			this.insertNode(i, Nodes.NEW_LINEBREAK());
-		}
+Nodes.prototype.separateOne$$ = function(i) {
+	var left  = this.skipTypesReverse(i - 1, ['space']);
+	var right = this.skipTypes(i + 1, ['space']);
+	//Справа налево, чтоб индексы не сползли
+	if (this.nodes[right] && this.nodes[right].type !== 'linebreak') {
+		this.insertNode(i + 1, Nodes.NEW_LINEBREAK());
+	}
+	if (this.nodes[left] && this.nodes[left].type !== 'linebreak') {
+		this.insertNode(i, Nodes.NEW_LINEBREAK());
 	}
 };
 
