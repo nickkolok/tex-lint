@@ -193,17 +193,16 @@ makeSingleForbiddingRule(
 	}
 );
 
-new Rule(
-	"no_trivial-comments",
-	'Не разрешается комментировать пустое окончание строки',
-	function(nodes) {
-		return {
-			quantity: nodes.getTrivialCommentsNumbers().length,
-		};
-	},
-	function(nodes) {
-		nodes.removeTrivialComments();
-		return nodes;
+makeSingleForbiddingRule(
+	/^comment$/,
+	/^%$/,
+	{
+		name: 'no_trivial-comments',
+		message: 'Не разрешается комментировать пустое окончание строки',
+		commonCorrector: function(nodes, i) {
+			nodes.removeComment(i);
+			return nodes;
+		},
 	}
 );
 
