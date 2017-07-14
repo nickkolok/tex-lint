@@ -208,19 +208,23 @@ new Rule(
 require('./Rules/no_nontrivial-comments.js');
 require('./Rules/no_trivial-comments.js');
 
-new Rule(
-	"separate$$",
-	'Знак выключной формулы $$ должен занимать отдельную строку',
-	function(nodes) {
+new Rule({
+	name: "separate$$",
+	message: 'Знак выключной формулы $$ должен занимать отдельную строку',
+	findErrors: function(nodes) {
 		return new RuleViolation({
 			indexes: nodes.getNonseparated$$Numbers(),
 		});
 	},
-	function(nodes) {
+	fixErrors: function(nodes) {
 		nodes.separate$$();
 		return nodes;
-	}
-);
+	},
+	commonCorrector: function(n, i) {
+		n.separateOne$$(i);
+		return n;
+	},
+});
 
 new Rule(
 	"separate$",
