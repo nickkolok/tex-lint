@@ -56,29 +56,20 @@ Nodes.prototype.isWellSeparated$ = function(i) {
 };
 
 Nodes.prototype.count$SeparationErrors = function() {
-	var quantity = 0;
-	var nums = this.getNodesNumbers('keyword','$');
+	return this.get$SeparationErrors().length;
+	//TODO: а не выпилить ли эту функцию?
+};
 
-	for (var j = 0; j < nums.length; j += 2) {
-		if (!this.isGoodOpening$(nums[j])) {
-			quantity++;
+Nodes.prototype.get$SeparationErrors = function() {
+	var errors = [];
+	var nums = this.getNodesNumbers('keyword', '$');
+
+	for (var j = 0; j < nums.length; j ++) {
+		if (!this.isWellSeparated$(nums[j])) {
+			errors.push(nums[j]);
 		}
 	}
-
-	for (var j = 1; j < nums.length; j += 2) {
-		if (!this.isGoodClosing$(nums[j])) {
-			quantity++;
-		}
-	}
-
-/*
-	for (var j = 0; j < nums.length; j++) {
-		if (![this.isGoodOpening$, this.isGoodClosing$][j % 2](nums[j])) {
-			quantity++;
-		}
-	}
-*/
-	return quantity;
+	return errors;
 };
 
 Nodes.prototype.getTooLongRowsNumbers = function(maxlength) {
