@@ -68,15 +68,8 @@ function makeSingleForbiddingRule(typereg, textreg, o) {
 module.exports.makeSingleForbiddingRule = makeSingleForbiddingRule;
 
 require('./Rules/nonewcommand.js');
+require('./Rules/noautonumformulas.js');
 
-makeSingleForbiddingRule(
-	/^tag$/,
-	/^\\(label|ref)$/,
-	{
-		name: 'noautonumformulas',
-		message: 'Не допускается использование автоматической нумерации формул',
-	}
-);
 
 new Rule(
 	"noautonumbiblio",
