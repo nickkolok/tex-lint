@@ -208,24 +208,7 @@ new Rule(
 require('./Rules/no_nontrivial-comments.js');
 require('./Rules/no_trivial-comments.js');
 require('./Rules/separate$$.js');
-
-new Rule({
-	name: 'separate$',
-	message: 'Строчная формула должна занимать отдельную строку',
-	findErrors: function(nodes) {
-		return new RuleViolation({
-			indexes: nodes.get$SeparationErrors(),
-		});
-	},
-	fixErrors: function(nodes) {
-		nodes.separate$();
-		return nodes;
-	},
-	commonCorrector: function(nodes, i) {
-		nodes.separateOne$(i);
-		return nodes;
-	},
-});
+require('./Rules/separate$.js');
 
 new Rule(
 	"splitrows80",
