@@ -31,8 +31,17 @@ Nodes.prototype.delAllPropsOfAllNodes = function() {
 Nodes.prototype.setPropForRanges = function(ranges, propname, propvalue) {
 	for (var i = 0; i < ranges.length; i++) {
 		var range = ranges[i];
-		for (var j = range[0]; j < range[1]; j++) {
+		for (var j = range[0]; j < range[1] && j < this.length; j++) {
 			this.nodes[j][propname] = propvalue;
+		}
+	}
+};
+
+Nodes.prototype.delPropForRanges = function(ranges, propname) {
+	for (var i = 0; i < ranges.length; i++) {
+		var range = ranges[i];
+		for (var j = range[0]; j < range[1] && j < this.length; j++) {
+			delete this.nodes[j][propname];
 		}
 	}
 };
