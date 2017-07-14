@@ -184,18 +184,24 @@ new Rule(
 	}
 );
 
+var toestreg = /[\s\n\r]то[\s\n\r]+есть[\s\n\r]/g;
 new Rule(
 	"notoest",
 	'Вместо "то есть" необходимо использовать сокращение "т. е."',
 	function(nodes) {
 		var text = nodes.toString();
-		var quantity = text.match(/\sто\s+есть\s/g);
+		var quantity = text.match(toestreg);
+		quantity = quantity ? quantity.length : 0;
 		return {
 			quantity: quantity, // TODO: всё-таки число бы, а?
 		};
 	},
 	function(nodes) {
-		return (new Nodes(nodes.toString().replace(/\sто\sесть\s/g," т.~е. ")));
+		var newtext = (nodes.toString().replace(toestreg, " т.~е. "));
+		nodes.nodes = [{ text: newtext }];
+		nodes.reparse();
+		return nodes;
+		//return (new Nodes(nodes.toString().replace(toestreg, " т.~е. ")));
 	}
 );
 
