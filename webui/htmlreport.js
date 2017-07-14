@@ -67,7 +67,7 @@ function createFullPreviewBlockIfNeeded(nodes, index, corrector, target) {
 	target.appendChild(previewBody);
 }
 
-function createFixButtonIfPossible(theRule, reportErrors, target) {
+function createFixButtonIfPossible(theRule, reportErrors, target, o) {
 	if (!theRule.fixErrors) {
 		return;
 	}
@@ -140,7 +140,8 @@ module.exports.createHTMLreport = function(o) {
 		createFixButtonIfPossible(
 			theRule,
 			corrector,
-			reportErrors
+			reportErrors,
+			o
 		);
 
 		// Если известны точные места...
