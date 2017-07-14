@@ -158,7 +158,7 @@ module.exports.createHTMLreport = function(o) {
 			})[0];
 
 			for (var j = 0; j < result.indexes.length; j++) {
-				var rowcol = $('<span>');
+				var rowcol = $('<span style="cursor:pointer;">'); // TODO: таки сделать CSS-файл
 				var coord = o.nodesObject.getRowCol(result.indexes[j]);
 				rowcol.html('Строка ' + coord.row + ', символ ' + coord.col + '; ');
 				divGroupErrors.appendChild(rowcol[0]);
