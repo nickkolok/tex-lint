@@ -181,19 +181,7 @@ new Rule(
 );
 
 require('./Rules/no_nontrivial-comments.js');
-
-makeSingleForbiddingRule(
-	/^comment$/,
-	/^%$/,
-	{
-		name: 'no_trivial-comments',
-		message: 'Не разрешается комментировать пустое окончание строки',
-		commonCorrector: function(nodes, i) {
-			nodes.removeComment(i);
-			return nodes;
-		},
-	}
-);
+require('./Rules/no_trivial-comments.js');
 
 new Rule(
 	"separate$$",
