@@ -702,9 +702,56 @@ test('splitOneRow', function () {
 		'1\n12345\n6 7\nabracadabra',
 		""
 	);
+});
 
+test('splitRowByIndex', function () {
+	var N = new Nodes('');
+	N.splitRowByIndex(0, 5);
+	assert.deepEqual(
+		N.toString(),
+		'',
+		""
+	);
 
-	'1\n12345 6 7\nabracadabra'
+	var N = new Nodes('1\n12345 6');
+	N.splitRowByIndex(5, 5);
+	assert.deepEqual(
+		N.toString(),
+		'1\n12345\n6',
+		""
+	);
+
+	var N = new Nodes('1\n12345 6 7');
+	N.splitRowByIndex(7, 5);
+	assert.deepEqual(
+		N.toString(),
+		'1\n12345\n6 7',
+		""
+	);
+
+	var N = new Nodes('1\n12345 6 7');
+	N.splitRowByIndex(7, 7);
+	assert.deepEqual(
+		N.toString(),
+		'1\n12345 6\n7',
+		""
+	);
+
+	var N = new Nodes('1\n12345 6 7\nabracadabra');
+	N.splitRowByIndex(9, 5);
+	assert.deepEqual(
+		N.toString(),
+		'1\n12345 6 7\nabracadabra',
+		""
+	);
+
+	var N = new Nodes('1\n12345 6 7\nabracadabra');
+	N.splitRowByIndex(7, 5);
+	assert.deepEqual(
+		N.toString(),
+		'1\n12345\n6 7\nabracadabra',
+		""
+	);
 });
 
 test('splitRows', function () {
