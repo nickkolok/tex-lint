@@ -92,6 +92,46 @@ function forbidEnvs(envs, o) {
 
 module.exports.forbidEnvs = forbidEnvs;
 
+var execall = require('execall');
+var cloneRegexp = require('clone-regexp');
+
+function replaceText(o) {
+	o.findErrors = (function(reg) {
+		return function(nodes) {
+			var text = nodes.toString();
+			var numbers = execall(reg, text);
+			var indexes = numbers.map(function(number) {
+				return nodes.getIndexBySymbolNumber(number.index);
+			});
+			return new RuleViolation({
+				indexes: indexes,
+			});
+		};
+	})(o.regtext);
+	if ('newtext' in o) {
+		o.fixErrors = (function(reg, newtext) {
+			return function(nodes) {
+				var newstr = (nodes.toString().replace(reg, newtext));
+				nodes.nodes = [{ text: newstr }];
+				nodes.reparse();
+				return nodes;
+			};
+		})(o.regtext, o.newtext);
+		o.commonCorrector = (function(reg, newtext) {
+			return function(n, i) {
+				var substr = n.getSubnodes(i, n.length).toString();
+				substr = substr.replace(cloneRegexp(reg, { global: false }), newtext);
+				n.length = i + 1;
+				n.nodes[i].text = substr;
+				n.reparse();
+				return n;
+			};
+		})(o.regtext, o.newtext);
+	}
+	new Rule(o);
+}
+
+module.exports.replaceText = replaceText;
 
 require('./Rules/nonewcommand.js');
 require('./Rules/noautonumformulas.js');
@@ -184,45 +224,6 @@ new Rule(
 	}
 );
 
-
-var execall = require('execall');
-var cloneRegexp = require('clone-regexp');
-
-function replaceText(o) {
-	o.findErrors = (function(reg) {
-		return function(nodes) {
-			var text = nodes.toString();
-			var numbers = execall(reg, text);
-			var indexes = numbers.map(function(number) {
-				return nodes.getIndexBySymbolNumber(number.index);
-			});
-			return new RuleViolation({
-				indexes: indexes,
-			});
-		};
-	})(o.regtext);
-	if ('newtext' in o) {
-		o.fixErrors = (function(reg, newtext) {
-			return function(nodes) {
-				var newstr = (nodes.toString().replace(reg, newtext));
-				nodes.nodes = [{ text: newstr }];
-				nodes.reparse();
-				return nodes;
-			};
-		})(o.regtext, o.newtext);
-		o.commonCorrector = (function(reg, newtext) {
-			return function(n, i) {
-				var substr = n.getSubnodes(i, n.length).toString();
-				substr = substr.replace(cloneRegexp(reg, { global: false }), newtext);
-				n.length = i + 1;
-				n.nodes[i].text = substr;
-				n.reparse();
-				return n;
-			};
-		})(o.regtext, o.newtext);
-	}
-	new Rule(o);
-}
 
 replaceText({
 	name: 'notoest',
