@@ -1,0 +1,15 @@
+require('./Rules/nonewcommand.js');
+require('./Rules/noautonumformulas.js');
+require('./Rules/noautonumbiblio.js');
+require('./Rules/notoest.js');
+require('./Rules/no_nontrivial-comments.js');
+require('./Rules/no_trivial-comments.js');
+require('./Rules/separate$$.js');
+require('./Rules/separate$.js');
+require('./Rules/splitrows80.js');
+require('./Rules/no_env_equation.js');
+require('./Rules/no_env_equation*.js');
+require('./Rules/dot_ending.js');
+require('./Rules/space_after_comma.js');
+require('./Rules/forbid_upsilon.js');
+require('./Rules/comma_before_gde.js');
