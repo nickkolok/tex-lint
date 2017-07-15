@@ -1,0 +1,73 @@
+\documentclass{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[cp1251]{inputenc}
+\usepackage[english,russian]{babel}
+
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newenvironment{nam}[2]{begdef}{enddef}
+\renewenvironment{nam}[2]{begdef}{enddef}
+
+\begin{document}
+
+
+Some text with frac $\frac{1}{2}$ in it.%
+
+Some text with frac $\frac{a}{b}+\frac{1+\alpha}{2-\beta}+\frac{1+C_0}{2}$ in it.  %comment
+
+ % Line-long comment
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% EVIL COMMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{equation}\label{eq1}
+E=mc^2
+\end{equation}
+то есть энергия есть масса (см. \cite{Einstein}).
+
+
+$E=mc^2$,то есть энергия есть масса (см. \cite{Einstein}).
+$E=mc^2$, то есть энергия есть масса (см. \cite{Einstein}).
+
+$E=mc^2$,то-есть энергия есть масса (см. \cite{Einstein}).
+$E=mc^2$,то~есть энергия есть масса (см. \cite{Einstein}).
+$E=mc^2$, тоесть энергия есть масса (см. \cite{Einstein}).
+
+$E=mc^2$,то-~есть энергия есть масса (см. \cite{Einstein}).
+
+
+$$E=mc^2$$
+
+Здесь и далее полагаем $c=3\cdot10^8$~м/с (в вакууме).
+
+Очень длинная строка, явно длиннее 80 символов, со множеством непонятных терминов и прочих слов.
+
+Также вспомним, что
+\begin{equation*}
+\sin^2 \alpha + \cos^2 \alpha = 1
+\end{equation*}
+
+откуда
+
+\begin{equation*}
+\sin^2 \alpha = 1 - \cos^2 \alpha
+\end{equation*}
+
+\begin{thebibliography}{99}
+
+
+\Bibitem{1}
+\by J.~Smith
+\paper Very interesting paper
+\jour Any journal
+\vol 42
+\pages 1--13
+\yr 1984
+
+
+\end{thebibliography}
+\end{document}
+
