@@ -96,12 +96,22 @@ test('isGoodClosing$', function () {
 		true,
 		""
 	);
+	assert.deepEqual(
+		new Nodes('$12$').isGoodClosing$(2),
+		true,
+		""
+	);
 });
 
 
 test('isWellSeparated$', function () {
 	assert.deepEqual(
 		new Nodes('$12$').isWellSeparated$(0),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$12$').isWellSeparated$(2),
 		true,
 		""
 	);

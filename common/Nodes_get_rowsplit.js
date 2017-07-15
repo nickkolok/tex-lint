@@ -47,7 +47,11 @@ Nodes.prototype.isGoodClosing$ = function(i) {
 };
 
 Nodes.prototype.isWellSeparated$ = function(i) {
-	if (this.isInside$(i + 1)) {
+	if (
+		(this.nodes[i + 1] &&  this.isInside$(i + 1))
+	||
+		(this.nodes[i - 1] && !this.isInside$(i - 1))
+	) { // Второе - на случай правого края
 		// Значит, наш $ - левый
 		return this.isGoodOpening$(i);
 	}
