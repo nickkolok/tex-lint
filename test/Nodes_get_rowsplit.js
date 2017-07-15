@@ -98,6 +98,40 @@ test('isGoodClosing$', function () {
 	);
 });
 
+
+test('isWellSeparated$', function () {
+	assert.deepEqual(
+		new Nodes('$12$').isWellSeparated$(0),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('a$12$').isWellSeparated$(1),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('a $12$').isWellSeparated$(2),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('a c$12$').isWellSeparated$(3),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('a c$12$').isWellSeparated$(5),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$12$ \nb').isWellSeparated$(2),
+		true,
+		""
+	);
+});
+
 test('count$SeparationErrors', function () {
 	assert.deepEqual(
 		new Nodes('$12$').count$SeparationErrors(),
