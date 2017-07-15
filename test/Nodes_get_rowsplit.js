@@ -314,6 +314,54 @@ test('getTooLongRowsNumbers', function () {
 	);
 });
 
+test('getTooLongRowsIndexes', function () {
+	assert.deepEqual(
+		new Nodes('').getTooLongRowsIndexes(4),
+		[],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('123').getTooLongRowsIndexes(4),
+		[],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('1234').getTooLongRowsIndexes(4),
+		[],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('123\n456').getTooLongRowsIndexes(4),
+		[],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('12345').getTooLongRowsIndexes(4),
+		[1],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('12 45\n67 y 90').getTooLongRowsIndexes(4),
+		[3, 9],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('12345\nabc\n67890').getTooLongRowsIndexes(4),
+		[1, 5],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('12345\n abc \n67890').getTooLongRowsIndexes(4),
+		[1, 5, 7],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('1\n12345 6 7').getTooLongRowsIndexes(4),
+		[7],
+		""
+	);
+});
+
 /*
 
 test('', function () {
