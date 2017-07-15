@@ -47,20 +47,24 @@ function Rule(o, message, findErrors, fixErrors) {
 module.exports.Rule = Rule;
 
 function makeSingleForbiddingRule(typereg, textreg, o) {
-	o.findErrors = (function($typereg, $textreg) { return function(nodes) {
-		return new RuleViolation({
-			indexes: nodes.findSingleByRegExp(
-				$typereg,
-				$textreg
-			),
-		});
-	};})(typereg, textreg);
-	if ('replacement' in o) {//o.replacement не сработает на пустую строку ''
-		o.commonCorrector = function(nodes, index) {
-			nodes.nodes[index].text = o.replacement;
-			nodes.reparse();
-			return nodes;
+	o.findErrors = (function($typereg, $textreg) {
+		return function(nodes) {
+			return new RuleViolation({
+				indexes: nodes.findSingleByRegExp(
+					$typereg,
+					$textreg
+				),
+			});
 		};
+	})(typereg, textreg);
+	if ('replacement' in o) {//o.replacement не сработает на пустую строку ''
+		o.commonCorrector = (function($rep) {
+			return function(nodes, index) {
+				nodes.nodes[index].text = o.replacement;
+				nodes.reparse();
+				return nodes;
+			};
+		})(o.replacement);
 	}
 
 	new Rule(o);
@@ -81,10 +85,12 @@ function forbidEnvs(envs, o) {
 		});
 	};})(envs);
 	if (('newBegin' in o) && ('newEnd' in o)) {//o.newBegin не сработает на пустую строку ''
-		o.commonCorrector = function(n, index) {
-			n.renewEnvironment(index, new Nodes(o.newBegin), new Nodes(o.newEnd));
-			return n;
-		};
+		o.commonCorrector = (function($begin, $end) {
+			return function(n, index) {
+				n.renewEnvironment(index, new Nodes($begin), new Nodes($end));
+				return n;
+			};
+		})(o.newBegin, o.newEnd);
 	}
 
 	new Rule(o);
