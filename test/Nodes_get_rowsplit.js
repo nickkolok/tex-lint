@@ -195,6 +195,77 @@ test('count$SeparationErrors', function () {
 	);
 });
 
+test('get$SeparationErrors', function () {
+	assert.deepEqual(
+		new Nodes('$12$').get$SeparationErrors(),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('a$12$').get$SeparationErrors(),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('a $12$').get$SeparationErrors(),
+		[
+			2,
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$12$b').get$SeparationErrors(),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$12$ b').get$SeparationErrors(),
+		[
+			2,
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$12$\n b').get$SeparationErrors(),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$12$ \nb').get$SeparationErrors(),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('a\n$12$').get$SeparationErrors(),
+		[
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$12$ b \n$333$c d\n$4$').get$SeparationErrors(),
+		[
+			2,
+			9,
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$12$ b \n$333$ $67$ c d\n$4$').get$SeparationErrors(),
+		[
+			2,
+			9,
+			11,
+			13,
+		],
+		""
+	);
+});
+
 test('getTooLongRowsNumbers', function () {
 	assert.deepEqual(
 		new Nodes('').getTooLongRowsNumbers(4),
