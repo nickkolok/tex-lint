@@ -173,6 +173,251 @@ test('separate$$', function () {
 
 });
 
+test('separateOne$$', function () {
+	var N;
+
+	N = new Nodes('$$');
+	N.separateOne$$(0);
+	assert.deepEqual(
+		N.toString(),
+		'$$',
+		""
+	);
+
+	N = new Nodes('\\alpha $$ \\frac{1}{2} \\cdot \\gamma $$ text text text');
+	N.separateOne$$(2);
+	assert.deepEqual(
+		N.toString(),
+		'\\alpha \n$$\n \\frac{1}{2} \\cdot \\gamma $$ text text text',
+		""
+	);
+
+	N = new Nodes('\\alpha $$ \\frac{1}{2} \\cdot \\gamma $$ text text text');
+	N.separateOne$$(16);
+	assert.deepEqual(
+		N.toString(),
+		'\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n$$\n text text text',
+		""
+	);
+
+	N = new Nodes('\\alpha \n$$\n \\frac{1}{2} \\cdot \\gamma $$ text text text');
+	N.separateOne$$(3);
+	assert.deepEqual(
+		N.toString(),
+		'\\alpha \n$$\n \\frac{1}{2} \\cdot \\gamma $$ text text text',
+		""
+	);
+
+	N = new Nodes('\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n$$ text text text');
+	N.separateOne$$(17);
+	assert.deepEqual(
+		N.toString(),
+		'\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n$$\n text text text',
+		""
+	);
+
+	N = new Nodes('\\alpha $$ \\frac{1}{2} \\cdot \\gamma $$\n text text text');
+	N.separateOne$$(16);
+	assert.deepEqual(
+		N.toString(),
+		'\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n$$\n text text text',
+		""
+	);
+
+	N = new Nodes('\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n$$\n text text text');
+	N.separateOne$$(17);
+	assert.deepEqual(
+		N.toString(),
+		'\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n$$\n text text text',
+		""
+	);
+
+	N = new Nodes('\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n  $$\n text text text');
+	N.separateOne$$(18);
+	assert.deepEqual(
+		N.toString(),
+		'\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n  $$\n text text text',
+		""
+	);
+
+	N = new Nodes('\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n$$  \n text text text');
+	N.separateOne$$(17);
+	assert.deepEqual(
+		N.toString(),
+		'\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n$$  \n text text text',
+		""
+	);
+
+	N = new Nodes('\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n   $$   \n text text text');
+	N.separateOne$$(18);
+	assert.deepEqual(
+		N.toString(),
+		'\\alpha $$ \\frac{1}{2} \\cdot \\gamma \n   $$   \n text text text',
+		""
+	);
+
+	N = new Nodes('\n$$\n');
+	N.separateOne$$(1);
+	assert.deepEqual(
+		N.toString(),
+		'\n$$\n',
+		""
+	);
+
+	N = new Nodes('\n$$');
+	N.separateOne$$(1);
+	assert.deepEqual(
+		N.toString(),
+		'\n$$',
+		""
+	);
+
+	N = new Nodes('$$\n');
+	N.separateOne$$(0);
+	assert.deepEqual(
+		N.toString(),
+		'$$\n',
+		""
+	);
+
+	N = new Nodes('  $$ ');
+	N.separateOne$$(1);
+	assert.deepEqual(
+		N.toString(),
+		'  $$ ',
+		""
+	);
+
+	N = new Nodes('\n  $$ ');
+	N.separateOne$$(2);
+	assert.deepEqual(
+		N.toString(),
+		'\n  $$ ',
+		""
+	);
+
+	N = new Nodes('  $$ \n');
+	N.separateOne$$(1);
+	assert.deepEqual(
+		N.toString(),
+		'  $$ \n',
+		""
+	);
+
+	N = new Nodes('\n  $$ \n');
+	N.separateOne$$(2);
+	assert.deepEqual(
+		N.toString(),
+		'\n  $$ \n',
+		""
+	);
+
+	N = new Nodes('\n  $$ \n \n');
+	N.separateOne$$(2);
+	assert.deepEqual(
+		N.toString(),
+		'\n  $$ \n \n',
+		""
+	);
+
+	N = new Nodes('1$$2');
+	N.separateOne$$(1);
+	assert.deepEqual(
+		N.toString(),
+		'1\n$$\n2',
+		""
+	);
+
+	N = new Nodes('1 $$2');
+	N.separateOne$$(2);
+	assert.deepEqual(
+		N.toString(),
+		'1 \n$$\n2',
+		""
+	);
+
+	N = new Nodes('1 $$ 2');
+	N.separateOne$$(2);
+	assert.deepEqual(
+		N.toString(),
+		'1 \n$$\n 2',
+		""
+	);
+
+	N = new Nodes('1 \n$$ 2');
+	N.separateOne$$(3);
+	assert.deepEqual(
+		N.toString(),
+		'1 \n$$\n 2',
+		""
+	);
+
+	N = new Nodes('1 \n$$\n 2');
+	N.separateOne$$(3);
+	assert.deepEqual(
+		N.toString(),
+		'1 \n$$\n 2',
+		""
+	);
+
+	N = new Nodes('1 \n $$ \n 2');
+	N.separateOne$$(4);
+	assert.deepEqual(
+		N.toString(),
+		'1 \n $$ \n 2',
+		""
+	);
+
+	N = new Nodes('1 \n $$ 2');
+	N.separateOne$$(4);
+	assert.deepEqual(
+		N.toString(),
+		'1 \n $$\n 2',
+		""
+	);
+
+	N = new Nodes('1 \n$$ 2');
+	N.separateOne$$(3);
+	assert.deepEqual(
+		N.toString(),
+		'1 \n$$\n 2',
+		""
+	);
+
+	N = new Nodes('1 \n$$ 2');
+	N.separateOne$$(3);
+	assert.deepEqual(
+		N.toString(),
+		'1 \n$$\n 2',
+		""
+	);
+
+	N = new Nodes('1 $$\n 2');
+	N.separateOne$$(2);
+	assert.deepEqual(
+		N.toString(),
+		'1 \n$$\n 2',
+		""
+	);
+
+	N = new Nodes('1 $$ 2 $$\n 3');
+	N.separateOne$$(2);
+	assert.deepEqual(
+		N.toString(),
+		'1 \n$$\n 2 $$\n 3',
+		''
+	);
+
+	N = new Nodes('1 $$ 2 $$\n 3');
+	N.separateOne$$(6);
+	assert.deepEqual(
+		N.toString(),
+		'1 $$ 2 \n$$\n 3',
+		''
+	);
+
+});
+
 test('separate$', function () {
 	var N;
 
