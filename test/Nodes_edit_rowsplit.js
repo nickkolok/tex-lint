@@ -493,6 +493,151 @@ test('separate$', function () {
 	);
 });
 
+test('separateOne$', function () {
+	var N;
+
+	N = new Nodes('$12$');
+	N.separateOne$(0);
+	assert.deepEqual(
+		N.toString(),
+		'$12$',
+		""
+	);
+	N = new Nodes('$12$');
+	N.separateOne$(2);
+	assert.deepEqual(
+		N.toString(),
+		'$12$',
+		""
+	);
+	N = new Nodes('a$12$');
+	N.separateOne$(1);
+	assert.deepEqual(
+		N.toString(),
+		'a$12$',
+		""
+	);
+	N = new Nodes('a$12$');
+	N.separateOne$(3);
+	assert.deepEqual(
+		N.toString(),
+		'a$12$',
+		""
+	);
+	N = new Nodes('a $12$');
+	N.separateOne$(2);
+	assert.deepEqual(
+		N.toString(),
+		'a\n$12$',
+		""
+	);
+	N = new Nodes('a $12$');
+	N.separateOne$(4);
+	assert.deepEqual(
+		N.toString(),
+		'a $12$',
+		""
+	);
+	N = new Nodes('$12$b');
+	N.separateOne$();
+	assert.deepEqual(
+		N.toString(),
+		'$12$b',
+		""
+	);
+	N = new Nodes('$12$ b');
+	N.separateOne$(0);
+	assert.deepEqual(
+		N.toString(),
+		'$12$ b',
+		""
+	);
+	N = new Nodes('$12$ b');
+	N.separateOne$(2);
+	assert.deepEqual(
+		N.toString(),
+		'$12$\nb',
+		""
+	);
+	N = new Nodes('$12$\n b');
+	N.separateOne$();
+	assert.deepEqual(
+		N.toString(),
+		'$12$\n b',
+		""
+	);
+	N = new Nodes('$12$ \nb');
+	N.separateOne$();
+	assert.deepEqual(
+		N.toString(),
+		'$12$ \nb',
+		""
+	);
+	N = new Nodes('a\n$12$');
+	N.separateOne$();
+	assert.deepEqual(
+		N.toString(),
+		'a\n$12$',
+		""
+	);
+	N = new Nodes('$12$ b \n$333$c d\n$4$');
+	N.separateOne$(0);
+	assert.deepEqual(
+		N.toString(),
+		'$12$ b \n$333$c d\n$4$',
+		''
+	);
+	N = new Nodes('$12$ b \n$333$c d\n$4$');
+	N.separateOne$(2);
+	assert.deepEqual(
+		N.toString(),
+		'$12$\nb \n$333$c d\n$4$',
+		''
+	);
+	N = new Nodes('$12$ b \n$333$c d\n$4$');
+	N.separateOne$(7);
+	assert.deepEqual(
+		N.toString(),
+		'$12$ b \n$333$c d\n$4$',
+		''
+	);
+	N = new Nodes('$12$ b \n$333$c d\n$4$');
+	N.separateOne$(9);
+	assert.deepEqual(
+		N.toString(),
+		'$12$ b \n$333$c\nd\n$4$',
+		''
+	);
+	N = new Nodes('$12$ b \n$333$c d\n$4$');
+	N.separateOne$(14);
+	assert.deepEqual(
+		N.toString(),
+		'$12$ b \n$333$c d\n$4$',
+		''
+	);
+	N = new Nodes('$12$ b \n$333$c d\n$4$');
+	N.separateOne$(16);
+	assert.deepEqual(
+		N.toString(),
+		'$12$ b \n$333$c d\n$4$',
+		''
+	);
+	N = new Nodes('$12$ b \n$333$ $67$ c d\n$4$');
+	N.separateOne$(9);
+	assert.deepEqual(
+		N.toString(),
+		'$12$ b \n$333$\n$67$ c d\n$4$',
+		""
+	);
+	N = new Nodes('$12$ b \n$333$ $67$ c d\n$4$');
+	N.separateOne$(11);
+	assert.deepEqual(
+		N.toString(),
+		'$12$ b \n$333$\n$67$ c d\n$4$',
+		""
+	);
+});
+
 test('splitRowOnce', function () {
 	var N = new Nodes('1\n12345 6');
 	N.splitRowOnce(1, 5);
