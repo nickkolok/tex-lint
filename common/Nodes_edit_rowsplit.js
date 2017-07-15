@@ -35,9 +35,18 @@ Nodes.prototype.separate$ = function() {
 };
 
 Nodes.prototype.separateOne$ = function(i) {
-	if (this.isInside$(i + 1)) {
+	if (this.isWellSeparated$(i)) {
+		return;
+	}
+	if (
+		(this.nodes[i + 1] &&  this.isInside$(i + 1))
+	||
+		(this.nodes[i - 1] && !this.isInside$(i - 1))
+	) { // Второе - на случай правого края
+		// Левый край
 		var target = this.skipToTypesReverse(i, ['space']);
 	} else {
+		// Правый край
 		var target = this.skipToTypes(i, ['space']);
 	}
 	this.nodes[target] = Nodes.NEW_LINEBREAK();
