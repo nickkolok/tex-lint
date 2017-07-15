@@ -133,9 +133,7 @@ function replaceText(o) {
 
 module.exports.replaceText = replaceText;
 
-require('./Rules/nonewcommand.js');
-require('./Rules/noautonumformulas.js');
-require('./Rules/noautonumbiblio.js');
+require('./Rule_list.js');
 
 new Rule(
 	"Bibitem_exist",
@@ -223,15 +221,6 @@ new Rule(
 		return nodes;
 	}
 );
-
-require('./Rules/notoest.js');
-require('./Rules/no_nontrivial-comments.js');
-require('./Rules/no_trivial-comments.js');
-require('./Rules/separate$$.js');
-require('./Rules/separate$.js');
-require('./Rules/splitrows80.js');
-require('./Rules/no_env_equation.js');
-require('./Rules/no_env_equation*.js');
 
 new Rule(
 	'no_frac_in_sub_sup',
@@ -516,7 +505,6 @@ new Rule({
 	},
 });
 
-require('./Rules/dot_ending.js');
 
 var eyo = require('eyo-kernel');
 
@@ -541,9 +529,6 @@ new Rule({
 	}
 });
 
-require('./Rules/space_after_comma.js');
-require('./Rules/forbid_upsilon.js');
-require('./Rules/comma_before_gde.js');
 
 new Rule({
 	name: 'numbers_must_be_in_formula',
