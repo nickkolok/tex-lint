@@ -186,8 +186,10 @@ new Rule(
 
 
 var execall = require('execall');
+var cloneRegexp = require('clone-regexp');
 
 var toestreg = /([\s\n\r]то[\s\n\r]+есть[\s\n\r])/g;
+var newword = ' т.~е. ';
 new Rule({
 	name: 'notoest',
 	message: 'Вместо "то есть" необходимо использовать сокращение "т. е."',
@@ -202,11 +204,19 @@ new Rule({
 		});
 	},
 	fixErrors: function(nodes) {
-		var newtext = (nodes.toString().replace(toestreg, " т.~е. "));
+		var newtext = (nodes.toString().replace(toestreg, newword));
 		nodes.nodes = [{ text: newtext }];
 		nodes.reparse();
 		return nodes;
 		//return (new Nodes(nodes.toString().replace(toestreg, " т.~е. ")));
+	},
+	commonCorrector: function(n, i) {
+		var substr = n.getSubnodes(i, n.length).toString();
+		substr = substr.replace(cloneRegexp(toestreg, { global: false }), newword);
+		n.length = i + 1;
+		n.nodes[i].text = substr;
+		n.reparse();
+		return n;
 	},
 });
 
