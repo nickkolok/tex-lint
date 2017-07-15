@@ -188,37 +188,49 @@ new Rule(
 var execall = require('execall');
 var cloneRegexp = require('clone-regexp');
 
-var toestreg = /([\s\n\r]то[\s\n\r]+есть[\s\n\r])/g;
-var newword = ' т.~е. ';
-new Rule({
+function replaceText(o) {
+	o.findErrors = (function(reg) {
+		return function(nodes) {
+			var text = nodes.toString();
+			var numbers = execall(reg, text);
+			var indexes = numbers.map(function(number) {
+				return nodes.getIndexBySymbolNumber(number.index);
+			});
+			return new RuleViolation({
+				indexes: indexes,
+			});
+		};
+	})(o.regtext);
+	if ('newtext' in o) {
+		o.fixErrors = (function(reg, newtext) {
+			return function(nodes) {
+				var newstr = (nodes.toString().replace(reg, newtext));
+				nodes.nodes = [{ text: newstr }];
+				nodes.reparse();
+				return nodes;
+			};
+		})(o.regtext, o.newtext);
+		o.commonCorrector = (function(reg, newtext) {
+			return function(n, i) {
+				var substr = n.getSubnodes(i, n.length).toString();
+				substr = substr.replace(cloneRegexp(reg, { global: false }), newtext);
+				n.length = i + 1;
+				n.nodes[i].text = substr;
+				n.reparse();
+				return n;
+			};
+		})(o.regtext, o.newtext);
+	}
+	new Rule(o);
+}
+
+replaceText({
 	name: 'notoest',
 	message: 'Вместо "то есть" необходимо использовать сокращение "т. е."',
-	findErrors: function(nodes) {
-		var text = nodes.toString();
-		var numbers = execall(toestreg, text);
-		var indexes = numbers.map(function(number) {
-			return nodes.getIndexBySymbolNumber(number.index);
-		});
-		return new RuleViolation({
-			indexes: indexes,
-		});
-	},
-	fixErrors: function(nodes) {
-		var newtext = (nodes.toString().replace(toestreg, newword));
-		nodes.nodes = [{ text: newtext }];
-		nodes.reparse();
-		return nodes;
-		//return (new Nodes(nodes.toString().replace(toestreg, " т.~е. ")));
-	},
-	commonCorrector: function(n, i) {
-		var substr = n.getSubnodes(i, n.length).toString();
-		substr = substr.replace(cloneRegexp(toestreg, { global: false }), newword);
-		n.length = i + 1;
-		n.nodes[i].text = substr;
-		n.reparse();
-		return n;
-	},
+	regtext: /([^-А-Яа-яЁёA-Za-z])то[\s\n\r]+есть([^-А-Яа-яЁёA-Za-z])/g,
+	newtext: '$1т.~е.$2',
 });
+
 
 require('./Rules/no_nontrivial-comments.js');
 require('./Rules/no_trivial-comments.js');
