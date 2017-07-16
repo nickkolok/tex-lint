@@ -76,7 +76,7 @@ function createFixButtonIfPossible(theRule, reportErrors, target, o) {
 	var fixbutton = $('<button>',{
 		id: 'fixErrors-' + theRule.name,
 		html: 'Исправить все',
-		'class': 'btn btn-default',
+		'class': 'btn btn-default btn-fix btn-fix-all',
 	})[0];
 	fixbutton.onclick = (function(rule) { return function() {
 		try { // TODO: выляпаться из замыкания!!!
@@ -98,7 +98,7 @@ function createFixButtonIfPossible(theRule, reportErrors, target, o) {
 function createPartialCorrectButton(o, index, corrector, target) {
 	var singleButton = $('<button>',{
 	html: 'Исправить',
-		'class': 'btn btn-default',
+		'class': 'btn btn-default btn-fix btn-fix-one',
 	})[0];
 	singleButton.onclick = (function(_index, _corrector) { return function() {
 		var nodes = _corrector(o.getNodes(), _index);
