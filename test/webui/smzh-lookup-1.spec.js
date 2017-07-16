@@ -19,6 +19,11 @@ describe('SMZH quick lookup no. 1', function () {
         expect($('.btn-fix-one').length).not.toEqual(0);
     });
 
+    it('should  have preview-buttons when checking example', function () {
+        window.exportedControls.runcheck();
+        expect($('.btn-preview').length).not.toEqual(0);
+    });
+
     it('should  have working fix-all buttons', function(){
         var selector = '.btn-fix-all';
 
