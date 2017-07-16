@@ -40,7 +40,7 @@ function createFullPreviewBlockIfNeeded(nodes, index, corrector, target) {
 		html : 'Предпросмотр',
 		'data-target' : '.' + randomClass,
 		'data-toggle' : 'collapse',
-		'class': 'btn btn-default',
+		'class': 'btn btn-default btn-preview',
 	})[0];
 
 	var previewBody = $('<div>', {
