@@ -36,6 +36,7 @@ function Rule(o, message, findErrors, fixErrors) {
 						}
 						nodes = corrector(nodes, found.indexes[0]);
 					}
+					return nodes;
 				};
 			})(commonCorrector, this.findErrors);
 		}
