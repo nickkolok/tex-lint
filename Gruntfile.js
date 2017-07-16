@@ -306,6 +306,7 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerTask('testui', [
+		'default',
 		'createHTMLscripts',
 		'jasmine',
 	]);
