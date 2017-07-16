@@ -13,3 +13,4 @@ require('./Rules/dot_ending.js');
 require('./Rules/space_after_comma.js');
 require('./Rules/forbid_upsilon.js');
 require('./Rules/comma_before_gde.js');
+require('./Rules/sin_must_be_command.js');
