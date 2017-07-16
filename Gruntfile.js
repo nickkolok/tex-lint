@@ -274,7 +274,18 @@ module.exports = function(grunt) {
 				},
 			},
 		},
-
+		jasmine: {
+            test: {
+                src: ['build/test/webui/makeHTML.js'], //'public/javascripts/*.js',
+                options: {
+                    vendor: [
+                        'node_modules/jquery/dist/jquery.js',
+                        'node_modules/jasmine-jquery/lib/jasmine-jquery.js'
+                    ],
+                    specs: 'test/webui/*.spec.js'
+                }
+            }
+        },
 /*
 		concurrent: {
 			'process-all': [
@@ -284,6 +295,9 @@ module.exports = function(grunt) {
 		},
 */
 	});
+
+	//TODO: а чего это оно не подхватывается само?
+	grunt.loadNpmTasks('grunt-contrib-jasmine');
 
 	grunt.registerTask('packExamples', 'Упаковываем примеры кода в js-обёртки', function() {
 		packExamples('webui/tex-examples/', 'build/webui/tex-examples.js');
