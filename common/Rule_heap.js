@@ -187,37 +187,6 @@ new Rule(
 	}
 );
 
-var mathopnames = require('tex-mathopnames');
-
-new Rule({
-	name: 'tg_must_be_command',
-	message: 'Русские названия математических операторов, такие как tg, в формулах должны быть прямым шрифтом; используйте \\operatorname',
-	findErrors: function(nodes) {
-		var indexesSusp = nodes.findSingleByRegExp(
-			/variable-2/,
-			mathopnames.mathOpRegExpRus
-		);
-		var indexes = [];
-		var operatorname = [{ type: /^tag$/, text: /\\operatorname/ }];
-		indexesSusp.forEach(function(index) {
-			if (!nodes.isInsideArgumentsOf(index, operatorname, 2)) {
-				indexes.push(index);
-			}
-		});
-
-		return new RuleViolation({
-			indexes: indexes,
-		});
-	},
-	commonCorrector: function(n, index) {
-		n.nodes[index].text = n.nodes[index].text.
-			replace(mathopnames.mathOpRegExpRus, '\\operatorname{$1}')
-			;
-		n.reparse();
-		return n;
-	},
-});
-
 new Rule({
 	name: 'eof_newline',
 	message: 'Файл должен заканчиваться пустой строкой',
