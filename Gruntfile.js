@@ -277,14 +277,22 @@ module.exports = function(grunt) {
 		jasmine: {
             test: {
                 src: [
-					'build/test/webui/makeHTML.js',
+					'dist/webui/playground.js',
 				],
                 options: {
                     vendor: [
                         'node_modules/jquery/dist/jquery.js',
                         'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
+						'build/test/webui/makeHTML.js',
+						'dist/webui/node_modules/codemirror/lib/codemirror.js',
+						'dist/webui/node_modules/codemirror/mode/stex/stex.js',
+						'dist/webui/node_modules/codemirror/addon/runmode/runmode.js',
+						'dist/webui/playground.js',
                     ],
-                    specs: 'test/webui/*.spec.js'
+                    specs: [
+						'test/webui/*.spec.js',
+					],
+					keepRunner: true,
                 }
             }
         },
