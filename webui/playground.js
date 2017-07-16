@@ -93,20 +93,24 @@ var hashOptions = JSONfromHash.getHashAsObject({
 	},
 });
 
-document.getElementById('ruleset-info').href = rulesets[hashOptions.ruleset].url;
-document.getElementById('ruleset-info').innerHTML = rulesets[hashOptions.ruleset].title;
-document.getElementById('ruleset-comment').innerHTML = rulesets[hashOptions.ruleset].comment;
+function switchToRuleset(ruleset) {
+	document.getElementById('ruleset-info').href = rulesets[ruleset].url;
+	document.getElementById('ruleset-info').innerHTML = rulesets[ruleset].title;
+	document.getElementById('ruleset-comment').innerHTML = rulesets[ruleset].comment;
 
-if (rulesets[hashOptions.ruleset].examples && rulesets[hashOptions.ruleset].examples.length) {
-	var optionsString = '';
-	var examples = rulesets[hashOptions.ruleset].examples;
-	for (var i = 0; i < examples.length; i++) {
-		optionsString += '<option value="' + i + '">' + examples[i].title + '</option>';
+	if (rulesets[ruleset].examples && rulesets[ruleset].examples.length) {
+		var optionsString = '';
+		var examples = rulesets[ruleset].examples;
+		for (var i = 0; i < examples.length; i++) {
+			optionsString += '<option value="' + i + '">' + examples[i].title + '</option>';
+		}
+		document.getElementById('tex-examples-list').innerHTML = optionsString;
+	} else {
+		document.getElementById('tex-examples').style.display = 'none';
 	}
-	document.getElementById('tex-examples-list').innerHTML = optionsString;
-} else {
-	document.getElementById('tex-examples').style.display = 'none';
 }
+
+switchToRuleset(hashOptions.ruleset);
 
 document.getElementById('paste-example').onclick = pasteExample;
 
