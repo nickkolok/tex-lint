@@ -5,7 +5,7 @@ var iconv = require('iconv-lite');
 var Nodes = require('../common/Nodes.js').Nodes;
 var rules = require('../common/Rule.js').rules;
 var rulesets = require('../common/rulesets.js');
-var texEmaples = require('../build/webui/tex-examples.js');
+var texExamples = require('../build/webui/tex-examples.js');
 var HTMLreport = require('./htmlreport.js');
 var JSONfromHash = require('json-from-location-hash');
 var autoenc = require('node-autodetect-utf8-cp1251-cp866');
@@ -112,5 +112,9 @@ document.getElementById('paste-example').onclick = pasteExample;
 
 function pasteExample() {
 	var exampleNumber = document.getElementById('tex-examples-list').value;
-	myCodeMirror.setValue(texEmaples[rulesets[hashOptions.ruleset].examples[exampleNumber].source]);
+	myCodeMirror.setValue(
+		texExamples[
+			rulesets[hashOptions.ruleset].examples[exampleNumber].source
+		]
+	);
 }
