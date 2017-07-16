@@ -298,9 +298,6 @@ module.exports = function(grunt) {
 */
 	});
 
-	//TODO: а чего это оно не подхватывается само?
-	grunt.loadNpmTasks('grunt-contrib-jasmine');
-
 	grunt.registerTask('createHTMLscripts', 'Упаковываем html-код в js-обёртки', function() {
 		require('./test/webui/create-html-making-script.js');
 	});
