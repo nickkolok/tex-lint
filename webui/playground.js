@@ -122,3 +122,22 @@ function pasteExample() {
 		]
 	);
 }
+
+
+// То, что должно торчать наружу для тестирования и отладки
+window.exportedControls = {
+	// Данные
+	texExampless: texExamples,
+	rulesets: rulesets,
+	hashOptions: hashOptions,
+
+	// Объект CodeMirror
+	myCodeMirror: myCodeMirror,
+
+	// Функции
+	runcheck: runcheck,
+	checkRules: checkRules,
+	switchToRuleset: switchToRuleset,
+	pasteExample: pasteExample,
+};
+
