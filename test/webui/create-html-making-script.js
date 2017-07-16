@@ -12,7 +12,9 @@ var body = $('body');
 var escapedBody = body.html().replace(/'/g,"\\'").replace(/\n/g,"\\n");
 fs.writeFileSync(
     scriptname,
-    "document.body.innerHTML='" + escapedBody + "'",
+    "document.body.innerHTML='"
+        + escapedBody +
+    "'",
     'utf8'
 );
 //console.log(escapedBody);

@@ -276,11 +276,13 @@ module.exports = function(grunt) {
 		},
 		jasmine: {
             test: {
-                src: ['build/test/webui/makeHTML.js'], //'public/javascripts/*.js',
+                src: [
+					'build/test/webui/makeHTML.js',
+				],
                 options: {
                     vendor: [
                         'node_modules/jquery/dist/jquery.js',
-                        'node_modules/jasmine-jquery/lib/jasmine-jquery.js'
+                        'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
                     ],
                     specs: 'test/webui/*.spec.js'
                 }
@@ -298,6 +300,15 @@ module.exports = function(grunt) {
 
 	//TODO: а чего это оно не подхватывается само?
 	grunt.loadNpmTasks('grunt-contrib-jasmine');
+
+	grunt.registerTask('createHTMLscripts', 'Упаковываем html-код в js-обёртки', function() {
+		require('./test/webui/create-html-making-script.js');
+	});
+
+	grunt.registerTask('testui', [
+		'createHTMLscripts',
+		'jasmine',
+	]);
 
 	grunt.registerTask('packExamples', 'Упаковываем примеры кода в js-обёртки', function() {
 		packExamples('webui/tex-examples/', 'build/webui/tex-examples.js');
