@@ -188,27 +188,26 @@ new Rule(
 );
 
 var mathopnames = require('tex-mathopnames');
-new Rule(
-	'sin_must_be_command',
-	'Названия математических операторов, такие как sin, в формулах должны быть прямым шрифтом. Пропущена дробь \\ перед командой',
-	function(nodes) {
+new Rule({
+	name: 'sin_must_be_command',
+	message: 'Названия математических операторов, такие как sin, в формулах должны быть прямым шрифтом. Пропущена дробь \\ перед командой',
+	findErrors: function(nodes) {
 		var indexes = nodes.findSingleByRegExp(
 			/variable-2/,
 			mathopnames.mathOpRegExpInt
 		);
-		return {
+		return new RuleViolation({
 			indexes: indexes,
-			quantity: indexes.length,
-			commonCorrector: function(n, index) {
-				n.nodes[index].text = n.nodes[index].text.
-					replace(mathopnames.mathOpRegExpInt, '\\$1')
-				;
-				n.reparse();
-				return n;
-			},
-		};
-	}
-);
+		});
+	},
+	commonCorrector: function(n, index) {
+		n.nodes[index].text = n.nodes[index].text.
+			replace(mathopnames.mathOpRegExpInt, '\\$1')
+		;
+		n.reparse();
+		return n;
+	},
+});
 
 new Rule({
 	name: 'tg_must_be_command',
