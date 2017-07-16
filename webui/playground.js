@@ -94,6 +94,7 @@ var hashOptions = JSONfromHash.getHashAsObject({
 });
 
 function switchToRuleset(ruleset) {
+	hashOptions.ruleset = ruleset;
 	document.getElementById('ruleset-info').href = rulesets[ruleset].url;
 	document.getElementById('ruleset-info').innerHTML = rulesets[ruleset].title;
 	document.getElementById('ruleset-comment').innerHTML = rulesets[ruleset].comment;
@@ -140,4 +141,3 @@ window.exportedControls = {
 	switchToRuleset: switchToRuleset,
 	pasteExample: pasteExample,
 };
-
