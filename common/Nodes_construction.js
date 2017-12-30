@@ -54,15 +54,8 @@ Nodes.prototype.remarkNumberNodes = function() {
 };
 
 Nodes.prototype.joinCyrillicNodes = function() {
-	// TODO: влить в joinNodeOfType()
-	for (var i = 0; i < this.length - 1; i++) {
-		// TODO: объединять не по одной, а по несколько. А то тормозит. Переделать!
-		if (this.nodes[i].type == 'cyrtext' && this.nodes[i + 1].type == 'cyrtext') {
-			this.nodes[i].text += this.nodes[i + 1].text;
-			this.nodes.splice(i + 1, 1);
-			i--;
-		}
-	}
+	// TODO: use joinNodesOfType('cyrtext') elsewhere instead of this
+	this.joinNodesOfType('cyrtext');
 };
 
 Nodes.prototype.separateNumbers = function() {
