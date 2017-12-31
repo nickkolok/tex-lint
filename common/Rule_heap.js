@@ -8,17 +8,6 @@ var Rule = require('./Rule.js').Rule;
 
 /* eslint no-new: 0 */  // --> OFF
 
-new Rule(
-	'Bibitem_exist',
-	'В статье должна присутствовать библиография, оформленная в соответствии с требованиями',
-	function(nodes) {
-		return {
-			quantity:
-				+!(nodes.getNodesQuantity('tag','\\RBibitem') +
-				nodes.getNodesQuantity('tag','\\Bibitem'))
-		};
-	}
-);
 
 new Rule(
 	'udk_exist',

@@ -1,0 +1,5 @@
+{
+	"text": "\\documentclass{article}\r\n\r\n\\usepackage[T2A]{fontenc}\r\n\\usepackage[cp1251]{inputenc}\r\n\\usepackage[english,russian]{babel}\r\n\r\n\\begin{document}\r\n\r\n\\udk{517}\r\n\r\n\\author{Author's Name}\r\n\r\nSome text with frac $\\frac{1}{2}$ in it.\r\n\r\n\\end{document}\r\n",
+	"rulename": "Bibitem_exist",
+	"quantity": 1
+}

@@ -15,3 +15,4 @@ require('./Rules/forbid_upsilon.js');
 require('./Rules/comma_before_gde.js');
 require('./Rules/sin_must_be_command.js');
 require('./Rules/tg_must_be_command.js');
+require('./Rules/Bibitem_exist');

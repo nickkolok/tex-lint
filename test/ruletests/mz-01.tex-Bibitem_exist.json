@@ -1,0 +1,5 @@
+{
+	"text": "\\documentclass{article}\r\n\r\n\\usepackage[T2A]{fontenc}\r\n\\usepackage[cp1251]{inputenc}\r\n\\usepackage[english,russian]{babel}\r\n\r\n\\begin{document}\r\n\r\n\\udk{517}\r\n\r\n\\author{Author's Name}\r\n\r\nSome text with frac $\\frac{1}{2} + \\sum_{i=\\frac{m}{n}}^{\\frac{m^2}{n+1}} a_i$ in it.\r\n\r\nSome text with frac $\\frac{a}{b}+\\frac{1+\\alpha}{2-\\beta}+\\frac{1+C_0}{2}$ in it.\r\n\r\n$$\r\n\\sum_{i=\\frac{m}{n}}^{\\frac{m^2}{n+1}} a_i\r\n$$\r\n\r\n\\begin{thebibliography}{99}\r\n\\Bibitem{1}\r\n\\by J.~Smith\r\n\\paper Very interesting paper\r\n\\jour Any journal\r\n\\vol 42\r\n\\pages 1--13\r\n\\yr 1984\r\n\\end{thebibliography}\r\n\\end{document}\r\n",
+	"rulename": "Bibitem_exist",
+	"quantity": 0
+}
