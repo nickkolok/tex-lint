@@ -8,9 +8,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("codemirror/lib/codemirror"));
+    mod(require("../../lib/codemirror"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["codemirror/lib/codemirror"], mod);
+    define(["../../lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {
@@ -106,7 +106,7 @@
       if (source.match(/^\\[$&%#{}_]/)) {
         return "tag";
       }
-/*
+
       // cyrillic (Russian) symbols
       if (source.match(/^[А-ЯЁ]+/i)) {
         return "cyrtext";
@@ -116,7 +116,7 @@
       if (source.match(/^\s+/i)) {
         return "space";
       }
-*/
+
       // white space control characters
       if (source.match(/^\\[,;!\/\\]/)) {
         return "tag";
@@ -168,6 +168,16 @@
     }
 
     function inMathMode(source, state, endModeSeq) {
+      // cyrillic (Russian) symbols
+      if (source.match(/^[А-ЯЁ]+/i)) {
+        return "cyrtext";
+      }
+
+      // spaces: it is important to third-part applications using CodeMirror's parser
+      if (source.match(/^\s+/i)) {
+        return "space";
+      }
+
       if (source.eatSpace()) {
         return null;
       }

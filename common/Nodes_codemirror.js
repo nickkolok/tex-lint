@@ -10,7 +10,7 @@ try {
 	if (typeof (navigator) === 'undefined') {
 		Nodes.CodeMirror = require('codemirror/addon/runmode/runmode.node.js');
 		require('codemirror/mode/meta.js');
-		require('codemirror/mode/stex/stex.js');
+		require('codemirror/mode/stex/stex-patched.js');
 	} else {
 		Nodes.CodeMirror = window.CodeMirror;
 	}

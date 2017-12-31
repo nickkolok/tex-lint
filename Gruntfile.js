@@ -233,6 +233,7 @@ module.exports = function(grunt) {
 				src: [
 					'webui/*.js',
 					'common/*.js',
+					'!common/stex-custom.codemirror-mode.js',
 					'cli/*.js',
 					'Gruntfile.js',
 				],
