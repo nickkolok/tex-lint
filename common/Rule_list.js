@@ -1,3 +1,5 @@
+'use strict';
+
 require('./Rules/nonewcommand.js');
 require('./Rules/noautonumformulas.js');
 require('./Rules/noautonumbiblio.js');
