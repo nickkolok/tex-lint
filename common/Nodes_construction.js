@@ -53,11 +53,6 @@ Nodes.prototype.remarkNumberNodes = function() {
 	}
 };
 
-Nodes.prototype.joinCyrillicNodes = function() {
-	// TODO: use joinNodesOfType('cyrtext') elsewhere instead of this
-	this.joinNodesOfType('cyrtext');
-};
-
 Nodes.prototype.separateNumbers = function() {
 	//TODO: сейчас оно режет только крайние. В принципе, пока этого хватает.
 	// Но в перспетиве - резать по-человечески и обобщить с separateSpaces
@@ -139,18 +134,9 @@ Nodes.prototype.prepareNodes = function() {
 	this.deleteEmptyNodes();
 	this.markSpaceNodes();
 	this.joinNodesOfType('space');
-	this.markCyrillicNodes();
-	this.joinCyrillicNodes();
 	this.markSubSup();
 	this.remarkNumberNodes();
 };
-
-
-// Вспомогательные - вынести!
-
-function isCyryllicText(text) {
-	return (/^[А-ЯЁ]+$/i).test(text);
-}
 
 };
 
