@@ -92,6 +92,21 @@ var rulesets = {
 		],
 		comment: '',
 	},
+	vzms2018: {
+		title: 'ВЗМШ-2018',
+		url: 'https://github.com/nickkolok/vzms2018',
+		rules: [
+			['manual_paragraph_format', 1],
+			['empty_text_options', 1],
+			['eyo', 1],
+			['space_after_comma', 1],
+			['sin_must_be_command', 1],
+			['tg_must_be_command', 1],
+			['forbid_upsilon', 1],
+			['comma_before_gde', 1],
+		],
+		comment: '',
+	},
 };
 
 rulesets.defaultSet = rulesets.vzmsh2017;
