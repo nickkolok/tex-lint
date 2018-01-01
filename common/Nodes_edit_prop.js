@@ -54,4 +54,16 @@ Nodes.prototype.setSkipAllEnds = function() {
 	this.setPropForRanges(ranges, 'skip', true);
 };
 
+Nodes.prototype.setSkipAllEqno = function() {
+	var eqnos = this.findSingleByRegExp(/^tag$/, /^\\eqno$/);
+	var ranges = eqnos.map(function(eqno) {
+		var end = eqno;
+		while (this.isInsideFormula(end)) {
+			end++;
+		}
+		return [eqno, end];
+	}, this);
+	this.setPropForRanges(ranges, 'skip', true);
+};
+
 };
