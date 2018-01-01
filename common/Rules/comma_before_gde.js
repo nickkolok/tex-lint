@@ -10,6 +10,7 @@ new Rule({
 	findErrors: function(nodes) {
 		nodes.setPropByRegExp(/^(space|linebreak|comment)$/, /^/, 'skip', true);
 		nodes.setSkipAllEnds();
+		nodes.setSkipAllEqno();
 		var indexes = nodes.findSequenceByRegExp([
 			{ type: /^/, text: /^(?!(,)$)/ },
 			{ type: /^/, text: /\$\$/ },

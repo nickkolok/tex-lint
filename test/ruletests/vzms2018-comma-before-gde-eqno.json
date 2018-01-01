@@ -1,0 +1,8 @@
+
+{
+	"text": "начальные условия\n$$\n\nu(t)=\\varphi(t),\\,-h\\leq t<0,\\,\\,\\,u(0)=u_{0}, \\eqno(2)\n$$\nгде функция",
+	"rulename": "comma_before_gde",
+	"indexes": [],
+	"quantity": 0,
+	"fixed": "начальные условия\n$$\n\nu(t)=\\varphi(t),\\,-h\\leq t<0,\\,\\,\\,u(0)=u_{0}, \\eqno(2)\n$$\nгде функция"
+}
