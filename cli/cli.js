@@ -5,6 +5,7 @@ var rules = require('../common/Rule.js').rules;
 var rulesets = require('../common/rulesets.js');
 
 function applyRuleToString(str, rulename) {
+	console.time('applyRuleToString("...", ' + rulename + ')');
 	var rule = rules[rulename];
 	var nodes = new Nodes(str);
 	var findResult = rule.findErrors(nodes);
@@ -20,6 +21,7 @@ function applyRuleToString(str, rulename) {
 		rule.fixErrors(nodes);
 		rez.fixed = nodes.toString();
 	}
+	console.timeEnd('applyRuleToString("...", ' + rulename + ')');
 	return rez;
 	// TODO: возможность применять точечные исправления с известными номерами.
 	// Не забыть, что при изменении номера нод ползут.
