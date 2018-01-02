@@ -105,6 +105,7 @@ var rulesets = {
 			['forbid_upsilon', 1],
 			['comma_before_gde', 1],
 			['no-mathit-in-formula', 1],
+			['no-foreignlanguage', 1],
 		],
 		comment: '',
 	},

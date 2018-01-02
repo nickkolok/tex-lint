@@ -1,0 +1,7 @@
+{
+	"text": "Good text.\n$R$\\foreignlanguage{english}{ is the radius of the ring.\n}\nИ опять нормальный текст.\n",
+	"rulename": "no-foreignlanguage",
+	"indexes": [8],
+	"quantity": 1,
+	"fixed": "Good text.\n$R$is the radius of the ring.\nИ опять нормальный текст.\n"
+}
