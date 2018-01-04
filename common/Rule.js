@@ -62,7 +62,10 @@ function makeSingleForbiddingRule(typereg, textreg, o) {
 		o.commonCorrector = (function($rep) {
 			return function(nodes, index) {
 				nodes.nodes[index].text = o.replacement;
-				nodes.reparse();
+				// TODO: ability to replace by a node Object or by Array of nodes
+				if (!o.noReparse) {
+					nodes.reparse();
+				}
 				return nodes;
 			};
 		})(o.replacement);
