@@ -21,6 +21,9 @@ function createKaTeXspan(nodes, index) {
 	try {
 		katex.render(formulaText, preview[0], {
 			displayMode: nodes.isInside$$(index),
+			macros: {
+				'\\eqno': '~~~~',
+			}
 		});
 	} catch (e) {
 		console.log(e);
