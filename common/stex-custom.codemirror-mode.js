@@ -112,6 +112,10 @@
         return "cyrtext";
       }
 
+      if (source.match(/^(\d+\.\d*|\d*\.\d+|\d+)/i)) {
+        return "number";
+      }
+
       // spaces: it is important to third-part applications using CodeMirror's parser
       if (source.match(/^\s+/i)) {
         return "space";

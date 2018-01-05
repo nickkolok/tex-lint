@@ -72,26 +72,30 @@ Nodes.prototype.separateNumbers = function() {
 			continue;
 		}
 
-		if (
-			[
-				'space',
-				'linebreak',
-				'comment',
-				'number',
-			].indexOf(this.nodes[i].type) !== -1
-		) {
+
+		if (!(/\d/i).test(this.nodes[i].text)) {
+			// There are no digits
 			continue;
 		}
-		var begin = this.nodes[i].text.match(/^\d+/);
-		var end = this.nodes[i].text.match(/\d+$/);
+		if ((/^(\d+\.\d*|\d*\.\d+|\d+)$/i).test(this.nodes[i].text)) {
+			// There are only digits
+			this.nodes[i].type = 'number';
+			continue;
+		}
+
+
+		var begin = (/^(\d+\.\d*|\d*\.\d+|\d+)/i).test(this.nodes[i].text);
 		if (begin) {
+			begin = this.nodes[i].text.match(/^(\d+\.\d*|\d*\.\d+|\d+)/i);
 			this.insertNode(i, { text: begin[0], type: 'number' });
 			i++;
-			this.nodes[i].text = this.nodes[i].text.replace(/^\d+/, '');
+			this.nodes[i].text = this.nodes[i].text.replace(/^(\d+\.\d*|\d*\.\d+|\d+)/i, '');
 		}
+		var end = (/(\d+\.\d*|\d*\.\d+|\d+)$/i).test(this.nodes[i].text);
 		if (end) {
+			end = this.nodes[i].text.match(/\d+$/);
 			this.insertNode(i + 1, { text: end[0], type: 'number' });
-			this.nodes[i].text = this.nodes[i].text.replace(/\d+$/, '');
+			this.nodes[i].text = this.nodes[i].text.replace(/(\d+\.\d*|\d*\.\d+|\d+)$/i, '');
 			i++;
 		}
 	}
