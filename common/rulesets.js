@@ -106,6 +106,8 @@ var rulesets = {
 			['comma_before_gde', 1],
 			['no-mathit-in-formula', 1],
 			['no-foreignlanguage', 1],
+			['force_geqslant', 1],
+			['force_leqslant', 1],
 		],
 		comment: '',
 	},
