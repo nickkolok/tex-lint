@@ -97,12 +97,12 @@ Nodes.prototype.separateSpaces = function() {
 			continue;
 		}
 		var begin = this.nodes[i].text.match(/^\s+/);
-		var end = this.nodes[i].text.match(/\s+$/);
 		if (begin) {
 			this.insertNode(i, { text: begin[0], type: 'space' });
 			i++;
 			this.nodes[i].text = this.nodes[i].text.replace(/^\s+/, '');
 		}
+		var end = this.nodes[i].text.match(/\s+$/);
 		if (end) {
 			this.insertNode(i + 1, { text: end[0], type: 'space' });
 			this.nodes[i].text = this.nodes[i].text.replace(/\s+$/, '');
