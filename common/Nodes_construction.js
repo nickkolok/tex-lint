@@ -55,7 +55,23 @@ Nodes.prototype.separateNumbers = function() {
 	// Но в перспективе - резать по-человечески и обобщить с separateSpaces
 
 	// Мы предполагаем, что разрывы строки-то уж кодемирроровский парсер осилил
+	var goodTypesCatalogue = {
+		'cyrtext': null,
+		'space': null,
+		'linebreak': null,
+		'comment': null,
+		'number': null,
+		'tag': null,
+		'bracket': null,
+		'keyword': null,
+		'variable': null,
+	};
+
 	for (var i = 0; i < this.length; i++) {
+		if (this.nodes[i].type in goodTypesCatalogue) {
+			continue;
+		}
+
 		if (
 			[
 				'space',
