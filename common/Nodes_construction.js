@@ -28,6 +28,7 @@ Nodes.prototype.markSubSup = function() {
 };
 
 Nodes.prototype.markSpaceNodes = function() {
+	console.time('Nodes.markSpaceNodes');
 	for (var i = 0; i < this.length; i++) {
 		if (this.nodes[i].text === '\n') {
 			this.nodes[i].type = 'linebreak';
@@ -35,17 +36,21 @@ Nodes.prototype.markSpaceNodes = function() {
 			this.nodes[i].type = 'space';
 		}
 	}
+	console.timeEnd('Nodes.markSpaceNodes');
 };
 
 Nodes.prototype.remarkNumberNodes = function() {
+	console.time('Nodes.remarkNumberNodes');
 	for (var i = 0; i < this.length; i++) {
 		if (/^\d+$/.test(this.nodes[i].text)) {
 			this.nodes[i].type = 'number';
 		}
 	}
+	console.timeEnd('Nodes.remarkNumberNodes');
 };
 
 Nodes.prototype.separateNumbers = function() {
+	console.time('Nodes.separateNumbers');
 	//TODO: сейчас оно режет только крайние. В принципе, пока этого хватает.
 	// Но в перспективе - резать по-человечески и обобщить с separateSpaces
 
@@ -74,9 +79,11 @@ Nodes.prototype.separateNumbers = function() {
 			i++;
 		}
 	}
+	console.timeEnd('Nodes.separateNumbers');
 };
 
 Nodes.prototype.separateSpaces = function() {
+	console.time('Nodes.separateSpaces');
 	// Мы предполагаем, что разрывы строки-то уж кодемирроровский парсер осилил
 	var goodTypesCatalogue = {
 		'cyrtext': null,
@@ -109,6 +116,7 @@ Nodes.prototype.separateSpaces = function() {
 			i++;
 		}
 	}
+	console.timeEnd('Nodes.separateSpaces');
 };
 
 Nodes.prototype.deleteEmptyNodes = function() {
@@ -121,6 +129,7 @@ Nodes.prototype.deleteEmptyNodes = function() {
 };
 
 Nodes.prototype.joinNodesOfType = function(type) {
+	console.time('Nodes.joinNodesOfType("' + type + '")');
 	for (var i = 0; i < this.length - 1; i++) {
 		if (this.nodes[i].type === type && this.nodes[i + 1].type === type) {
 			for (var j = i + 1; j < this.length && this.nodes[j].type === type; j++) {
@@ -129,6 +138,7 @@ Nodes.prototype.joinNodesOfType = function(type) {
 			this.nodes.splice(i + 1, j - i - 1);
 		}
 	}
+	console.timeEnd('Nodes.joinNodesOfType("' + type + '")');
 };
 
 Nodes.prototype.prepareNodes = function() {
