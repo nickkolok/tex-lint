@@ -27,14 +27,6 @@ Nodes.prototype.markSubSup = function() {
 	}
 };
 
-Nodes.prototype.markCyrillicNodes = function() {
-	for (var i = 0; i < this.length; i++) {
-		if (isCyryllicText(this.nodes[i].text)) {
-			this.nodes[i].type = 'cyrtext';
-		}
-	}
-};
-
 Nodes.prototype.markSpaceNodes = function() {
 	for (var i = 0; i < this.length; i++) {
 		if (this.nodes[i].text == '\n') {
