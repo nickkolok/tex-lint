@@ -9,12 +9,12 @@ new Rule({
 	findErrors: function(nodes) {
 		var indexes = nodes.findSequenceByRegExp([
 			{ type: /cyrtext/, text: /^/ },
-			{ type: /^/, text: /,/ },
-			{ type: /^(?!(space|linebreak)$)/, text: /^/ },
+			{ type: /^(?!(tag))/, text: /,$/ },
+			{ type: /^(?!(space|linebreak)$)/, text: /^(?!((\\\\)|~|\}))/ },
 		]).concat(nodes.findSequenceByRegExp([
 			{ type: /^/, text: /\$/ },
-			{ type: /^/, text: /,/ },
-			{ type: /^(?!(space|linebreak)$)/, text: /^/ },
+			{ type: /^(?!(tag))/, text: /,$/ },
+			{ type: /^(?!(space|linebreak)$)/, text: /^(?!((\\\\)|~|\}))/ },
 		]));
 		indexes = indexes.map(function(index) {
 			return index + 1;
