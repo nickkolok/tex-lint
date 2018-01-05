@@ -86,15 +86,15 @@ Nodes.prototype.separateSpaces = function() {
 	console.time('Nodes.separateSpaces');
 	// Мы предполагаем, что разрывы строки-то уж кодемирроровский парсер осилил
 	var goodTypesCatalogue = {
-		//'cyrtext': null,
+		'cyrtext': null,
 		'space': null,
 		'linebreak': null,
-		//'comment': null,
-		//'number': null,
-		//'tag': null,
-		//'bracket': null,
-		//'keyword': null,
-		//'variable': null,
+		'comment': null,
+		'number': null,
+		'tag': null,
+		'bracket': null,
+		'keyword': null,
+		'variable': null,
 	};
 
 	for (var i = 0; i < this.length; i++) {
