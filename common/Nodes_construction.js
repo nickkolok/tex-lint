@@ -163,8 +163,6 @@ Nodes.prototype.joinNodesOfType = function(type) {
 };
 
 Nodes.prototype.prepareNodes = function() {
-	this.markSpaceNodes();
-	this.separateSpaces();
 	this.remarkNumberNodes();
 	this.separateNumbers();
 	this.remarkNumberNodes();
