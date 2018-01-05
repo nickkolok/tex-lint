@@ -29,7 +29,7 @@ Nodes.prototype.markSubSup = function() {
 
 Nodes.prototype.markSpaceNodes = function() {
 	for (var i = 0; i < this.length; i++) {
-		if (this.nodes[i].text == '\n') {
+		if (this.nodes[i].text === '\n') {
 			this.nodes[i].type = 'linebreak';
 		} else if (/^\s+$/.test(this.nodes[i].text)) {
 			this.nodes[i].type = 'space';
@@ -80,6 +80,9 @@ Nodes.prototype.separateSpaces = function() {
 	// Мы предполагаем, что разрывы строки-то уж кодемирроровский парсер осилил
 	for (var i = 0; i < this.length; i++) {
 		if (this.nodes[i].type === 'space' || this.nodes[i].type === 'linebreak') {
+			continue;
+		}
+		if (!(/\s/i).test(this.nodes[i].text)) {
 			continue;
 		}
 		var begin = this.nodes[i].text.match(/^\s+/);
