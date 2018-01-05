@@ -288,8 +288,7 @@ test('with comments', function () {
 			{ text: '[', type: 'bracket' },
 			{ text: '5', type: 'number' },
 			{ text: ']', type: 'bracket' },
-			{ text: '%', type: 'comment' },
-			{ text: ' ', type: 'space' },
+			{ text: '% ', type: 'comment' },
 			{ text: '\n', type: 'linebreak' },
 		],
 		""
