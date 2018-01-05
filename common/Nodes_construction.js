@@ -64,7 +64,7 @@ Nodes.prototype.separateNumbers = function() {
 		'tag': null,
 		'bracket': null,
 		'keyword': null,
-		//'variable': null,
+		'variable': null,
 	};
 
 	for (var i = 0; i < this.length; i++) {

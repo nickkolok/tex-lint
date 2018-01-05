@@ -517,13 +517,29 @@ test('double linebreak', function () {
 	);
 });
 
+test('spaces and $s', function () {
+	assert.deepEqual(
+		new Nodes(' $ \\alpha $ ').nodes,
+		[
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: ' ', type: 'space' },
+			{ text: '\\alpha', type: 'tag' },
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: ' ', type: 'space' },
+		],
+		""
+	);
+});
+
 test('\\begin{document}\\usepackage [ utf8 ] {inputenc}', function () {
 	assert.deepEqual(
 		new Nodes('\\begin{document}\\usepackage [ utf8 ] {inputenc}').nodes,
 		[
 			{ text: '\\begin', type: 'tag' },
 			{ text: '{', type: 'bracket' },
-			{ text: 'document', type: 'atom' },
+			{ text: 'document', type: 'variable' },
 			{ text: '}', type: 'bracket' },
 			{ text: '\\usepackage', type: 'tag' },
 			{ text: ' ', type: 'space' },
@@ -548,7 +564,7 @@ test('\\begin{document}\n\\usepackage{amsmath}\n\\usepackage[cp1251]{inputenc}\\
 		[
 			{ text: '\\begin', type: 'tag' },
 			{ text: '{', type: 'bracket' },
-			{ text: 'document', type: 'atom' },
+			{ text: 'document', type: 'variable' },
 			{ text: '}', type: 'bracket' },
 			{ text: '\n', type: 'linebreak' },
 			{ text: '\\usepackage', type: 'tag' },
@@ -859,13 +875,42 @@ test('3.14', function () {
 	assert.deepEqual(
 		new Nodes('3.14').nodes,
 		[
-			{ text: '3', type: 'number' },
-			{ text: '.', type: 'atom' },
-			{ text: '14', type: 'number' },
+			{ text: '3.14', type: 'number' },
 		],
 		""
 	);
 });
+
+test('', function () {
+	assert.deepEqual(
+		new Nodes('(2)').nodes,
+		[
+			{ text: '(', type: null },
+			{ text: '2', type: 'number' },
+			{ text: ')', type: null },
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('{1}').nodes,
+		[
+			{ text: '{', type: 'bracket' },
+			{ text: '1', type: 'number' },
+			{ text: '}', type: 'bracket' },
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\frac12').nodes,
+		[
+			{ text: '\\frac', type: 'tag' },
+			{ text: '12', type: 'number' },
+		],
+		""
+	);
+});
+
+
 /*
 //TODO: запятая не отделяется от слова. Решить, что с ней делать.
 test('', function () {
