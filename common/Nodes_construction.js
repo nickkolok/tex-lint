@@ -163,9 +163,7 @@ Nodes.prototype.joinNodesOfType = function(type) {
 };
 
 Nodes.prototype.prepareNodes = function() {
-	this.remarkNumberNodes();
 	this.separateNumbers();
-	this.remarkNumberNodes();
 	this.deleteEmptyNodes();
 	this.markSpaceNodes();
 	this.joinNodesOfType('space');
