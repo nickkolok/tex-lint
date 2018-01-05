@@ -47,7 +47,7 @@ Nodes.prototype.remarkNumberNodes = function() {
 
 Nodes.prototype.separateNumbers = function() {
 	//TODO: сейчас оно режет только крайние. В принципе, пока этого хватает.
-	// Но в перспетиве - резать по-человечески и обобщить с separateSpaces
+	// Но в перспективе - резать по-человечески и обобщить с separateSpaces
 
 	// Мы предполагаем, что разрывы строки-то уж кодемирроровский парсер осилил
 	for (var i = 0; i < this.length; i++) {
