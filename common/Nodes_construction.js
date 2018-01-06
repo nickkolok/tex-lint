@@ -10,17 +10,6 @@ Nodes.prototype.fromText = function(text) {
 	console.time('Nodes.fromText');
 	this.nodes = [];
 	var self = this;
-	var goodTypesCatalogue = {
-		'cyrtext': null,
-		'space': null,
-		'linebreak': null,
-		'comment': null,
-		'number': null,
-		'tag': null,
-		'bracket': null,
-		'keyword': null,
-		'variable': null,
-	};
 	var goodTypesCatalogueNoSpace = {
 		'cyrtext': null,
 		'linebreak': null,
