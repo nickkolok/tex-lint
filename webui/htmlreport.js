@@ -142,6 +142,8 @@ function createPartialCorrectButton(o, index, corrector, target) {
 }
 
 module.exports.createHTMLreport = function(o) {
+	clearElement(o.targetElement);
+
 	var reportErrors = document.createDocumentFragment();
 	var reportGood = document.createDocumentFragment();
 	var totalRules = rulesets[o.rulesetName].rules.length;
@@ -211,7 +213,7 @@ module.exports.createHTMLreport = function(o) {
 
 		reportErrors.appendChild($('<hr/>')[0]);
 	}
-	o.targetElement.innerHTML = '';
+
 	if (brokenRules) {
 		o.targetElement.appendChild(reportErrors);
 	} else {
@@ -219,3 +221,13 @@ module.exports.createHTMLreport = function(o) {
 	}
 
 };
+
+function clearElement(el) {
+	console.time('clearElement()');
+	while (el.firstChild) {
+		el.removeChild(el.firstChild);
+	}
+	//el.innerHTML = '';
+
+	console.timeEnd('clearElement()');
+}
