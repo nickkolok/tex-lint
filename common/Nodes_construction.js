@@ -201,7 +201,6 @@ Nodes.prototype.joinNodesOfType = function(type) {
 
 Nodes.prototype.prepareNodes = function() {
 	this.markSpaceNodes();
-	this.remarkNumberNodes();
 	this.joinNodesOfType('space');
 };
 
