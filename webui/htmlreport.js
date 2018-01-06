@@ -151,7 +151,12 @@ module.exports.createHTMLreport = function(o) {
 
 	for (var i = 0; i < totalRules; i++) {
 		var theRule = rules[rulesets[o.rulesetName].rules[i][0]];
+
+		console.time('Checking rule: ' + theRule.name);
 		var result = theRule.findErrors(o.nodesObject);
+		console.timeEnd('Checking rule: ' + theRule.name);
+
+		console.time('Building html for rule: ' + theRule.name);
 
 		if (!result.quantity) {
 			var goodspan = $('<span>', {
@@ -212,6 +217,8 @@ module.exports.createHTMLreport = function(o) {
 		}
 
 		reportErrors.appendChild($('<hr/>')[0]);
+		console.timeEnd('Building html for rule: ' + theRule.name);
+
 	}
 
 	if (brokenRules) {

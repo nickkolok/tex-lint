@@ -41,6 +41,7 @@ function codeLoad() {
 }
 
 function codeSave() {
+	console.time('codeSave()');
 	var encoding = document.getElementById('file-save-encoding').value;
 	var text = myCodeMirror.getValue().replace(/[\r]*[\n][\r]*/g, '\r\n');
 	var blob = new Blob([iconv.encode(text, encoding)], {
@@ -53,7 +54,7 @@ function codeSave() {
 	});
 	document.getElementById('span-save').innerHTML = '';
 	document.getElementById('span-save').appendChild(a[0]);
-	console.log('codeSave()');
+	console.timeEnd('codeSave()');
 }
 
 
@@ -69,6 +70,7 @@ function getNodesAsIs() {
 }
 
 function checkRules(rulesetName, nodesObject) {
+	console.time('checkRules()');
 	HTMLreport.createHTMLreport({
 		rulesetName: rulesetName,
 		nodesObject: nodesObject,
@@ -77,11 +79,14 @@ function checkRules(rulesetName, nodesObject) {
 		getNodes: getNodesAsIs,
 		recheck: runcheck,
 	});
+	console.timeEnd('checkRules()');
 }
 
 function runcheck() {
+	console.time('runcheck()');
 	var nodesObject = getNodesAsIs();
 	checkRules(hashOptions.ruleset, nodesObject);
+	console.timeEnd('runcheck()');
 }
 
 document.getElementById('file-load').onchange = codeLoad;
