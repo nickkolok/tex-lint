@@ -203,8 +203,21 @@ Nodes.prototype.isWellSeparated = function(index, rightSepTypes, wrongSepTypes, 
 	return true;
 };
 
-Nodes.prototype.isInsideSymmDelimiters = function(index, delimeterType, delimiterText, includeDelimiters) {
-	var delimiters = this.getNodesNumbers(delimeterType, delimiterText);
+Nodes.prototype.isInsideSymmDelimiters = function(index, delimiterType, delimiterText, includeDelimiters) {
+	if (!includeDelimiters) {
+		// If there are 2n+1 delimiters on the left, then index is inside
+		var delimCount = 0;
+		for (;index > -1; index--) {
+			if (this.nodes[index].type === delimiterType && this.nodes[index].text === delimiterText) {
+				delimCount++;
+			}
+		}
+		return !!(delimCount % 2);
+	}
+
+	//TODO: optimize
+
+	var delimiters = this.getNodesNumbers(delimiterType, delimiterText);
 	if (includeDelimiters && delimiters.indexOf(index) !== -1) {
 		return true;
 	}
@@ -227,6 +240,17 @@ Nodes.prototype.isInside$$ = function(index, includeDelimiters) {
 };
 
 Nodes.prototype.isInsideFormula = function(index, includeDelimiters) {
+	if (!includeDelimiters) {
+		// If there are 2n+1 delimiters on the left, then index is inside formula
+		var delimCount = 0;
+		for (;index > -1; index--) {
+			if (this.nodes[index].type === 'keyword') {
+				delimCount++;
+			}
+		}
+		return !!(delimCount % 2);
+	}
+
 	return (
 		this.isInside$(index, includeDelimiters) || this.isInside$$(index, includeDelimiters)
 	);
