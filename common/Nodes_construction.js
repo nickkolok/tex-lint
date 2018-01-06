@@ -19,14 +19,6 @@ Nodes.prototype.fromText = function(text) {
 	this.prepareNodes();
 };
 
-Nodes.prototype.markSubSup = function() {
-	for (var i = 0; i < this.length; i++) {
-		if (['_', '^'].indexOf(this.nodes[i].text) !== -1) {
-			this.nodes[i].type = 'tag';
-		}
-	}
-};
-
 Nodes.prototype.markSpaceNodes = function() {
 	console.time('Nodes.markSpaceNodes');
 	for (var i = 0; i < this.length; i++) {
@@ -167,7 +159,6 @@ Nodes.prototype.prepareNodes = function() {
 	this.deleteEmptyNodes();
 	this.markSpaceNodes();
 	this.joinNodesOfType('space');
-	this.markSubSup();
 	this.remarkNumberNodes();
 };
 

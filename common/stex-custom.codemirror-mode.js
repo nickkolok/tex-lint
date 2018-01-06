@@ -135,6 +135,11 @@
         return "tag";
       }
 
+      // special math-mode characters
+      if (source.match(/^[\^_&]/)) {
+        return "tag";
+      }
+
       // find if we're starting various math modes
       if (source.match("\\[")) {
         setState(state, function(source, state){ return inMathMode(source, state, "\\]"); });
