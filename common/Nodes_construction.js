@@ -7,19 +7,71 @@ module.exports = function(Nodes) {
 // Тесты пишутся не на отдельную функцию, а на результат конструктора
 
 Nodes.prototype.fromText = function(text) {
+	console.time('Nodes.fromText');
 	this.nodes = [];
 	var self = this;
+	var goodTypesCatalogue = {
+		'cyrtext': null,
+		'space': null,
+		'linebreak': null,
+		'comment': null,
+		'number': null,
+		'tag': null,
+		'bracket': null,
+		'keyword': null,
+		'variable': null,
+	};
 	Nodes.CodeMirror.runMode(
 		text,
 		{ name:'stex' },
 		function(node, style) {
 			if (node === '\n') {
 				// TODO: patch CodeMirror
-				style = 'linebreak';
+				self.nodes.push({ text: '\n', type: 'linebreak' });
+				return;
 			}
-			self.nodes.push({ text:node, type:style });
+			if (!(style in goodTypesCatalogue) && (/\d/i).test(node)) {
+				// There are digits!
+				if ((/^(\d+\.\d*|\d*\.\d+|\d+)$/i).test(node)) {
+					// ...only digits
+					self.nodes.push({ text: node, type: 'number' });
+					return;
+				}
+				var begin = node.match(/^(\d+\.\d*|\d*\.\d+|\d+)/i);
+				if (begin) {
+					self.nodes.push({ text: begin[0], type: 'number' });
+					node = node.substr(begin[0].length);
+				}
+				var end = node.match(/(\d+\.\d*|\d*\.\d+|\d+)$/i);
+				if (end) {
+					node = node.substr(0, node.length - end[0].length);
+				}
+
+				// Maybe it's unrecognized space?
+				if (/^\s+$/.test(node)) {
+					style = 'space';
+					if (!begin && self.nodes[self.nodes.length - 1].type === 'space') {
+						self.nodes[self.nodes.length - 1] += node;
+						node = null;
+					}
+				}
+
+				if (end) {
+					self.nodes.push({ text:node, type:style });
+					self.nodes.push({ text: end[0], type: 'number' });
+					return;
+				}
+			}
+
+
+			if (node) {
+				self.nodes.push({ text:node, type:style });
+			}
+
+
 		}
 	);
+	console.timeEnd('Nodes.fromText');
 	this.prepareNodes();
 };
 
@@ -39,10 +91,11 @@ Nodes.prototype.markSpaceNodes = function() {
 	for (var i = 0; i < this.length; i++) {
 		/*
 		if (this.nodes[i].text === '\n') {
+			//console.log(this.nodes[i].type);
 			this.nodes[i].type = 'linebreak';
 		} else
 		*/
-		if (!(this.nodes[i].type in goodTypesCatalogue) && /^[ \t]+$/i.test(this.nodes[i].text)) {
+		if (!(this.nodes[i].type in goodTypesCatalogue) && (/^\s+$/i).test(this.nodes[i].text)) {
 			this.nodes[i].type = 'space';
 		}
 	}
@@ -52,12 +105,15 @@ Nodes.prototype.markSpaceNodes = function() {
 Nodes.prototype.remarkNumberNodes = function() {
 	console.time('Nodes.remarkNumberNodes');
 	for (var i = 0; i < this.length; i++) {
-		if (/^\d+$/.test(this.nodes[i].text)) {
+		if (/^(\d+\.\d*|\d*\.\d+|\d+)$/i.test(this.nodes[i].text)) {
 			this.nodes[i].type = 'number';
 		}
 	}
 	console.timeEnd('Nodes.remarkNumberNodes');
 };
+
+
+//var separateNumberCache = {};
 
 Nodes.prototype.separateNumbers = function() {
 	console.time('Nodes.separateNumbers');
@@ -83,24 +139,31 @@ Nodes.prototype.separateNumbers = function() {
 		}
 
 
+//		if (this.nodes[i].text in separateNumberCache) {
+//			continue;
+//		}
+
 		if (!(/\d/i).test(this.nodes[i].text)) {
 			// There are no digits
+//			separateNumberCache[this.nodes[i].text] = null;
 			continue;
 		}
+/*
 		if ((/^(\d+\.\d*|\d*\.\d+|\d+)$/i).test(this.nodes[i].text)) {
 			// There are only digits
+//			separateNumberCache[this.nodes[i].text] = null;
 			this.nodes[i].type = 'number';
 			continue;
 		}
-
-
-		var begin = (/^(\d+\.\d*|\d*\.\d+|\d+)/i).test(this.nodes[i].text);
+*/
+/*
+		var begin = this.nodes[i].text.match(/^(\d+\.\d*|\d*\.\d+|\d+)/i);
 		if (begin) {
-			begin = this.nodes[i].text.match(/^(\d+\.\d*|\d*\.\d+|\d+)/i);
 			this.insertNode(i, { text: begin[0], type: 'number' });
 			i++;
 			this.nodes[i].text = this.nodes[i].text.replace(/^(\d+\.\d*|\d*\.\d+|\d+)/i, '');
 		}
+*/
 		var end = (/(\d+\.\d*|\d*\.\d+|\d+)$/i).test(this.nodes[i].text);
 		if (end) {
 			end = this.nodes[i].text.match(/\d+$/);
@@ -112,51 +175,15 @@ Nodes.prototype.separateNumbers = function() {
 	console.timeEnd('Nodes.separateNumbers');
 };
 
-Nodes.prototype.separateSpaces = function() {
-	console.time('Nodes.separateSpaces');
-	// Мы предполагаем, что разрывы строки-то уж кодемирроровский парсер осилил
-	var goodTypesCatalogue = {
-		'cyrtext': null,
-		'space': null,
-		'linebreak': null,
-		'comment': null,
-		'number': null,
-		'tag': null,
-		'bracket': null,
-		'keyword': null,
-		'variable': null,
-	};
-
-	for (var i = 0; i < this.length; i++) {
-		if (this.nodes[i].type in goodTypesCatalogue) {
-			continue;
-		}
-		if (!(/\s/i).test(this.nodes[i].text)) {
-			continue;
-		}
-		var begin = this.nodes[i].text.match(/^\s+/);
-		if (begin) {
-			this.insertNode(i, { text: begin[0], type: 'space' });
-			i++;
-			this.nodes[i].text = this.nodes[i].text.replace(/^\s+/, '');
-		}
-		var end = this.nodes[i].text.match(/\s+$/);
-		if (end) {
-			this.insertNode(i + 1, { text: end[0], type: 'space' });
-			this.nodes[i].text = this.nodes[i].text.replace(/\s+$/, '');
-			i++;
-		}
-	}
-	console.timeEnd('Nodes.separateSpaces');
-};
-
 Nodes.prototype.deleteEmptyNodes = function() {
+	console.time('Nodes.deleteEmptyNodes');
 	for (var i = 0; i < this.length; i++) {
 		if (!this.nodes[i].text) {
 			this.nodes.splice(i, 1);
 			i--;
 		}
 	}
+	console.timeEnd('Nodes.deleteEmptyNodes');
 };
 
 Nodes.prototype.joinNodesOfType = function(type) {
