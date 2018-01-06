@@ -186,14 +186,14 @@
     }
 
     function inMathMode(source, state, endModeSeq) {
-      // cyrillic (Russian) symbols
-      if (source.match(/^[А-ЯЁ]+/i)) {
-        return "cyrtext";
-      }
-
       // spaces: it is important to third-part applications using CodeMirror's parser
       if (source.match(/^\s+/i)) {
         return "space";
+      }
+
+      // cyrillic (Russian) symbols
+      if (source.match(/^[А-ЯЁ]+/i)) {
+        return "cyrtext";
       }
 
       if (source.eatSpace()) {
