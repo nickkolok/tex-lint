@@ -174,10 +174,10 @@ Nodes.prototype.joinNodesOfType = function(type) {
 
 Nodes.prototype.prepareNodes = function() {
 	this.separateNumbers();
-	this.deleteEmptyNodes();
 	this.markSpaceNodes();
-	this.joinNodesOfType('space');
 	this.remarkNumberNodes();
+	this.joinNodesOfType('space');
+	this.deleteEmptyNodes();
 };
 
 };
