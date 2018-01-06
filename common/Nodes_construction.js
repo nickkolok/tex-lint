@@ -13,6 +13,10 @@ Nodes.prototype.fromText = function(text) {
 		text,
 		{ name:'stex' },
 		function(node, style) {
+			if (node === '\n') {
+				// TODO: patch CodeMirror
+				style = 'linebreak';
+			}
 			self.nodes.push({ text:node, type:style });
 		}
 	);
@@ -22,9 +26,12 @@ Nodes.prototype.fromText = function(text) {
 Nodes.prototype.markSpaceNodes = function() {
 	console.time('Nodes.markSpaceNodes');
 	for (var i = 0; i < this.length; i++) {
+		/*
 		if (this.nodes[i].text === '\n') {
 			this.nodes[i].type = 'linebreak';
-		} else if (/^\s+$/.test(this.nodes[i].text)) {
+		} else
+		*/
+		if (/^[ \t]+$/i.test(this.nodes[i].text)) {
 			this.nodes[i].type = 'space';
 		}
 	}
