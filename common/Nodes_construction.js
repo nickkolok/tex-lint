@@ -25,13 +25,24 @@ Nodes.prototype.fromText = function(text) {
 
 Nodes.prototype.markSpaceNodes = function() {
 	console.time('Nodes.markSpaceNodes');
+	var goodTypesCatalogue = {
+		'cyrtext': null,
+		'space': null,
+		'linebreak': null,
+		'comment': null,
+		'number': null,
+		'tag': null,
+		'bracket': null,
+		'keyword': null,
+		'variable': null,
+	};
 	for (var i = 0; i < this.length; i++) {
 		/*
 		if (this.nodes[i].text === '\n') {
 			this.nodes[i].type = 'linebreak';
 		} else
 		*/
-		if (/^[ \t]+$/i.test(this.nodes[i].text)) {
+		if (!(this.nodes[i].type in goodTypesCatalogue) && /^[ \t]+$/i.test(this.nodes[i].text)) {
 			this.nodes[i].type = 'space';
 		}
 	}
