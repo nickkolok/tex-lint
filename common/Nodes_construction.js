@@ -40,7 +40,7 @@ Nodes.prototype.fromText = function(text) {
 				self.nodes.push({ text: '\n', type: 'linebreak' });
 				return;
 			}
-			if (style in goodTypesCatalogueNoSpace && node) {
+			if (style in goodTypesCatalogueNoSpace) {
 				self.nodes.push({ text:node, type:style });
 				return;
 			}
@@ -60,33 +60,32 @@ Nodes.prototype.fromText = function(text) {
 				if (end) {
 					node = node.substr(0, node.length - end[0].length);
 				}
-
-				// Maybe it's unrecognized space?
-				if (/^\s+$/.test(node)) {
-					style = 'space';
-					if (!begin && self.nodes[self.nodes.length - 1].type === 'space') {
-						self.nodes[self.nodes.length - 1] += node;
-						node = null;
-					}
-				}
-
-				if (end) {
-					self.nodes.push({ text:node, type:style });
-					self.nodes.push({ text: end[0], type: 'number' });
-					return;
+			}
+			// Maybe it's unrecognized space?
+			if (/^\s+$/.test(node)) {
+				style = 'space';
+				if (!begin && self.nodes.length && self.nodes[self.nodes.length - 1].type === 'space') {
+					self.nodes[self.nodes.length - 1].text += node;
+					node = '';
 				}
 			}
 
-
-			if (node) {
+			if (node !== '') {
 				self.nodes.push({ text:node, type:style });
 			}
+
+			if (end) {
+				self.nodes.push({ text: end[0], type: 'number' });
+				return;
+			}
+
+
 
 
 		}
 	);
 	console.timeEnd('Nodes.fromText');
-	this.prepareNodes();
+	//this.prepareNodes();
 };
 
 Nodes.prototype.markSpaceNodes = function() {
