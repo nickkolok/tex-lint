@@ -100,6 +100,13 @@
 
     // called when in a normal (no environment) context
     function normal(source, state) {
+
+      // Spaces are most frequent nodes, so they should be detected first
+      // spaces: it is important to third-part applications using CodeMirror's parser
+      if (source.match(/^\s+/i)) {
+        return "space";
+      }
+
       var plug;
       // Do we look like '\command' ?  If so, attempt to apply the plugin 'command'
       if (source.match(/^\\[a-zA-Z@]+/)) {
@@ -111,11 +118,6 @@
         return plug.style;
       }
 
-      // escape characters
-      if (source.match(/^\\[$&%#{}_]/)) {
-        return "tag";
-      }
-
       // cyrillic (Russian) symbols
       if (source.match(/^[А-ЯЁ]+/i)) {
         return "cyrtext";
@@ -125,9 +127,9 @@
         return "number";
       }
 
-      // spaces: it is important to third-part applications using CodeMirror's parser
-      if (source.match(/^\s+/i)) {
-        return "space";
+      // escape characters
+      if (source.match(/^\\[$&%#{}_]/)) {
+        return "tag";
       }
 
       // white space control characters
