@@ -21,6 +21,16 @@ Nodes.prototype.fromText = function(text) {
 		'keyword': null,
 		'variable': null,
 	};
+	var goodTypesCatalogueNoSpace = {
+		'cyrtext': null,
+		'linebreak': null,
+		'comment': null,
+		'number': null,
+		'tag': null,
+		'bracket': null,
+		'keyword': null,
+		'variable': null,
+	};
 	Nodes.CodeMirror.runMode(
 		text,
 		{ name:'stex' },
@@ -30,7 +40,11 @@ Nodes.prototype.fromText = function(text) {
 				self.nodes.push({ text: '\n', type: 'linebreak' });
 				return;
 			}
-			if (!(style in goodTypesCatalogue) && (/\d/i).test(node)) {
+			if (style in goodTypesCatalogueNoSpace && node) {
+				self.nodes.push({ text:node, type:style });
+				return;
+			}
+			if ((/\d/i).test(node)) {
 				// There are digits!
 				if ((/^(\d+\.\d*|\d*\.\d+|\d+)$/i).test(node)) {
 					// ...only digits
