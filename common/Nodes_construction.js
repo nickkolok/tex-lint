@@ -200,11 +200,9 @@ Nodes.prototype.joinNodesOfType = function(type) {
 };
 
 Nodes.prototype.prepareNodes = function() {
-	this.separateNumbers();
 	this.markSpaceNodes();
 	this.remarkNumberNodes();
 	this.joinNodesOfType('space');
-	this.deleteEmptyNodes();
 };
 
 };
