@@ -9,18 +9,34 @@ function genRandomClass() {
 	return ('randomclass' + Math.random()).replace('.', '');
 }
 
+var KaTeXcache$ = {};
+var KaTeXcache$$ = {};
+
 function createKaTeXspan(nodes, index) {
+	console.time('createKaTeXspan()');
 	var formula = nodes.getFormulaByIndex(index);
 	var formulaText = nodes.getSubnodes(
 		formula.start + 1,
 		formula.end
 	).toString();
 
+	var displayMode = nodes.isInside$$(index);
+
+
+	var cache = displayMode ? KaTeXcache$$ : KaTeXcache$;
+
+	if (formulaText in cache) {
+		console.log('Cached:' + formulaText);
+		console.timeEnd('createKaTeXspan()');
+		return cache[formulaText].cloneNode(true);
+	}
+
+
 	var preview = $('<span>', {
 	});
 	try {
 		katex.render(formulaText, preview[0], {
-			displayMode: nodes.isInside$$(index),
+			displayMode: displayMode,
 			macros: {
 				'\\eqno': '~~~~',
 			}
@@ -30,6 +46,8 @@ function createKaTeXspan(nodes, index) {
 		preview.html('(не удалось изобразить формулу)');
 	}
 
+	cache[formulaText] = preview[0];//.innerHTML;
+	console.timeEnd('createKaTeXspan()');
 	return preview[0];
 }
 
