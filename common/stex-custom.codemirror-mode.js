@@ -73,9 +73,9 @@
     var plugins = {};
     var precise = "variable";
 
-    plugins["importmodule"] = addPluginPattern("importmodule", "tag", ["string", "builtin"]);
-    plugins["documentclass"] = addPluginPattern("documentclass", "tag", ["", "atom"]);
-    plugins["usepackage"] = addPluginPattern("usepackage", "tag", ["atom"]);
+    //plugins["importmodule"] = addPluginPattern("importmodule", "tag", ["string", "builtin"]);
+    //plugins["documentclass"] = addPluginPattern("documentclass", "tag", ["", "atom"]);
+    //plugins["usepackage"] = addPluginPattern("usepackage", "tag", ["atom"]);
     plugins["begin"] = addPluginPattern("begin", "tag", [precise]);
     plugins["end"] = addPluginPattern("end", "tag", [precise]);
 

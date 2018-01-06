@@ -137,13 +137,13 @@ test("getArguments", function () {
 	// Полукостыли, но без них парсится неправильно.
 	// То есть правильно, но нам так не надо.
 	var _utf8_ = new Nodes('[ utf8 ]');
-	_utf8_.nodes[2].type = 'atom';
+	_utf8_.nodes[2].type = null;
 
 	var utf8_ = new Nodes('[utf8 ]');
-	utf8_.nodes[1].type = 'atom';
+	utf8_.nodes[1].type = null;
 
 	var utf8 = new Nodes('[utf8]');
-	utf8.nodes[1].type = 'atom';
+	utf8.nodes[1].type = null;
 
 	assert.deepEqual(
 		N.getArguments(4, 2),
