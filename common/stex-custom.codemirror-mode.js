@@ -187,6 +187,17 @@
       }
     }
 
+/*
+    var allBraces = {
+      '}': null,
+      '{': null,
+      '(': null,
+      ')': null,
+      ']': null,
+      '[': null,
+    };
+*/
+
     function inMathMode(source, state, endModeSeq) {
       // spaces: it is important to third-part applications using CodeMirror's parser
       if (source.match(/^\s+/i)) {
@@ -231,6 +242,10 @@
         return "number";
       }
       var ch = source.next();
+      //var chcode = ch.charCodeAt(0) | 32;
+      //if (chcode === 0x7b || chcode === 0x7d || chcode | 1 === 29) {
+      //if (ch in allBraces) {
+      //if (/^[\[\]\{\}\(\)]/i.test(ch)) {
       if (ch === "{" || ch === "}" || ch === "[" || ch === "]" || ch === "(" || ch === ")") {
         return "bracket";
       }
