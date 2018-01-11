@@ -226,8 +226,30 @@ Nodes.prototype.isInsideSymmDelimiters = function(index, delimiterType, delimite
 	return !!(delimCount % 2);
 };
 
+Nodes.inlineFormulaDelimiters = {
+	'$': null,
+	'\(': null,
+	'\)': null,
+};
+
+
 Nodes.prototype.isInside$ = function(index, includeDelimiters) {
-	return this.isInsideSymmDelimiters(index, 'keyword', '$', includeDelimiters);
+	if (includeDelimiters && this.nodes.type === 'keyword') {
+		return (this.nodes[index].text in displayFormulaDelimiters);
+	}
+	var delimCount = 0;
+	for (; index > -1; index--) {
+		if (this.nodes[index].type === 'keyword') {
+			if (this.nodes[index].text === '$') {
+				delimCount++;
+			} else if (this.nodes[index].text === '\\(') {
+				return true;
+			} else {
+				break;
+			}
+		}
+	}
+	return !!(delimCount % 2);
 };
 
 Nodes.displayFormulaDelimiters = {
