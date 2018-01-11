@@ -13,7 +13,7 @@ var KaTeXcache$ = {};
 var KaTeXcache$$ = {};
 
 function createKaTeXspan(nodes, index) {
-	console.time('createKaTeXspan()');
+//	console.time('createKaTeXspan()');
 	var formula = nodes.getFormulaByIndex(index);
 	var formulaText = nodes.getSubnodes(
 		formula.start + 1,
@@ -26,8 +26,8 @@ function createKaTeXspan(nodes, index) {
 	var cache = displayMode ? KaTeXcache$$ : KaTeXcache$;
 
 	if (formulaText in cache) {
-		console.log('Cached:' + formulaText);
-		console.timeEnd('createKaTeXspan()');
+//		console.log('Cached:' + formulaText);
+//		console.timeEnd('createKaTeXspan()');
 		return cache[formulaText].cloneNode(true);
 	}
 
@@ -47,50 +47,61 @@ function createKaTeXspan(nodes, index) {
 	}
 
 	cache[formulaText] = preview[0];//.innerHTML;
-	console.timeEnd('createKaTeXspan()');
+//	console.timeEnd('createKaTeXspan()');
 	return preview[0];
 }
 
 function createFullPreviewBlockIfNeeded(nodes, index, corrector, target) {
+	console.time('createFullPreviewBlockIfNeeded()');
 	//TODO: isInsideFormula
-	if (!nodes.isInside$(index) && !nodes.isInside$$(index)) {
+	if (!nodes.isInsideFormula(index)) {
+//		console.timeEnd('createFullPreviewBlockIfNeeded()');
+//		console.log('(not needed)');
 		return;
 	}
-	var randomClass = genRandomClass();
-	var previewButton = $('<button>', {
-		html : 'Предпросмотр',
-		'data-target' : '.' + randomClass,
-		'data-toggle' : 'collapse',
-		'class': 'btn btn-default btn-preview',
-	})[0];
 
-	var previewBody = $('<div>', {
-		'class' : 'collapse ' + randomClass,
-	})[0];
+//	try {
+		var randomClass = genRandomClass();
+		var previewButton = $('<button>', {
+			html : 'Предпросмотр',
+			'data-target' : '.' + randomClass,
+			'data-toggle' : 'collapse',
+			'class': 'btn btn-default btn-preview',
+		})[0];
 
-	previewBody.appendChild(
-		createKaTeXspan(nodes, index)
-	);
-	previewBody.appendChild(
-		$('<span>', {
-			'html' : ' будет преобразовано в '
-		})[0]
-	);
+		var previewBody = $('<div>', {
+			'class' : 'collapse ' + randomClass,
+		})[0];
 
-	var nodesAfterFix = corrector(nodes.clone(), index);
-	// Убеждаемся, что индекс по-прежнему показывает внутрь формулы
-	if (!nodesAfterFix.isInside$(index) && !nodesAfterFix.isInside$$(index)) {
-		return;
-	}
-	previewBody.appendChild(
-		createKaTeXspan(nodesAfterFix, index)
-	);
+		previewBody.appendChild(
+			createKaTeXspan(nodes, index)
+		);
+		previewBody.appendChild(
+			$('<span>', {
+				'html' : ' будет преобразовано в '
+			})[0]
+		);
 
-	target.appendChild(previewButton);
-	target.appendChild(previewBody);
+//		console.time('createFullPreviewBlockIfNeeded(): second span');
+
+		var nodesAfterFix = corrector(nodes.clone(), index);
+//		console.timeEnd('createFullPreviewBlockIfNeeded(): second span');
+		// Убеждаемся, что индекс по-прежнему показывает внутрь формулы
+		if (!nodesAfterFix.isInsideFormula(index)) {
+			return;
+		}
+		previewBody.appendChild(
+			createKaTeXspan(nodesAfterFix, index)
+		);
+
+		target.appendChild(previewButton);
+		target.appendChild(previewBody);
+//	} catch (e) {}
+	console.timeEnd('createFullPreviewBlockIfNeeded()');
 }
 
 function createFixButtonIfPossible(theRule, reportErrors, target, o) {
+//	console.time('createFixButtonIfPossible()');
 	if (!theRule.fixErrors) {
 		return;
 	}
@@ -114,9 +125,11 @@ function createFixButtonIfPossible(theRule, reportErrors, target, o) {
 		}
 	};})(theRule);
 	target.appendChild(fixbutton);
+//	console.timeEnd('createFixButtonIfPossible()');
 }
 
 function createPartialCorrectButton(o, index, corrector, target) {
+	console.time('createPartialCorrectButton');
 	var singleButton = $('<button>',{
 	html: 'Исправить',
 		'class': 'btn btn-default btn-fix btn-fix-one',
@@ -139,9 +152,11 @@ function createPartialCorrectButton(o, index, corrector, target) {
 		target
 	);
 	target.appendChild($('<br/>')[0]);
+	console.timeEnd('createPartialCorrectButton');
 }
 
 module.exports.createHTMLreport = function(o) {
+	console.time('createHTMLreport()');
 	clearElement(o.targetElement);
 
 	var reportErrors = document.createDocumentFragment();
@@ -226,7 +241,7 @@ module.exports.createHTMLreport = function(o) {
 	} else {
 		$(o.targetElement).html('Ошибок не найдено');
 	}
-
+	console.timeEnd('createHTMLreport()');
 };
 
 function clearElement(el) {
