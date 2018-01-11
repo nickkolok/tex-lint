@@ -598,6 +598,36 @@ test('isInsideSymmDelimiters', function () {
 		""
 	);
 	assert.deepEqual(
+		new Nodes('$a$').isInsideSymmDelimiters(0, 'keyword', '$', false),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$').isInsideSymmDelimiters(0, 'keyword', '$'),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$').isInsideSymmDelimiters(0, 'keyword', '$', true),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$').isInsideSymmDelimiters(2, 'keyword', '$', false),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$').isInsideSymmDelimiters(2, 'keyword', '$'),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$').isInsideSymmDelimiters(2, 'keyword', '$', true),
+		true,
+		""
+	);
+	assert.deepEqual(
 		new Nodes('$a$b').isInsideSymmDelimiters(3, 'keyword', '$'),
 		false,
 		""
@@ -627,6 +657,77 @@ test('isInsideSymmDelimiters', function () {
 		true,
 		""
 	);
+	assert.deepEqual(
+		new Nodes('Some text with frac $\\frac{1}{2}$ in').isInsideSymmDelimiters(8, 'keyword', '$', true),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('Some text with frac $\\frac{1}{2}$ in').isInsideSymmDelimiters(16, 'keyword', '$', true),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('Some text with frac $\\frac{1}{2}$ in').isInsideSymmDelimiters(8, 'keyword', '$'),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('Some text with frac $\\frac{1}{2}$ in').isInsideSymmDelimiters(8, 'keyword', '$', false),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('Some text with frac $\\frac{1}{2}$ in').isInsideSymmDelimiters(16, 'keyword', '$'),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('Some text with frac $\\frac{1}{2}$ in').isInsideSymmDelimiters(16, 'keyword', '$', false),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('frac $\\frac{1}{2}$ in').isInsideSymmDelimiters(10, 'keyword', '$'),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('frac $\\frac{1}{2}$ in').isInsideSymmDelimiters(10, 'keyword', '$', false),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$\\frac{1}{2}$ in').isInsideSymmDelimiters(8, 'keyword', '$'),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$\\frac{1}{2}$ in').isInsideSymmDelimiters(8, 'keyword', '$', false),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$\\frac{1}{2}$').isInsideSymmDelimiters(8, 'keyword', '$'),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$\\frac{1}{2}$').isInsideSymmDelimiters(8, 'keyword', '$', false),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$1$ in').isInsideSymmDelimiters(2, 'keyword', '$'),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$1$ in').isInsideSymmDelimiters(2, 'keyword', '$', false),
+		false,
+		""
+	);
+
 
 });
 
@@ -737,6 +838,11 @@ test('isInsideFormula', function () {
 	assert.deepEqual(
 		new Nodes('$a$b').isInsideFormula(2),
 		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$b').isInsideFormula(1),
+		true,
 		""
 	);
 	assert.deepEqual(
@@ -911,6 +1017,24 @@ test('getFormulaByIndex', function () {
 	);
 	assert.deepEqual(
 		new Nodes('$a$\\alpha$g\\beta_2$').getFormulaByIndex(5),
+		{
+			start : 4,
+			end   : 9,
+			type  : '$',
+		},
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$\\alpha$g\\beta_2$').getFormulaByIndex(4),
+		{
+			start : 4,
+			end   : 9,
+			type  : '$',
+		},
+		""
+	);
+	assert.deepEqual(
+		new Nodes('$a$\\alpha$g\\beta_2$').getFormulaByIndex(9),
 		{
 			start : 4,
 			end   : 9,
