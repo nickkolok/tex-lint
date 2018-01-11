@@ -230,28 +230,29 @@ Nodes.prototype.isInside$ = function(index, includeDelimiters) {
 	return this.isInsideSymmDelimiters(index, 'keyword', '$', includeDelimiters);
 };
 
+Nodes.displayFormulaDelimiters = {
+	'$$': null,
+	'\[': null,
+	'\]': null,
+};
+
 Nodes.prototype.isInside$$ = function(index, includeDelimiters) {
-	console.time('isInside$$ ' + index);
-	if (!includeDelimiters) {
-		var delimCount = 0;
-		for (; index > -1; index--) {
-			if (this.nodes[index].type === 'keyword') {
-				if (this.nodes[index].text === '$$') {
-					delimCount++;
-				} else if (this.nodes[index].text === '\\[') {
-					return true;
-				} else {
-					break;
-				}
+	if (includeDelimiters && this.nodes.type === 'keyword') {
+		return (this.nodes[index].text in displayFormulaDelimiters);
+	}
+	var delimCount = 0;
+	for (; index > -1; index--) {
+		if (this.nodes[index].type === 'keyword') {
+			if (this.nodes[index].text === '$$') {
+				delimCount++;
+			} else if (this.nodes[index].text === '\\[') {
+				return true;
+			} else {
+				break;
 			}
 		}
-		return !!(delimCount % 2);
 	}
-
-	var res = this.isInsideSymmDelimiters(index, 'keyword', '$$', includeDelimiters);
-	console.timeEnd('isInside$$ ' + index);
-	console.log(res);
-	return res;
+	return !!(delimCount % 2);
 };
 
 Nodes.prototype.isInsideFormula = function(index, includeDelimiters) {
