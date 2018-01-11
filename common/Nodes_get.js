@@ -424,6 +424,8 @@ Nodes.prototype.getSuspiciousLongmaps = function() {
 
 
 Nodes.prototype.getTagsAssignments = function(tags) {
+	console.time('Nodes.getTagsAssignments');
+
 	var foundTags = this.getTagsArrayNumbers(tags);
 	var assignments = [];
 	for (var i = 0; i < foundTags.length; i++) {
@@ -431,6 +433,9 @@ Nodes.prototype.getTagsAssignments = function(tags) {
 			assignments.push(foundTags[i]);
 		}
 	}
+
+	console.timeEnd('Nodes.getTagsAssignments');
+
 	return assignments;
 };
 
