@@ -8,13 +8,15 @@ new Rule({
 	name: 'comma_before_gde',
 	message: 'В конце выключной формулы перед словом "где" ставится запятая',
 	findErrors: function(nodes) {
+		console.time('Skipping');
 		nodes.setPropByRegExp(/^(space|linebreak|comment)$/, /^/, 'skip', true);
 		nodes.setSkipAllEnds();
 		nodes.setSkipAllEqno();
+		console.timeEnd('Skipping');
 		var indexes = nodes.findSequenceByRegExp([
 			{ type: /^/, text: /^(?!(,)$)/ },
-			{ type: /^/, text: /\$\$/ },
-			{ type: /cyrtext/, text: /где/ },
+			{ type: /^keyword$/, text: /^\$\$$/ },
+			{ type: /^cyrtext$/, text: /^где$/ },
 		]);
 		indexes = indexes.map(function(index) {
 			return index + 1;
