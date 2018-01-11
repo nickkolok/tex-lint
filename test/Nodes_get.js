@@ -984,7 +984,11 @@ test('getFormulaByIndex', function () {
 	);
 	assert.deepEqual(
 		new Nodes('$a$b').getFormulaByIndex(2),
-		null,
+		{
+			start: 0,
+			end: 2,
+			type: '$'
+		},
 		""
 	);
 	assert.deepEqual(
@@ -1044,7 +1048,11 @@ test('getFormulaByIndex', function () {
 	);
 	assert.deepEqual(
 		new Nodes('$a$\\alpha$$g$$').getFormulaByIndex(6),
-		null,
+		{
+			start: 4,
+			end: 6,
+			type: '$$'
+		},
 		""
 	);
 	assert.deepEqual(
@@ -1056,6 +1064,16 @@ test('getFormulaByIndex', function () {
 		},
 		""
 	);
+	assert.deepEqual(
+		new Nodes('Some text with frac $\\frac{1}{2}$ in').getFormulaByIndex(8),
+		{
+			start : 8,
+			end   : 16,
+			type  : '$',
+		},
+		""
+	);
+	
 });
 
 test('getChildrenInTagsArguments', function () {

@@ -206,31 +206,24 @@ Nodes.prototype.isWellSeparated = function(index, rightSepTypes, wrongSepTypes, 
 };
 
 Nodes.prototype.isInsideSymmDelimiters = function(index, delimiterType, delimiterText, includeDelimiters) {
-	if (!includeDelimiters) {
-		// If there are 2n+1 delimiters on the left, then index is inside
-		var delimCount = 0;
-		for (;index > -1; index--) {
-			if (this.nodes[index].type === delimiterType && this.nodes[index].text === delimiterText) {
-				delimCount++;
-			}
-		}
-		return !!(delimCount % 2);
+
+	console.log(this.getSubnodes(index - 10, index + 10).toString());
+	console.log("!  !  ", this.nodes[index].text);
+	console.log(index, delimiterType, delimiterText, includeDelimiters);
+
+	// If the node is a delimiter, return includeDelimiter
+	if (this.nodes[index].type === delimiterType && this.nodes[index].text === delimiterText) {
+		return !!includeDelimiters;
 	}
 
-	//TODO: optimize
-
-	var delimiters = this.getNodesNumbers(delimiterType, delimiterText);
-	if (includeDelimiters && delimiters.indexOf(index) !== -1) {
-		return true;
-	}
-	for (var i = 0; i < delimiters.length; i += 2) {
-		if (index < delimiters[i + 1] && delimiters[i] < index) { // В таком порядке проверка д.б. быстрее
-			return true;
-		} else if (delimiters[i] > index) {
-			return false;
+	// If there are 2n+1 delimiters on the left, then index is inside
+	var delimCount = 0;
+	for (;index > -1; index--) {
+		if (this.nodes[index].type === delimiterType && this.nodes[index].text === delimiterText) {
+			delimCount++;
 		}
 	}
-	return false;
+	return !!(delimCount % 2);
 };
 
 Nodes.prototype.isInside$ = function(index, includeDelimiters) {
@@ -309,12 +302,34 @@ Nodes.prototype.isInsideFormula = function(index, includeDelimiters) {
 	return res;
 };
 
+//TODO: separate to Nodes_get_formula.js
 Nodes.prototype.getFormulaByIndex = function(index) {
+
+	//TODO: refactor?
+	if (this.nodes[index].type === 'keyword') {
+		// Bad case, we don't know, is index left or right border of formula
+		if (this.nodes[index].text === "\[") {
+			//TODO: correct type + tests!
+			return this.getFormulaByIndex(index + 1);
+		}
+		if (this.nodes[index].text === "\]") {
+			//TODO: correct type + tests!
+			return this.getFormulaByIndex(index - 1);
+		}
+		if (this.nodes[index].text === "$" || this.nodes[index].text === "$$") {
+			//TODO: correct type + tests!
+			if (this.nodes[index + 1] && this.isInsideFormula(index + 1)) {
+				return this.getFormulaByIndex(index + 1);
+			}
+			return this.getFormulaByIndex(index - 1);
+		}
+	}
+
 	// TODO: обобщить
 	var beginIndex = 0;
-	if (this.isInside$(index)) {
+	if (this.isInside$(index, true)) {
 		var type = '$';
-	} else if (this.isInside$$(index)) {
+	} else if (this.isInside$$(index, true)) {
 		var type = '$$';
 	} else {
 		return null; // TODO: а может, всё-таки объект, пусть и пустой?
