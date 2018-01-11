@@ -255,51 +255,38 @@ Nodes.prototype.isInside$$ = function(index, includeDelimiters) {
 };
 
 Nodes.prototype.isInsideFormula = function(index, includeDelimiters) {
-	console.time('Nodes.isInsideFormula()');
-	if (!includeDelimiters) {
-		var indexOld = index; //DBG
-
-		// If there are 2n+1 delimiters on the left, then index is inside formula
-		var nearest;
-		for (; index > -1; index--) {
-			if (this.nodes[index].type === 'keyword') {
-				nearest = this.nodes[index];
-				if (nearest.text === '\\[') {
-					console.timeEnd('Nodes.isInsideFormula()');
-					return true;
-				}
-				if (nearest.text === '\\]') {
-					console.timeEnd('Nodes.isInsideFormula()');
-					return false;
-				}
-				break;
-			}
-		}
-		if (index === -1) {
-			console.timeEnd('Nodes.isInsideFormula()');
-			return false;
-		}
-
-		index--;
-		var delimCount = 1;
-		for (; index > -1; index--) {
-			if (this.nodes[index].type === 'keyword') {
-				if (this.nodes[index].text !== nearest.text) {
-					console.log(this.nodes[index].text, nearest.text, index, indexOld);
-					break;
-				}
-				delimCount++;
-			}
-		}
-		console.timeEnd('Nodes.isInsideFormula()');
-		return !!(delimCount % 2);
+	if (includeDelimiters && this.nodes.type === 'keyword') {
+		return true;
 	}
 
-	var res = (
-		this.isInside$(index, includeDelimiters) || this.isInside$$(index, includeDelimiters)
-	);
-	console.timeEnd('Nodes.isInsideFormula()');
-	return res;
+	var nearest;
+	for (; index > -1; index--) {
+		if (this.nodes[index].type === 'keyword') {
+			nearest = this.nodes[index];
+			if (nearest.text === '\\[') {
+				return true;
+			}
+			if (nearest.text === '\\]') {
+				return false;
+			}
+			break;
+		}
+	}
+	if (index === -1) {
+		return false;
+	}
+
+	index--;
+	var delimCount = 1;
+	for (; index > -1; index--) {
+		if (this.nodes[index].type === 'keyword') {
+			if (this.nodes[index].text !== nearest.text) {
+				break;
+			}
+			delimCount++;
+		}
+	}
+	return !!(delimCount % 2);
 };
 
 //TODO: separate to Nodes_get_formula.js
