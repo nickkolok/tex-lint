@@ -238,24 +238,75 @@ Nodes.prototype.isInside$ = function(index, includeDelimiters) {
 };
 
 Nodes.prototype.isInside$$ = function(index, includeDelimiters) {
-	return this.isInsideSymmDelimiters(index, 'keyword', '$$', includeDelimiters);
-};
-
-Nodes.prototype.isInsideFormula = function(index, includeDelimiters) {
+	console.time('isInside$$ ' + index);
 	if (!includeDelimiters) {
-		// If there are 2n+1 delimiters on the left, then index is inside formula
 		var delimCount = 0;
-		for (;index > -1; index--) {
+		for (; index > -1; index--) {
 			if (this.nodes[index].type === 'keyword') {
-				delimCount++;
+				if (this.nodes[index].text === '$$') {
+					delimCount++;
+				} else if (this.nodes[index].text === '\\[') {
+					return true;
+				} else {
+					break;
+				}
 			}
 		}
 		return !!(delimCount % 2);
 	}
 
-	return (
+	var res = this.isInsideSymmDelimiters(index, 'keyword', '$$', includeDelimiters);
+	console.timeEnd('isInside$$ ' + index);
+	console.log(res);
+	return res;
+};
+
+Nodes.prototype.isInsideFormula = function(index, includeDelimiters) {
+	console.time('Nodes.isInsideFormula()');
+	if (!includeDelimiters) {
+		var indexOld = index; //DBG
+
+		// If there are 2n+1 delimiters on the left, then index is inside formula
+		var nearest;
+		for (; index > -1; index--) {
+			if (this.nodes[index].type === 'keyword') {
+				nearest = this.nodes[index];
+				if (nearest.text === '\\[') {
+					console.timeEnd('Nodes.isInsideFormula()');
+					return true;
+				}
+				if (nearest.text === '\\]') {
+					console.timeEnd('Nodes.isInsideFormula()');
+					return false;
+				}
+				break;
+			}
+		}
+		if (index === -1) {
+			console.timeEnd('Nodes.isInsideFormula()');
+			return false;
+		}
+
+		index--;
+		var delimCount = 1;
+		for (; index > -1; index--) {
+			if (this.nodes[index].type === 'keyword') {
+				if (this.nodes[index].text !== nearest.text) {
+					console.log(this.nodes[index].text, nearest.text, index, indexOld);
+					break;
+				}
+				delimCount++;
+			}
+		}
+		console.timeEnd('Nodes.isInsideFormula()');
+		return !!(delimCount % 2);
+	}
+
+	var res = (
 		this.isInside$(index, includeDelimiters) || this.isInside$$(index, includeDelimiters)
 	);
+	console.timeEnd('Nodes.isInsideFormula()');
+	return res;
 };
 
 Nodes.prototype.getFormulaByIndex = function(index) {
