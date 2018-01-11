@@ -178,6 +178,7 @@ Nodes.prototype.slice = function() {
 };
 
 Nodes.prototype.clone = function() {
+	//console.time('Nodes.clone()');
 	var copy = new Nodes();
 	copy.nodes = this.map(function(n) {
 		return {
@@ -185,6 +186,7 @@ Nodes.prototype.clone = function() {
 			text : n.text,
 		};
 	});
+	//console.timeEnd('Nodes.clone()');
 	return copy;
 };
 
