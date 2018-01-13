@@ -22,3 +22,4 @@ require('./Rules/no-mathit-in-formula.js');
 require('./Rules/no-foreignlanguage.js');
 require('./Rules/force_geqslant.js');
 require('./Rules/force_leqslant.js');
+require('./Rules/Russian_quotes.js');
