@@ -1133,6 +1133,98 @@ test('', function () {
 	);
 });
 
+test('quotes', function () {
+	assert.deepEqual(
+		new Nodes('For an "operator" situation, see Corollary 2.1 below').nodes,
+		[
+			{ text: 'For', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'an', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '"', type: null },
+			{ text: 'operator', type: null },
+			{ text: '"', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'situation', type: null },
+			{ text: ',', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'see', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'Corollary', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '2.1', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: 'below', type: null },
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('Ижевск НИЦ "Регулярная и хаотическая динамика", 1999').nodes,
+		[
+			{ text: 'Ижевск', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'НИЦ', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: '"', type: null },
+			{ text: 'Регулярная', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'и', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'хаотическая', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'динамика', type: 'cyrtext' },
+			{ text: '"', type: null },
+			{ text: ',', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '1999', type: 'number' },
+		],
+		""
+	);
+});
+
+test('babel-inspirated quotes', function () {
+	assert.deepEqual(
+		new Nodes('Вместе с физико"=математическим, медицинским, историко-филологическим и юридическим факультетами в г. Воронеж прибыли:').nodes,
+		[
+			//TDOD: maybe treat "= as single node? Wouldn't it make parser too slow?
+			{ text: 'Вместе', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'с', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'физико', type: 'cyrtext' },
+			{ text: '"', type: null },
+			{ text: '=', type: null },
+			{ text: 'математическим', type: 'cyrtext' },
+			{ text: ',', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'медицинским', type: 'cyrtext' },
+			{ text: ',', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'историко', type: 'cyrtext' },
+			{ text: '-', type: null },
+			{ text: 'филологическим', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'и', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'юридическим', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'факультетами', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'в', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'г', type: 'cyrtext' },
+			{ text: '.', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'Воронеж', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'прибыли', type: 'cyrtext' },
+			{ text: ':', type: null },
+		],
+		""
+	);
+});
+
+
 
 /*
 //TODO: запятая не отделяется от слова. Решить, что с ней делать.
