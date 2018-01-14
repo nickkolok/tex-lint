@@ -216,6 +216,8 @@ module.exports.createHTMLreport = function(o) {
 			})[0];
 
 			for (var j = 0; j < result.indexes.length; j++) {
+				//console.time('Building html for label: ' + theRule.name);
+
 				var rowcol = $('<span style="cursor:pointer;">'); // TODO: таки сделать CSS-файл
 				var coord = {
 					row: mapRowCol.row[result.indexes[j]],
@@ -233,6 +235,8 @@ module.exports.createHTMLreport = function(o) {
 					});
 					o.editor.focus();
 				};})(coord);
+				//console.timeEnd('Building html for label: ' + theRule.name);
+
 				if (corrector) {
 					createPartialCorrectButton(o, result.indexes[j], corrector, divGroupErrors);
 				}
