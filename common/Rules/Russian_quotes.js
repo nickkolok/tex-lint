@@ -23,8 +23,10 @@ new Rule({
 			if (
 				index < nodes.nodes.length
 			&&
-				nodes.nodes[index + 1].text === '='
+				// TODO: unificate quotes!
+				(/^[=><']$/i).test(nodes.nodes[index + 1].text)
 			){
+				//console.log('Not error: ' + nodes.getSubnodes(index - 2, index + 2).toString());
 				return;
 			}
 
@@ -36,7 +38,7 @@ new Rule({
 		});
 	},
 	commonCorrector: function(n, index) {
-		
+		var isAfterLetter = index && regLetter.test(n.nodes[index - 1].text[n.nodes[index - 1].text.length - 1]);
 		if (
 			index < n.nodes.length
 		&&
@@ -45,11 +47,7 @@ new Rule({
 			n.nodes[index].text = '<<';
 		}
 		else
-		if (
-			index // > 0
-		&&
-			regLetter.test(n.nodes[index - 1].text[0])
-		){
+		if (isAfterLetter){
 			n.nodes[index].text = '>>';
 		}
 		else if (

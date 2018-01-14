@@ -1,0 +1,7 @@
+{
+	"text": "If $z\\in X\\widehat\\otimes Y, \\varepsilon>0,$ then one can represent $z$ as\n$z=\\sum_{k=1}^\\infty x_k\\otimes y_k$ with $\\sum_{k=1}^\\infty ||x_k||\\, ||y_k||<||z||_\\land+\\varepsilon.$\nFor $z\\in X^*\\widehat\\otimes X$ with a \"projective representation\" $z=\\sum_{k=1}^\\infty x'_k\\otimes x_k,$",
+	"rulename": "Russian_quotes",
+	"indexes": [ 117, 121 ],
+	"fixed": "If $z\\in X\\widehat\\otimes Y, \\varepsilon>0,$ then one can represent $z$ as\n$z=\\sum_{k=1}^\\infty x_k\\otimes y_k$ with $\\sum_{k=1}^\\infty ||x_k||\\, ||y_k||<||z||_\\land+\\varepsilon.$\nFor $z\\in X^*\\widehat\\otimes X$ with a <<projective representation>> $z=\\sum_{k=1}^\\infty x'_k\\otimes x_k,$",
+	"quantity": 2
+}
