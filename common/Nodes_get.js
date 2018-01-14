@@ -394,15 +394,15 @@ Nodes.prototype.getChildrenInTagsArguments = function(parents, children, args) {
 };
 
 Nodes.prototype.getRowCol = function(index) {
-	var coord = { col:0, row:0 };
+	var coord = { col:1, row:1 };
 	for (var i = index - 1; i >= 0 && this.nodes[i].type !== 'linebreak'; i--) {
 		coord.col += this.nodes[i].text.length;
 	}
 	for (var i = index - 1; i >= 0; i--) {
-		coord.row += (this.nodes[i].type === 'linebreak');
+		if (this.nodes[i].type === 'linebreak') {
+			coord.row++;
+		}
 	}
-	coord.row++;
-	coord.col++;
 	return coord;
 };
 
