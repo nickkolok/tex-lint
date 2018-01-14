@@ -394,7 +394,7 @@ Nodes.prototype.getChildrenInTagsArguments = function(parents, children, args) {
 };
 
 Nodes.prototype.getRowCol = function(index) {
-	var coord = { col:1, row:1 };
+	var coord = { col: 1, row: 1 };
 	for (var i = index - 1; i >= 0 && this.nodes[i].type !== 'linebreak'; i--) {
 		coord.col += this.nodes[i].text.length;
 	}
@@ -404,6 +404,33 @@ Nodes.prototype.getRowCol = function(index) {
 		}
 	}
 	return coord;
+};
+
+Nodes.prototype.getRowColMap = function() {
+	console.time('Nodes.getRowColMap');
+	// TODO: tests!
+	var map = { row: [], col: [] };
+	var col = 0;
+	var row = 0;
+	for (var i = 0; i < this.nodes.length; i++) {
+		/*
+		map.push({
+			row: row,
+			col: col,
+		});
+		*/
+		//map.push([row,col]);
+		map.col.push(col);
+		map.row.push(row);
+		if (this.nodes[i].type === 'linebreak') {
+			col = 0;
+			row++;
+		} else {
+			col += this.nodes[i].text.length;
+		}
+	}
+	console.timeEnd('Nodes.getRowColMap');
+	return map;
 };
 
 Nodes.prototype.getInputencs = function() {
