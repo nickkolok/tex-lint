@@ -228,7 +228,9 @@ module.exports.createHTMLreport = function(o) {
 					createPartialCorrectButton(o, result.indexes[j], corrector, divGroupErrors);
 				}
 			}
+			//console.time('Appending html for rule: ' + theRule.name);
 			reportErrors.appendChild(divGroupErrors);
+			//console.timeEnd('Appending html for rule: ' + theRule.name);
 		}
 
 		reportErrors.appendChild($('<hr/>')[0]);
