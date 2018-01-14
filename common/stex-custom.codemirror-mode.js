@@ -127,29 +127,9 @@
         return "number";
       }
 
-      // escape characters
-      if (source.match(/^\\[$&%#{}_]/)) {
-        return "tag";
-      }
-
       // white space control characters
       if (source.match(/^\\[,;!\/\\]/)) {
         return "tag";
-      }
-
-      // diacritics
-      if (source.match(/^\\["]/)) {
-        return "tag";
-      }
-
-      // special math-mode characters
-      if (source.match(/^[\^_&]/)) {
-        return "tag";
-      }
-
-      // quotes
-      if (source.match(/^["]/)) {
-        return null;
       }
 
       // find if we're starting various math modes
@@ -164,6 +144,26 @@
       if (source.match("\\[")) {
         setState(state, function(source, state){ return inMathMode(source, state, "\\]"); });
         return "keyword";
+      }
+
+      // diacritics
+      if (source.match(/^\\["]/)) {
+        return "tag";
+      }
+
+      // escape characters
+      if (source.match(/^\\[$&%#{}_]/)) {
+        return "tag";
+      }
+
+      // special math-mode characters
+      if (source.match(/^[\^_&]/)) {
+        return "tag";
+      }
+
+      // quotes
+      if (source.match(/^["]/)) {
+        return null;
       }
 
       var ch = source.next();
