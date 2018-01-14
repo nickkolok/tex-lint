@@ -153,16 +153,16 @@
       }
 
       // find if we're starting various math modes
-      if (source.match("\\[")) {
-        setState(state, function(source, state){ return inMathMode(source, state, "\\]"); });
-        return "keyword";
-      }
       if (source.match("$$")) {
         setState(state, function(source, state){ return inMathMode(source, state, "$$"); });
         return "keyword";
       }
       if (source.match("$")) {
         setState(state, function(source, state){ return inMathMode(source, state, "$"); });
+        return "keyword";
+      }
+      if (source.match("\\[")) {
+        setState(state, function(source, state){ return inMathMode(source, state, "\\]"); });
         return "keyword";
       }
 
