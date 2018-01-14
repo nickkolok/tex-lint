@@ -225,16 +225,29 @@ module.exports.createHTMLreport = function(o) {
 				};
 				coord.row++;
 				coord.col++;
+				var coordEnd = {
+					row: mapRowCol.row[result.indexes[j] + 1],
+					col: mapRowCol.col[result.indexes[j] + 1],
+				};
+				coordEnd.row++;
+				coordEnd.col++;
 				rowcol.html('Строка ' + coord.row + ', символ ' + coord.col + '; ');
 				divGroupErrors.appendChild(rowcol[0]);
-				rowcol[0].onclick = (function(pos) { return function() {
+				rowcol[0].onclick = (function(pos, end) { return function() {
 					o.editor.focus();
 					o.editor.setCursor({
 						line: pos.row - 1,
 						ch  : pos.col - 1,
 					});
+					o.editor.setSelection({
+						line: pos.row - 1,
+						ch  : pos.col - 1,
+					},{
+						line: end.row - 1,
+						ch  : end.col - 1,
+					});
 					o.editor.focus();
-				};})(coord);
+				};})(coord, coordEnd);
 				//console.timeEnd('Building html for label: ' + theRule.name);
 
 				if (corrector) {
