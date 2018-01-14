@@ -1224,6 +1224,55 @@ test('babel-inspirated quotes', function () {
 	);
 });
 
+test('\\( \\)', function () {
+	assert.deepEqual(
+		new Nodes('где \\(B=\\sqrt{\\frac{\\rho+\\alpha}2}\\),').nodes,
+		[
+			{ text: 'где', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: '\\(', type: 'keyword' },
+			{ text: 'B', type: 'variable-2' },
+			{ text: '=', type: null },
+			{ text: '\\sqrt', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: '\\frac', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: '\\rho', type: 'tag' },
+			{ text: '+', type: null },
+			{ text: '\\alpha', type: 'tag' },
+			{ text: '}', type: 'bracket' },
+			{ text: '2', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '\\)', type: 'keyword' },
+			{ text: ',', type: null },
+		],
+		""
+	);
+	assert.deepEqual(
+		new Nodes('где $B=\\sqrt{\\frac{\\rho+\\alpha}2}$,').nodes,
+		[
+			{ text: 'где', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: 'B', type: 'variable-2' },
+			{ text: '=', type: null },
+			{ text: '\\sqrt', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: '\\frac', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: '\\rho', type: 'tag' },
+			{ text: '+', type: null },
+			{ text: '\\alpha', type: 'tag' },
+			{ text: '}', type: 'bracket' },
+			{ text: '2', type: 'number' },
+			{ text: '}', type: 'bracket' },
+			{ text: '$', type: 'keyword' },
+			{ text: ',', type: null },
+		],
+		""
+	);
+});
+
 
 
 /*
