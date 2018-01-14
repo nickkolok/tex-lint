@@ -164,6 +164,10 @@ module.exports.createHTMLreport = function(o) {
 	var totalRules = rulesets[o.rulesetName].rules.length;
 	var brokenRules = 0;
 
+	//TODO: optimize: find maximum index and build the map only for nodes before it
+	//However, it took 26ms to perform this on 1MB file, so optimization isn't crucial
+	var mapRowCol =  o.nodesObject.getRowColMap();
+
 	for (var i = 0; i < totalRules; i++) {
 		var theRule = rules[rulesets[o.rulesetName].rules[i][0]];
 
@@ -213,7 +217,12 @@ module.exports.createHTMLreport = function(o) {
 
 			for (var j = 0; j < result.indexes.length; j++) {
 				var rowcol = $('<span style="cursor:pointer;">'); // TODO: таки сделать CSS-файл
-				var coord = o.nodesObject.getRowCol(result.indexes[j]);
+				var coord = {
+					row: mapRowCol.row[result.indexes[j]],
+					col: mapRowCol.col[result.indexes[j]],
+				};
+				coord.row++;
+				coord.col++;
 				rowcol.html('Строка ' + coord.row + ', символ ' + coord.col + '; ');
 				divGroupErrors.appendChild(rowcol[0]);
 				rowcol[0].onclick = (function(pos) { return function() {
