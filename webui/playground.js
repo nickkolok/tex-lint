@@ -57,12 +57,15 @@ function codeSave() {
 	console.timeEnd('codeSave()');
 }
 
+function codeSaveDelayed() {
+	setTimeout(codeSave, 1);
+}
 
 var myCodeMirror = CodeMirror(document.getElementById('code-mirror-holder'), {
 	lineNumbers: true,
 });
 
-myCodeMirror.on('change', codeSave);
+myCodeMirror.on('change', codeSaveDelayed);
 document.getElementById('file-save-encoding').onchange = codeSave;
 
 function getNodesAsIs() {
