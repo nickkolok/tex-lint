@@ -137,6 +137,11 @@
         return "tag";
       }
 
+      // diacritics
+      if (source.match(/^\\["]/)) {
+        return "tag";
+      }
+
       // special math-mode characters
       if (source.match(/^[\^_&]/)) {
         return "tag";
