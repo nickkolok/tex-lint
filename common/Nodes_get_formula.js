@@ -92,7 +92,6 @@ Nodes.prototype.isInsideFormula = function(index, includeDelimiters) {
 	return !!(delimCount % 2);
 };
 
-//TODO: separate to Nodes_get_formula.js
 Nodes.prototype.getFormulaByIndex = function(index) {
 
 	//TODO: refactor?
