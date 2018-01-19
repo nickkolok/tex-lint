@@ -56,6 +56,26 @@ test('isInside$$ - \\[ \\]', function () {
 		""
 	);
 	assert.deepEqual(
+		new Nodes('\\[a\\]').isInside$$(0, true),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\[a\\]').isInside$$(2, true),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\[a\\]').isInside$$(0),
+		false,
+		""
+	);
+	assert.deepEqual(
+		new Nodes('\\[a\\]').isInside$$(2),
+		false,
+		""
+	);
+	assert.deepEqual(
 		new Nodes('\\[a\\]b').isInside$$(3),
 		false,
 		""

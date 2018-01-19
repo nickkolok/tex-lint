@@ -8,15 +8,19 @@ module.exports = function(Nodes) {
 
 Nodes.inlineFormulaDelimiters = {
 	'$': null,
-	'\(': null,
-	'\)': null,
+	'\\(': null,
+	'\\)': null,
 };
 
 
 Nodes.prototype.isInside$ = function(index, includeDelimiters) {
-	if (includeDelimiters && this.nodes.type === 'keyword') {
-		return (this.nodes[index].text in displayFormulaDelimiters);
-	}
+    if (this.nodes[index].type === 'keyword') {
+        return (
+            !!includeDelimiters
+        &&
+            this.nodes[index].text in Nodes.inlineFormulaDelimiters
+        );
+    }
 	var delimCount = 0;
 	for (; index > -1; index--) {
 		if (this.nodes[index].type === 'keyword') {
@@ -34,14 +38,19 @@ Nodes.prototype.isInside$ = function(index, includeDelimiters) {
 
 Nodes.displayFormulaDelimiters = {
 	'$$': null,
-	'\[': null,
-	'\]': null,
+	'\\[': null,
+	'\\]': null,
 };
 
 Nodes.prototype.isInside$$ = function(index, includeDelimiters) {
-	if (includeDelimiters && this.nodes.type === 'keyword') {
-		return (this.nodes[index].text in displayFormulaDelimiters);
-	}
+    if (this.nodes[index].type === 'keyword') {
+        return (
+            !!includeDelimiters
+        &&
+            this.nodes[index].text in Nodes.displayFormulaDelimiters
+        );
+    }
+
 	var delimCount = 0;
 	for (; index > -1; index--) {
 		if (this.nodes[index].type === 'keyword') {
@@ -58,9 +67,9 @@ Nodes.prototype.isInside$$ = function(index, includeDelimiters) {
 };
 
 Nodes.prototype.isInsideFormula = function(index, includeDelimiters) {
-	if (includeDelimiters && this.nodes.type === 'keyword') {
-		return true;
-	}
+    if (this.nodes[index].type === 'keyword') {
+        return !!includeDelimiters;
+    }
 
 	var nearest;
 	for (; index > -1; index--) {

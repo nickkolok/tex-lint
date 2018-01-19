@@ -1273,6 +1273,26 @@ test('\\( \\)', function () {
 	);
 });
 
+test('\\[a\\]\\alpha$g$123\\[g\\]', function () {
+	assert.deepEqual(
+		new Nodes('\\[a\\]\\alpha$g$123\\[g\\]').nodes,
+		[
+			{ text: '\\[', type: 'keyword' },
+			{ text: 'a', type: 'variable-2' },
+			{ text: '\\]', type: 'keyword' },
+			{ text: '\\alpha', type: 'tag' },
+			{ text: '$', type: 'keyword' },
+			{ text: 'g', type: 'variable-2' },
+			{ text: '$', type: 'keyword' },
+			{ text: '123', type: 'number' },
+			{ text: '\\[', type: 'keyword' },
+			{ text: 'g', type: 'variable-2' },
+			{ text: '\\]', type: 'keyword' },
+		],
+		""
+	);
+});
+
 
 
 /*
