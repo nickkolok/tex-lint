@@ -26,6 +26,7 @@ require('./Nodes_codemirror.js')(Nodes);
 require('./Nodes_constants.js')(Nodes);
 
 require('./Nodes_get.js')(Nodes);
+require('./Nodes_get_formula.js')(Nodes);
 require('./Nodes_get_environments.js')(Nodes);
 require('./Nodes_get_rowsplit.js')(Nodes);
 
