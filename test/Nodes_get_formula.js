@@ -49,7 +49,71 @@ test('isInside$$', function () {
 	);
 });
 
+function testInsideFormula(str, inside$$, inside$) {
+	var n = new Nodes(str);
+	for (var i = 0; i < n.length; i++){
+		assert.deepEqual(
+			n.isInside$$(i),
+			!!Math.floor(inside$$[i]),
+			""
+		);
+		assert.deepEqual(
+			n.isInside$$(i),
+			!!Math.floor(inside$$[i]),
+			""
+		);
+		assert.deepEqual(
+			n.isInside$$(i, true),
+			!!Math.ceil(inside$$[i]),
+			""
+		);
+
+		assert.deepEqual(
+			n.isInside$(i),
+			!!Math.floor(inside$[i]),
+			""
+		);
+		assert.deepEqual(
+			n.isInside$(i),
+			!!Math.floor(inside$[i]),
+			""
+		);
+		assert.deepEqual(
+			n.isInside$(i, true),
+			!!Math.ceil(inside$[i]),
+			""
+		);
+
+		assert.deepEqual(
+			n.isInsideFormula(i),
+			!!Math.floor(inside$[i]) || !!Math.floor(inside$$[i]),
+			""
+		);
+		assert.deepEqual(
+			n.isInsideFormula(i),
+			!!Math.floor(inside$[i]) || !!Math.floor(inside$$[i]),
+			""
+		);
+		assert.deepEqual(
+			n.isInsideFormula(i, true),
+			!!Math.ceil(inside$[i]) || !!Math.ceil(inside$$[i]),
+			""
+		);
+	}
+    
+}
+
+
 test('isInside$$ - \\[ \\]', function () {
+
+    testInsideFormula(
+        '\\[a\\]',
+        [0.5, 1, 0.5],
+        [0,0,0]
+    );
+
+
+
 	assert.deepEqual(
 		new Nodes('\\[a\\]').isInside$$(1),
 		true,
