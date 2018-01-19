@@ -75,10 +75,10 @@ Nodes.prototype.isInsideFormula = function(index, includeDelimiters) {
 	for (; index > -1; index--) {
 		if (this.nodes[index].type === 'keyword') {
 			nearest = this.nodes[index];
-			if (nearest.text === '\\[') {
+			if (nearest.text === '\\[' || nearest.text === '\\(') {
 				return true;
 			}
-			if (nearest.text === '\\]') {
+			if (nearest.text === '\\]' || nearest.text === '\\)') {
 				return false;
 			}
 			break;

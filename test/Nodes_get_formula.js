@@ -49,277 +49,122 @@ test('isInside$$', function () {
 	);
 });
 
+function equal(bool1, bool2, i) {
+    return assert.deepEqual(
+        !!bool1,
+        !!bool2,
+        i
+    );
+}
+
 function testInsideFormula(str, inside$$, inside$) {
 	var n = new Nodes(str);
 	for (var i = 0; i < n.length; i++){
-		assert.deepEqual(
+		equal(
+			n.isInside$$(i),
+			Math.floor(inside$$[i]),
+			i + ' $$ ' + str
+		);
+		equal(
 			n.isInside$$(i),
 			!!Math.floor(inside$$[i]),
-			""
+			i + ' $$ ' + str
 		);
-		assert.deepEqual(
-			n.isInside$$(i),
-			!!Math.floor(inside$$[i]),
-			""
-		);
-		assert.deepEqual(
+		equal(
 			n.isInside$$(i, true),
 			!!Math.ceil(inside$$[i]),
-			""
+			i + ' $$ ' + true + ' ' + str
 		);
 
-		assert.deepEqual(
+		equal(
 			n.isInside$(i),
 			!!Math.floor(inside$[i]),
-			""
+			i + ' $ ' + str
 		);
-		assert.deepEqual(
+		equal(
 			n.isInside$(i),
 			!!Math.floor(inside$[i]),
-			""
+			i + ' $ ' + str
 		);
-		assert.deepEqual(
+		equal(
 			n.isInside$(i, true),
 			!!Math.ceil(inside$[i]),
-			""
+			i + ' $ ' + true + ' ' + str
 		);
 
-		assert.deepEqual(
+		equal(
 			n.isInsideFormula(i),
 			!!Math.floor(inside$[i]) || !!Math.floor(inside$$[i]),
-			""
+			i + ' Formula ' + str
 		);
-		assert.deepEqual(
+		equal(
 			n.isInsideFormula(i),
 			!!Math.floor(inside$[i]) || !!Math.floor(inside$$[i]),
-			""
+			i + ' Formula ' + str
 		);
-		assert.deepEqual(
+		equal(
 			n.isInsideFormula(i, true),
 			!!Math.ceil(inside$[i]) || !!Math.ceil(inside$$[i]),
-			""
+			i + ' Formula ' + true + ' ' + str
 		);
+
 	}
-    
 }
 
+function testInsideFormulaArray(arr, inside$$, inside$) {
+    for (var j = 0; j < arr.length; j++) {
+        testInsideFormula(arr[j], inside$$, inside$);
+    }
+}
 
 test('isInside$$ - \\[ \\]', function () {
 
-    testInsideFormula(
-        '\\[a\\]',
+    testInsideFormulaArray(
+        [
+            '\\[a\\]',
+            '$$a$$',
+        ],
         [0.5, 1, 0.5],
-        [0,0,0]
+        [0, 0, 0]
+    );
+    testInsideFormulaArray(
+        [
+            '\\[a\\]b',
+            '$$a$$b',
+        ],
+        [0.5, 1, 0.5, 0],
+        [0, 0, 0, 0]
+    );
+    testInsideFormula(
+        '\\[a\\]b$$',
+        [0.5, 1, 0.5, 0, 0.5],
+        [0, 0, 0, 0, 0]
+    );
+    testInsideFormulaArray(
+        [
+            '$$a$$\\alpha$$g$$',
+            '$$a$$\\alpha\\[g\\]',
+            '\\[a\\]\\alpha$$g$$',
+            '\\[a\\]\\alpha\\[g\\]',
+        ],
+        [0.5, 1, 0.5, 0, 0.5, 1, 0.5],
+        [0, 0, 0, 0, 0, 0, 0]
     );
 
-
-
-	assert.deepEqual(
-		new Nodes('\\[a\\]').isInside$$(1),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]').isInside$$(0, true),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]').isInside$$(2, true),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]').isInside$$(0),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]').isInside$$(2),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]b').isInside$$(3),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]b').isInside$$(2),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]b').isInside$$(3, true),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]b$$').isInside$$(3, true),
-		false,
-		""
-	);
-
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$$g$$').isInside$$(5, true),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha\\[g\\]').isInside$$(5, true),
-		true,
-		""
-	);
- 	assert.deepEqual(
-		new Nodes('$$a$$\\alpha\\[g\\]').isInside$$(5, true),
-		true,
-		""
-	);
- 	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$$g$$').isInside$$(1, true),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha\\[g\\]').isInside$$(1, true),
-		true,
-		""
-	);
- 	assert.deepEqual(
-		new Nodes('$$a$$\\alpha\\[g\\]').isInside$$(1, true),
-		true,
-		""
-	);
-  
-	assert.deepEqual(
-		new Nodes('$$a$$\\alpha$g$123$$g$$').isInside$$(9, true),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$\\alpha$g$123$$g$$').isInside$$(5, true),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$\\alpha$g$123$$g$$').isInside$$(5),
-		false,
-		""
-	);
-
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123$$g$$').isInside$$(9, true),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123$$g$$').isInside$$(5, true),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123$$g$$').isInside$$(5),
-		false,
-		""
-	);
-
-
-	assert.deepEqual(
-		new Nodes('$$a$$\\alpha$g$123\\[g\\]').isInside$$(9, true),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$\\alpha$g$123\\[g\\]').isInside$$(5, true),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$\\alpha$g$123\\[g\\]').isInside$$(5),
-		false,
-		""
-	);
-
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123\\[g\\]').isInside$$(9, true),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123\\[g\\]').isInside$$(5, true),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123\\[g\\]').isInside$$(5),
-		false,
-		""
-	);
-
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123\\[g\\]').isInside$$(8, true),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123\\[g\\]').isInside$$(10, true),
-		true,
-		""
-	);
-
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123\\[g\\]').isInside$$(8, false),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123\\[g\\]').isInside$$(10, false),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123\\[g\\]').isInside$$(8),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123\\[g\\]').isInside$$(10),
-		false,
-		""
-	);
-
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123\\[g\\]').isInside$$(0, true),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123\\[g\\]').isInside$$(2, true),
-		true,
-		""
-	);
-
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123\\[g\\]').isInside$$(0, false),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123\\[g\\]').isInside$$(2, false),
-		false,
-		""
-	);
-
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123\\[g\\]').isInside$$(0),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('\\[a\\]\\alpha$g$123\\[g\\]').isInside$$(2),
-		false,
-		""
-	);
+    testInsideFormulaArray(
+        [
+            '$$a$$\\alpha$g$123$$g$$',
+            '\\[a\\]\\alpha$g$123$$g$$',
+            '$$a$$\\alpha$g$123\\[g\\]',
+            '\\[a\\]\\alpha$g$123\\[g\\]',
+            '$$a$$\\alpha\\(g\\)123$$g$$',
+            '\\[a\\]\\alpha\\(g\\)123$$g$$',
+            '$$a$$\\alpha\\(g\\)123\\[g\\]',
+            '\\[a\\]\\alpha\\(g\\)123\\[g\\]',
+        ],
+        [0.5, 1, 0.5, 0, 0  , 0, 0  , 0, 0.5, 1, 0.5],
+        [0  , 0, 0  , 0, 0.5, 1, 0.5, 0, 0  , 0, 0  ]
+    );
 
 
 });
