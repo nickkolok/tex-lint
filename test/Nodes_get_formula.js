@@ -1,54 +1,6 @@
 QUnit.module("Nodes_get_formula");
 
 
-test('isInside$$', function () {
-	assert.deepEqual(
-		new Nodes('$$a$$').isInside$$(1),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$b').isInside$$(3),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$b').isInside$$(2),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$b').isInside$$(3, true),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$b$$').isInside$$(3, true),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$\\alpha$$g$$').isInside$$(5, true),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$\\alpha$g$123$$g$$').isInside$$(9, true),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$\\alpha$g$123$$g$$').isInside$$(5, true),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$\\alpha$g$123$$g$$').isInside$$(5),
-		false,
-		""
-	);
-});
-
 function equal(bool1, bool2, i) {
     return assert.deepEqual(
         !!bool1,
@@ -117,7 +69,7 @@ function testInsideFormulaArray(arr, inside$$, inside$) {
     }
 }
 
-test('isInside$$ - \\[ \\]', function () {
+test('isInside$$', function () {
 
     testInsideFormulaArray(
         [
@@ -135,8 +87,11 @@ test('isInside$$ - \\[ \\]', function () {
         [0.5, 1, 0.5, 0],
         [0, 0, 0, 0]
     );
-    testInsideFormula(
-        '\\[a\\]b$$',
+    testInsideFormulaArray(
+        [
+            '\\[a\\]b$$',
+            '$$a$$b$$',
+        ],
         [0.5, 1, 0.5, 0, 0.5],
         [0, 0, 0, 0, 0]
     );
