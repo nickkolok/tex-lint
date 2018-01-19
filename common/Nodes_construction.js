@@ -7,7 +7,7 @@ module.exports = function(Nodes) {
 // Тесты пишутся не на отдельную функцию, а на результат конструктора
 
 Nodes.prototype.fromText = function(text) {
-	console.time('Nodes.fromText');
+//	console.time('Nodes.fromText');
 	this.nodes = [];
 	var self = this;
 	var goodTypesCatalogueNoSpace = {
@@ -69,7 +69,7 @@ Nodes.prototype.fromText = function(text) {
 			}
 		}
 	);
-	console.timeEnd('Nodes.fromText');
+	//console.timeEnd('Nodes.fromText');
 };
 
 
