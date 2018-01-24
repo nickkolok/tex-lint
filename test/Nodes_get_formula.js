@@ -235,26 +235,47 @@ test('getFormulaByIndex', function () {
 		[-146, -1, 3, 4, 1337],
 		null
 	);
-	
-
-	assert.deepEqual(
-		new Nodes('$a$\\alpha$g$').getFormulaByIndex(5),
+	testFormulaByIndexes(
+		[
+			'$a$\\alpha$g$',
+			'$a$\\alpha\\(g\\)',
+			'$$a$$\\alpha$g$',
+			'$$a$$\\alpha\\(g\\)',
+			'\\[a\\]\\alpha$g$',
+			'\\[a\\]\\alpha\\(g\\)',
+			'\\(a\\)\\alpha$g$',
+			'\\(a\\)\\alpha\\(g\\)',
+			'a\\beta\\gamma\\alpha$g$',
+			'a\\beta\\gamma\\alpha\\(g\\)',
+		],
+		[4, 5, 6],
 		{
 			start : 4,
 			end   : 6,
 			type  : '$',
 		},
-		""
 	);
-	assert.deepEqual(
-		new Nodes('$a$\\alpha$$g$$').getFormulaByIndex(5),
+	testFormulaByIndexes(
+		[
+			'$a$\\alpha$$g$$',
+			'$a$\\alpha\\[g\\]',
+			'$$a$$\\alpha$$g$$',
+			'$$a$$\\alpha\\[g\\]',
+			'\\[a\\]\\alpha$$g$$',
+			'\\[a\\]\\alpha\\[g\\]',
+			'\\(a\\)\\alpha$$g$$',
+			'\\(a\\)\\alpha\\[g\\]',
+			'a\\beta\\gamma\\alpha$$g$$',
+			'a\\beta\\gamma\\alpha\\[g\\]',
+		],
+		[4, 5, 6],
 		{
 			start : 4,
 			end   : 6,
 			type  : '$$',
 		},
-		""
 	);
+
 	assert.deepEqual(
 		new Nodes('$a$\\alpha$g\\beta_2$').getFormulaByIndex(5),
 		{
@@ -282,15 +303,7 @@ test('getFormulaByIndex', function () {
 		},
 		""
 	);
-	assert.deepEqual(
-		new Nodes('$a$\\alpha$$g$$').getFormulaByIndex(6),
-		{
-			start: 4,
-			end: 6,
-			type: '$$'
-		},
-		""
-	);
+
 	assert.deepEqual(
 		new Nodes('$a$\\alpha$$g$$123$g$').getFormulaByIndex(9),
 		{
