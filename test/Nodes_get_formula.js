@@ -275,52 +275,49 @@ test('getFormulaByIndex', function () {
 			type  : '$$',
 		},
 	);
-
-	assert.deepEqual(
-		new Nodes('$a$\\alpha$g\\beta_2$').getFormulaByIndex(5),
+	testFormulaByIndexes(
+		[
+			'$a$\\alpha$g\\beta_2$',
+			'$a$\\alpha\\(g\\beta_2\\)',
+			'$$a$$\\alpha$g\\beta_2$',
+			'$$a$$\\alpha\\(g\\beta_2\\)',
+			'\\(a\\)\\alpha$g\\beta_2$',
+			'\\(a\\)\\alpha\\(g\\beta_2\\)',
+			'\\[a\\]\\alpha$g\\beta_2$',
+			'\\[a\\]\\alpha\\(g\\beta_2\\)',
+			' a \\alpha$g\\beta_2$',
+			' a \\alpha\\(g\\beta_2\\)',
+		],
+		[4, 5, 6, 7, 8, 9],
 		{
 			start : 4,
 			end   : 9,
 			type  : '$',
-		},
-		""
+		}
 	);
-	assert.deepEqual(
-		new Nodes('$a$\\alpha$g\\beta_2$').getFormulaByIndex(4),
-		{
-			start : 4,
-			end   : 9,
-			type  : '$',
-		},
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$a$\\alpha$g\\beta_2$').getFormulaByIndex(9),
-		{
-			start : 4,
-			end   : 9,
-			type  : '$',
-		},
-		""
-	);
-
-	assert.deepEqual(
-		new Nodes('$a$\\alpha$$g$$123$g$').getFormulaByIndex(9),
+	testFormulaByIndexes(
+		[
+			'$a$\\alpha$$g$$123$g$',
+			'$a$\\alpha$$g$$123\\(g\\)',
+		],
+		[8, 9, 10],
 		{
 			start : 8,
 			end   : 10,
 			type  : '$',
-		},
-		""
+		}
 	);
-	assert.deepEqual(
-		new Nodes('Some text with frac $\\frac{1}{2}$ in').getFormulaByIndex(8),
+	testFormulaByIndexes(
+		[
+			'Some text with frac $\\frac{1}{2}$ in',
+			'Some text with frac \\(\\frac{1}{2}\\) in',
+		],
+		[8,9,10,11,12,13,14,15,16],
 		{
 			start : 8,
 			end   : 16,
 			type  : '$',
-		},
-		""
+		}
 	);
 	
 });
