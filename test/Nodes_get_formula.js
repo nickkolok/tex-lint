@@ -2,11 +2,11 @@ QUnit.module("Nodes_get_formula");
 
 
 function equal(bool1, bool2, i) {
-    return assert.deepEqual(
-        !!bool1,
-        !!bool2,
-        i
-    );
+	return assert.deepEqual(
+		!!bool1,
+		!!bool2,
+		i
+	);
 }
 
 function testInsideFormula(str, inside$$, inside$) {
@@ -64,64 +64,121 @@ function testInsideFormula(str, inside$$, inside$) {
 }
 
 function testInsideFormulaArray(arr, inside$$, inside$) {
-    for (var j = 0; j < arr.length; j++) {
-        testInsideFormula(arr[j], inside$$, inside$);
-    }
+	for (var j = 0; j < arr.length; j++) {
+		testInsideFormula(arr[j], inside$$, inside$);
+	}
 }
 
 test('isInside$$', function () {
 
-    testInsideFormulaArray(
-        [
-            '\\[a\\]',
-            '$$a$$',
-        ],
-        [0.5, 1, 0.5],
-        [0, 0, 0]
-    );
-    testInsideFormulaArray(
-        [
-            '\\[a\\]b',
-            '$$a$$b',
-        ],
-        [0.5, 1, 0.5, 0],
-        [0, 0, 0, 0]
-    );
-    testInsideFormulaArray(
-        [
-            '\\[a\\]b$$',
-            '$$a$$b$$',
-        ],
-        [0.5, 1, 0.5, 0, 0.5],
-        [0, 0, 0, 0, 0]
-    );
-    testInsideFormulaArray(
-        [
-            '$$a$$\\alpha$$g$$',
-            '$$a$$\\alpha\\[g\\]',
-            '\\[a\\]\\alpha$$g$$',
-            '\\[a\\]\\alpha\\[g\\]',
-        ],
-        [0.5, 1, 0.5, 0, 0.5, 1, 0.5],
-        [0, 0, 0, 0, 0, 0, 0]
-    );
+	testInsideFormulaArray(
+		[
+			'\\[a\\]',
+			'$$a$$',
+		],
+		[0.5, 1, 0.5],
+		[0, 0, 0]
+	);
+	testInsideFormulaArray(
+		[
+			'\\[a\\]b',
+			'$$a$$b',
+		],
+		[0.5, 1, 0.5, 0],
+		[0, 0, 0, 0]
+	);
+	testInsideFormulaArray(
+		[
+			'\\[a\\]b$$',
+			'$$a$$b$$',
+		],
+		[0.5, 1, 0.5, 0, 0.5],
+		[0, 0, 0, 0, 0]
+	);
+	testInsideFormulaArray(
+		[
+			'$$a$$\\alpha$$g$$',
+			'$$a$$\\alpha\\[g\\]',
+			'\\[a\\]\\alpha$$g$$',
+			'\\[a\\]\\alpha\\[g\\]',
+		],
+		[0.5, 1, 0.5, 0, 0.5, 1, 0.5],
+		[0, 0, 0, 0, 0, 0, 0]
+	);
 
-    testInsideFormulaArray(
-        [
-            '$$a$$\\alpha$g$123$$g$$',
-            '\\[a\\]\\alpha$g$123$$g$$',
-            '$$a$$\\alpha$g$123\\[g\\]',
-            '\\[a\\]\\alpha$g$123\\[g\\]',
-            '$$a$$\\alpha\\(g\\)123$$g$$',
-            '\\[a\\]\\alpha\\(g\\)123$$g$$',
-            '$$a$$\\alpha\\(g\\)123\\[g\\]',
-            '\\[a\\]\\alpha\\(g\\)123\\[g\\]',
-        ],
-        [0.5, 1, 0.5, 0, 0  , 0, 0  , 0, 0.5, 1, 0.5],
-        [0  , 0, 0  , 0, 0.5, 1, 0.5, 0, 0  , 0, 0  ]
-    );
+	testInsideFormulaArray(
+		[
+			'$$a$$\\alpha$g$123$$g$$',
+			'\\[a\\]\\alpha$g$123$$g$$',
+			'$$a$$\\alpha$g$123\\[g\\]',
+			'\\[a\\]\\alpha$g$123\\[g\\]',
+			'$$a$$\\alpha\\(g\\)123$$g$$',
+			'\\[a\\]\\alpha\\(g\\)123$$g$$',
+			'$$a$$\\alpha\\(g\\)123\\[g\\]',
+			'\\[a\\]\\alpha\\(g\\)123\\[g\\]',
+		],
+		[0.5, 1, 0.5, 0, 0  , 0, 0  , 0, 0.5, 1, 0.5],
+		[0  , 0, 0  , 0, 0.5, 1, 0.5, 0, 0  , 0, 0  ]
+	);
+});
 
 
+test('isInside$', function () {
+
+	testInsideFormulaArray(
+		[
+			'\\(a\\)',
+			'$a$',
+		],
+		[0, 0, 0]
+		,
+		[0.5, 1, 0.5]
+	);
+	testInsideFormulaArray(
+		[
+			'\\(a\\)b',
+			'$a$b',
+		],
+		[0, 0, 0, 0]
+		,
+		[0.5, 1, 0.5, 0]
+	);
+	testInsideFormulaArray(
+		[
+			'\\(a\\)b$',
+			'$a$b$',
+		],
+		[0, 0, 0, 0, 0]
+		,
+		[0.5, 1, 0.5, 0, 0.5]
+	);
+	testInsideFormulaArray(
+		[
+			'$a$\\alpha$g$',
+			'$a$\\alpha\\(g\\)',
+			'\\(a\\)\\alpha$g$',
+			'\\(a\\)\\alpha\\(g\\)',
+		],
+		[0, 0, 0, 0, 0, 0, 0]
+		,
+		[0.5, 1, 0.5, 0, 0.5, 1, 0.5]
+	);
+
+	testInsideFormulaArray(
+		[
+			'$a$\\alpha$$g$$123$g$',
+			'\\(a\\)\\alpha$$g$$123$g$',
+			'$a$\\alpha$$g$$123\\(g\\)',
+			'\\(a\\)\\alpha$$g$$123\\(g\\)',
+			'$a$\\alpha\\[g\\]123$g$',
+			'\\(a\\)\\alpha\\[g\\]123$g$',
+			'$a$\\alpha\\[g\\]123\\(g\\)',
+			'\\(a\\)\\alpha\\[g\\]123\\(g\\)',
+		],
+		[0  , 0, 0  , 0, 0.5, 1, 0.5, 0, 0  , 0, 0  ]
+		,
+		[0.5, 1, 0.5, 0, 0  , 0, 0  , 0, 0.5, 1, 0.5]
+	);
 });
 
 test('isInside$', function () {
