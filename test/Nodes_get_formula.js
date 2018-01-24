@@ -216,7 +216,7 @@ test('getFormulaByIndex', function () {
 			'$a$b$',
 			'\\(a\\)b$',
 		],
-		[1, 2],
+		[0, 1, 2],
 		{
 			start : 0,
 			end   : 2,

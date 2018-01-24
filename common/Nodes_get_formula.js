@@ -109,11 +109,11 @@ Nodes.prototype.getFormulaByIndex = function(index) {
 	//TODO: refactor?
 	if (this.nodes[index].type === 'keyword') {
 		// Bad case, we don't know, is index left or right border of formula
-		if (this.nodes[index].text === "\[") {
+		if (this.nodes[index].text === '\\[' || this.nodes[index].text === '\\(') {
 			//TODO: correct type + tests!
 			return this.getFormulaByIndex(index + 1);
 		}
-		if (this.nodes[index].text === "\]") {
+		if (this.nodes[index].text === '\\]' || this.nodes[index].text === '\\)') {
 			//TODO: correct type + tests!
 			return this.getFormulaByIndex(index - 1);
 		}
@@ -138,13 +138,15 @@ Nodes.prototype.getFormulaByIndex = function(index) {
 
 	// TODO: getNearestLeft/RightFormulaDelimiter
 	var start = index;
-	do {
-		start--;
-	} while (!(
-		this.nodes[start].text in Nodes.inlineFormulaDelimiters
+	while (!(
+		start <= 0
+	||
+		this.nodes[/*console.log(start),*/start].text in Nodes.inlineFormulaDelimiters
 	||
 		this.nodes[start].text in Nodes.displayFormulaDelimiters
-	));
+	)) {
+		start--;
+	}
 
 	var end = index;
 	while (!(
