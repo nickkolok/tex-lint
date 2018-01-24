@@ -132,14 +132,29 @@ Nodes.prototype.getFormulaByIndex = function(index) {
 	} else {
 		return null; // TODO: а может, всё-таки объект, пусть и пустой?
 	}
-	var $s = this.getNodesNumbers('keyword', type);
-	while ($s[beginIndex] < index) {
-		beginIndex++;
-	}
+
+	// TODO: getNearestLeft/RightFormulaDelimiter
+	var start = index;
+	do {
+		start--;
+	} while (!(
+		this.nodes[start].text in Nodes.inlineFormulaDelimiters
+	||
+		this.nodes[start].text in Nodes.displayFormulaDelimiters
+	));
+
+	var end = index;
+	do {
+		end++;
+	} while (!(
+		this.nodes[end].text in Nodes.inlineFormulaDelimiters
+	||
+		this.nodes[end].text in Nodes.displayFormulaDelimiters
+	));
 
 	return {
-		start : $s[beginIndex - 1],
-		end   : $s[beginIndex    ],
+		start : start,
+		end   : end,
 		type  : type,
 	};
 };

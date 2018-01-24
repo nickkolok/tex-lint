@@ -192,66 +192,38 @@ test('isInside$', function () {
 	);
 });
 
-test('isInsideFormula', function () {
-	assert.deepEqual(
-		new Nodes('$a$\\alpha$$g$$123$g$').isInsideFormula(9, true),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$').isInsideFormula(1),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$b').isInsideFormula(3),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$b').isInsideFormula(2),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$b').isInsideFormula(3, true),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$b$$').isInsideFormula(3, true),
-		false,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$\\alpha$$g$$').isInsideFormula(5, true),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$\\alpha$g$123$$g$$').isInsideFormula(9, true),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$\\alpha$g$123$$g$$').isInsideFormula(5, true),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$\\alpha$g$123$$g$$').isInsideFormula(5),
-		true,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$$a$$\\alpha$g$123$$g$$').isInsideFormula(3),
-		false,
-		""
-	);
+function testFormulaByIndexes(texts, indexes, formula) {
+	for (var i = 0; i < texts.length; i++) {
+		var nodes = new Nodes(texts[i]);
+		for (var j = 0; j < indexes.length; j++) {
+			assert.deepEqual(
+				nodes.getFormulaByIndex(indexes[j]),
+				formula,
+				"" + texts[i] + "  " + indexes[j] + "  " + JSON.stringify(formula)
+			);					
+		}
+	}
 
-});
+}
 
 test('getFormulaByIndex', function () {
+	testFormulaByIndexes(
+		[
+			'$a$',
+			'\\(a\\)',
+			'$a$b',
+			'\\(a\\)b',
+			'$a$b$',
+			'\\(a\\)b$',
+		],
+		[1],
+		{
+			start : 0,
+			end   : 2,
+			type  : '$',
+		}
+	);
+	
 	assert.deepEqual(
 		new Nodes('$a$').getFormulaByIndex(1),
 		{
