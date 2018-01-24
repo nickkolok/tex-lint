@@ -102,7 +102,7 @@ Nodes.prototype.isInsideFormula = function(index, includeDelimiters) {
 };
 
 Nodes.prototype.getFormulaByIndex = function(index) {
-	if (index >= this.length) {
+	if (index >= this.length || index < 0) {
 		return null;
 	}
 

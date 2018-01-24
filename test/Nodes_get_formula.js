@@ -232,7 +232,7 @@ test('getFormulaByIndex', function () {
 			'$a$b$',
 			'\\(a\\)b$',
 		],
-		[3],
+		[-146, -1, 3, 4, 1337],
 		null
 	);
 	
