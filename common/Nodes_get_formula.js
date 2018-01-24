@@ -141,7 +141,7 @@ Nodes.prototype.getFormulaByIndex = function(index) {
 	while (!(
 		start <= 0
 	||
-		this.nodes[/*console.log(start),*/start].text in Nodes.inlineFormulaDelimiters
+		this.nodes[start].text in Nodes.inlineFormulaDelimiters
 	||
 		this.nodes[start].text in Nodes.displayFormulaDelimiters
 	)) {
