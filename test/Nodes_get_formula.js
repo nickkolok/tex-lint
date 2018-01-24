@@ -216,47 +216,27 @@ test('getFormulaByIndex', function () {
 			'$a$b$',
 			'\\(a\\)b$',
 		],
-		[1],
+		[1, 2],
 		{
 			start : 0,
 			end   : 2,
 			type  : '$',
 		}
 	);
+	testFormulaByIndexes(
+		[
+			'$a$',
+			'\\(a\\)',
+			'$a$b',
+			'\\(a\\)b',
+			'$a$b$',
+			'\\(a\\)b$',
+		],
+		[3],
+		null
+	);
 	
-	assert.deepEqual(
-		new Nodes('$a$').getFormulaByIndex(1),
-		{
-			start : 0,
-			end   : 2,
-			type  : '$',
-		},
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$a$b').getFormulaByIndex(3),
-		null,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$a$b').getFormulaByIndex(2),
-		{
-			start: 0,
-			end: 2,
-			type: '$'
-		},
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$a$b').getFormulaByIndex(3),
-		null,
-		""
-	);
-	assert.deepEqual(
-		new Nodes('$a$b$').getFormulaByIndex(3),
-		null,
-		""
-	);
+
 	assert.deepEqual(
 		new Nodes('$a$\\alpha$g$').getFormulaByIndex(5),
 		{

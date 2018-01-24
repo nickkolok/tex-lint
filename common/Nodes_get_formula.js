@@ -102,6 +102,9 @@ Nodes.prototype.isInsideFormula = function(index, includeDelimiters) {
 };
 
 Nodes.prototype.getFormulaByIndex = function(index) {
+	if (index >= this.length) {
+		return null;
+	}
 
 	//TODO: refactor?
 	if (this.nodes[index].type === 'keyword') {
@@ -144,13 +147,15 @@ Nodes.prototype.getFormulaByIndex = function(index) {
 	));
 
 	var end = index;
-	do {
-		end++;
-	} while (!(
+	while (!(
+		end >= this.length - 1
+	||
 		this.nodes[end].text in Nodes.inlineFormulaDelimiters
 	||
 		this.nodes[end].text in Nodes.displayFormulaDelimiters
-	));
+	)) {
+		end++;
+	}
 
 	return {
 		start : start,
