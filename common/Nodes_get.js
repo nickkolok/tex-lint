@@ -128,6 +128,25 @@ Nodes.prototype.skipToTypesReverse = function(index, types) {
 	return index;
 };
 
+// TODO: skipType and skipTypeReverse --- just for API consistence
+
+Nodes.prototype.skipToType = function(index, type) {
+	//TODO: tests
+	while (index < this.length && this.nodes[index].type !== type) {
+		index++;
+	}
+	return index;
+};
+
+Nodes.prototype.skipToTypeReverse = function(index, type) {
+	//TODO: tests
+	while (index > -1 && this.nodes[index].type !== type) {
+		index--;
+	}
+	return index;
+};
+
+
 Nodes.prototype.getArgumentsMap = function(index, count) {
 	var nodes = this.nodes;
 	var argsmap = [];
