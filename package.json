@@ -24,7 +24,8 @@
     "execall": "^1.0.0",
     "eyo-kernel": "^1.0.7",
     "node-autodetect-utf8-cp1251-cp866": "^0.1.0",
-    "tex-mathopnames": "0.0.1"
+    "tex-mathopnames": "0.0.1",
+    "xtend": "^4.0.1"
   },
   "devDependencies": {
     "bootstrap": "^3.3.7",

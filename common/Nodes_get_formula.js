@@ -1,5 +1,7 @@
 'use strict';
 
+var xtend = require('xtend');
+
 module.exports = function(Nodes) {
 
 // Здесь сложены функции, вызываемые из других функций, правил и т.д.
@@ -18,19 +20,45 @@ Nodes.displayFormulaDelimiters = {
 	'\\]': null,
 };
 
-Nodes.allFormulaDelimiters = {
-	'$': null,
-	'$$': null,
-	'\\(': null,
-	'\\)': null,
-	'\\[': null,
-	'\\]': null,
-};
+Nodes.allFormulaDelimiters = xtend(
+	Nodes.inlineFormulaDelimiters,
+	Nodes.displayFormulaDelimiters
+);
 
-Nodes.formulaEnvironments = {
+Nodes.inlineFormulaEnvironments = {
+	'math': null,
+};
+Nodes.displayFormulaEnvironments = {
+	'align': null,
+	'align*': null,
+	'alignat': null,
+	'alignat*': null,
+	'displaymath': null,
+	'eqnarray': null,
+	'eqnarray*': null,
 	'equation': null,
 	'equation*': null,
+	'flalign': null,
+	'flalign*': null,
+	'gather': null,
+	'gather*': null,
+	'multline': null,
+	'multline*': null,
+/*
+	'': null,
+	'*': null,
+	'': null,
+	'*': null,
+	'': null,
+	'*': null,
+*/
 };
+
+Nodes.allFormulaEnvironments = xtend(
+	Nodes.inlineFormulaEnvironments,
+	Nodes.displayFormulaEnvironments
+);
+
 
 Nodes.prototype.isInside$ = function(index, includeDelimiters) {
     if (this.nodes[index].type === 'keyword') {
@@ -187,7 +215,11 @@ Nodes.prototype.isFormulaDelimiter = function(index) {
 	if (this.nodes[index].type === 'keyword') {
 		return true;
 	}
-	if (this.nodes[index].text in Nodes.formulaEnvironments) {
+	if (
+		this.nodes[index].type === 'variable'
+	&&
+		this.nodes[index].text in Nodes.allFormulaEnvironments
+	) {
 		var tag = this.skipToTypeReverse('tag');
 		return (
 			this.nodes[tag].text === '\\begin'
