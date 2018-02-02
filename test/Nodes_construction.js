@@ -1293,6 +1293,33 @@ test('\\[a\\]\\alpha$g$123\\[g\\]', function () {
 	);
 });
 
+test('Strange formula \\begin{equation*}x^2\\end{equation*}', function () {
+	assert.deepEqual(
+		new Nodes('Strange formula \\begin{equation*}x^2\\end{equation*}').nodes,
+		[
+			{ text: 'Strange', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'formula', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '\\begin', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'equation', type: 'variable' },
+			{ text: '*', type: 'variable' },
+			{ text: '}', type: 'bracket' },
+			{ text: 'x', type: null },
+			{ text: '^', type: 'tag' },
+			{ text: '2', type: 'number' },
+			{ text: '\\end', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'equation', type: 'variable' },
+			{ text: '*', type: 'variable' },
+			{ text: '}', type: 'bracket' },
+		],
+		""
+	);
+});
+
+
 
 
 /*
