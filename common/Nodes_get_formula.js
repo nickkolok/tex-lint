@@ -280,4 +280,24 @@ Nodes.prototype.classifyFormulaDelimiter = function(index) {
 	};
 };
 
+Nodes.allFormulaDelimiters = {
+	'$': null,
+	'$$': null,
+	'\\(': null,
+	'\\)': null,
+	'\\[': null,
+	'\\]': null,
+};
+
+Nodes.prototype.getNearestFormulaDelimiterRight = function(index) {
+	for (; index < this.length; index++) {
+		if (this.nodes[index].text in Nodes.allFormulaDelimiters) {
+			return this.classifyFormulaDelimiter(index);
+		}
+	}
+	return {
+		index: this.length,
+	};
+};
+
 };//modules.export
