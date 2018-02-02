@@ -81,11 +81,14 @@
 
     plugins["label"    ] = addPluginPattern("label"    , "tag", [precise]);
     plugins["ref"      ] = addPluginPattern("ref"      , "tag", [precise]);
+    plugins["eqref"    ] = addPluginPattern("eqref"    , "tag", [precise]);
     plugins["cite"     ] = addPluginPattern("cite"     , "tag", [precise]);
     plugins["bibitem"  ] = addPluginPattern("bibitem"  , "tag", [precise]);
     plugins["Bibitem"  ] = addPluginPattern("Bibitem"  , "tag", [precise]);
-    plugins["eqref"    ] = addPluginPattern("eqref"    , "tag", [precise]);
     plugins["RBibitem" ] = addPluginPattern("RBibitem" , "tag", [precise]);
+    // TODO: \setcounter, \addtocounter, \newcounter and others
+    // TODO: \pageref
+    // TODO: do this with a loop
 
     plugins["DEFAULT"] = function () {
       this.name = "DEFAULT";
