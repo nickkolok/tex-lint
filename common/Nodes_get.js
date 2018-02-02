@@ -226,9 +226,9 @@ Nodes.prototype.isWellSeparated = function(index, rightSepTypes, wrongSepTypes, 
 
 Nodes.prototype.isInsideSymmDelimiters = function(index, delimiterType, delimiterText, includeDelimiters) {
 
-	console.log(this.getSubnodes(index - 10, index + 10).toString());
-	console.log("!  !  ", this.nodes[index].text);
-	console.log(index, delimiterType, delimiterText, includeDelimiters);
+	//console.log(this.getSubnodes(index - 10, index + 10).toString());
+	//console.log("!  !  ", this.nodes[index].text);
+	//console.log(index, delimiterType, delimiterText, includeDelimiters);
 
 	// If the node is a delimiter, return includeDelimiter
 	if (this.nodes[index].type === delimiterType && this.nodes[index].text === delimiterText) {
