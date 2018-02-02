@@ -179,6 +179,25 @@ Nodes.prototype.getFormulaByIndex = function(index) {
 	};
 };
 
+Nodes.prototype.isFormulaDelimiter = function(index) {
+	// TODO: tests
+	// TODO: it's very rough
+	// The space, the tag and the brackets in `\begin {equation}` will be not delimiters
+	// However, this should be enough for our needs
+	if (this.nodes[index].type === 'keyword') {
+		return true;
+	}
+	if (this.nodes[index].text in Nodes.formulaEnvironments) {
+		var tag = this.skipToTypeReverse('tag');
+		return (
+			this.nodes[tag].text === '\\begin'
+		||
+			this.nodes[tag].text === '\\end'
+		);
+	}
+	return false;
+};
+
 Nodes.prototype.classifyFormulaDelimiter = function(index) {
 	if (index < 0 || index >= this.length) {
 		return {
