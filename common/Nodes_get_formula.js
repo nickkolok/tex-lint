@@ -148,7 +148,7 @@ Nodes.prototype.getFormulaByIndex = function(index) {
 	}
 
 	//TODO: refactor?
-	if (this.nodes[index].type === 'keyword') {
+	if (this.isFormulaDelimiter(index)) {
 		// Bad case, we don't know, is index left or right border of formula
 		if (this.nodes[index].text === '\\[' || this.nodes[index].text === '\\(') {
 			//TODO: correct type + tests!
