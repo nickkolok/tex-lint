@@ -322,3 +322,124 @@ test('getFormulaByIndex', function () {
 	
 });
 
+test("classifyFormulaDelimiter", function () {
+	var N = new Nodes('Text $\\frac{1}{2}$ with display formula $$\\frac{1}{3}$$ and \\(\\pi\\) and \\[E=mc^2\\] other text');
+	assert.deepEqual(
+		N.classifyFormulaDelimiter(0),
+		{
+			index: 0,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.classifyFormulaDelimiter(-10),
+		{
+			index: -10,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.classifyFormulaDelimiter(9000),
+		{
+			index: 9000,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.classifyFormulaDelimiter(2),
+		{
+			index: 2,
+			inline: true,
+			display: false,
+			marker: '$',
+			isBegin: undefined,
+			isEnd: undefined,
+	},
+		""
+	);
+	assert.deepEqual(
+		N.classifyFormulaDelimiter(10),
+		{
+			index: 10,
+			inline: true,
+			display: false,
+			marker: '$',
+			isBegin: undefined,
+			isEnd: undefined,
+	},
+		""
+	);
+	assert.deepEqual(
+		N.classifyFormulaDelimiter(18),
+		{
+			index: 18,
+			inline: false,
+			display: true,
+			marker: '$$',
+			isBegin: undefined,
+			isEnd: undefined,
+	},
+		""
+	);
+	assert.deepEqual(
+		N.classifyFormulaDelimiter(26),
+		{
+			index: 26,
+			inline: false,
+			display: true,
+			marker: '$$',
+			isBegin: undefined,
+			isEnd: undefined,
+	},
+		""
+	);
+	assert.deepEqual(
+		N.classifyFormulaDelimiter(30),
+		{
+			index: 30,
+			inline: true,
+			display: false,
+			marker: '\\(',
+			isBegin: true,
+			isEnd: false,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.classifyFormulaDelimiter(32),
+		{
+			index: 32,
+			inline: true,
+			display: false,
+			marker: '\\(',
+			isBegin: false,
+			isEnd: true,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.classifyFormulaDelimiter(36),
+		{
+			index: 36,
+			inline: false,
+			display: true,
+			marker: '\\[',
+			isBegin: true,
+			isEnd: false,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.classifyFormulaDelimiter(42),
+		{
+			index: 42,
+			inline: false,
+			display: true,
+			marker: '\\[',
+			isBegin: false,
+			isEnd: true,
+		},
+		""
+	);
+
+});

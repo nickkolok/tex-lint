@@ -166,4 +166,78 @@ Nodes.prototype.getFormulaByIndex = function(index) {
 	};
 };
 
+Nodes.prototype.classifyFormulaDelimiter = function(index) {
+	if (index < 0 || index >= this.length) {
+		return {
+			index: index,
+		};
+	}
+	switch (this.nodes[index].text) {
+		//{{ Plain TeX delimiters $ and $$
+		case '$':
+			return {
+				index: index,
+				inline: true,
+				display: false,
+				marker: '$',
+				isBegin: undefined,
+				isEnd: undefined,
+			};
+		case '$$':
+			return {
+				index: index,
+				inline: false,
+				display: true,
+				marker: '$$',
+				isBegin: undefined,
+				isEnd: undefined,
+			};
+		//}} Plain TeX delimiters $ and $$
+
+		//{{ Simple LaTeX delimiters \( \) \[ \]
+		case '\\(':
+			return {
+				index: index,
+				inline: true,
+				display: false,
+				marker: '\\(',
+				isBegin: true,
+				isEnd: false,
+			};
+		case '\\)':
+			return {
+				index: index,
+				inline: true,
+				display: false,
+				marker: '\\(',
+				isBegin: false,
+				isEnd: true,
+			};
+
+		case '\\[':
+			return {
+				index: index,
+				inline: false,
+				display: true,
+				marker: '\\[',
+				isBegin: true,
+				isEnd: false,
+			};
+		case '\\]':
+			return {
+				index: index,
+				inline: false,
+				display: true,
+				marker: '\\[',
+				isBegin: false,
+				isEnd: true,
+			};
+		default:
+			return {
+				index: index,
+			};
+	}
+
+};
+
 };//modules.export
