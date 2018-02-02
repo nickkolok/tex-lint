@@ -12,6 +12,25 @@ Nodes.inlineFormulaDelimiters = {
 	'\\)': null,
 };
 
+Nodes.displayFormulaDelimiters = {
+	'$$': null,
+	'\\[': null,
+	'\\]': null,
+};
+
+Nodes.allFormulaDelimiters = {
+	'$': null,
+	'$$': null,
+	'\\(': null,
+	'\\)': null,
+	'\\[': null,
+	'\\]': null,
+};
+
+Nodes.formulaEnvironments = {
+	'equation': null,
+	'equation*': null,
+};
 
 Nodes.prototype.isInside$ = function(index, includeDelimiters) {
     if (this.nodes[index].type === 'keyword') {
@@ -34,12 +53,6 @@ Nodes.prototype.isInside$ = function(index, includeDelimiters) {
 		}
 	}
 	return !!(delimCount % 2);
-};
-
-Nodes.displayFormulaDelimiters = {
-	'$$': null,
-	'\\[': null,
-	'\\]': null,
 };
 
 Nodes.prototype.isInside$$ = function(index, includeDelimiters) {
@@ -278,15 +291,6 @@ Nodes.prototype.classifyFormulaDelimiter = function(index) {
 	return {
 		index: index,
 	};
-};
-
-Nodes.allFormulaDelimiters = {
-	'$': null,
-	'$$': null,
-	'\\(': null,
-	'\\)': null,
-	'\\[': null,
-	'\\]': null,
 };
 
 Nodes.prototype.getNearestFormulaDelimiterRight = function(index) {
