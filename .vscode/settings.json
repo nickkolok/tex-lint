@@ -9,6 +9,8 @@
         "build": true,
         "dist": true,
         "nohup.out": true,
+        "*.orig": true,
+        "**/*.orig": true,
         ".grunt": true,
         "_SpecRunner.html": true,
         "**/*~": true,
