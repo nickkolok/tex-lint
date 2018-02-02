@@ -442,4 +442,59 @@ test("classifyFormulaDelimiter", function () {
 		""
 	);
 
+	N = new Nodes(
+		"Strange formula \\begin{math}x^2\\end{math}"
+	);
+	assert.deepEqual(
+		N.classifyFormulaDelimiter(6),
+		{
+			index: 7,
+			inline: true,
+			display: false,
+			marker: 'math',
+			isBegin: true,
+			isEnd: false,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.classifyFormulaDelimiter(13),
+		{
+			index: 11,
+			inline: true,
+			display: false,
+			marker: 'math',
+			isBegin: false,
+			isEnd: true,
+		},
+		""
+	);
+
+	N = new Nodes(
+		"Strange formula \\begin{equation*}x^2\\end{equation*}"
+	);
+	assert.deepEqual(
+		N.classifyFormulaDelimiter(6),
+		{
+			index: 8,
+			inline: false,
+			display: true,
+			marker: 'equation*',
+			isBegin: true,
+			isEnd: false,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.classifyFormulaDelimiter(14),
+		{
+			index: 12,
+			inline: false,
+			display: true,
+			marker: 'equation*',
+			isBegin: false,
+			isEnd: true,
+		},
+		""
+	);
 });

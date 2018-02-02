@@ -233,11 +233,51 @@ Nodes.prototype.classifyFormulaDelimiter = function(index) {
 				isEnd: true,
 			};
 		default:
-			return {
-				index: index,
-			};
-	}
+			var marker = this.nodes[index].text;
+			if (this.nodes[index + 1].text === '*') {
+				// Parser splits them
+				// TODO: dekostylize
+				marker += '*';
+			}
+			if (
+				this.nodes[index].type === 'variable'
+			&&
+				marker in Nodes.allFormulaEnvironments
+			) {
+				var tag = this.skipToTypeReverse(index, 'tag');
+				if (!this.nodes[tag]) {
+					break;
+				}
+				var tagtext = this.nodes[tag].text;
 
+				//if (tagtext !== '\\begin' && tagtext !== '\\end'){
+				//	break;
+				//}
+				if (tagtext === '\\begin') {
+					return {
+						index: this.skipToType(index, 'bracket'),
+						inline: marker in Nodes.inlineFormulaEnvironments,
+						display: marker in Nodes.displayFormulaEnvironments,
+						marker: marker,
+						isBegin: true,
+						isEnd: false,
+					};
+				}
+				if (tagtext === '\\end') {
+					return {
+						index: tag,
+						inline: marker in Nodes.inlineFormulaEnvironments,
+						display: marker in Nodes.displayFormulaEnvironments,
+						marker: marker,
+						isBegin: false,
+						isEnd: true,
+					};
+				}
+			}
+	}
+	return {
+		index: index,
+	};
 };
 
 };//modules.export
