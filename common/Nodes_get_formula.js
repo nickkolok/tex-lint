@@ -177,28 +177,9 @@ Nodes.prototype.getFormulaByIndex = function(index) {
 		return null; // TODO: а может, всё-таки объект, пусть и пустой?
 	}
 
-	// TODO: getNearestLeft/RightFormulaDelimiter
-	var start = index;
-	while (!(
-		start <= 0
-	||
-		this.nodes[start].text in Nodes.inlineFormulaDelimiters
-	||
-		this.nodes[start].text in Nodes.displayFormulaDelimiters
-	)) {
-		start--;
-	}
+	var start = this.getNearestFormulaDelimiterLeft(index).index;
+	var end = this.getNearestFormulaDelimiterRight(index).index;
 
-	var end = index;
-	while (!(
-		end >= this.length - 1
-	||
-		this.nodes[end].text in Nodes.inlineFormulaDelimiters
-	||
-		this.nodes[end].text in Nodes.displayFormulaDelimiters
-	)) {
-		end++;
-	}
 
 	return {
 		start : start,
