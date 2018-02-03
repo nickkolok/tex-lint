@@ -498,3 +498,52 @@ test("classifyFormulaDelimiter", function () {
 		""
 	);
 });
+
+test("isFormulaDelimiter", function () {
+	var N = new Nodes(
+		'Text $\\frac{1}{2}$ with display formula $$\\frac{1}{3}$$ and \\(\\pi\\) and \\[E=mc^2\\] other text'
+	);
+	var tests = [
+		[0, false],
+		[2, true],
+		[3, false],
+		[10, true],
+		[18, true],
+		[26, true],
+		[27, false],
+		[29, false],
+		[30, true],
+		[32, true],
+		[36, true],
+		[42, true],		
+	];
+	
+	for (var i = 0; i < tests.length; i++) {
+		assert.deepEqual(
+			N.isFormulaDelimiter(tests[i][0]),
+			tests[i][1],
+			""
+		);	
+	}
+
+	N = new Nodes(
+		'Strange formula \\begin{equation*}x^2\\end{equation*}'
+	);
+	tests = [
+		[0, false],
+		[6, true],
+		[3, false],
+		[14, true],
+		[27, false],
+		[29, false],
+	];
+
+	// TODO: google for internal procedure of QUnit which does that
+	for (var i = 0; i < tests.length; i++) {
+		assert.deepEqual(
+			N.isFormulaDelimiter(tests[i][0]),
+			tests[i][1],
+			""
+		);	
+	}
+});

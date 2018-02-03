@@ -208,10 +208,14 @@ Nodes.prototype.getFormulaByIndex = function(index) {
 };
 
 Nodes.prototype.isFormulaDelimiter = function(index) {
-	// TODO: tests
 	// TODO: it's very rough
 	// The space, the tag and the brackets in `\begin {equation}` will be not delimiters
 	// However, this should be enough for our needs
+
+	if (index < 0 || index >= this.length) {
+		return false;
+	}
+
 	if (this.nodes[index].type === 'keyword') {
 		return true;
 	}
@@ -220,7 +224,7 @@ Nodes.prototype.isFormulaDelimiter = function(index) {
 	&&
 		this.nodes[index].text in Nodes.allFormulaEnvironments
 	) {
-		var tag = this.skipToTypeReverse('tag');
+		var tag = this.skipToTypeReverse(index, 'tag');
 		return (
 			this.nodes[tag].text === '\\begin'
 		||
