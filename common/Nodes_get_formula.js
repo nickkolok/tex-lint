@@ -300,4 +300,15 @@ Nodes.prototype.getNearestFormulaDelimiterRight = function(index) {
 	};
 };
 
+Nodes.prototype.getNearestFormulaDelimiterLeft = function(index) {
+	for (; index > -1; index--) {
+		if (this.nodes[index].text in Nodes.allFormulaDelimiters) {
+			return this.classifyFormulaDelimiter(index);
+		}
+	}
+	return {
+		index: -1,
+	};
+};
+
 };//modules.export
