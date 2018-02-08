@@ -547,3 +547,580 @@ test("isFormulaDelimiter", function () {
 		);	
 	}
 });
+
+test('getNearestFormulaDelimiterRight - single-tag delimiters', function () {
+	var N = new Nodes(
+		//   1               12                   18            26     30     32      36       42
+		'Text $\\frac{1}{2}$ with display formula $$\\frac{1}{3}$$ and \\(\\pi\\) and \\[E=mc^2\\] other text'
+	);
+
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(0),
+		{
+			index: 2,
+			inline: true,
+			display: false,
+			marker: '$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);	
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(1),
+		{
+			index: 2,
+			inline: true,
+			display: false,
+			marker: '$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);	
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(2),
+		{
+			index: 2,
+			inline: true,
+			display: false,
+			marker: '$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);	
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(4),
+		{
+			index: 10,
+			inline: true,
+			display: false,
+			marker: '$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);	
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(9),
+		{
+			index: 10,
+			inline: true,
+			display: false,
+			marker: '$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);	
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(10),
+		{
+			index: 10,
+			inline: true,
+			display: false,
+			marker: '$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);	
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(11),
+		{
+			index: 18,
+			inline: false,
+			display: true,
+			marker: '$$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);	
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(17),
+		{
+			index: 18,
+			inline: false,
+			display: true,
+			marker: '$$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);	
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(18),
+		{
+			index: 18,
+			inline: false,
+			display: true,
+			marker: '$$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(19),
+		{
+			index: 26,
+			inline: false,
+			display: true,
+			marker: '$$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(25),
+		{
+			index: 26,
+			inline: false,
+			display: true,
+			marker: '$$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(26),
+		{
+			index: 26,
+			inline: false,
+			display: true,
+			marker: '$$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);
+
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(27),
+		{
+			index: 30,
+			inline: true,
+			display: false,
+			marker: '\\(',
+			isBegin: true,
+			isEnd: false,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(28),
+		{
+			index: 30,
+			inline: true,
+			display: false,
+			marker: '\\(',
+			isBegin: true,
+			isEnd: false,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(30),
+		{
+			index: 30,
+			inline: true,
+			display: false,
+			marker: '\\(',
+			isBegin: true,
+			isEnd: false,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(31),
+		{
+			index: 32,
+			inline: true,
+			display: false,
+			marker: '\\(',
+			isBegin: false,
+			isEnd: true,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(32),
+		{
+			index: 32,
+			inline: true,
+			display: false,
+			marker: '\\(',
+			isBegin: false,
+			isEnd: true,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(33),
+		{
+			index: 36,
+			inline: false,
+			display: true,
+			marker: '\\[',
+			isBegin: true,
+			isEnd: false,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(34),
+		{
+			index: 36,
+			inline: false,
+			display: true,
+			marker: '\\[',
+			isBegin: true,
+			isEnd: false,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(36),
+		{
+			index: 36,
+			inline: false,
+			display: true,
+			marker: '\\[',
+			isBegin: true,
+			isEnd: false,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(37),
+		{
+			index: 42,
+			inline: false,
+			display: true,
+			marker: '\\[',
+			isBegin: false,
+			isEnd: true,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(41),
+		{
+			index: 42,
+			inline: false,
+			display: true,
+			marker: '\\[',
+			isBegin: false,
+			isEnd: true,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(42),
+		{
+			index: 42,
+			inline: false,
+			display: true,
+			marker: '\\[',
+			isBegin: false,
+			isEnd: true,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterRight(43),
+		{
+			index: 47,
+		},
+		""
+	);
+});
+
+test('getNearestFormulaDelimiterLeft - single-tag delimiters', function () {
+	var N = new Nodes(
+		//   1               12                   18            26     30     32      36       42
+		'Text $\\frac{1}{2}$ with display formula $$\\frac{1}{3}$$ and \\(\\pi\\) and \\[E=mc^2\\] other text'
+	);
+
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(2),
+		{
+			index: 2,
+			inline: true,
+			display: false,
+			marker: '$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);	
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(3),
+		{
+			index: 2,
+			inline: true,
+			display: false,
+			marker: '$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);	
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(9),
+		{
+			index: 2,
+			inline: true,
+			display: false,
+			marker: '$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);	
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(10),
+		{
+			index: 10,
+			inline: true,
+			display: false,
+			marker: '$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);	
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(11),
+		{
+			index: 10,
+			inline: true,
+			display: false,
+			marker: '$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);	
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(17),
+		{
+			index: 10,
+			inline: true,
+			display: false,
+			marker: '$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);	
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(18),
+		{
+			index: 18,
+			inline: false,
+			display: true,
+			marker: '$$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);	
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(19),
+		{
+			index: 18,
+			inline: false,
+			display: true,
+			marker: '$$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);	
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(25),
+		{
+			index: 18,
+			inline: false,
+			display: true,
+			marker: '$$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(26),
+		{
+			index: 26,
+			inline: false,
+			display: true,
+			marker: '$$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(27),
+		{
+			index: 26,
+			inline: false,
+			display: true,
+			marker: '$$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(29),
+		{
+			index: 26,
+			inline: false,
+			display: true,
+			marker: '$$',
+			isBegin: undefined,
+			isEnd: undefined,
+		},
+		""
+	);
+
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(30),
+		{
+			index: 30,
+			inline: true,
+			display: false,
+			marker: '\\(',
+			isBegin: true,
+			isEnd: false,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(31),
+		{
+			index: 30,
+			inline: true,
+			display: false,
+			marker: '\\(',
+			isBegin: true,
+			isEnd: false,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(32),
+		{
+			index: 32,
+			inline: true,
+			display: false,
+			marker: '\\(',
+			isBegin: false,
+			isEnd: true,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(33),
+		{
+			index: 32,
+			inline: true,
+			display: false,
+			marker: '\\(',
+			isBegin: false,
+			isEnd: true,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(35),
+		{
+			index: 32,
+			inline: true,
+			display: false,
+			marker: '\\(',
+			isBegin: false,
+			isEnd: true,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(36),
+		{
+			index: 36,
+			inline: false,
+			display: true,
+			marker: '\\[',
+			isBegin: true,
+			isEnd: false,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(37),
+		{
+			index: 36,
+			inline: false,
+			display: true,
+			marker: '\\[',
+			isBegin: true,
+			isEnd: false,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(41),
+		{
+			index: 36,
+			inline: false,
+			display: true,
+			marker: '\\[',
+			isBegin: true,
+			isEnd: false,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(42),
+		{
+			index: 42,
+			inline: false,
+			display: true,
+			marker: '\\[',
+			isBegin: false,
+			isEnd: true,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(43),
+		{
+			index: 42,
+			inline: false,
+			display: true,
+			marker: '\\[',
+			isBegin: false,
+			isEnd: true,
+		},
+		""
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(46),
+		{
+			index: 42,
+			inline: false,
+			display: true,
+			marker: '\\[',
+			isBegin: false,
+			isEnd: true,
+		},
+		""
+	);
+});
