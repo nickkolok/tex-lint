@@ -1338,6 +1338,23 @@ test('графа $\\Gamma  $ , инцидентных', function () {
 	);
 });
 
+test('$n\\geq 2 $\n,', function () {
+	assert.deepEqual(
+		new Nodes('$n\\geq 2 $\n,').nodes,
+		[
+			{ text: '$', type: 'keyword' },
+			{ text: 'n', type: 'variable-2' },
+			{ text: '\\geq', type: 'tag' },
+			{ text: ' ', type: 'space' },
+			{ text: '2', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: ',', type: null },
+		],
+		""
+	);
+});
 
 
 /*

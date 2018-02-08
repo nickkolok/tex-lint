@@ -71,6 +71,7 @@ var rulesets = {
 			['no_spaces_at_line_ending', 1],
 			['space_after_comma', 1],
 			['no_space_before_comma', 1],
+			['no_newline_before_comma', 1],
 			['sin_must_be_command', 1],
 			['tg_must_be_command', 1],
 			['forbid_upsilon', 1],
