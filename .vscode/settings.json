@@ -11,6 +11,7 @@
         "nohup.out": true,
         "*.orig": true,
         "**/*.orig": true,
+        "**/*.bak": true,
         ".grunt": true,
         "_SpecRunner.html": true,
         "**/*~": true,
