@@ -1,0 +1,7 @@
+{
+	"text": "Text\n\n\n\\vspace{12pt}\n\nAnother text",
+	"rulename": "forbid_vspace",
+	"indexes": [4],
+	"quantity": 1,
+	"fixed": "Text\n\n\n\n\nAnother text"
+}

@@ -66,6 +66,7 @@ var rulesets = {
 			['longmapsto_instead_of_delta', 1],
 			['manual_paragraph_format', 1],
 			['empty_text_options', 1],
+			['forbid_vspace', 1],
 			['rtf2latex_subunicode_artifacts', 1],
 		],
 		comment: '',
