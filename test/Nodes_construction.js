@@ -1319,6 +1319,24 @@ test('Strange formula \\begin{equation*}x^2\\end{equation*}', function () {
 	);
 });
 
+test('графа $\\Gamma  $ , инцидентных', function () {
+	assert.deepEqual(
+		new Nodes('графа $\\Gamma  $ , инцидентных').nodes,
+		[
+			{ text: 'графа', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: '\\Gamma', type: 'tag' },
+			{ text: '  ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: ' ', type: 'space' },
+			{ text: ',', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'инцидентных', type: 'cyrtext' },
+		],
+		""
+	);
+});
 
 
 

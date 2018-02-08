@@ -1282,12 +1282,49 @@ test('findSequenceByRegExp', function () {
 	N = new Nodes('{1}');
 	N.nodes[1].skip = true;
 	N.nodes[2].skip = true;
-		assert.deepEqual(
+	assert.deepEqual(
 		N.findSequenceByRegExp([{ type:/bracket/, text:/^/ }, { type:/bracket/, text:/^/ }]),
 		[
 		],
 		''
 	);
+
+
+	N = new Nodes('графа $\\Gamma  $ , инцидентных');
+	assert.deepEqual(
+		N.findSequenceByRegExp([
+			{ type:/space/, text:/^/ },
+		]),
+		[
+			1,
+			4,
+			6,
+			8,
+		],
+		''
+	);
+	assert.deepEqual(
+		N.findSequenceByRegExp([
+			{ type: /^/, text: /\$/ },
+			{ type: /space/, text: /^/ },
+		]),
+		[
+			5,
+		],
+		''
+	);
+	assert.deepEqual(
+		N.findSequenceByRegExp([
+			{ type: /^/, text: /\$/ },
+			{ type: /space/, text: /^/ },
+			{ type: /^(?!(tag))/, text: /^,/ },
+		]),
+		[
+			5,
+		],
+		''
+	);
+
 });
 
 test('isInsideArgumentsOf', function () {
