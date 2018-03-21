@@ -132,6 +132,25 @@ test("getArguments", function () {
 		""
 	);
 
+	N = new Nodes('\\frac{1}%\n{2}3[5]');
+	assert.deepEqual(
+		N.getArguments(1, 1),
+		[
+			new Nodes('{1}'),
+		],
+		""
+	);
+	assert.deepEqual(
+		N.getArguments(1, 2),
+		[
+			new Nodes('{1}'),
+			new Nodes('{2}'),
+		],
+		""
+	);
+
+
+
 	N = new Nodes('\\begin{document}\\usepackage [ utf8 ] {inputenc}');
 
 	// Полукостыли, но без них парсится неправильно.

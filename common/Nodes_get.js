@@ -154,7 +154,7 @@ Nodes.prototype.getArgumentsMap = function(index, count) {
 		if (index >= nodes.length) {
 			break;
 		}
-		index = this.skipTypes(index, ['space', 'linebreak']);
+		index = this.skipTypes(index, ['space', 'linebreak', 'comment']);
 		var arg = this.getGroupOrSingle(index);
 		var end = index + arg.length;
 		argsmap.push([index, end - 1]);
