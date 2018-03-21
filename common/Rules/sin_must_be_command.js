@@ -20,7 +20,8 @@ new Rule({
 	},
 	commonCorrector: function(n, index) {
 		n.nodes[index].text = n.nodes[index].text.
-			replace(mathopnames.mathOpRegExpInt, '\\$1')
+			replace(mathopnames.mathOpRegExpInt, '\\$1 ').
+			replace(/\s$/, '');
 		;
 		n.reparse();
 		return n;
