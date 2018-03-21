@@ -10,11 +10,11 @@ new Rule({
 		var indexes = nodes.findSequenceByRegExp([
 			{ type: /cyrtext/, text: /^/ },
 			{ type: /^(?!(tag))/, text: /,$/ },
-			{ type: /^(?!(space|linebreak)$)/, text: /^(?!((\\\\)|~|\}))/ },
+			{ type: /^(?!(space|linebreak)$)/, text: /^(?!((\\\\)|~|\}|\\,|\\;|\\:|\\\s))/ },
 		]).concat(nodes.findSequenceByRegExp([
 			{ type: /^/, text: /\$/ },
 			{ type: /^(?!(tag))/, text: /,$/ },
-			{ type: /^(?!(space|linebreak)$)/, text: /^(?!((\\\\)|~|\}))/ },
+			{ type: /^(?!(space|linebreak)$)/, text: /^(?!((\\\\)|~|\}|\\,|\\;|\\:|\\\s))/ },
 		]));
 		indexes = indexes.map(function(index) {
 			return index + 1;
