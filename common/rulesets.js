@@ -123,6 +123,26 @@ var rulesets = {
 		],
 		comment: '',
 	},
+	vvmsh2018: {
+		title: 'ВВМШ-2018',
+		url: '', //TODO
+		rules: [
+			['manual_paragraph_format', 1],
+			['empty_text_options', 1],
+			//['eyo', 1],
+			['space_after_comma', 1],
+			['sin_must_be_command', 1],
+			['tg_must_be_command', 1],
+			['forbid_upsilon', 1],
+			['comma_before_gde', 1],
+			['no-mathit-in-formula', 1],
+			//['force_geqslant', 1],
+			//['force_leqslant', 1],
+			['Russian_quotes', 1],
+			['no-mathit-in-formula', 1],
+		],
+		comment: '',
+	},
 };
 
 rulesets.defaultSet = rulesets.vzmsh2017;
