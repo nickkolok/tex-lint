@@ -1356,6 +1356,61 @@ test('$n\\geq 2 $\n,', function () {
 	);
 });
 
+test('', function () {
+	assert.deepEqual(
+		new Nodes('Вейвлет - от английского слова "wavelet"~--- означает в переводе "маленькая волна", или <<волны, идущие друг за другом>>.').nodes,
+		[
+			{ text: 'Вейвлет', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: '-', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'от', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'английского', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'слова', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: '"', type: null },
+			{ text: 'wavelet', type: null },
+			{ text: '"', type: null },
+			{ text: '~---', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'означает', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'в', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'переводе', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: '"', type: null },
+			{ text: 'маленькая', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'волна', type: 'cyrtext' },
+			{ text: '"', type: null },
+			{ text: ',', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'или', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: '<', type: null },
+			{ text: '<', type: null },
+			{ text: 'волны', type: 'cyrtext' },
+			{ text: ',', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'идущие', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'друг', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'за', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'другом', type: 'cyrtext' },
+			{ text: '>', type: null },
+			{ text: '>', type: null },
+			{ text: '.', type: null },
+		],
+		""
+	);
+});
+
+
 
 /*
 //TODO: запятая не отделяется от слова. Решить, что с ней делать.
