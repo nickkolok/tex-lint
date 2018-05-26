@@ -1410,6 +1410,25 @@ test('', function () {
 	);
 });
 
+test('', function () {
+	assert.deepEqual(
+		new Nodes("''Современные проблемы теоретической математики``").nodes,
+		[
+			{ text: '\'', type: null },
+			{ text: '\'', type: null },
+			{ text: 'Современные', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'проблемы', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'теоретической', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'математики', type: 'cyrtext' },
+			{ text: '`', type: null },
+			{ text: '`', type: null },
+		],
+		""
+	);
+});
 
 
 /*
