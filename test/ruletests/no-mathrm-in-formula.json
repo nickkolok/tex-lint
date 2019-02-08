@@ -1,0 +1,7 @@
+{
+	"text": "This is $\\frac{\\mathrm{dP}}{\\mathrm{dt}}=F_A-F_{\\mathrm{drag}}$ a formula.\n",
+	"rulename": "no-mathrm-in-formula",
+	"indexes": [7,13,26],
+	"quantity": 3,
+	"fixed": "This is $\\frac{dP}{dt}=F_A-F_{drag}$ a formula.\n"
+}

@@ -22,6 +22,7 @@ require('./Rules/sin_must_be_command.js');
 require('./Rules/tg_must_be_command.js');
 require('./Rules/Bibitem_exist.js');
 require('./Rules/no-mathit-in-formula.js');
+require('./Rules/no-mathrm-in-formula.js');
 require('./Rules/no-foreignlanguage.js');
 require('./Rules/force_geqslant.js');
 require('./Rules/force_leqslant.js');
