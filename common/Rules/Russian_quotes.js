@@ -24,7 +24,7 @@ new Rule({
 				index < nodes.nodes.length
 			&&
 				// TODO: unificate quotes!
-				(/(^[=><']$)|(^---$)/i).test(nodes.nodes[index + 1].text)
+				(/(^[=><']$)|(^-)/i).test(nodes.nodes[index + 1].text)
 			){
 				//console.log('Not error: ' + nodes.getSubnodes(index - 2, index + 2).toString());
 				return;
