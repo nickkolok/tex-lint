@@ -1,0 +1,27 @@
+{
+	"text": "\\[-2\\cdot \\sqrt{q\\cdot {{y}^{2}}+{{x}^{2}}}\\cdot \\sqrt{q\\cdot {{\\mathit{y\\_2}}^{2}}-2\\cdot q\\cdot y\\cdot \\mathit{y\\_2}+q\\cdot {{y}^{2}}+{{\\mathit{x\\_2}}^{2}}-2\\cdot x\\cdot \\mathit{x\\_2}+{{x}^{2}}}+q\\cdot {{\\mathit{y\\_2}}^{2}}-2\\cdot q\\cdot y\\cdot \\mathit{y\\_2}+2\\cdot q\\cdot {{y}^{2}}+{{\\mathit{x\\_2}}^{2}}-2\\cdot x\\cdot \\mathit{x\\_2}+2\\cdot {{x}^{2}}-{{n}^{2}}=0\\]",
+	"rulename": "maxima_forbid_cdot",
+	"indexes": [
+		3,
+		8,
+		30,
+		35,
+		53,
+		56,
+		59,
+		69,
+		97,
+		100,
+		121,
+		139,
+		142,
+		145,
+		155,
+		158,
+		186,
+		189,
+		199
+	],
+	"quantity": 19,
+	"fixed": "\\[-2 \\sqrt{q {{y}^{2}}+{{x}^{2}}} \\sqrt{q {{\\mathit{y\\_2}}^{2}}-2 q y \\mathit{y\\_2}+q {{y}^{2}}+{{\\mathit{x\\_2}}^{2}}-2 x \\mathit{x\\_2}+{{x}^{2}}}+q {{\\mathit{y\\_2}}^{2}}-2 q y \\mathit{y\\_2}+2 q {{y}^{2}}+{{\\mathit{x\\_2}}^{2}}-2 x \\mathit{x\\_2}+2 {{x}^{2}}-{{n}^{2}}=0\\]"
+}

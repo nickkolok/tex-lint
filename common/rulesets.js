@@ -145,6 +145,17 @@ var rulesets = {
 		],
 		comment: '',
 	},
+	wxmaximaTransit: {
+		title: 'После wxMaxima',
+		url: '', //TODO
+		rules: [
+			['no-mathit-in-formula', 1],
+			['no-mathrm-in-formula', 1],
+			['maxima_forbid_cdot', 1],
+			['maxima_underscore', 1],
+		],
+		comment: '',
+	},
 };
 
 rulesets.defaultSet = rulesets.vzmsh2017;

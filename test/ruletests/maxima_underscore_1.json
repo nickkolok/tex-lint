@@ -1,0 +1,7 @@
+{
+	"text": "\\[-2\\cdot \\sqrt{q\\cdot {{y}^{2}}+{{x}^{2}}}\\cdot \\sqrt{q\\cdot {{\\mathit{y\\_2}}^{2}}-2\\cdot q\\cdot y\\cdot \\mathit{y\\_2}+q\\cdot {{y}^{2}}+{{\\mathit{x\\_2}}^{2}}-2\\cdot x\\cdot \\mathit{x\\_2}+{{x}^{2}}}+q\\cdot {{\\mathit{y\\_2}}^{2}}-2\\cdot q\\cdot y\\cdot \\mathit{y\\_2}+2\\cdot q\\cdot {{y}^{2}}+{{\\mathit{x\\_2}}^{2}}-2\\cdot x\\cdot \\mathit{x\\_2}+2\\cdot {{x}^{2}}-{{n}^{2}}=0\\]",
+	"rulename": "maxima_underscore",
+	"indexes": [ 42, 64, 86, 105, 128, 150, 175, 194 ],
+	"quantity": 8,
+	"fixed": "\\[-2\\cdot \\sqrt{q\\cdot {{y}^{2}}+{{x}^{2}}}\\cdot \\sqrt{q\\cdot {{\\mathit{y_2}}^{2}}-2\\cdot q\\cdot y\\cdot \\mathit{y_2}+q\\cdot {{y}^{2}}+{{\\mathit{x_2}}^{2}}-2\\cdot x\\cdot \\mathit{x_2}+{{x}^{2}}}+q\\cdot {{\\mathit{y_2}}^{2}}-2\\cdot q\\cdot y\\cdot \\mathit{y_2}+2\\cdot q\\cdot {{y}^{2}}+{{\\mathit{x_2}}^{2}}-2\\cdot x\\cdot \\mathit{x_2}+2\\cdot {{x}^{2}}-{{n}^{2}}=0\\]"
+}
