@@ -11,6 +11,8 @@ require('./Rules/separate$.js');
 require('./Rules/splitrows80.js');
 require('./Rules/no_env_equation.js');
 require('./Rules/no_env_equation*.js');
+require('./Rules/no_env_eqnarray.js');
+require('./Rules/no_env_eqnarray*.js');
 require('./Rules/dot_ending.js');
 require('./Rules/space_after_comma.js');
 require('./Rules/no_space_before_comma.js');
