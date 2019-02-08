@@ -174,6 +174,7 @@ var rulesets = {
 			['comma_before_gde', 1],
 			['no_env_eqnarray', 1],
 			['no_env_eqnarray*', 1],
+			['force_$$_to_equation*', 1],
 		],
 		comment: '',
 	},

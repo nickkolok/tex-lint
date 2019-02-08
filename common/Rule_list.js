@@ -9,6 +9,7 @@ require('./Rules/no_trivial-comments.js');
 require('./Rules/separate$$.js');
 require('./Rules/separate$.js');
 require('./Rules/splitrows80.js');
+require('./Rules/force_$$_to_equation*.js');
 require('./Rules/no_env_equation.js');
 require('./Rules/no_env_equation*.js');
 require('./Rules/no_env_eqnarray.js');
