@@ -173,6 +173,13 @@
         return null;
       }
 
+      
+      // dashes
+      if (source.match(/^-+/)) {
+        return null;
+      }
+      
+
       var ch = source.next();
       if (ch === "%") {
         source.skipToEnd();
