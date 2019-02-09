@@ -1,0 +1,7 @@
+{
+	"text": "где $\\delta$ --- малый положительный параметр,",
+	"rulename": "force_babel_quoted_emdash",
+	"indexes": [6],
+	"quantity": 1,
+	"fixed": "где $\\delta$ \"--- малый положительный параметр,"
+}
