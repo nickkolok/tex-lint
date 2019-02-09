@@ -1645,6 +1645,36 @@ test('\\|', function () {
 	);
 });
 
+test('', function () {
+	assert.deepEqual(
+		new Nodes('изложенные в \\cite{kor-1}, \\cite{k-v-z-r-s}, \\cite{k-z}.').nodes,
+		[
+			{ text: 'изложенные', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'в', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: '\\cite', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'kor-1', type: 'variable' },
+			{ text: '}', type: 'bracket' },
+			{ text: ',', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '\\cite', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'k-v-z-r-s', type: 'variable' },
+			{ text: '}', type: 'bracket' },
+			{ text: ',', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '\\cite', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'k-z', type: 'variable' },
+			{ text: '}', type: 'bracket' },
+			{ text: '.', type: null },
+		],
+		""
+	);
+});
+
 /*
 //TODO: запятая не отделяется от слова. Решить, что с ней делать.
 test('', function () {
