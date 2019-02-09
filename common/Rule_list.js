@@ -34,3 +34,4 @@ require('./Rules/Russian_quotes.js');
 require('./Rules/forbid_English_quotes.js');
 require('./Rules/maxima_forbid_cdot.js');
 require('./Rules/maxima_underscore.js');
+require('./Rules/collapse_cite.js');

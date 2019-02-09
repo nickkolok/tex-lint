@@ -1,0 +1,7 @@
+{
+	"text": "изложенные в \\cite{kor-1}, \\cite{k-v-z-r-s}, \\cite{k-z}.",
+	"rulename": "collapse_cite",
+	"indexes": [4, 10],
+	"quantity": 2,
+	"fixed": "изложенные в \\cite{kor-1,k-v-z-r-s,k-z}."
+}
