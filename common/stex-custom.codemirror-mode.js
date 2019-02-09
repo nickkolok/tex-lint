@@ -159,7 +159,7 @@
       }
 
       // escape characters
-      if (source.match(/^\\[$&%#{}_]/)) {
+      if (source.match(/^\\[$&%#{}_|]/)) {
         return "tag";
       }
 
@@ -247,7 +247,7 @@
         return "variable-2";
       }
       // escape characters
-      if (source.match(/^\\[$&%#{}_]/)) {
+      if (source.match(/^\\[$&%#{}_|]/)) {
         return "tag";
       }
       // white space control characters

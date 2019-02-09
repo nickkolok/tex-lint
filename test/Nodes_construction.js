@@ -1618,6 +1618,32 @@ test('---', function () {
 	);
 });
 
+test('\\|', function () {
+	assert.deepEqual(
+		new Nodes('$v\\,\\left(\\lambda\\, -\\|v\\|^2\\right)$,').nodes,
+		[
+			{ text: '$', type: 'keyword' },
+			{ text: 'v', type: 'variable-2' },
+			{ text: '\\,', type: 'tag' },
+			{ text: '\\left', type: 'tag' },
+			{ text: '(', type: 'bracket' },
+			{ text: '\\lambda', type: 'tag' },
+			{ text: '\\,', type: 'tag' },
+			{ text: ' ', type: 'space' },
+			{ text: '-', type: null },
+			{ text: '\\|', type: 'tag' },
+			{ text: 'v', type: 'variable-2' },
+			{ text: '\\|', type: 'tag' },
+			{ text: '^', type: 'tag' },
+			{ text: '2', type: 'number' },
+			{ text: '\\right', type: 'tag' },
+			{ text: ')', type: 'bracket' },
+			{ text: '$', type: 'keyword' },
+			{ text: ',', type: null },
+		],
+		""
+	);
+});
 
 /*
 //TODO: запятая не отделяется от слова. Решить, что с ней делать.
