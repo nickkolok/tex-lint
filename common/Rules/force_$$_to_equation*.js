@@ -4,8 +4,6 @@ var Rule = require('../Rule.js').Rule;
 var RuleViolation = require('../RuleViolation.js');
 var Nodes = require('../Nodes.js').Nodes;
 
-var mathopnames = require('tex-mathopnames');
-
 new Rule({
 	name: 'force_$$_to_equation*',
 	message: 'Ненумеруемые выключные формулы следует оформлять с помощью окружения {equation*}',
