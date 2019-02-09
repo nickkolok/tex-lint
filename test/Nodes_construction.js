@@ -1595,6 +1595,29 @@ test('', function () {
 	);
 });
 
+test('---', function () {
+	assert.deepEqual(
+		new Nodes('где $\\delta$ --- малый положительный параметр,').nodes,
+		[
+			{ text: 'где', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: '\\delta', type: 'tag' },
+			{ text: '$', type: 'keyword' },
+			{ text: ' ', type: 'space' },
+			{ text: '---', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'малый', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'положительный', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'параметр', type: 'cyrtext' },
+			{ text: ',', type: null },
+		],
+		""
+	);
+});
+
 
 /*
 //TODO: запятая не отделяется от слова. Решить, что с ней делать.
