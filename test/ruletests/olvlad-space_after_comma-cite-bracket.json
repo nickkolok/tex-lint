@@ -1,0 +1,7 @@
+{
+	"text": "методику М.А. Малюгиной\n\\cite{RMal-1, RMal-2, RMal-3},разработанную для случаев нарушения",
+	"rulename": "space_after_comma",
+	"indexes": [19],
+	"quantity": 1,
+	"fixed": "методику М.А. Малюгиной\n\\cite{RMal-1, RMal-2, RMal-3}, разработанную для случаев нарушения"
+}

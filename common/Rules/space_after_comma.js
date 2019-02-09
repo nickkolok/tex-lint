@@ -15,6 +15,10 @@ new Rule({
 			{ type: /^/, text: /\$/ },
 			{ type: /^(?!(tag)$)/, text: /,$/ },
 			{ type: /^(?!(space|linebreak)$)/, text: /^(?!((\\\\)|~|\}|\\,|\\;|\\:|\\\s))/ },
+		])).concat(nodes.findSequenceByRegExp([
+			{ type: /^bracket$/, text: /^/ },
+			{ type: /^(?!(tag)$)/, text: /,$/ },
+			{ type: /^cyrtext$/, text: /^/ },
 		]));
 		indexes = indexes.map(function(index) {
 			return index + 1;
