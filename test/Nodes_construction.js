@@ -1430,6 +1430,88 @@ test('', function () {
 	);
 });
 
+test('"---', function () {
+	assert.deepEqual(
+		new Nodes('В.И. Арнольд. "--- 2-е изд. "--- М.: МЦНМО, 2008. "--- 32 с.').nodes,
+		[
+			{ text: 'В', type: 'cyrtext' },
+			{ text: '.', type: null },
+			{ text: 'И', type: 'cyrtext' },
+			{ text: '.', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'Арнольд', type: 'cyrtext' },
+			{ text: '.', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '"', type: null },
+			{ text: '---', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '2', type: 'number' },
+			{ text: '-', type: null },
+			{ text: 'е', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'изд', type: 'cyrtext' },
+			{ text: '.', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '"', type: null },
+			{ text: '---', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'М', type: 'cyrtext' },
+			{ text: '.', type: null },
+			{ text: ':', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'МЦНМО', type: 'cyrtext' },
+			{ text: ',', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '2008.', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: '"', type: null },
+			{ text: '---', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '32', type: 'number' },
+			{ text: ' ', type: 'space' },
+			{ text: 'с', type: 'cyrtext' },
+			{ text: '.', type: null },
+		],
+		""
+	);
+});
+
+test('', function () {
+	assert.deepEqual(
+		new Nodes('методику М.А. Малюгиной\n\\cite{RMal-1, RMal-2, RMal-3},разработанную для случаев нарушения').nodes,
+		[
+			{ text: 'методику', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'М', type: 'cyrtext' },
+			{ text: '.', type: null },
+			{ text: 'А', type: 'cyrtext' },
+			{ text: '.', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'Малюгиной', type: 'cyrtext' },
+			{ text: '\n', type: 'linebreak' },
+			{ text: '\\cite', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'RMal-1', type: 'variable' },
+			{ text: ',', type: 'variable' },
+			{ text: ' ', type: 'space' },
+			{ text: 'RMal-2', type: 'variable' },
+			{ text: ',', type: 'variable' },
+			{ text: ' ', type: 'space' },
+			{ text: 'RMal-3', type: 'variable' },
+			{ text: '}', type: 'bracket' },
+			{ text: ',', type: null },
+			{ text: 'разработанную', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'для', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'случаев', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'нарушения', type: 'cyrtext' },
+		],
+		""
+	);
+});
+
 
 /*
 //TODO: запятая не отделяется от слова. Решить, что с ней делать.
