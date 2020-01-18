@@ -30,6 +30,7 @@ require('./Rules/no-foreignlanguage.js');
 require('./Rules/force_geqslant.js');
 require('./Rules/force_leqslant.js');
 require('./Rules/force_babel_quoted_emdash.js');
+require('./Rules/force_babel_quoted_hyphen.js');
 require('./Rules/Russian_quotes.js');
 require('./Rules/forbid_English_quotes.js');
 require('./Rules/maxima_forbid_cdot.js');

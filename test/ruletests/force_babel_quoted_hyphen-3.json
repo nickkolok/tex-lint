@@ -1,0 +1,7 @@
+{
+	"text": "на физико--математическом факультете phys-math инфо-rm",
+	"rulename": "force_babel_quoted_hyphen",
+	"indexes": [ 3 ],
+	"quantity": 1,
+	"fixed": "на физико\"=математическом факультете phys-math инфо-rm"
+}
