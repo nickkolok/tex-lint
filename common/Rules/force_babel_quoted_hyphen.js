@@ -16,6 +16,9 @@ new Rule({
 		indexes = indexes.map(function(index) {
 			return index + 1;
 		});
+		indexes = indexes.filter(function(index) {
+			return nodes.nodes[index-1].text.length + nodes.nodes[index+1].text.length > 5;
+		});
 		return new RuleViolation({
 			indexes: indexes,
 		});
