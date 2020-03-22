@@ -1675,6 +1675,35 @@ test('', function () {
 	);
 });
 
+test('||', function () {
+	assert.deepEqual(
+		new Nodes('$||*||_E$ see || for $\\|$').nodes,
+		[
+			{ text: '$', type: 'keyword' },
+			{ text: '|', type: null },
+			{ text: '|', type: null },
+			{ text: '*', type: null },
+			{ text: '|', type: null },
+			{ text: '|', type: null },
+			{ text: '_', type: 'tag' },
+			{ text: 'E', type: 'variable-2' },
+			{ text: '$', type: 'keyword' },
+			{ text: ' ', type: 'space' },
+			{ text: 'see', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '|', type: null },
+			{ text: '|', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'for', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: '\\|', type: 'tag' },
+			{ text: '$', type: 'keyword' },
+		],
+		""
+	);
+});
+
 /*
 //TODO: запятая не отделяется от слова. Решить, что с ней делать.
 test('', function () {
