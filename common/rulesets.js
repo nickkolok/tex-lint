@@ -122,6 +122,7 @@ var rulesets = {
 			['Russian_quotes', 1],
 			['force_babel_quoted_emdash', 1],
 			['force_emdash_after_formula_cyr', 1],
+			['force_emdash_in_text_cyr', 1],
 			['force_babel_quoted_hyphen', 1],
 		],
 		comment: '',
