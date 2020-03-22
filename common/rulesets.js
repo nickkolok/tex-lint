@@ -116,6 +116,7 @@ var rulesets = {
 			['forbid_upsilon', 1],
 			['comma_before_gde', 1],
 			['no-mathit-in-formula', 1],
+			['force_tagged_norm', 1],
 			['force_geqslant', 1],
 			['force_leqslant', 1],
 			['Russian_quotes', 1],

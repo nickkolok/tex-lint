@@ -1,0 +1,7 @@
+{
+	"text": "при $||x||\\geq M$, где положительные числа ||",
+	"rulename": "force_tagged_norm",
+	"indexes": [ 3, 6 ],
+	"quantity": 2,
+	"fixed": "при $\\|x\\|\\geq M$, где положительные числа ||"
+}
