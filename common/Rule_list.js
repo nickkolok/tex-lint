@@ -31,6 +31,7 @@ require('./Rules/force_geqslant.js');
 require('./Rules/force_leqslant.js');
 require('./Rules/force_tagged_norm.js');
 require('./Rules/force_babel_quoted_emdash.js');
+require('./Rules/force_emdash_after_formula_cyr.js');
 require('./Rules/force_babel_quoted_hyphen.js');
 require('./Rules/Russian_quotes.js');
 require('./Rules/forbid_English_quotes.js');
