@@ -1,0 +1,7 @@
+{
+	"text": "$$E=mc^2$$ но $E < 0$",
+	"rulename": "comma_before_gde",
+	"indexes": [6],
+	"quantity": 1,
+	"fixed": "$$E=mc^2,$$ но $E < 0$"
+}

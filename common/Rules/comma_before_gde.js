@@ -6,7 +6,7 @@ var Nodes = require('../Nodes.js').Nodes;
 
 new Rule({
 	name: 'comma_before_gde',
-	message: 'В конце выключной формулы перед словом "где" ставится запятая',
+	message: 'В конце выключной формулы перед словами "где", "который" и т.д. ставится запятая',
 	findErrors: function(nodes) {
 		console.time('Skipping');
 		nodes.setPropByRegExp(/^(space|linebreak|comment)$/, /^/, 'skip', true);
@@ -16,7 +16,7 @@ new Rule({
 		var indexes = nodes.findSequenceByRegExp([
 			{ type: /^/, text: /^(?!(,)$)/ },
 			{ type: /^keyword$/, text: /^\$\$$/ },
-			{ type: /^cyrtext$/, text: /^где$/ },
+			{ type: /^cyrtext$/, text: /^(где$|котор|но$)/ },
 		]);
 		indexes = indexes.map(function(index) {
 			return index + 1;
