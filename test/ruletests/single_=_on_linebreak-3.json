@@ -1,0 +1,7 @@
+{
+	"text": "=\\end{equation}",
+	"rulename": "single_=_on_linebreak",
+	"indexes": [0],
+	"quantity": 1,
+	"fixed": "\\end{equation}"
+}

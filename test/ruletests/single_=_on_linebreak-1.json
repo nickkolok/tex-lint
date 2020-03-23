@@ -1,0 +1,7 @@
+{
+	"text": "\\begin{equation*}\n\tcr(M_1,M_2) \\cap cr(M_3,M_4) = (l^1_1 \\cup l^1_2)\\cap(l^2_1 \\cup l^2_2) =\n\t\\\\=\n\t(l^1_1 \\cap l^2_2) \\cup (l^1_2 \\cap l^2_1)\n\t,\n\\end{equation*}",
+	"rulename": "single_=_on_linebreak",
+	"indexes": [55],
+	"quantity": 1,
+	"fixed": "\\begin{equation*}\n\tcr(M_1,M_2) \\cap cr(M_3,M_4) = (l^1_1 \\cup l^1_2)\\cap(l^2_1 \\cup l^2_2) \n\t\\\\=\n\t(l^1_1 \\cap l^2_2) \\cup (l^1_2 \\cap l^2_1)\n\t,\n\\end{equation*}"
+}

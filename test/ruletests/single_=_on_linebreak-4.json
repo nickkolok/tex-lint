@@ -1,0 +1,7 @@
+{
+	"text": "$$ a \\leq $$ $$ \\leq b \\leq $$ $$ \\leq c",
+	"rulename": "single_=_on_linebreak",
+	"indexes": [4, 14],
+	"quantity": 2,
+	"fixed": "$$ a  $$ $$ \\leq b  $$ $$ \\leq c"
+}
