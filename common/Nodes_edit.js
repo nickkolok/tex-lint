@@ -177,8 +177,14 @@ Nodes.prototype.correctSubunicodeArtifact = function(index) {
 	artifact.unwrap();
 	artifact = artifact.toString();
 	switch (artifact) {
+		case '^^d0^^c1':
+			var replacement = 'c';
+		break;
 		case '^^d0^^121':
 			var replacement = '\\mathbb{R}';
+		break;
+		case '^^d0^^125':
+			var replacement = '\\mathbb{N}';
 		break;
 		case '^^d0^^120':
 			var replacement = '';
