@@ -1,0 +1,7 @@
+{
+	"text": "при $х\\geq М$, где положительные числа ||",
+	"rulename": "no-cyrtext-in-formula",
+	"indexes": [3, 6],
+	"quantity": 2,
+	"fixed": "при $ x \\geq  M $, где положительные числа ||"
+}
