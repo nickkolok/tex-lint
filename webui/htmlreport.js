@@ -14,7 +14,14 @@ var KaTeXcache$$ = {};
 
 function createKaTeXspan(nodes, index) {
 //	console.time('createKaTeXspan()');
+	var preview = $('<span>', {
+	});
+
 	var formula = nodes.getFormulaByIndex(index);
+	if (!formula) {
+		preview.html('(не удалось изобразить формулу)');
+		return preview[0];
+	}
 	var formulaText = nodes.getSubnodes(
 		formula.start + 1,
 		formula.end
@@ -32,8 +39,6 @@ function createKaTeXspan(nodes, index) {
 	}
 
 
-	var preview = $('<span>', {
-	});
 	try {
 		katex.render(formulaText, preview[0], {
 			displayMode: displayMode,
