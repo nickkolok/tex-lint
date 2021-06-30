@@ -35,6 +35,7 @@ require('./Rules/force_babel_quoted_emdash.js');
 require('./Rules/force_emdash_after_formula_cyr.js');
 require('./Rules/force_emdash_in_text_cyr.js');
 require('./Rules/force_babel_quoted_hyphen.js');
+require('./Rules/force_theorem_paragraphs.js');
 require('./Rules/Russian_quotes.js');
 require('./Rules/forbid_English_quotes.js');
 require('./Rules/maxima_forbid_cdot.js');
