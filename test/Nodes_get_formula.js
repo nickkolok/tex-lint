@@ -322,6 +322,42 @@ test('getFormulaByIndex', function () {
 	
 });
 
+test("isInsideFormula - environments", function () {
+	var N = new Nodes('Text \\begin{equation}\\frac{1}{2}\\end{equation} other text');
+	assert.deepEqual(
+		N.isInsideFormula(7),
+		true,
+		""
+	);
+	N = new Nodes(
+		'$$\n\\pi(\\alpha A+ \\beta B)=\\alpha\\pi(A)+\\beta\\pi(B) ,\\alpha,'+
+		'\\beta\\geqslant 0.'+
+		'\n$$'+
+		'\n\\textbf{Доказательство:}'+
+		'\n\\begin{multline*}'+
+		'\n\\pi(\\alpha A+ \\beta B)=<\\alpha A+\\beta B,0>=<\\alpha А,0>+<\\beta B,0>= \\\\'+
+		'\n=\\alpha<A,0>+\\beta<B,0>=\\alpha\\pi(A)+\\beta\\pi(B)\\\\'+
+		'\n\\text{т.е.} \\pi(\\alpha A+\\beta B)=\\alpha\\pi(A)+\\beta\\pi(B),\\Box'+
+		'\n\\end{multline*}'
+	);
+	assert.deepEqual(
+		N.isInsideFormula(50),
+		true,
+		""
+	);
+	N = new Nodes(
+		'\\begin{multline*}'+
+		'\n\\pi(\\alpha A+ \\beta B)'+
+		'\n\\end{multline*}'+
+		'\n text text text'
+	);
+	assert.deepEqual(
+		N.isInsideFormula(24),
+		false,
+		""
+	);
+});
+
 test("classifyFormulaDelimiter", function () {
 	var N = new Nodes('Text $\\frac{1}{2}$ with display formula $$\\frac{1}{3}$$ and \\(\\pi\\) and \\[E=mc^2\\] other text');
 	assert.deepEqual(
@@ -1120,6 +1156,22 @@ test('getNearestFormulaDelimiterLeft - single-tag delimiters', function () {
 			marker: '\\[',
 			isBegin: false,
 			isEnd: true,
+		},
+		""
+	);
+
+	N = new Nodes(
+		'Text \\begin{equation*}\\frac{1}{2}\\end{equation*} other text'
+	);
+	assert.deepEqual(
+		N.getNearestFormulaDelimiterLeft(7),
+		{
+			index: 6,
+			inline: false,
+			display: true,
+			marker: 'equation*',
+			isBegin: true,
+			isEnd: false
 		},
 		""
 	);

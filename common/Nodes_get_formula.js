@@ -112,23 +112,22 @@ Nodes.prototype.isInsideFormula = function(index, includeDelimiters) {
         return !!includeDelimiters;
     }
 
-	var nearest;
-	for (; index > -1; index--) {
-		if (this.nodes[index].type === 'keyword') {
-			nearest = this.nodes[index];
-			if (nearest.text === '\\[' || nearest.text === '\\(') {
-				return true;
-			}
-			if (nearest.text === '\\]' || nearest.text === '\\)') {
-				return false;
-			}
-			break;
-		}
-	}
-	if (index === -1) {
+	var nearest = this.getNearestFormulaDelimiterLeft(index);
+
+	if (nearest.index === -1) {
 		return false;
 	}
 
+	if (nearest.isBegin) {
+		return true;
+	}
+
+	if (nearest.isEnd) {
+		return false;
+	}
+
+	index = nearest.index;
+	nearest = this.nodes[index];
 	index--;
 	var delimCount = 1;
 	for (; index > -1; index--) {
@@ -331,7 +330,11 @@ Nodes.prototype.classifyFormulaDelimiter = function(index) {
 
 Nodes.prototype.getNearestFormulaDelimiterRight = function(index) {
 	for (; index < this.length; index++) {
-		if (this.nodes[index].text in Nodes.allFormulaDelimiters) {
+		if (
+			this.nodes[index].text in Nodes.allFormulaDelimiters
+		||
+			this.nodes[index].text in Nodes.allFormulaEnvironments
+		) {
 			return this.classifyFormulaDelimiter(index);
 		}
 	}
@@ -342,7 +345,11 @@ Nodes.prototype.getNearestFormulaDelimiterRight = function(index) {
 
 Nodes.prototype.getNearestFormulaDelimiterLeft = function(index) {
 	for (; index > -1; index--) {
-		if (this.nodes[index].text in Nodes.allFormulaDelimiters) {
+		if (
+			this.nodes[index].text in Nodes.allFormulaDelimiters
+		||
+			this.nodes[index].text in Nodes.allFormulaEnvironments
+		) {
 			return this.classifyFormulaDelimiter(index);
 		}
 	}
