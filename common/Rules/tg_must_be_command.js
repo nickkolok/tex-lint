@@ -11,7 +11,7 @@ new Rule({
 	message: 'Русские названия математических операторов, такие как tg, в формулах должны быть прямым шрифтом; используйте \\operatorname',
 	findErrors: function(nodes) {
 		var indexesSusp = nodes.findSingleByRegExp(
-			/variable-2/,
+			/(variable-2)|(null)/,
 			mathopnames.mathOpRegExpRus
 		);
 		var indexes = [];
@@ -20,6 +20,13 @@ new Rule({
 			if (!nodes.isInsideArgumentsOf(index, operatorname, 2)) {
 				indexes.push(index);
 			}
+		});
+
+		indexes = indexes.filter(function(index){
+			return nodes.isInsideFormula(index);
+		});
+		indexes = indexes.filter(function(index){
+			return !nodes.isDirectlyUnderProtectiveTag(index);
 		});
 
 		return new RuleViolation({

@@ -499,4 +499,26 @@ Nodes.prototype.isProtectiveTag = function(i) {
 	);
 };
 
+
+Nodes.prototype.isDirectlyUnderProtectiveTag = function(index) {
+	for (var pos = index; pos >= 0; pos--) {
+		if (this.nodes[pos].text === '}')
+			return false;
+		if (this.nodes[pos].type === 'tag')
+			return false;
+		if (this.nodes[pos].text === '{')
+			break;
+	}
+	if (pos === -1)
+		return false;
+	for (pos--; pos >= 0; pos--) {
+		if (this.nodes[pos].text === '}')
+			return false;
+		if (this.nodes[pos].type === 'tag')
+			return this.isProtectiveTag(pos);
+	}
+	return false;
+};
+
+
 };//modules.export

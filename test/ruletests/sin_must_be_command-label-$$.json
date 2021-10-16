@@ -1,0 +1,7 @@
+{
+    "text":"$$\\label{sol:sin}y(x) = sin 2x $$",
+    "rulename":"sin_must_be_command",
+    "indexes":[14],
+    "quantity":1,
+    "fixed":"$$\\label{sol:sin}y(x) = \\sin 2x $$"
+}

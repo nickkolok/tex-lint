@@ -1,0 +1,7 @@
+{
+    "text":"$$\\label{resh}y(x) = tg 2x $$",
+    "rulename":"tg_must_be_command",
+    "indexes":[12],
+    "quantity":1,
+    "fixed":"$$\\label{resh}y(x) = \\operatorname{tg} 2x $$"
+}

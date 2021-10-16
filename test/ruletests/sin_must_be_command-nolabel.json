@@ -1,0 +1,7 @@
+{
+    "text":"\\begin{equation} y ( x ) = sin 2x \\end{equation}",
+    "rulename":"sin_must_be_command",
+    "indexes":[15],
+    "quantity":1,
+    "fixed":"\\begin{equation} y ( x ) = \\sin 2x \\end{equation}"
+}

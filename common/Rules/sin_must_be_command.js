@@ -16,27 +16,11 @@ new Rule({
 		);
 		indexes = indexes.filter(function(index){
 			return nodes.isInsideFormula(index);
-		})
-		indexes = indexes.filter(function(index){
-			for (var pos = index; pos >= 0; pos--){
-				if(nodes.nodes[pos].text === '}')
-					return true;
-				if(nodes.nodes[pos].type === 'tag')
-					return true;
-				if(nodes.nodes[pos].text === '{')
-					break;
-			}
-			console.log(pos, index);
-			if (pos === -1)
-				return true;
-			for (pos--; pos >= 0; pos--){
-				if(nodes.nodes[pos].text === '}')
-					return true;
-				if(nodes.nodes[pos].type === 'tag')
-					return !nodes.isProtectiveTag(pos);
-			}
-			return true;
 		});
+		indexes = indexes.filter(function(index){
+			return !nodes.isDirectlyUnderProtectiveTag(index);
+		});
+
 		return new RuleViolation({
 			indexes: indexes,
 		});

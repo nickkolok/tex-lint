@@ -1,0 +1,7 @@
+{
+    "text":"\\begin{equation}\\label{resh} y ( x )  = arctg 2x \\end{equation}",
+    "rulename":"tg_must_be_command",
+    "indexes":[19],
+    "quantity":1,
+    "fixed":"\\begin{equation}\\label{resh} y ( x )  = \\operatorname{arctg} 2x \\end{equation}"
+}

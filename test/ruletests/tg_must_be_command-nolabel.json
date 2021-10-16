@@ -1,0 +1,7 @@
+{
+    "text":"\\begin{equation} y ( x ) = ctg 2x \\end{equation}",
+    "rulename":"tg_must_be_command",
+    "indexes":[15],
+    "quantity":1,
+    "fixed":"\\begin{equation} y ( x ) = \\operatorname{ctg} 2x \\end{equation}"
+}
