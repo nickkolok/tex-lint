@@ -356,6 +356,14 @@ test("isInsideFormula - environments", function () {
 		false,
 		""
 	);
+	N = new Nodes(
+		'\\begin{equation}y(x) = sin 2x \\end{equation}'
+	);
+	assert.deepEqual(
+		N.isInsideFormula(11),
+		true,
+		""
+	);
 });
 
 test("classifyFormulaDelimiter", function () {
