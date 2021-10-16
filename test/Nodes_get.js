@@ -1419,6 +1419,38 @@ test('getIndexBySymbolNumber', function () {
 	}
 });
 
+test('isProtectiveTag', function () {
+	assert.deepEqual(
+		new Nodes("\\begin{equation}\\label{sol:sin}y(x) = sin 2x \\end{equation}").isProtectiveTag(0),
+		true,
+		""
+	);
+	assert.deepEqual(
+		new Nodes("\\begin{equation}\\label{sol:sin}y(x) = sin 2x \\end{equation}").isProtectiveTag(4),
+		true,
+		""
+	);
+	var n2 = new Nodes("\\begin{equation}\\label{sol:sin}y(x) = \\sin 2x \\end{equation}");
+	for (var i = 5; i < 19; i++){
+		assert.deepEqual(
+			n2.isProtectiveTag(i),
+			false,
+			"" + i + ": " + n2.nodes[i].text
+		);	
+	}
+	assert.deepEqual(
+		n2.isProtectiveTag(20),
+		true,
+		""
+	);	
+	assert.deepEqual(
+		n2.isProtectiveTag(21),
+		false,
+		""
+	);	
+
+});
+
 /*
 
 test('', function () {

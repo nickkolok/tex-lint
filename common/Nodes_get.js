@@ -482,4 +482,21 @@ Nodes.prototype.getIndexBySymbolNumber = function(number) {
 	}
 };
 
+Nodes.prototype.isProtectiveTag = function(i) {
+	var protectiveTags = {
+		'\\label': null,
+		'\\ref': null,
+		'\\href': null,
+		'\\eqref': null,
+		'\\cite': null,
+		'\\begin': null,
+		'\\end': null,
+	};
+	return (
+		(this.nodes[i].type === 'tag')
+		&&
+		(this.nodes[i].text in protectiveTags)
+	);
+};
+
 };//modules.export
