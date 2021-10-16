@@ -16,7 +16,7 @@ new Rule({
 		var indexes = nodes.findSequenceByRegExp([
 			{ type: /^/, text: /^(?!(,)$)/ },
 			{ type: /^keyword$/, text: /^\$\$$/ },
-			{ type: /^cyrtext$/, text: /^(где$|котор|но$)/ },
+			{ type: /^cyrtext$/, text: /^(где$|котор|но$|a$|то$|тогда$|поэтому$)/ },
 		]);
 		indexes = indexes.map(function(index) {
 			return index + 1;
