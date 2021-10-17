@@ -110,6 +110,11 @@
         return "space";
       }
 
+      if (source.match(/\\begin(?=\s*\{equation\})/)) {
+        setState(state, function(source, state){ return inMathMode(source, state, /\\end(?=\s*\{equation\})/, true); });
+        return "tag";
+      }
+
       var plug;
       // Do we look like '\command' ?  If so, attempt to apply the plugin 'command'
       if (source.match(/^\\[a-zA-Z@]+/)) {
@@ -222,7 +227,7 @@
     };
 */
 
-    function inMathMode(source, state, endModeSeq) {
+    function inMathMode(source, state, endModeSeq, isEnvironment) {
       // spaces: it is important to third-part applications using CodeMirror's parser
       if (source.match(/^\s+/i)) {
         return "space";
@@ -238,8 +243,10 @@
       }
       if (source.match(endModeSeq)) {
         setState(state, normal);
-        return "keyword";
+        return isEnvironment ? "tag" : "keyword";
       }
+
+      
       if (source.match(/^\\[a-zA-Z@]+/)) {
         return "tag";
       }
