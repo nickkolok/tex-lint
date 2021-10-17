@@ -1,7 +1,7 @@
 {
     "text":"\\begin{equation}\\label{sol:sin} y ( x )  = sin 2x \\end{equation}",
     "rulename":"sin_must_be_command",
-    "indexes":[20],
+    "indexes":[21],
     "quantity":1,
     "fixed":"\\begin{equation}\\label{sol:sin} y ( x )  = \\sin 2x \\end{equation}"
 }

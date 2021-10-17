@@ -3,5 +3,5 @@
     "rulename": "separate$$",
     "quantity": 2,
     "fixed": "\\documentclass{article}\n\n\\usepackage[T2A]{fontenc}\n\\usepackage[cp1251]{inputenc}\n\\usepackage[english,russian]{babel}\n\n\\newcommand{\\R}{\\mathbb{R}}\n\\renewcommand{\\epsilon}{\\varepsilon}\n\n\\begin{document}\n\n\nSome text with frac $\\frac{1}{2}$ in it.%\n\nSome text with frac $\\frac{a}{b}+\\frac{1+\\alpha}{2-\\beta}+\\frac{1+C_0}{2}$ in it.  %comment\n\n % Line-long comment\n\n%%%%%%%%%%%%%%%%%%%%%%%%%\n%%% EVIL COMMENT\n%%%%%%%%%%%%%%%%%%%%%%%%%\n\n\\begin{equation}\\label{eq1}\nE=mc^2\n\\end{equation}\nто есть энергия есть масса (см. \\cite{Einstein}).\n\n$$\nE=mc^2\n$$\n\nЗдесь и далее полагаем $c=3\\cdot10^8$~м/с (в вакууме).\n\nОчень длинная строка, явно длиннее 80 символов, со множеством непонятных терминов и прочих слов.\n\nТакже вспомним, что\n\\begin{equation*}\n\\sin^2 \\alpha + \\cos^2 \\alpha = 1\n\\end{equation*}\n\n\\begin{thebibliography}{99}\n\n\n\\Bibitem{1}\n\\by J.~Smith\n\\paper Very interesting paper\n\\jour Any journal\n\\vol 42\n\\pages 1--13\n\\yr 1984\n\n\n\\end{thebibliography}\n\\end{document}\n\n",
-    "indexes": [ 187, 193 ]
+    "indexes": [ 189, 195 ]
 }
