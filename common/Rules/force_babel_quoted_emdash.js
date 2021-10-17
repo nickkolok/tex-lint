@@ -9,7 +9,7 @@ new Rule({
 	message: 'Тире следует оформлять как "---',
 	findErrors: function(nodes) {
 		var indexes = nodes.findSequenceByRegExp([
-			{ type: /^/, text: /^(?!(["])$)/ },
+			{ type: /^/, text: /^(?!([{"])$)/ },
 			{ type: /^/, text: /^---$/ },
 		]);
 		indexes = indexes.map(function(index) {
