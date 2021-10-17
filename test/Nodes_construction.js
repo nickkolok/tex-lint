@@ -1704,6 +1704,34 @@ test('||', function () {
 	);
 });
 
+test('equation', function () {
+	assert.deepEqual(
+		new Nodes('\\begin{equation}y(x) = sin 2x \\end{equation}').nodes,
+		[
+			{ text: '\\begin', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'equation', type: 'variable' },
+			{ text: '}', type: 'bracket' },
+			{ text: 'y', type: null },
+			{ text: '(x', type: null },
+			{ text: ')', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '=', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'sin', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '2', type: 'number' },
+			{ text: 'x', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: '\\end', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'equation', type: 'variable' },
+			{ text: '}', type: 'bracket' },
+		],
+		""
+	);
+});
+
 /*
 //TODO: запятая не отделяется от слова. Решить, что с ней делать.
 test('', function () {
