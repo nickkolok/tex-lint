@@ -258,7 +258,7 @@
         return "tag";
       }
       // white space control characters
-      if (source.match(/^\\[,;!\/]/)) {
+      if (source.match(/^\\[,;!\/\\]/)) {
         return "tag";
       }
       // special math-mode characters
