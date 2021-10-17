@@ -1,7 +1,7 @@
 {
 	"text": "$$ (b-\\lambda)x^2+(a-\\lambda)y^2=(a-\\lambda)(b-\\lambda),   \\lambda\\le a.$$\n\n\n$$\n\\dfrac{\\pi \\lambda}{\\sin \\pi \\lambda} &\\quad \\text{for $0\\leqslant \\lambda <\\dfrac{1}{2}$,}\\\\\n$$\n\n$$ (b-\\lambda)x^2+(a-\\lambda)y^2=(a-\\lambda)(b-\\lambda),   \\lambda\\ge a.$$\n\n\n$$\n\\dfrac{\\pi \\lambda}{\\sin \\pi \\lambda} &\\quad \\text{for $0\\geq \\lambda <\\dfrac{1}{2}$,}\\\\\n$$\n\n\n$$\n\\dfrac{\\pi \\lambda}{\\sin \\pi \\lambda} &\\quad \\text{for $0\\leq \\lambda <\\dfrac{1}{2}$,}\\\\\n$$\n\n$$\n\\dfrac{\\pi \\lambda}{\\sin \\pi \\lambda} &\\quad \\text{for $0\\ge \\lambda <\\dfrac{1}{2}$,}\\\\\n$$\n\n$$\n\\dfrac{\\pi \\lambda}{\\sin \\pi \\lambda} &\\quad \\text{for $0\\le \\lambda <\\dfrac{1}{2}$,}\\\\\n$$\n",
 	"rulename": "force_geqslant",
-	"indexes": [120,153,246],
+	"indexes": [119,152,243],
 	"quantity": 3,
 	"fixed": "$$ (b-\\lambda)x^2+(a-\\lambda)y^2=(a-\\lambda)(b-\\lambda),   \\lambda\\le a.$$\n\n\n$$\n\\dfrac{\\pi \\lambda}{\\sin \\pi \\lambda} &\\quad \\text{for $0\\leqslant \\lambda <\\dfrac{1}{2}$,}\\\\\n$$\n\n$$ (b-\\lambda)x^2+(a-\\lambda)y^2=(a-\\lambda)(b-\\lambda),   \\lambda\\geqslant a.$$\n\n\n$$\n\\dfrac{\\pi \\lambda}{\\sin \\pi \\lambda} &\\quad \\text{for $0\\geqslant \\lambda <\\dfrac{1}{2}$,}\\\\\n$$\n\n\n$$\n\\dfrac{\\pi \\lambda}{\\sin \\pi \\lambda} &\\quad \\text{for $0\\leq \\lambda <\\dfrac{1}{2}$,}\\\\\n$$\n\n$$\n\\dfrac{\\pi \\lambda}{\\sin \\pi \\lambda} &\\quad \\text{for $0\\geqslant \\lambda <\\dfrac{1}{2}$,}\\\\\n$$\n\n$$\n\\dfrac{\\pi \\lambda}{\\sin \\pi \\lambda} &\\quad \\text{for $0\\le \\lambda <\\dfrac{1}{2}$,}\\\\\n$$\n"
 }

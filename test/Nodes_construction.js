@@ -1309,16 +1309,16 @@ test('Strange formula \\begin{equation*}x^2\\end{equation*}', function () {
 			{ text: ' ', type: 'space' },
 			{ text: '\\begin', type: 'tag' },
 			{ text: '{', type: 'bracket' },
-			{ text: 'equation', type: 'variable' },
-			{ text: '*', type: 'variable' },
+			{ text: 'equation', type: 'variable-2' },
+			{ text: '*', type: null },
 			{ text: '}', type: 'bracket' },
-			{ text: 'x', type: null },
+			{ text: 'x', type: 'variable-2' },
 			{ text: '^', type: 'tag' },
 			{ text: '2', type: 'number' },
 			{ text: '\\end', type: 'tag' },
 			{ text: '{', type: 'bracket' },
-			{ text: 'equation', type: 'variable' },
-			{ text: '*', type: 'variable' },
+			{ text: 'equation', type: null },
+			{ text: '*', type: null },
 			{ text: '}', type: 'bracket' },
 		],
 		""
@@ -1735,6 +1735,37 @@ test('equation', function () {
 			{ text: 'equation', type: null },
 			{ text: '}', type: 'bracket' },
 
+		],
+		""
+	);
+});
+
+test('equation*', function () {
+	assert.deepEqual(
+		new Nodes('\\begin{equation*}y(x) = sin 2x \\end{equation*}').nodes,
+		[
+			{ text: '\\begin', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'equation', type: 'variable-2' },
+			{ text: '*', type: null },
+			{ text: '}', type: 'bracket' },
+			{ text: 'y', type: 'variable-2' },
+			{ text: '(', type: 'bracket' },
+			{ text: 'x', type: 'variable-2' },
+			{ text: ')', type: 'bracket' },
+			{ text: ' ', type: 'space' },
+			{ text: '=', type: null },
+			{ text: ' ', type: 'space' },
+			{ text: 'sin', type: 'variable-2' },
+			{ text: ' ', type: 'space' },
+			{ text: '2', type: 'number' },
+			{ text: 'x', type: 'variable-2' },
+			{ text: ' ', type: 'space' },
+			{ text: '\\end', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'equation', type: null },
+			{ text: '*', type: null },
+			{ text: '}', type: 'bracket' },
 		],
 		""
 	);

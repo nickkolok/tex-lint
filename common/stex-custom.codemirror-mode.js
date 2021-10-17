@@ -110,8 +110,8 @@
         return "space";
       }
 
-      if (source.match(/\\begin(?=\s*\{equation\})/)) {
-        setState(state, function(source, state){ return inMathMode(source, state, /\\end(?=\s*\{equation\})/, true); });
+      if (source.match(/\\begin(?=\s*\{equation\*?\})/)) {
+        setState(state, function(source, state){ return inMathMode(source, state, /\\end(?=\s*\{equation\*?\})/, true); });
         return "tag";
       }
 
