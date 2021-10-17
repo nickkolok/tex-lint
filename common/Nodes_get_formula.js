@@ -187,6 +187,20 @@ Nodes.prototype.getFormulaByIndex = function(index) {
 	};
 };
 
+Nodes.prototype.isFormulaEnvironmentName = function(index) {
+	return (
+		(
+			this.nodes[index].type === 'variable'
+			||
+			this.nodes[index].type === 'variable-2'
+			||
+			this.nodes[index].type === null
+		)
+	&&
+		this.nodes[index].text in Nodes.allFormulaEnvironments
+	);
+};
+
 Nodes.prototype.isFormulaDelimiter = function(index) {
 	// TODO: it's very rough
 	// The space, the tag and the brackets in `\begin {equation}` will be not delimiters
@@ -199,11 +213,7 @@ Nodes.prototype.isFormulaDelimiter = function(index) {
 	if (this.nodes[index].type === 'keyword') {
 		return true;
 	}
-	if (
-		this.nodes[index].type === 'variable'
-	&&
-		this.nodes[index].text in Nodes.allFormulaEnvironments
-	) {
+	if (this.isFormulaEnvironmentName(index)) {
 		var tag = this.skipToTypeReverse(index, 'tag');
 		return (
 			this.nodes[tag].text === '\\begin'
@@ -287,11 +297,7 @@ Nodes.prototype.classifyFormulaDelimiter = function(index) {
 				// TODO: dekostylize
 				marker += '*';
 			}
-			if (
-				this.nodes[index].type === 'variable'
-			&&
-				marker in Nodes.allFormulaEnvironments
-			) {
+			if (this.isFormulaEnvironmentName(index)) {
 				var tag = this.skipToTypeReverse(index, 'tag');
 				if (!this.nodes[tag]) {
 					break;
