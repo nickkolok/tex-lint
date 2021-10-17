@@ -27,12 +27,14 @@ test("getAllEnvironmentsList", function () {
 	assert.deepEqual(
 		N.getAllEnvironmentsList(),
 		[
-			{ begin: 4, end: 14, name: 'equation' },
+			{ begin: 4, end: 15, name: 'equation' },
 		],
 		""
 	);
 
 	// Не знаю, как на самом деле латех на это реагирует, но пусть будет
+	// Узнал. Плохо на это латех реагирует, не компилируется
+	// TODO: тоже реагировать плохо!
 	var N = new Nodes('\n 123 \\begin{ equation }\nE=mc^2\n\\end{equation} smth \n 123');
 	assert.deepEqual(
 		N.getAllEnvironmentsList(),
@@ -54,8 +56,8 @@ test("getAllEnvironmentsList", function () {
 	assert.deepEqual(
 		N.getAllEnvironmentsList(),
 		[
-			{ begin: 4, end: 33, name: 'equation' },
-			{ begin: 9, end: 24, name: 'array' },
+			{ begin: 4, end: 35, name: 'equation' },
+			{ begin: 9, end: 25, name: 'array' },
 		],
 		""
 	);
@@ -66,7 +68,7 @@ test("getEnvironmentsList", function () {
 	assert.deepEqual(
 		N.getEnvironmentsList(['equation']),
 		[
-			{ begin: 4, end: 33, name: 'equation' },
+			{ begin: 4, end: 35, name: 'equation' },
 		],
 		""
 	);
@@ -74,9 +76,9 @@ test("getEnvironmentsList", function () {
 	assert.deepEqual(
 		N.getEnvironmentsList(['equation']),
 		[
-			{ begin:  4, end: 41, name: 'equation' },
-			{ begin: 20, end: 24, name: 'equation' },
-			{ begin: 51, end: 58, name: 'equation' },
+			{ begin:  4, end: 42, name: 'equation' },
+			{ begin: 21, end: 25, name: 'equation' },
+			{ begin: 52, end: 61, name: 'equation' },
 		],
 		""
 	);
@@ -84,10 +86,10 @@ test("getEnvironmentsList", function () {
 	assert.deepEqual(
 		N.getEnvironmentsList(['equation','array']),
 		[
-			{ begin:  4, end: 41, name: 'equation' },
-			{ begin:  9, end: 32, name: 'array' },
-			{ begin: 20, end: 24, name: 'equation' },
-			{ begin: 51, end: 58, name: 'equation' },
+			{ begin:  4, end: 42, name: 'equation' },
+			{ begin:  9, end: 33, name: 'array' },
+			{ begin: 21, end: 25, name: 'equation' },
+			{ begin: 52, end: 61, name: 'equation' },
 		],
 		""
 	);
