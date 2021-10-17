@@ -1431,7 +1431,7 @@ test('isProtectiveTag', function () {
 		""
 	);
 	var n2 = new Nodes("\\begin{equation}\\label{sol:sin}y(x) = \\sin 2x \\end{equation}");
-	for (var i = 5; i < 19; i++){
+	for (var i = 5; i < 21; i++){
 		assert.deepEqual(
 			n2.isProtectiveTag(i),
 			false,
@@ -1439,12 +1439,12 @@ test('isProtectiveTag', function () {
 		);	
 	}
 	assert.deepEqual(
-		n2.isProtectiveTag(20),
+		n2.isProtectiveTag(22),
 		true,
 		""
 	);	
 	assert.deepEqual(
-		n2.isProtectiveTag(21),
+		n2.isProtectiveTag(23),
 		false,
 		""
 	);	
