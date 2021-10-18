@@ -1,0 +1,7 @@
+{
+	"text": "(здесь $k-$ номера рёбер)",
+	"rulename": "forbid_dash_at_end_of_formula",
+	"indexes": [5],
+	"quantity": 1,
+	"fixed": "(здесь $k$ - номера рёбер)"
+}

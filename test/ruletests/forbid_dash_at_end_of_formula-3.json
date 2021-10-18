@@ -1,0 +1,7 @@
+{
+	"text": "а узлы его через $\\xi_{k}$ (здесь $k-$ номера рёбер);",
+	"rulename": "forbid_dash_at_end_of_formula",
+	"indexes": [21],
+	"quantity": 1,
+	"fixed": "а узлы его через $\\xi_{k}$ (здесь $k$ - номера рёбер);"
+}

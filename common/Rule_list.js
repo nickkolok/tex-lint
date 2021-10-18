@@ -38,6 +38,7 @@ require('./Rules/force_babel_quoted_hyphen.js');
 require('./Rules/force_theorem_paragraphs.js');
 require('./Rules/Russian_quotes.js');
 require('./Rules/forbid_English_quotes.js');
+require('./Rules/forbid_dash_at_end_of_formula.js');
 require('./Rules/maxima_forbid_cdot.js');
 require('./Rules/maxima_underscore.js');
 require('./Rules/collapse_cite.js');
