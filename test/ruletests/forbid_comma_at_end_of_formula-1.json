@@ -1,0 +1,7 @@
+{
+	"text": "в точке $x_{0}\\in U,$ если отображение",
+	"rulename": "forbid_comma_at_end_of_formula",
+	"indexes": [ 13 ],
+	"quantity": 1,
+	"fixed": "в точке $x_{0}\\in U$, если отображение"
+}

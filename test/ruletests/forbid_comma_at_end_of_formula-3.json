@@ -1,0 +1,7 @@
+{
+	"text": "переменных $x,$ $t$ и спектрального параметра $\\lambda .$",
+	"rulename": "forbid_comma_at_end_of_formula",
+	"indexes": [ 4, 20 ],
+	"quantity": 2,
+	"fixed": "переменных $x$, $t$ и спектрального параметра $\\lambda $."
+}

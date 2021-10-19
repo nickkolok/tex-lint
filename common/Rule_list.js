@@ -19,6 +19,7 @@ require('./Rules/dot_ending.js');
 require('./Rules/space_after_comma.js');
 require('./Rules/no_space_before_comma.js');
 require('./Rules/no_newline_before_comma.js');
+require('./Rules/forbid_comma_at_end_of_formula.js');
 require('./Rules/forbid_upsilon.js');
 require('./Rules/forbid_vspace.js');
 require('./Rules/comma_before_gde.js');
