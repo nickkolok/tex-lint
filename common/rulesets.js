@@ -108,6 +108,7 @@ var rulesets = {
 		rules: [
 			['manual_paragraph_format', 1],
 			['empty_text_options', 1],
+			['separate_latin_and_cyrillic', 1],
 			['eyo', 1],
 			['space_after_comma', 1],
 			['no_space_before_comma', 1],

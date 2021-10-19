@@ -92,21 +92,13 @@ new Rule({
 					(n[leftEdge - 1].type === 'bracket')
 					||
 					(n[leftEdge - 1].type === 'linebreak')
-					//||
-					//(n[leftEdge - 1].type === 'space' && n[leftEdge - 2].type === 'cyrtext')
-					//||
-					//(n[leftEdge - 1].type === 'linebreak' && n[leftEdge - 2].type === 'cyrtext')
-					//||
-					//(n[leftEdge - 1].type === 'space' && n[leftEdge - 2].text.search(/[A-Z]/i) === -1 && n[leftEdge - 3].type === 'cyrtext')
-					//||
-					//(n[leftEdge - 2].text.search(/[A-Z]/i) === -1 && n[leftEdge - 1].type === 'linebreak' && n[leftEdge - 3].type === 'cyrtext')
 				){
 					break;
 				}
 			}
 			if (n[leftEdge].type === 'space'){
 				leftEdge++;
-			} else if (/*n[leftEdge].type !== 'cyrtext' && */n[leftEdge].text.search(/[A-Z]/i) === -1 && n[leftEdge + 1].type === 'space'){
+			} else if (n[leftEdge].text.search(/[A-Z]/i) === -1 && n[leftEdge + 1].type === 'space'){
 				leftEdge += 2;
 			}
 			for ( ; n[rightEdge + 1]; rightEdge++) {
@@ -120,17 +112,13 @@ new Rule({
 					(n[rightEdge + 1].type === 'bracket')
 					||
 					(n[rightEdge + 1].type === 'linebreak')
-					//||
-					//(n[rightEdge + 1].type === 'space' && n[rightEdge + 2].type === 'cyrtext')
-					//||
-					//(n[rightEdge + 1].type === 'space' && n[rightEdge + 2].text.search(/[A-Z]/i) === -1 && n[rightEdge + 3].type === 'cyrtext')
 				){
 					break;
 				}
 			}
 			if (n[rightEdge].type === 'space'){
 				rightEdge--;
-			} else if (/*n[rightEdge].type !== 'cyrtext' && */n[rightEdge].text.search(/[A-Z]/i) === -1 && n[rightEdge - 1].type === 'space'){
+			} else if (n[rightEdge].text.search(/[A-Z]/i) === -1 && n[rightEdge - 1].type === 'space'){
 				rightEdge -= 2;
 			}
 
@@ -138,7 +126,6 @@ new Rule({
 			n[rightEdge].text += '$';
 			nodes.reparse();
 		}
-
 
 		return nodes;
 	},
