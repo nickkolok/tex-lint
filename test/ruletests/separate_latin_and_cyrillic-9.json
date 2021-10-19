@@ -1,0 +1,7 @@
+{
+	"text": "Если $F(x)\\equiv Ax$, где $A(x_{0}):X\\rightarrow Y$, то оператор F(x) дифференцируем в любой точке $x_{0}\\in X$ и его производная равна A.",
+	"rulename": "separate_latin_and_cyrillic",
+	"indexes": [ 36, 37, 67 ],
+	"quantity": 3,
+	"fixed": "Если $F(x)\\equiv Ax$, где $A(x_{0}):X\\rightarrow Y$, то оператор $F(x)$ дифференцируем в любой точке $x_{0}\\in X$ и его производная равна $A.$"
+}

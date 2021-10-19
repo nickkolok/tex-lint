@@ -1,0 +1,7 @@
+{
+	"text": "При x=0:\n$$\nu_i(x,0)=u_i(0,0)=0=f_i(0)+g_i(0)\n$$",
+	"rulename": "separate_latin_and_cyrillic",
+	"indexes": [ 2 ],
+	"quantity": 1,
+	"fixed": "При $x=0:$\n$$\nu_i(x,0)=u_i(0,0)=0=f_i(0)+g_i(0)\n$$"
+}
