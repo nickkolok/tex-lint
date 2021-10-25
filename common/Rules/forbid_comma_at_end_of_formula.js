@@ -14,6 +14,10 @@ new Rule({
 			//{ type: /^(space|linebreak)$/, text: /^/ },
 		]);
 		indexes = indexes.filter(function(index) {
+			var i = nodes.skipTypesReverse(index - 1, ['space','linebreak','comment']);;
+			if (nodes.nodes[i].text === '\\right'){
+				return false;
+			}
 			return nodes.isInsideFormula(index);
 		});
 		return new RuleViolation({

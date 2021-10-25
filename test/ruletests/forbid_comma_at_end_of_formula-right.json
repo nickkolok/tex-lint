@@ -1,0 +1,7 @@
+{
+	"text": "$\\varphi_{\\gamma_{y_{k}}}(x)=\\left\\{\\begin{array}{l}\\varphi(x)_{\\gamma_{k}}, x \\in\\left[0, \\frac{\\pi}{2}\\right], \\\\ \\frac{1}{2}\\left(\\varphi_{\\gamma \\gamma y_{m}}(x), \\varphi_{\\gamma \\gamma / m}(\\pi-x)\\right) x \\in\\left[\\frac{\\pi}{2}, \\pi\\right]\\end{array}\\right.$",
+	"rulename": "forbid_comma_at_end_of_formula",
+	"indexes": [  ],
+	"quantity": 0,
+	"fixed": "$\\varphi_{\\gamma_{y_{k}}}(x)=\\left\\{\\begin{array}{l}\\varphi(x)_{\\gamma_{k}}, x \\in\\left[0, \\frac{\\pi}{2}\\right], \\\\ \\frac{1}{2}\\left(\\varphi_{\\gamma \\gamma y_{m}}(x), \\varphi_{\\gamma \\gamma / m}(\\pi-x)\\right) x \\in\\left[\\frac{\\pi}{2}, \\pi\\right]\\end{array}\\right.$"
+}
