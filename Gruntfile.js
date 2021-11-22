@@ -163,6 +163,23 @@ module.exports = function(grunt) {
 			}
 		},
 		compress: {
+			vzms: {
+				options: {
+					archive: 'dist/tex-lint-dist-vzms.zip'
+				},
+				files: [
+					{
+						expand: true,
+						cwd: 'dist/',
+						src: [
+							'webui/**',
+							'LICENSE.TXT',
+							'for-vzms.html',
+						],
+						dest: 'tex-lint-vzms/'
+					},
+				],
+			},
 			mz: {
 				options: {
 					archive: 'dist/tex-lint-dist-mz.zip'
