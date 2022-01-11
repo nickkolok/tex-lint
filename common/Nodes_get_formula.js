@@ -341,7 +341,10 @@ Nodes.prototype.getNearestFormulaDelimiterRight = function(index) {
 		||
 			this.nodes[index].text in Nodes.allFormulaEnvironments
 		) {
-			return this.classifyFormulaDelimiter(index);
+			var classified = this.classifyFormulaDelimiter(index);
+			if (classified.marker) {
+				return classified;
+			}
 		}
 	}
 	return {
@@ -356,7 +359,10 @@ Nodes.prototype.getNearestFormulaDelimiterLeft = function(index) {
 		||
 			this.nodes[index].text in Nodes.allFormulaEnvironments
 		) {
-			return this.classifyFormulaDelimiter(index);
+			var classified = this.classifyFormulaDelimiter(index);
+			if (classified.marker) {
+				return classified;
+			}
 		}
 	}
 	return {

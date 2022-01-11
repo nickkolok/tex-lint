@@ -322,11 +322,64 @@ test('getFormulaByIndex', function () {
 	
 });
 
+test("isInsideFormula - pseudo-environments", function () {
+	var N = new Nodes('Positive solutions for boundary value problem on nonlinear fractional differential equation // J. Math. Anal. Appl.  – 2005. – Т. 311. – №. 2. – С. 495-505.');
+	for(let i = 0; i < N.length; i++) {
+		assert.deepEqual(
+			N.isInsideFormula(i),
+			false,
+			""
+		);
+	}
+});
+
 test("isInsideFormula - environments", function () {
 	var N = new Nodes('Text \\begin{equation}\\frac{1}{2}\\end{equation} other text');
 	assert.deepEqual(
 		N.isInsideFormula(7),
 		true,
+		""
+	);
+	assert.deepEqual(
+		N.isInsideFormula(18),
+		false,
+		""
+	);
+	assert.deepEqual(
+		N.isInsideFormula(19),
+		false,
+		""
+	);
+	N = new Nodes('Text \\begin{equation*}\\frac{1}{2}\\end{equation*} other text');
+	assert.deepEqual(
+		N.isInsideFormula(7),
+		true,
+		""
+	);
+	assert.deepEqual(
+		N.isInsideFormula(18),
+		false,
+		""
+	);
+	assert.deepEqual(
+		N.isInsideFormula(19),
+		false,
+		""
+	);
+	N = new Nodes('Text \\begin{gather*}\\frac{1}{2}\\end{gather*} other text');
+	assert.deepEqual(
+		N.isInsideFormula(7),
+		true,
+		""
+	);
+	assert.deepEqual(
+		N.isInsideFormula(18),
+		false,
+		""
+	);
+	assert.deepEqual(
+		N.isInsideFormula(19),
+		false,
 		""
 	);
 	N = new Nodes(
