@@ -1740,6 +1740,56 @@ test('equation', function () {
 	);
 });
 
+test('gather*', function () {
+	assert.deepEqual(
+		new Nodes('\\begin{gather*}f(t,\\tau u)>\\tau f(t,u),~~~t\\in(0,1).\\end{gather*} sin').nodes,
+		[
+			{ text: '\\begin', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'gather', type: 'variable-2' },
+			{ text: '*', type: null },
+			{ text: '}', type: 'bracket' },
+			{ text: 'f', type: 'variable-2' },
+			{ text: '(', type: 'bracket' },
+			{ text: 't', type: 'variable-2' },
+			{ text: ',', type: null },
+			{ text: '\\tau', type: 'tag' },
+			{ text: ' ', type: 'space' },
+			{ text: 'u', type: 'variable-2' },
+			{ text: ')', type: 'bracket' },
+			{ text: '>', type: null },
+			{ text: '\\tau', type: 'tag' },
+			{ text: ' ', type: 'space' },
+			{ text: 'f', type: 'variable-2' },
+			{ text: '(', type: 'bracket' },
+			{ text: 't', type: 'variable-2' },
+			{ text: ',', type: null },
+			{ text: 'u', type: 'variable-2' },
+			{ text: ')', type: 'bracket' },
+			{ text: ',', type: null },
+			{ text: '~', type: null },
+			{ text: '~', type: null },
+			{ text: '~', type: null },
+			{ text: 't', type: 'variable-2' },
+			{ text: '\\in', type: 'tag' },
+			{ text: '(', type: 'bracket' },
+			{ text: '0', type: 'number' },
+			{ text: ',', type: null },
+			{ text: '1', type: 'number' },
+			{ text: ')', type: 'bracket' },
+			{ text: '.', type: 'error' },
+			{ text: '\\end', type: 'tag' },
+			{ text: '{', type: 'bracket' },
+			{ text: 'gather', type: null },
+			{ text: '*', type: null },
+			{ text: '}', type: 'bracket' },
+			{ text: ' ', type: 'space' },
+			{ text: 'sin', type: null },
+		],
+		""
+	);
+});
+
 test('equation*', function () {
 	assert.deepEqual(
 		new Nodes('\\begin{equation*}y(x) = sin 2x \\end{equation*}').nodes,
@@ -1770,7 +1820,6 @@ test('equation*', function () {
 		""
 	);
 });
-
 
 test('norm', function () {
 	assert.deepEqual(
@@ -1890,6 +1939,32 @@ test('norm', function () {
 		""
 	);
 });
+
+test('переменных x{,} $t$ и спектрального параметра', function () {
+	assert.deepEqual(
+		new Nodes('переменных x{,} $t$ и спектрального параметра').nodes,
+		[
+			{ text: 'переменных', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'x', type: null },
+			{ text: '{', type: 'bracket' },
+			{ text: ',', type: null },
+			{ text: '}', type: 'bracket' },
+			{ text: ' ', type: 'space' },
+			{ text: '$', type: 'keyword' },
+			{ text: 't', type: 'variable-2' },
+			{ text: '$', type: 'keyword' },
+			{ text: ' ', type: 'space' },
+			{ text: 'и', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'спектрального', type: 'cyrtext' },
+			{ text: ' ', type: 'space' },
+			{ text: 'параметра', type: 'cyrtext' },
+		],
+		""
+	);
+});
+
 
 /*
 //TODO: запятая не отделяется от слова. Решить, что с ней делать.
