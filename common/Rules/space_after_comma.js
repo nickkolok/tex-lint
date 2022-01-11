@@ -13,7 +13,7 @@ new Rule({
 			{ type: /^(?!(space|linebreak)$)/, text: /^(?!((\\\\)|~|\}|\\,|\\;|\\:|\\\s))/ },
 		]).concat(nodes.findSequenceByRegExp([
 			{ type: /^/, text: /\$/ },
-			{ type: /^(?!(tag)$)/, text: /,$/ },
+			{ type: /^(?!(tag)$)/, text: /[,.:;]$/ },
 			{ type: /^(?!(space|linebreak)$)/, text: /^(?!((\\\\)|~|\}|\\,|\\;|\\:|\\\s))/ },
 		])).concat(nodes.findSequenceByRegExp([
 			{ type: /^bracket$/, text: /^/ },
