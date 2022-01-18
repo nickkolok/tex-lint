@@ -127,6 +127,12 @@ var rulesets = {
 			['force_babel_quoted_hyphen', 1],
 		],
 		comment: '',
+		examples: [
+			{
+				title: 'Простой пример',
+				source: 'smzh-1',
+			},
+		],
 	},
 	vvmsh2018: {
 		title: 'ВВМШ-2018',
