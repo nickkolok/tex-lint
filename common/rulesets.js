@@ -117,6 +117,7 @@ var rulesets = {
 			['forbid_upsilon', 1],
 			['comma_before_gde', 1],
 			['no-mathit-in-formula', 1],
+			['no-cyrtext-in-formula', 1],
 			['force_tagged_norm', 1],
 			['force_geqslant', 1],
 			['force_leqslant', 1],
@@ -125,6 +126,8 @@ var rulesets = {
 			['force_emdash_after_formula_cyr', 1],
 			['force_emdash_in_text_cyr', 1],
 			['force_babel_quoted_hyphen', 1],
+			['force_theorem_paragraphs', 1],
+			['forbid_dash_at_end_of_formula', 1],
 		],
 		comment: '',
 		examples: [
