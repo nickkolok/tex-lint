@@ -1,6 +1,6 @@
 {
   "name": "tex-lint",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "TeX/LaTeX scientific paper linting tool",
   "main": "index.js",
   "scripts": {
