@@ -11,7 +11,7 @@ new Rule({
 	message: 'Названия математических операторов, такие как sin, в формулах должны быть прямым шрифтом. Пропущена дробь \\ перед командой',
 	findErrors: function(nodes) {
 		var indexes = nodes.findSingleByRegExp(
-			/(variable-2)|(null)/,
+			/(variable-2)/,
 			mathopnames.mathOpRegExpInt
 		);
 		indexes = indexes.filter(function(index){
