@@ -43,6 +43,18 @@ new Rule({
 			}
 		}
 
+		indexes = indexes.filter(function(i){
+			// Latin letters
+			let literalPart = n[i].text.replace(/^[^A-Z]+/i,"").replace(/[^A-Z]+$/i,"");
+
+			// Roman numbers
+			if (/^(([iv]+)|([IV]+)|([ivxl]{2,})|([IVXL]{2,}))$/.test(literalPart)){
+				return false;
+			}
+			//TODO: теорема 1.b.3
+			return true;
+		});
+
 		return new RuleViolation({
 			indexes: indexes,
 		});

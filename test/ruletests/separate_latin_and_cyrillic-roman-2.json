@@ -1,0 +1,7 @@
+{
+	"text": "Условия (i) и (ii) независимы iff",
+	"rulename": "separate_latin_and_cyrillic",
+	"indexes": [12],
+	"quantity": 1,
+	"fixed": "Условия (i) и (ii) независимы $iff$"
+}
