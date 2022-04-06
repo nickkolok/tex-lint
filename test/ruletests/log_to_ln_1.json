@@ -1,0 +1,7 @@
+{
+	"text": "$\\log 2 \\cdot \\log e$",
+	"rulename": "log_to_ln",
+	"indexes": [1, 7],
+	"quantity": 2,
+	"fixed": "$\\ln 2 \\cdot \\ln e$"
+}

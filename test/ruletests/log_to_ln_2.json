@@ -1,0 +1,7 @@
+{
+	"text": "Из утверждения~\\ref{H} вытекает, что функционал $\\gamma\\circ \\log$",
+	"rulename": "log_to_ln",
+	"indexes": [20],
+	"quantity": 1,
+	"fixed": "Из утверждения~\\ref{H} вытекает, что функционал $\\gamma\\circ \\ln$"
+}

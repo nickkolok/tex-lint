@@ -114,6 +114,7 @@ var rulesets = {
 			['no_space_before_comma', 1],
 			['sin_must_be_command', 1],
 			['tg_must_be_command', 1],
+			['log_to_ln', 1],
 			['forbid_upsilon', 1],
 			['comma_before_gde', 1],
 			['no-mathit-in-formula', 1],

@@ -1,0 +1,7 @@
+{
+	"text": "$\\log _ 3 2 \\cdot \\log^ 2_ {10} e$",
+	"rulename": "log_to_ln",
+	"indexes": [],
+	"quantity": 0,
+	"fixed": "$\\log _ 3 2 \\cdot \\log^ 2_ {10} e$"
+}

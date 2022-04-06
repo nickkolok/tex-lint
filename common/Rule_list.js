@@ -30,6 +30,7 @@ require('./Rules/no-mathit-in-formula.js');
 require('./Rules/no-mathrm-in-formula.js');
 require('./Rules/no-cyrtext-in-formula.js');
 require('./Rules/no-foreignlanguage.js');
+require('./Rules/log_to_ln.js');
 require('./Rules/force_geqslant.js');
 require('./Rules/force_leqslant.js');
 require('./Rules/force_tagged_norm.js');
